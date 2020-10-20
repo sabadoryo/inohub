@@ -72,6 +72,15 @@
                             </a>
                         </li>
 
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon far fa-plus-square"></i>
+                                <p>
+                                    Добавить организацию
+                                </p>
+                            </a>
+                        </li>
+
                     </ul>
 
                 </nav>
