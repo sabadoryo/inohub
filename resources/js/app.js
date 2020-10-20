@@ -21,3 +21,6 @@ angular
         ngFileUpload,
         angularMoment,
     ]);
+
+require('./components/organizations-control/organizations-control');
+require('./components/organizations-control/organizations-control');
