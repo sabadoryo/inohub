@@ -1,0 +1,18 @@
+<div class="card" ng-repeat="org in $ctrl.organizations track by $index">
+
+    <div class="card-header">{{org.name}}</div>
+
+    <div class="card-body">
+
+        <div>
+            <label>Город: </label>
+            <span>{{org.country_name}}, {{org.city_name}}</span>
+        </div>
+
+    </div>
+
+    <div class="card-footer">
+        <a href="" ng-href="/admin/organizations/{{org.id}}" class="btn btn-primary">Перейти к организации</a>
+    </div>
+
+</div>

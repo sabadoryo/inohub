@@ -18,6 +18,7 @@ mix.js('resources/js/app.js', 'public/js').extract([
     'ng-file-upload',
     'sweetalert2',
     'moment',
+    'overlayscrollbars/js/jquery.overlayScrollbars'
 ]).sourceMaps();
 
 if (mix.inProduction()) {

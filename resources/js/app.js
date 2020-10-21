@@ -23,4 +23,6 @@ angular
     ]);
 
 require('./components/organizations-control/organizations-control');
-require('./components/organizations-control/organizations-control');
+require('./components/organization-create-form/organization-create-form');
+require('./components/organization-form/organization-form');
+require('./components/control-panel/control-panel');

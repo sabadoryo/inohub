@@ -13,5 +13,6 @@ yarn-error.log
 /.idea
 /public/js
 /public/css
+/public/fonts
 /public/mix-manifest.json
 _ide_helper.php

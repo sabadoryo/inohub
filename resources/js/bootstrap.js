@@ -1,13 +1,11 @@
 window._ = require('lodash');
 
-try {
-    window.Swal = require('sweetalert2/dist/sweetalert2');
-    window.Popper = require('popper.js').default;
-    window.$ = window.jQuery = require('jquery');
-    require('bootstrap');
-} catch (e) {}
-
-// import Echo from 'laravel-echo';
+window.Swal = require('sweetalert2/dist/sweetalert2');
+window.Popper = require('popper.js').default;
+window.$ = window.jQuery = require('jquery');
+require('bootstrap');
+require('overlayscrollbars/js/jquery.overlayScrollbars');
+// import Echo from 'laravel-echo';s
 
 // window.Pusher = require('pusher-js');
 
