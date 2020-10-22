@@ -20,9 +20,29 @@ angular
         angularScroll,
         ngFileUpload,
         angularMoment,
-    ]);
+    ])
+    .config(['$httpProvider', function ($httpProvider) {
+        $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+    }])
+    .run(['$templateCache', function ($templateCache) {
+        $templateCache.put('b4-pagination', require('./templates/b4-pagination.html'));
+    }]);
+
+
+require('./auth');
+require('./plural');
+require('./controllers/mainController');
+require('./controllers/cabinetController');
 
 require('./components/organizations-control/organizations-control');
 require('./components/organization-create-form/organization-create-form');
 require('./components/organization-form/organization-form');
 require('./components/control-panel/control-panel');
+require('./components/programs-control/programs-control');
+require('./components/programs-create-form/programs-create-form');
+require('./components/astana-hub-page/astana-hub-page');
+require('./components/astana-hub-program/astana-hub-program');
+require('./components/application-modal/application-modal');
+require('./components/login-modal/login-modal');
+require('./components/cabinet-profile/cabinet-profile');
+require('./components/cabinet-project/cabinet-project');

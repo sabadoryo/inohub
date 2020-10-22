@@ -1,12 +1,20 @@
 <?php
 
-Auth::routes();
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout');
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', 'MainPageController@index');
+
+Route::group(['prefix' => 'astana-hub'], function () {
+    Route::get('', 'AstanaHubController@index');
+    Route::get('programs/{id}', 'AstanaHubController@program');
 });
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['prefix' => 'cabinet', 'middleware' => ['auth']], function () {
+    Route::get('', 'CabinetController@profile');
+    Route::get('project', 'CabinetController@project');
+    Route::post('update-roles', 'CabinetController@updateRoles');
+});
 
 Route::group([
     'prefix' => 'admin',
@@ -28,15 +36,10 @@ Route::group([
 ], function () {
 
     Route::get('/', 'ControlPanelController@index');
+
     Route::get('programs', 'ProgramsController@index');
-
+    Route::get('programs/get-list', 'ProgramsController@getList');
+    Route::get('programs/create', 'ProgramsController@create');
+    Route::post('programs', 'ProgramsController@store');
 });
 
-
-Route::get('page-1', function(){
-    return view('page-1');
-});
-
-Route::get('page-2', function(){
-    return view('page-2');
-});

@@ -50,3 +50,8 @@
 .custom-file-label::after {
     content: 'Обзор';
 }
+
+
+.dropdown.show .dropdown-menu {
+    display: block;
+}

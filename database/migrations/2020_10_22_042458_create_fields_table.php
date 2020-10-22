@@ -13,14 +13,20 @@ class CreateFieldsTable extends Migration
      */
     public function up()
     {
-        Schema::create('fields', function (Blueprint $table) {
+        Schema::create('form_fields', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->unsignedBigInteger('form_id');
             $table->string('type');
             $table->string('label');
-            $table->boolean('required');
-            $table->string('default_value');
-            $table->text('options');
+            $table->boolean('required')->default(false);
+            $table->string('default_value')->nullable();
+            $table->text('options')->nullable();
+            $table->timestamps();
+
+            $table->foreign('form_id')
+                ->references('id')
+                ->on('forms')
+                ->onDelete('cascade');
         });
     }
 
@@ -31,6 +37,6 @@ class CreateFieldsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fields');
+        Schema::dropIfExists('form_fields');
     }
 }

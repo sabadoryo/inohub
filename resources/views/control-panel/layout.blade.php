@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
     <link rel="stylesheet" href="{{asset('css/adminlte.min.css')}}">
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/control-panel.css') }}" rel="stylesheet">
 </head>
 <body class="layout-fixed sidebar-mini hold-transition">
 
@@ -68,7 +68,7 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
                         <li class="nav-item">
-                            <a href="/" class="nav-link active">
+                            <a href="/" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Главная
@@ -76,13 +76,34 @@
                             </a>
                         </li>
 
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon far fa-plus-square"></i>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link active">
+                                <i class="nav-icon fas fa-book"></i>
                                 <p>
                                     Программы
+                                    <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/control-panel/programs" class="nav-link active">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Список</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/control-panel/programs/create" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Добавить программу</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Заяки</p>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
 
                         <li class="nav-item">

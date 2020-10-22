@@ -1,0 +1,31 @@
+<div class="card mb-3">
+    <div class="card-header">
+        Основная информация
+    </div>
+    <div class="card-body">
+
+        forma osnovnoi informacii
+
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        Роли
+    </div>
+    <div class="card-body">
+
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" ng-model="$ctrl.startup" ng-value="true" id="startup">
+            <label class="form-check-label" for="startup">Стартап</label>
+        </div>
+
+        <div class="form-check mb-2">
+            <input class="form-check-input" type="checkbox" ng-model="$ctrl.investor" ng-value="true" id="investor">
+            <label class="form-check-label" for="investor">Инвестор</label>
+        </div>
+
+        <button type="button" class="btn btn-primary" ng-click="$ctrl.updateRoles()">Обновить</button>
+
+    </div>
+</div>

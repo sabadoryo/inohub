@@ -1,0 +1,20 @@
+<div class="modal-header">
+    <h5 class="modal-title">Отправить заявку</h5>
+    <button type="button" class="close" ng-click="$ctrl.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div class="modal-body">
+
+    <div ng-if="!$ctrl.user" class="alert alert-danger">
+        <a href="" ng-click="$ctrl.openLoginModal()">Войдите</a> или
+        <a href="" ng-click="$ctrl.openRegisterModal()">Зарегистрируйтесь</a>
+    </div>
+
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" ng-click="$ctrl.dismiss()">Close</button>
+    <button type="button" class="btn btn-primary" ng-click="$ctrl.saves()">Save changes</button>
+</div>
