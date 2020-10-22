@@ -15,10 +15,11 @@ class CreateProgramsTable extends Migration
     {
         Schema::create('programs', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+
             $table->string('title');
             $table->text('short_description');
             $table->text('description');
+//            $table->unsignedBigInteger('');
             $table->text('audience');
             $table->text('benefits');
             $table->text('requirements');
@@ -27,6 +28,13 @@ class CreateProgramsTable extends Migration
             $table->dateTime('end_date');
             $table->string('status');
             $table->boolean('project_include');
+            $table->timestamps();
+
+//            $table->foreign('user_id')
+//                ->references('id')
+//                ->on('users')
+//                ->onDelete('cascade');
+
         });
     }
 

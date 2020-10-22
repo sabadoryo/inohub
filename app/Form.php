@@ -11,4 +11,14 @@ class Form extends Model
         'title',
         'description'
     ];
+
+    public function fields()
+    {
+        return $this->belongsToMany(Field::class);
+    }
+
+    public function programs()
+    {
+        return $this->belongsToMany(Program::class);
+    }
 }

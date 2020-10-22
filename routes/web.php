@@ -28,6 +28,7 @@ Route::group([
 ], function () {
 
     Route::get('/', 'ControlPanelController@index');
+    Route::get('programs', 'ProgramsController@index');
 
 });
 

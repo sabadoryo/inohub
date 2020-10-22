@@ -27,6 +27,8 @@ class Program extends Model
         'end_date'
     ];
 
-
-
+    public function forms()
+    {
+        return $this->belongsToMany(Form::class);
+    }
 }
