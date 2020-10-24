@@ -1,0 +1,62 @@
+<form class="mb-3" ng-submit="$ctrl.filter()">
+    <div class="form-row">
+        <div class="col-3">
+            <input type="text"
+                   class="form-control"
+                   placeholder="Введите ФИО, email или телефон"
+                   ng-model="$ctrl.search">
+        </div>
+        <div class="col-3">
+            <select ng-model="$ctrl.organization" class="form-control">
+                <option value="">Организацию:</option>
+                <option value="draft">Черновик</option>
+                <option value="published">Опубликован</option>
+                <option value="to-check">На проверке</option>
+            </select>
+        </div>
+        <div class="col-2">
+            <select ng-model="$ctrl.status" class="form-control">
+                <option value="">Статус:</option>
+                <option value="active">Активный</option>
+                <option value="inactive">Неактивный</option>
+            </select>
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary btn-sm">Поиск</button>
+            <button type="button" class="btn btn-secondary btn-sm" ng-click="$ctrl.reset()">Сбросить</button>
+        </div>
+    </div>
+</form>
+
+<div class="card">
+    <div class="card-body">
+        <table class="table table-bordered table-striped table-sm">
+            <thead class="thead-light">
+                <tr>
+                    <th>ID</th>
+                    <th>ФИО</th>
+                    <th>Email</th>
+                    <th>Телефон</th>
+                    <th>Организация</th>
+                    <th>Статус</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="user in $ctrl.users track by $index">
+                    <td>{{user.id}}</td>
+                    <td>{{user.full_name}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.phone}}</td>
+                    <td>{{user.organization.name}}</td>
+                    <td>{{user.status}}</td>
+                    <td class="text-center">
+                        <a href="" ng-href="/control-panel/{{user.id}}/edit" class="btn btn-primary btn-xs">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

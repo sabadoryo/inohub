@@ -15,6 +15,11 @@
     <!-- Styles -->
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
 
+    <style>
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+            display: none !important;
+        }
+    </style>
 </head>
 <body ng-controller="MainController">
     <div id="app">
@@ -33,8 +38,23 @@
 
                     </ul>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <div ng-if="user" uib-dropdown ng-cloak>
+                        <button type="button"
+                                uib-dropdown-toggle=""
+                                class="btn btn-primary">
+                            @{{user.full_name}}
+                        </button>
+                        <ul uib-dropdown-menu="">
+                            <li>
+                                <a href="/cabinet">Кабинет</a>
+                            </li>
+                            <li>
+                                <a href="" ng-click="logout()">Выйти</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <ul class="navbar-nav ml-auto" ng-if="!user" ng-cloak   >
 
                         <li class="nav-item" ng-show="!user">
                             <a class="nav-link" ng-click="openLoginModal()">{{ __('Login') }}</a>
@@ -43,34 +63,8 @@
                         <li class="nav-item" ng-show="!user">
                             <a class="nav-link" ng-click="openRegisterModal()">{{ __('Register') }}</a>
                         </li>
-
-                        <li class="nav-item" ng-show="user">
-                            <a class="nav-link" href="/cabinet">Cabinet</a>
-                        </li>
-
-                        <!-- Authentication Links -->
-                        @guest
-
-                        @else
-{{--                            <li class="nav-item dropdown">--}}
-{{--                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>--}}
-{{--                                    {{ Auth::user()->name }}--}}
-{{--                                </a>--}}
-
-{{--                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">--}}
-{{--                                    <a class="dropdown-item" href=""--}}
-{{--                                       onclick="event.preventDefault();--}}
-{{--                                                     document.getElementById('logout-form').submit();">--}}
-{{--                                        {{ __('Logout') }}--}}
-{{--                                    </a>--}}
-
-{{--                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">--}}
-{{--                                        @csrf--}}
-{{--                                    </form>--}}
-{{--                                </div>--}}
-{{--                            </li>--}}
-                        @endguest
                     </ul>
+
                 </div>
             </div>
         </nav>

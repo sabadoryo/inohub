@@ -23,6 +23,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "@cgross/angular-notify": "^2.5.1",
         "@fortawesome/fontawesome-free": "^5.14.0",
         "admin-lte": "^3.0.5",
         "angular": "^1.7.9",

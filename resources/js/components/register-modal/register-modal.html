@@ -1,0 +1,73 @@
+<div class="modal-header">
+    <h5 class="modal-title">Register modal</h5>
+    <button type="button" class="close" ng-click="$ctrl.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div class="modal-body">
+
+    <form ng-submit="$ctrl.toStep(2)" ng-show="$ctrl.step == 1">
+
+        <div class="form-group">
+            <label>Фамилия:</label>
+            <input type="text" class="form-control" ng-model="$ctrl.lastName" required>
+        </div>
+
+        <div class="form-group">
+            <label>Имя:</label>
+            <input type="text" class="form-control" ng-model="$ctrl.firstName" required>
+        </div>
+
+        <div class="form-group">
+            <label>Email:</label>
+            <input type="email" class="form-control" ng-model="$ctrl.email" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Далее</button>
+
+    </form>
+
+    <form ng-submit="$ctrl.register()" ng-show="$ctrl.step == 2">
+
+        <div class="form-group">
+            <label>Пароль:</label>
+            <input type="password" class="form-control" ng-model="$ctrl.password">
+        </div>
+
+        <div class="form-group">
+            <label>Повторите пароль:</label>
+            <input type="password" class="form-control" ng-model="$ctrl.passwordConfirmation">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Далее</button>
+
+    </form>
+
+    <div ng-show="$ctrl.step == 3">
+
+        <h4>Поздравляем, вы успешно зарегистрированы!</h4>
+
+        <a href="">Перейти в личный кабинет</a>
+
+        <div class="alert alert-info">
+            <i class="fa fa-alert" style="font-size: 30px;"></i>
+            Если вы хотите что бы о вашем проекте знали наши пользователи,
+            пожалуйста, заполните
+            <a href="/cabinet/project">анкету проекта</a>
+        </div>
+
+        <div class="alert alert-info">
+            <i class="fa fa-alert" style="font-size: 30px;"></i>
+            Если вы хотите быть в списке инвесторов, пожалуйста, заполните
+            <a href="/cabinet/investor-profile" ng-href="">анкету инвестора</a>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" ng-click="$ctrl.dismiss()">Close</button>
+    <button type="button" class="btn btn-primary" ng-click="$ctrl.saves()">Save changes</button>
+</div>

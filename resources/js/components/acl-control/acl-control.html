@@ -1,0 +1,49 @@
+
+<div class="row">
+
+    <div class="col-6">
+
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-muted mb-0">Роли</h5>
+            </div>
+            <div class="list-group list-group-flush">
+                <a href=""
+                   ng-repeat="role in $ctrl.roles track by $index"
+                   class="list-group-item list-group-item-action"
+                   ng-class="{active: $ctrl.selectedRole == role}"
+                   ng-click="$ctrl.selectRole(role)">
+                    {{role.name}}
+                </a>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-muted mb-0">Права</h5>
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="permission in $ctrl.permissions track by $index">
+                    {{permission.name}}
+                    <div class="custom-control custom-switch float-right">
+                        <input type="checkbox"
+                               ng-model="permission.isSelected"
+                               ng-change="$ctrl.permissionChanged(permission)"
+                               class="custom-control-input"
+                               id="permission_{{permission.id}}">
+                        <label class="custom-control-label"
+                               for="permission_{{permission.id}}"
+                               style="font-weight: normal">
+                            Включен
+                        </label>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>

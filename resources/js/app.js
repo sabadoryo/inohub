@@ -9,6 +9,7 @@ import angularFilter from "angular-filter";
 import angularScroll from "angular-scroll";
 import ngFileUpload from "ng-file-upload";
 import angularMoment from "angular-moment";
+import notify from "@cgross/angular-notify";
 
 angular
     .module('app', [
@@ -20,6 +21,7 @@ angular
         angularScroll,
         ngFileUpload,
         angularMoment,
+        notify
     ])
     .config(['$httpProvider', function ($httpProvider) {
         $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -46,3 +48,8 @@ require('./components/application-modal/application-modal');
 require('./components/login-modal/login-modal');
 require('./components/cabinet-profile/cabinet-profile');
 require('./components/cabinet-project/cabinet-project');
+require('./components/organization-edit-form/organization-edit-form');
+require('./components/users-control/users-control');
+require('./components/acl-control/acl-control');
+require('./components/project-register-form/project-register-form');
+require('./components/register-modal/register-modal');

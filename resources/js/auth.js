@@ -8,6 +8,18 @@ function controller(user, permissions, roles, $uibModal, $q, $rootScope) {
 
     let $ctrl = this;
 
+    $rootScope.$on('UserRegistered', (event, data) => {
+        $ctrl.user = user;
+        $ctrl.roles = [];
+        $ctrl.permissions = [];
+    });
+
+    $rootScope.$on('UserLogout', () => {
+        $ctrl.user = null;
+        $ctrl.roles = null;
+        $ctrl.permissions = null;
+    });
+
     $ctrl.user = () => { return user };
 
     $ctrl.roles = () => { return roles };
@@ -40,4 +52,26 @@ function controller(user, permissions, roles, $uibModal, $q, $rootScope) {
         return d.promise;
     };
 
+    $ctrl.openRegisterModal = () => {
+        let d = $q.defer();
+
+        $uibModal
+            .open({
+                component: 'registerModal'
+            })
+            .result
+            .then(
+                data => {
+                    $ctrl.user = data.user;
+                    $ctrl.roles = data.roles;
+                    $ctrl.permissions = data.permissions;
+                    d.resolve(user);
+                },
+                error => {
+                    d.reject();
+                }
+            );
+
+        return d.promise;
+    };
 }

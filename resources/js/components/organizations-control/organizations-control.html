@@ -1,18 +1,31 @@
-<div class="card" ng-repeat="org in $ctrl.organizations track by $index">
-
-    <div class="card-header">{{org.name}}</div>
-
+<div class="card">
     <div class="card-body">
 
-        <div>
-            <label>Город: </label>
-            <span>{{org.country_name}}, {{org.city_name}}</span>
-        </div>
+        <table class="table table-bordered table-striped table-sm">
+            <thead class="thead-light">
+            <tr>
+                <th>ID</th>
+                <th>Название</th>
+                <th>Адрес</th>
+                <th>Телефон</th>
+                <th>Email</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tr ng-repeat="org in $ctrl.organizations">
+                <td>{{org.id}}</td>
+                <td>{{org.name}}</td>
+                <td>{{org.address}}</td>
+                <td>{{org.phones}}</td>
+                <td>{{org.email}}</td>
+                <td class="text-center">
+                    <a href="" ng-href="/control-panel/organizations/{{org.id}}/edit" class="btn btn-primary btn-xs">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                </td>
+            </tr>
+        </table>
+
 
     </div>
-
-    <div class="card-footer">
-        <a href="" ng-href="/admin/organizations/{{org.id}}" class="btn btn-primary">Перейти к организации</a>
-    </div>
-
 </div>

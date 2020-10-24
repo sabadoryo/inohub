@@ -2,9 +2,9 @@ import angular from "angular";
 
 angular
     .module('app')
-    .controller('MainController', ['$scope', '$uibModal', 'Auth', '$rootScope', controller]);
+    .controller('MainController', ['$scope', '$uibModal', 'Auth', '$rootScope', '$http', controller]);
 
-function controller($scope, $uibModal, Auth, $rootScope) {
+function controller($scope, $uibModal, Auth, $rootScope, $http) {
 
     $scope.user = Auth.user();
 
@@ -16,4 +16,21 @@ function controller($scope, $uibModal, Auth, $rootScope) {
         Auth.openLoginModal();
     };
 
+    $scope.openRegisterModal = function () {
+        Auth.openRegisterModal();
+    };
+
+    $scope.logout = function () {
+        $http
+            .post('/logout')
+            .then(
+                function (response) {
+                    $rootScope.$emit('UserLogout');
+                    $scope.user = null
+                },
+                function (error) {
+
+                }
+            );
+    };
 }

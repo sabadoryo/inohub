@@ -9,13 +9,11 @@ class ControlPanelController extends Controller
 {
     public function index()
     {
-        $component = 'control-panel';
-
-        view()->share('PAGE_TITLE', 'Панель управления');
-
-        return view(
-            'control-panel.component',
-            compact('component')
-        );
+        return view('control-panel.component', [
+            'PAGE_TITLE' => 'Панель управления',
+            'component' => 'control-panel',
+            'breadcrumb' => [],
+            'activePage' => 'control-panel'
+        ]);
     }
 }
