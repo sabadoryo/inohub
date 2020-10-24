@@ -66,11 +66,19 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
+        $path = null;
+
+        if ($data['avatar'] !== "null") {
+            $path = \Storage::disk('public')->put('user_avatars', $data['avatar']);
+        }
+
         return User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'avatar_path' => $path,
         ]);
     }
 

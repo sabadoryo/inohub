@@ -19,6 +19,7 @@ class User extends Authenticatable
         'organization_id',
         'password',
         'is_active',
+        'avatar_path',
     ];
 
     protected $appends = [
@@ -38,7 +39,7 @@ class User extends Authenticatable
 
     public function getFullNameAttribute()
     {
-        return $this->last_name . ' ' . $this->first_name;
+        return $this->last_name.' '.$this->first_name;
     }
 
     public function getStatusAttribute()
@@ -49,5 +50,10 @@ class User extends Authenticatable
     public function organization()
     {
         return $this->belongsTo(Organization::class);
+    }
+
+    public function getAvatarUrlAttribute()
+    {
+        return $this->avatar_path ? \Storage::disk('public')->url($this->avatar_path) : null;
     }
 }

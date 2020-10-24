@@ -11,6 +11,7 @@ import ngFileUpload from "ng-file-upload";
 import angularMoment from "angular-moment";
 import notify from "@cgross/angular-notify";
 
+
 angular
     .module('app', [
         angularAnimate,
@@ -53,3 +54,5 @@ require('./components/users-control/users-control');
 require('./components/acl-control/acl-control');
 require('./components/project-register-form/project-register-form');
 require('./components/register-modal/register-modal');
+require('./components/events-control/events-control');
+require('./components/create-event-modal/create-event-modal');

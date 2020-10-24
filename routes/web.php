@@ -48,5 +48,8 @@ Route::group([
     Route::get('programs/create', 'ProgramsController@create');
     Route::post('programs', 'ProgramsController@store');
 
+    Route::get('events', 'EventsController@index');
+    Route::get('events/get-list', 'EventsController@getList');
+    Route::post('events/create', 'EventsController@create');
 });
 

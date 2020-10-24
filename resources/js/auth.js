@@ -57,7 +57,9 @@ function controller(user, permissions, roles, $uibModal, $q, $rootScope) {
 
         $uibModal
             .open({
-                component: 'registerModal'
+                component: 'registerModal',
+                backdrop: 'static',
+
             })
             .result
             .then(
