@@ -69,7 +69,7 @@ class UsersController extends Controller
             $query->where('is_active', true);
         }
 
-        $result = $query->with(['roles', 'organization'])->withCount('roles')->paginate($request->per_page ?: 20);
+        $result = $query->with(['roles', 'organization'])->withCount('roles')->paginate($request->per_page ?: 30);
 
         return $result;
     }

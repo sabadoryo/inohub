@@ -17,12 +17,9 @@ function controller($http, $uibModal) {
     let $ctrl = this;
 
     $ctrl.page = 1;
-    $ctrl.perPage = 20;
-    $ctrl.search = null;
-    $ctrl.status = null;
+    $ctrl.perPage = 30;
 
     $ctrl.$onInit = function () {
-        console.log($ctrl.organizations);
         $ctrl.getList();
     };
 
@@ -45,7 +42,7 @@ function controller($http, $uibModal) {
 
     $ctrl.reset = () => {
         $ctrl.page = 1;
-        $ctrl.title = null;
+        $ctrl.search = null;
         $ctrl.status = null;
         $ctrl.roleId = null;
         $ctrl.organizationId = null;
@@ -56,7 +53,6 @@ function controller($http, $uibModal) {
         $http
             .get('/control-panel/users/get-list', {
                 params: {
-                    title: $ctrl.title,
                     status: $ctrl.status,
                     page: $ctrl.page,
                     per_page: $ctrl.perPage,
