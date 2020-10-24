@@ -9,6 +9,7 @@ import angularFilter from "angular-filter";
 import angularScroll from "angular-scroll";
 import ngFileUpload from "ng-file-upload";
 import angularMoment from "angular-moment";
+import 'grapesjs/dist/css/grapes.min.css';
 
 angular
     .module('app', [
@@ -19,7 +20,7 @@ angular
         angularFilter,
         angularScroll,
         ngFileUpload,
-        angularMoment,
+        angularMoment
     ])
     .config(['$httpProvider', function ($httpProvider) {
         $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';

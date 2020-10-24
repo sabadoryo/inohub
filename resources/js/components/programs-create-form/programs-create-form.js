@@ -1,17 +1,18 @@
 import angular from "angular";
+import buildConstructor from '../../webBuilderUtil/grapejsBuilder';
 
 angular
     .module('app')
     .component('programsCreateForm', {
         template: require('./programs-create-form.html'),
-        controller: ['moment', '$http', controller],
+        controller: ['$compile', '$sce', 'moment', '$http', controller],
         bindings: {
             //
         }
     });
-    
-function controller(moment, $http) {
- 
+
+function controller($compile, $sce, moment, $http) {
+
 	let $ctrl = this;
 
 	$ctrl.step = 1;
@@ -21,14 +22,27 @@ function controller(moment, $http) {
 	$ctrl.startDate = null;
 	$ctrl.endDate = null;
 	$ctrl.content = null;
+	$ctrl.passportHtml = null;
+    let editor = null;
 
 	$ctrl.$onInit = function () {
-        //
+	    editor = buildConstructor('gjsProgramPassport');
     };
 
 	$ctrl.toStep = (step) => {
+	    if (step === 3) {
+            $ctrl.passportHtml = editor.getHtml();
+            $ctrl.passportHtml += `<style>${editor.getCss()}</style>`;
+            $ctrl.passportHtml = $sce.trustAsHtml($ctrl.passportHtml)
+            $compile($ctrl.passportHtml)($ctrl);
+	        console.log($ctrl.passportHtml);
+        }
 		$ctrl.step = step;
 	};
+
+	$ctrl.testfunc = function () {
+	    console.log('func test')
+    }
 
 	$ctrl.save = function () {
 		$ctrl.loading = true;

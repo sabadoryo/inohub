@@ -13,6 +13,7 @@ function controller($scope, $uibModal, Auth, $rootScope) {
     });
 
     $scope.openLoginModal = function () {
+        console.log('opening midal lign')
         Auth.openLoginModal();
     };
 

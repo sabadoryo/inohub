@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{asset('css/adminlte.min.css')}}">
     <link href="{{ mix('css/control-panel.css') }}" rel="stylesheet">
 </head>
-<body class="layout-fixed sidebar-mini hold-transition">
+<body class="layout-fixed sidebar-mini hold-transition" ng-controller="MainController">
 
     <div class="wrapper" id="app">
 
@@ -29,7 +29,7 @@
             <ul class="navbar-nav ml-auto">
 
                 <li class="nav-item">
-                    <form action="{{route('logout')}}" method="post">
+                    <form  method="post">
                         @csrf
                         <button class="btn btn-outline-secondary">
                             <i class="fas fa-sign-out-alt mr-1"></i>
@@ -203,6 +203,13 @@
     <script src="{{mix('js/manifest.js')}}"></script>
     <script src="{{mix('js/vendor.js')}}"></script>
     <script src="{{mix('js/app.js')}}"></script>
-
+    <script>
+        window
+            .angular
+            .module('app')
+            .constant('AUTH_USER', {!! \Auth::user() !!})
+            .constant('AUTH_ROLES', {!! $AUTH_ROLES !!})
+            .constant('AUTH_PERMISSIONS', {!! $AUTH_PERMISSIONS !!})
+    </script>
 </body>
 </html>
