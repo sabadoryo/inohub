@@ -4,22 +4,27 @@ namespace App\Http\Controllers\ControlPanel;
 
 use App\Http\Controllers\Controller;
 use App\Organization;
+use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $breadcrumb = [
             ['/control-panel', 'Главная'],
             [null, 'Пользователи']
         ];
-
+        
         $organizations = Organization::all();
+        
+        $roles = Role::all();
 
         $bindings = [
             'organizations' => $organizations,
+            'roles' => $roles,
+            'role_id' => $request->role_id,
         ];
 
         return view('control-panel.component', [
@@ -48,13 +53,23 @@ class UsersController extends Controller
             });
         }
 
+        if ($request->organization_id) {
+            $query->where('organization_id', $request->organization_id);
+        }
+        
+        if ($request->role_id) {
+            $query->whereHas('roles', function ($q) use ($request) {
+                $q->where('id', $request->role_id);
+            });
+        }
+        
         if ($request->status == 'inactive') {
             $query->where('is_active', false);
         } else {
             $query->where('is_active', true);
         }
 
-        $result = $query->paginate($request->per_page ?: 20);
+        $result = $query->with(['roles', 'organization'])->withCount('roles')->paginate($request->per_page ?: 20);
 
         return $result;
     }

@@ -4,23 +4,25 @@ angular
     .module('app')
     .component('usersControl', {
         template: require('./users-control.html'),
-        controller: ['$http', controller],
+        controller: ['$http', '$uibModal', controller],
         bindings: {
             organizations: '<',
+            roles: '<',
+            roleId: '<',
         }
     });
     
-function controller($http) {
+function controller($http, $uibModal) {
 
     let $ctrl = this;
 
     $ctrl.page = 1;
     $ctrl.perPage = 20;
     $ctrl.search = null;
-    $ctrl.organization = null;
     $ctrl.status = null;
 
     $ctrl.$onInit = function () {
+        console.log($ctrl.organizations);
         $ctrl.getList();
     };
 
@@ -29,10 +31,24 @@ function controller($http) {
         $ctrl.getList();
     };
 
+    $ctrl.openUserRolesModal = (index) => {
+        $uibModal
+            .open({
+                component: 'userRolesModal',
+                resolve: {
+                    user: function () {
+                        return $ctrl.users[index];
+                    }
+                }
+            })
+    }
+
     $ctrl.reset = () => {
         $ctrl.page = 1;
         $ctrl.title = null;
         $ctrl.status = null;
+        $ctrl.roleId = null;
+        $ctrl.organizationId = null;
         $ctrl.getList();
     };
 
@@ -44,6 +60,9 @@ function controller($http) {
                     status: $ctrl.status,
                     page: $ctrl.page,
                     per_page: $ctrl.perPage,
+                    search: $ctrl.search,
+                    role_id: $ctrl.roleId,
+                    organization_id: $ctrl.organizationId,
                 }
             })
             .then(

@@ -42,6 +42,7 @@ Route::group([
     Route::get('acl', 'ACLController@index');
     Route::post('acl/attach-permission-to-role', 'ACLController@attachPermissionToRole');
     Route::post('acl/detach-permission-from-role', 'ACLController@detachPermissionFromRole');
+    Route::post('acl/add-role', 'ACLController@addRole');
 
     Route::get('programs', 'ProgramsController@index');
     Route::get('programs/get-list', 'ProgramsController@getList');

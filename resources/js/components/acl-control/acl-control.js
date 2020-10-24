@@ -4,14 +4,14 @@ angular
     .module('app')
     .component('aclControl', {
         template: require('./acl-control.html'),
-        controller: ['$timeout', '$http', 'notify', controller],
+        controller: ['$timeout', '$http', 'notify', '$uibModal', controller],
         bindings: {
             roles: '<',
             permissions: '<',
         }
     });
     
-function controller($timeout, $http, notify) {
+function controller($timeout, $http, notify, $uibModal) {
  
 	let $ctrl = this;
 
@@ -33,6 +33,18 @@ function controller($timeout, $http, notify) {
         $ctrl.selectedRole = role;
         refreshPermissionsStatuses();
     };
+
+	$ctrl.openAddRoleModal = function () {
+        $uibModal
+            .open({
+            component: 'addRoleModal'
+            })
+            .result
+            .then(function (role) {
+                $ctrl.roles.push(role);
+                $ctrl.selectRole(role);
+        })
+    }
 
     $ctrl.permissionChanged = function (permission) {
 	    if (permission.isSelected) {

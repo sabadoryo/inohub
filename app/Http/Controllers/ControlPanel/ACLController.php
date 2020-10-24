@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Permission;
 use App\Role;
+use Illuminate\Support\Facades\Auth;
 
 class ACLController extends Controller
 {
@@ -15,9 +16,9 @@ class ACLController extends Controller
             ['/control-panel', 'Главная'],
             [null, 'ACL']
         ];
-
-        $roles = Role::with('permissions')->get();
-
+        
+        $roles = Role::with('permissions')->withCount('users')->get();
+        
         $permissions = Permission::all();
 
         return view('control-panel.component', [
@@ -30,6 +31,25 @@ class ACLController extends Controller
                 'permissions' => $permissions
             ]
         ]);
+    }
+    
+    public function addRole(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|unique:roles|min:3|max:255',
+        ], [
+            'name.required' => 'Введите название',
+            'name.unique' => 'Название роли должно быть уникальным',
+            'name.min' => 'Название роли должно быть больше :min символов',
+            'name.max' => 'Название роли должно быть меньше :max символов',
+        ]);
+        
+        $role = Role::create([
+            'name' => $request->name,
+        ]);
+        $role->users_count = 0;
+        $role->permissions = [];
+        return ['role' => $role];
     }
 
     public function attachPermissionToRole(Request $request)
