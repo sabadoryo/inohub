@@ -44,8 +44,12 @@ function controller($http, Auth, $uibModal) {
         openActionModal('reject');
     };
 
-	function openActionModal(action) {
-	    $uibModal
+    $ctrl.sendMessage = () => {
+        openActionModal('send-message');
+    };
+
+    function openActionModal(action) {
+        $uibModal
             .open({
                 component: 'applicationReplyAction',
                 resolve: {
@@ -65,5 +69,4 @@ function controller($http, Auth, $uibModal) {
                 }
             )
     }
-
 }

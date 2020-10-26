@@ -5,6 +5,7 @@ namespace App\Http\Controllers\ControlPanel;
 use App\Application;
 use App\Http\Controllers\Controller;
 use App\Organization;
+use App\Program;
 use Illuminate\Http\Request;
 
 class ApplicationsController extends Controller
@@ -42,10 +43,15 @@ class ApplicationsController extends Controller
 
     public function show($id)
     {
-        $application = Application::findOrFail($id);
-        $application->entity;
-        $application->user;
-        $application->manager;
+        $application = Application::with([
+            'entity',
+            'user',
+            'manager',
+            'forms',
+            'forms.form',
+            'forms.fields',
+            'forms.fields.formField'
+        ])->findOrFail($id);
 
         $title = 'Заявка №' . $application->id;
 
@@ -82,20 +88,43 @@ class ApplicationsController extends Controller
     {
         $app = Application::find($id);
 
+        if ($request->action == 'send-message') {
+            $app->actions()->create([
+                'user_id' => \Auth::user()->id,
+                'name' => 'send message',
+                'message' => $request->message
+            ]);
+        }
+
+        if ($request->action == 'to-remake') {
+            $app->status = 'to-remake';
+            $app->actions()->create([
+                'user_id' => \Auth::user()->id,
+                'name' => 'to-remake',
+            ]);
+        }
+
+        if ($request->action == 'reject') {
+            $app->status = 'rejected';
+            $app->actions()->create([
+                'user_id' => \Auth::user()->id,
+                'name' => 'to-remake',
+            ]);
+        }
+
         if ($request->action == 'accept') {
+            $entity = $app->entity;
+            if ($entity instanceof Program) {
+                $entity->members()->create([
+                    'user_id' => $app->user_id,
+                    'manager_id' => \Auth::user()->id,
+                    'application_id' => $app->id
+                ]);
+            }
             $app->status = 'accepted';
         }
 
-        if ($request->status == 'reject') {
-            $app->status = 'rejected';
-        }
-
-        if ($request->status == 'to-remake') {
-            $app->status = 'to-remake';
-        }
-
         $app->save();
-
 
         return [];
     }

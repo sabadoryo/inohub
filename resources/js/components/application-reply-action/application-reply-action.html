@@ -16,9 +16,11 @@
                 <textarea class="form-control"
                           rows="4"
                           ng-model="$ctrl.message"
-                          ng-required="$ctrl.action != 'accept'"></textarea>
+                          ng-required="$ctrl.action == 'send-message'"></textarea>
 
-                <small class="form-text text-muted" ng-show="$ctrl.action != 'accept'">Обязательно для заполнения</small>
+                <small class="form-text text-muted" ng-show="$ctrl.action != 'send-message'">Обязательно для заполнения</small>
+
+                <small class="form-text text-muted" ng-show="$ctrl.action != 'send-message'">Необязательно для заполнения</small>
 
             </div>
 

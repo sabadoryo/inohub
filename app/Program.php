@@ -37,4 +37,9 @@ class Program extends Model
         return $this->belongsToMany(Form::class)
             ->withPivot('order_number');
     }
+
+    public function members()
+    {
+        return $this->hasMany(ProgramMember::class);
+    }
 }

@@ -10,18 +10,34 @@
         <div>Дата и время отправки: <b>{{$ctrl.application.created_at | amDateFormat : 'DD.MM.YYYY HH:mm'}}</b></div>
         <div class="mb-3">Текущий статус: <b>{{$ctrl.application.status}}</b></div>
 
-        <div>Данные:</div>
-        <div>{{$ctrl.application.data | json}}</div>
-
-        <div>
-
-            <button type="button" class="btn btn-success" ng-click="$ctrl.accept()">Принять</button>
-
-            <button type="button" class="btn btn-warning" ng-click="$ctrl.toRemake()">Отправить на доработку</button>
-
-            <button type="button" class="btn btn-danger" ng-click="$ctrl.reject()">Отказать</button>
-
-        </div>
-
     </div>
+</div>
+
+<div class="card">
+    <div class="card-header">Данные</div>
+    <div class="card-body">
+        <table class="table table-bordered table-condensed">
+            <tbody ng-repeat="appForm in $ctrl.application.forms track by $index">
+            <tr>
+                <th colspan="2">{{appForm.form.title}}</th>
+            </tr>
+            <tr ng-repeat="field in appForm.fields track by $index">
+                <td>{{field.form_field.label}}</td>
+                <td>{{field.value}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div>
+
+    <button type="button" class="btn btn-primary" ng-click="$ctrl.sendMessage()">Отправить сообщение</button>
+
+    <button type="button" class="btn btn-success" ng-click="$ctrl.accept()">Принять</button>
+
+    <button type="button" class="btn btn-warning" ng-click="$ctrl.toRemake()">Отправить на доработку</button>
+
+    <button type="button" class="btn btn-danger" ng-click="$ctrl.reject()">Отказать</button>
+
 </div>

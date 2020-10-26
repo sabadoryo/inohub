@@ -59,7 +59,6 @@ Route::group([
     Route::get('programs/{id}/page', 'ProgramsController@pageForm');
     Route::get('programs/{id}/forms', 'ProgramsController@forms');
 
-
     Route::get('applications', 'ApplicationsController@index');
     Route::get('applications/get-list', 'ApplicationsController@getList');
     Route::get('applications/{id}', 'ApplicationsController@show');

@@ -26,7 +26,8 @@ function controller($http) {
 	$ctrl.save = () => {
         $http
             .post(`/control-panel/applications/${$ctrl.app.id}/reply`, {
-                action: $ctrl.action
+                action: $ctrl.action,
+                message: $ctrl.message,
             })
             .then(
                 res => {
