@@ -1,0 +1,86 @@
+<form class="mb-3" ng-submit="$ctrl.filter()">
+  <div class="form">
+    <div class="ml-2">Всего: <b>{{ $ctrl.total }}</b>.</div>
+    <div class="d-flex align-items-center">
+      <div class="col-1">
+        <select class="form-control"
+                ng-model="$ctrl.perPage"
+                ng-change="$ctrl.getList()">
+          <option ng-value="15">15</option>
+          <option ng-value="30">30</option>
+          <option ng-value="50">50</option>
+          <option ng-value="100">100</option>
+        </select>
+      </div>
+      <div class="col-4">
+        <input type="text"
+               class="form-control"
+               placeholder="Введите ФИО, email или телефон"
+               ng-model="$ctrl.search">
+      </div>
+      <div class="col-2">
+        <select class="form-control"
+                ng-model="$ctrl.organizationId"
+                ng-options="organ.id as organ.name for organ in $ctrl.organizations">
+          <option value="">Организация</option>
+        </select>
+      </div>
+      <div class="col-1">
+        <select class="form-control"
+                ng-model="$ctrl.roleId"
+                ng-options="role.id as role.name for role in $ctrl.roles">
+          <option value="">Роль</option>
+        </select>
+      </div>
+      <div class="col-2">
+        <select ng-model="$ctrl.status" class="form-control">
+          <option value="">Статус</option>
+          <option value="active">Активный</option>
+          <option value="inactive">Неактивный</option>
+        </select>
+      </div>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-primary btn-sm">Поиск</button>
+        <button type="button" class="btn btn-secondary btn-sm" ng-click="$ctrl.reset()">Сбросить</button>
+      </div>
+    </div>
+  </div>
+</form>
+
+<table class="table table-bordered table-striped table-sm">
+  <thead class="thead-light">
+  <tr>
+    <th>ID</th>
+    <th>ФИО</th>
+    <th>Email</th>
+    <th>Телефон</th>
+    <th>Организация</th>
+    <th>Количество ролей</th>
+    <th>Статус</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="user in $ctrl.users track by $index">
+    <td>{{ user.id }}</td>
+    <td>{{ user.full_name }}</td>
+    <td>{{ user.email }}</td>
+    <td>{{ user.phone }}</td>
+    <td>{{ user.organization.name }}</td>
+    <td class="text-primary" ng-click="$ctrl.openUserRolesModal($index)">{{ user.roles_count }}</td>
+    <td>{{ user.status }}</td>
+    <td class="text-center">
+      <a href="" ng-href="/control-panel/{{user.id}}/edit" class="btn btn-primary btn-xs">
+        <i class="fa fa-edit"></i>
+      </a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<ul uib-pagination
+    total-items="$ctrl.total"
+    ng-model="$ctrl.page"
+    max-size="10"
+    items-per-page="$ctrl.perPage"
+    ng-change="$ctrl.getList()"></ul>

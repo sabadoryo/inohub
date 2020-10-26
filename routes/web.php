@@ -36,6 +36,11 @@ Route::group([
 
     Route::get('users', 'UsersController@index');
     Route::get('users/get-list', 'UsersController@getList');
+    Route::post('users/{id}/change-active', 'UsersController@changeActive');
+    
+    Route::get('admin-users', 'AdminUsersController@index');
+    Route::get('admin-users/get-list', 'AdminUsersController@getList');
+    Route::post('admin-users/{id}/change-active', 'AdminUsersController@changeActive');
 
     Route::get('roles', 'RolesController@index');
 

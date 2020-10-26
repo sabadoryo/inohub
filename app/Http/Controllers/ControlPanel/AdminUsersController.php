@@ -8,33 +8,41 @@ use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 
-class UsersController extends Controller
+class AdminUsersController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $breadcrumb = [
             ['/control-panel', 'Главная'],
-            [null, 'Пользователи']
+            [null, 'Персонал сайта']
         ];
-
-        $bindings = [];
-
+        
+        $organizations = Organization::all();
+        
+        $roles = Role::all();
+        
+        $bindings = [
+            'organizations' => $organizations,
+            'roles' => $roles,
+            'role_id' => $request->role_id,
+        ];
+        
         return view('control-panel.component', [
-            'PAGE_TITLE' => 'Пользователи',
-            'activePage' => 'users',
+            'PAGE_TITLE' => 'Персонал сайта',
+            'activePage' => 'admin-users',
             'breadcrumb' => $breadcrumb,
-            'component' => 'users-control',
+            'component' => 'admin-users-control',
             'bindings' => $bindings
         ]);
     }
-
+    
     public function getList(Request $request)
     {
         $query = User::query()->where('is_admin', 0);
-
+        
         if ($request->search) {
             $s = $request->search;
-
+            
             $query->where(function ($q) use ($s) {
                 $q->where(
                     \DB::raw('CONCAT_WS(" ", last_name, first_name)'),
@@ -45,23 +53,24 @@ class UsersController extends Controller
             });
         }
         
+        if ($request->organization_id) {
+            $query->where('organization_id', $request->organization_id);
+        }
+        
+        if ($request->role_id) {
+            $query->whereHas('roles', function ($q) use ($request) {
+                $q->where('id', $request->role_id);
+            });
+        }
+        
         if ($request->status == 'inactive') {
             $query->where('is_active', false);
-        } elseif($request->status == 'active') {
+        } else {
             $query->where('is_active', true);
         }
-
-        $result = $query->with(['roles', 'organization'])->withCount('roles')->paginate($request->per_page ?: 30);
-
-        return $result;
-    }
-    
-    public function changeActive($id)
-    {
-        $user = User::find($id);
         
-        $user->update([
-            'is_active' => !$user->is_active,
-        ]);
+        $result = $query->with(['roles', 'organization'])->withCount('roles')->paginate($request->per_page ?: 30);
+        
+        return $result;
     }
 }

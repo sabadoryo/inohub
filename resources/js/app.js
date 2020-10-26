@@ -62,3 +62,4 @@ require('./components/project-register-form/project-register-form');
 require('./components/register-modal/register-modal');
 require('./components/add-role-modal/add-role-modal');
 require('./components/user-roles-modal/user-roles-modal');
+require('./components/admin-users-control/admin-users-control');

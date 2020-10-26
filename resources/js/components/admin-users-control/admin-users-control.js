@@ -2,19 +2,22 @@ import angular from "angular";
 
 angular
     .module('app')
-    .component('usersControl', {
-        template: require('./users-control.html'),
-        controller: ['$http', 'notify', controller],
-        bindings: {}
+    .component('adminUsersControl', {
+        template: require('./admin-users-control.html'),
+        controller: [controller],
+        bindings: {
+            organizations: '<',
+            roles: '<',
+            roleId: '<',
+        }
     });
     
-function controller($http, notify) {
+function controller($http, $uibModal) {
 
     let $ctrl = this;
 
     $ctrl.page = 1;
     $ctrl.perPage = 30;
-    $ctrl.status = 'active';
 
     $ctrl.$onInit = function () {
         $ctrl.getList();
@@ -25,35 +28,26 @@ function controller($http, notify) {
         $ctrl.getList();
     };
 
-    $ctrl.pageChanged = () => {
-        $ctrl.page = 1;
-        $ctrl.getList();
+    $ctrl.openUserRolesModal = (index) => {
+        $uibModal
+            .open({
+                component: 'userRolesModal',
+                resolve: {
+                    user: function () {
+                        return $ctrl.users[index];
+                    }
+                }
+            })
     }
 
     $ctrl.reset = () => {
         $ctrl.page = 1;
         $ctrl.search = null;
         $ctrl.status = null;
+        $ctrl.roleId = null;
+        $ctrl.organizationId = null;
         $ctrl.getList();
     };
-
-    $ctrl.changeActive = (userId) => {
-        let url = '/control-panel/users/' + userId + '/change-active';
-        $http.post(url).then(function (response){
-            notify({
-                message: 'Активность пользователя изменено',
-                duration: 2000,
-                classes: 'alert-success',
-            });
-            $ctrl.getList();
-        }, function (error){
-            notify({
-                message: 'Ошибка!',
-                duration: 2000,
-                classes: 'alert-danger',
-            });
-        });
-    }
 
     $ctrl.getList = () => {
         $http
@@ -63,6 +57,8 @@ function controller($http, notify) {
                     page: $ctrl.page,
                     per_page: $ctrl.perPage,
                     search: $ctrl.search,
+                    role_id: $ctrl.roleId,
+                    organization_id: $ctrl.organizationId,
                 }
             })
             .then(

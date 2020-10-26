@@ -19,6 +19,8 @@ class User extends Authenticatable
         'organization_id',
         'password',
         'is_active',
+        'is_admin',
+        'last_login',
     ];
 
     protected $appends = [
@@ -32,8 +34,13 @@ class User extends Authenticatable
     ];
 
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'is_admin' => 'boolean',
         'is_active' => 'boolean',
+    ];
+    
+    protected $dates = [
+        'email_verified_at',
+        'last_login',
     ];
 
     public function getFullNameAttribute()

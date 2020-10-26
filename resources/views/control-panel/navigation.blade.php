@@ -47,6 +47,13 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="/control-panel/admin-users" class="nav-link {{$activePage == 'admin-users' ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-users-cog"></i>
+                        <p>Персонал сайта</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="/control-panel/roles" class="nav-link {{$activePage == 'roles' ? 'active' : ''}}">
                         <i class="nav-icon fas fa-users"></i>
                         <p>Роли</p>
