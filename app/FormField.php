@@ -21,6 +21,7 @@ class FormField extends Model
     protected $casts = [
         'is_required' => 'boolean',
         'max_files_count' => 'integer',
+        'options' => 'array',
     ];
 
 }
