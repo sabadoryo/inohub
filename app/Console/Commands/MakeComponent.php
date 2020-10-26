@@ -79,7 +79,7 @@ class MakeComponent extends Command
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-secondary" ng-click="$ctrl.dismiss()">Close</button>
-    <button type="button" class="btn btn-primary" ng-click="$ctrl.saves()">Save changes</button>
+    <button type="button" class="btn btn-primary" ng-click="$ctrl.save()">Save changes</button>
  </div>';
         } else {
             return '';

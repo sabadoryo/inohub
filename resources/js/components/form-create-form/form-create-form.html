@@ -1,0 +1,152 @@
+<form ng-submit="$ctrl.submit()">
+
+    <div class="card">
+        <div class="card-body">
+
+            <div class="form-group">
+                <label>Название:</label>
+                <input type="text" class="form-control" ng-model="$ctrl.title" required>
+                <small class="form-text text-muted">Обязательное поле</small>
+            </div>
+
+            <div class="form-group">
+                <label>Описание:</label>
+                <textarea class="form-control" rows="3" ng-model="$ctrl.description" required></textarea>
+                <small class="form-text text-muted">Обязательное поле. Опишите для чего и как будет использоваться данная форма</small>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="card" ng-repeat="field in $ctrl.fields track by $index">
+        <div class="card-header" ng-switch="field.type">
+            №{{$index + 1}}. {{field.label}}
+            <button class="btn btn-danger btn-xs float-right"
+                    ng-if="$index"
+                    type="button"
+                    ng-click="$ctrl.delField($index)">
+                <i class="fa fa-times"></i>
+            </button>
+        </div>
+        <div class="card-body">
+
+            <div class="form-row mb-2">
+
+                <div class="form-group col-3">
+                    <label>Вопрос:</label>
+                    <input type="text" class="form-control" ng-model="field.label" required>
+                    <small class="form-text text-muted">Обязательное поле</small>
+                </div>
+
+                <div class="form-group col-3">
+                    <label>Тип ответа:</label>
+                    <select class="form-control" ng-model="field.type" ng-change="$ctrl.fieldTypeChanged(field)" required>
+                        <option value="text">Текст(строка)</option>
+                        <option value="textarea">Текст(абзац)</option>
+                        <option value="radio">Один из списка</option>
+                        <option value="checkbox">Нескольно из списка</option>
+                        <option value="select">Раскрывающийся список</option>
+                        <option value="file">Загрузка файлов</option>
+                        <option value="text">Дата</option>
+                    </select>
+                    <small class="form-text text-muted">Обязательное поле</small>
+                </div>
+
+                <div class="form-group col-2">
+                    <label>Обязательность</label>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox"
+                               ng-model="field.isRequired"
+                               class="custom-control-input"
+                               id="field_require_{{$index}}">
+                        <label class="custom-control-label" for="field_require_{{$index}}" style="font-weight: normal">
+                            {{field.isRequired ? 'Включена' : 'Выключена'}}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group col-4">
+                    <label>Примечание для проверяющего</label>
+                    <input type="text" class="form-control" ng-model="field.prompt">
+                </div>
+
+            </div>
+
+            <div ng-if="field.type == 'radio' || field.type == 'checkbox' || field.type == 'select'">
+
+                <div ng-repeat="opt in field.options track by $index" class="mb-2">
+
+                    <input type="radio" ng-if="field.type == 'radio'" checked disabled style="display: inline-block">
+
+                    <input type="checkbox" ng-if="field.type == 'checkbox'" checked disabled style="display: inline-block">
+
+                    <input type="text"
+                           class="form-control"
+                           style="display: inline-block; width: 400px"
+                           ng-model="opt.val"
+                           required>
+
+                    <button type="button"
+                            class="btn btn-danger btn-xs"
+                            ng-if="$index"
+                            ng-click="$ctrl.delOption(field, $index)">
+                        <span class="fa fa-times"></span>
+                    </button>
+
+                </div>
+
+                <div class="form-group form-check">
+                    <input type="checkbox"
+                           class="form-check-input"
+                           id="allow-other-option-{{$index}}"
+                           ng-model="field.otherOption">
+                    <label class="form-check-label" for="allow-other-option-{{$index}}">Разрешить другой вариант</label>
+                </div>
+
+                <button type="button" class="btn btn-primary btn-sm" ng-click="$ctrl.addOption(field)">
+                    Добавить вариант
+                </button>
+
+            </div>
+
+            <div ng-if="field.type == 'file'">
+                <div class="row">
+                    <div class="col-3">
+                        <label>Мак. кол-во файлов:</label>
+                        <select class="form-control" ng-model="field.maxFilesCount" required>
+                            <option ng-value="1">1</option>
+                            <option ng-value="5">5</option>
+                            <option ng-value="10">10</option>
+                        </select>
+                    </div>
+                    <div class="col-3">
+                        <label>Расширение файлов:</label>
+                        <select class="form-control" ng-model="field.fileAllows" required>
+                            <option value="any">Любые</option>
+                            <option value="specific">Определенные</option>
+                        </select>
+                    </div>
+                    <div class="col-4" ng-if="field.fileAllows == 'specific'">
+                        <label>Типы файлов:</label>
+                        <select class="form-control"
+                                ng-model="field.fileTypes"
+                                ng-options="i.key as i.value for i in $ctrl.filesTypes"
+                                multiple
+                                required>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <button type="button"
+            class="btn btn-primary"
+            ng-click="$ctrl.addField()">
+        Добавить поле
+    </button>
+
+    <button type="submit" class="btn btn-primary" ng-disabled="$ctrl.loading">Сохранить</button>
+
+</form>

@@ -4,20 +4,20 @@ angular
     .module('app')
     .component('programsControl', {
         template: require('./programs-control.html'),
-        controller: ['$http', controller],
+        controller: ['$http', '$uibModal', controller],
         bindings: {
-            //
+            categories: '<',
         }
     });
     
-function controller($http) {
+function controller($http, $uibModal) {
  
 	let $ctrl = this;
 
 	$ctrl.page = 1;
-	$ctrl.perPage = 6;
-	$ctrl.title = null;
-	$ctrl.status = null;
+    $ctrl.title = null;
+    $ctrl.status = null;
+    $ctrl.category = null;
 
 	$ctrl.$onInit = function () {
         $ctrl.getList();
@@ -32,6 +32,7 @@ function controller($http) {
 	    $ctrl.page = 1;
 	    $ctrl.title = null;
 	    $ctrl.status = null;
+	    $ctrl.category = null;
 	    $ctrl.getList();
     };
 
@@ -39,20 +40,41 @@ function controller($http) {
         $http
             .get('/control-panel/programs/get-list', {
                 params: {
+                    page: $ctrl.page,
+                    category_id: $ctrl.category ? $ctrl.category.id : null,
                     title: $ctrl.title,
                     status: $ctrl.status,
-                    page: $ctrl.page,
                 }
             })
             .then(
                 response => {
-                    $ctrl.total = response.data.total;
                     $ctrl.programs = response.data.data;
+                    $ctrl.total = response.data.total;
                 },
                 error => {
-                    alert(error);
                     // todo handle error
                 }
             )
+    };
+
+	$ctrl.openCreateModal = () => {
+	    $uibModal
+            .open({
+                component: 'programCreateModal',
+                resolve: {
+                    categories: function () {
+                        return $ctrl.categories;
+                    }
+                }
+            })
+            .result
+            .then(
+                res => {
+
+                },
+                err => {
+
+                }
+            );
     };
 }
