@@ -200,6 +200,7 @@ const buildConstructor = elemId => {
 
     editor.BlockManager.add('ui-header-block', {
         label: 'UI Header 1',
+        category: 'Header',
         content: `
             <header class="header">
 
@@ -236,6 +237,7 @@ const buildConstructor = elemId => {
     });
     editor.BlockManager.add('ui-main-container-block', {
         label: 'FILLABLE: UI Main Container',
+        category: 'Container',
         content: `
             <main data-gjs-droppable=".dropping" class="program-page"></main>
         `
@@ -249,6 +251,7 @@ const buildConstructor = elemId => {
     // });
     editor.BlockManager.add('ui-welcome-section-block', {
         label: 'Welcome Section',
+        category: 'Basic',
         content: `
             <div data-gjs-droppable=".dropping" class="program-page__section program-welcome-section dropping">
                 <img data-gjs-type="image" alt="" class="program-welcome-section__img dropping">
@@ -264,6 +267,7 @@ const buildConstructor = elemId => {
 
     editor.BlockManager.add('ui-cards-block', {
         label: 'Cards section',
+        category: 'Basic',
         content: `
             <div class="program-page__section program-cards dropping">
 
@@ -345,6 +349,8 @@ const buildConstructor = elemId => {
 
     editor.BlockManager.add('ui-info-block', {
         label: 'Info Block',
+        category: 'Basic',
+
         content: `
             <div class="program-page__section program-info">
                 <div class="program-info__container">
@@ -382,6 +388,8 @@ const buildConstructor = elemId => {
 
     editor.BlockManager.add('ui-steps-block', {
         label: 'Steps',
+        category: 'Basic',
+
         content: `
             <div class="program-page__section program-steps">
 
@@ -418,6 +426,7 @@ const buildConstructor = elemId => {
 
     editor.BlockManager.add('ui-request', {
         label: 'Request form',
+        category: 'Section',
         content: `
             <div class="program-page__section program-request">
                 <div class="program-request__title">
