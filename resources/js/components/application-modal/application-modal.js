@@ -4,33 +4,34 @@ angular
     .module('app')
     .component('applicationModal', {
         template: require('./application-modal.html'),
-        controller: ['Auth', '$rootScope', '$http', controller],
+        controller: ['Auth', '$rootScope', 'Upload', '$http', controller],
         bindings: {
             resolve: '<',
             close: '&',
             dismiss: '&'
         }
     });
-    
-function controller(Auth, $rootScope, $http) {
- 
-	let $ctrl = this;
 
-	$rootScope.$on('UserAuthenticated', (event, data) => {
+function controller(Auth, $rootScope, Upload, $http) {
+
+    let $ctrl = this;
+    $ctrl.curForm = 0;
+    $rootScope.$on('UserAuthenticated', (event, data) => {
         $ctrl.user = data.user;
     });
 
-	$ctrl.fullName = null;
-	$ctrl.email = null;
+    $ctrl.fullName = null;
+    $ctrl.email = null;
 
-	$ctrl.$onInit = function () {
-	    $ctrl.user = Auth.user();
-	    $ctrl.entityType = $ctrl.resolve.entityType;
-	    $ctrl.entityId = $ctrl.resolve.entityId;
-	    $ctrl.getForms();
+    $ctrl.$onInit = function () {
+        $ctrl.user = Auth.user();
+        $ctrl.entityType = $ctrl.resolve.entityType;
+        $ctrl.entityId = $ctrl.resolve.entityId;
+        $ctrl.getForms();
+
     };
 
-	$ctrl.getForms = function () {
+    $ctrl.getForms = function () {
         $http
             .get(`/astana-hub/programs/${$ctrl.entityId}/get-forms`)
             .then(
@@ -47,34 +48,87 @@ function controller(Auth, $rootScope, $http) {
             )
     };
 
-	$ctrl.openLoginModal = () => {
-	    Auth.openLoginModal();
+    $ctrl.openLoginModal = () => {
+        Auth.openLoginModal();
     };
 
-	$ctrl.submit = function (ind) {
+    $ctrl.selectOtherOptionSelected = function (field) {
+        field.otherOptionSelected = field.value.val === 'Свой вариант';
+        console.log(field);
+    };
 
-	    if (ind != $ctrl.forms.length - 1) {
-            return;
+    $ctrl.radioOtherOptionSelected = function (field) {
+        console.log(field);
+    };
+
+    $ctrl.validateFile = function (files, file, newFiles, duplicateFiles, invalidFiles, event, field) {
+        if (files.length > field.max_files_count) {
+            alert('Выбрано сликшмо много файлов, максимальное количество:' + field.max_files_count);
+            field.value = [];
+        }
+    };
+
+    $ctrl.removeFile = function (field, index) {
+        console.log(field, index);
+        field.value.splice(index, 1);
+    };
+
+    $ctrl.submit = function (ind) {
+
+        let ch = true;
+        if (ind != $ctrl.forms.length - 1) {
+            $ctrl.forms[ind].fields.forEach(field => {
+                if (field.type === 'file') {
+                    if (field.value.length === 0) {
+                        alert('Поле c загрузкой файла - является обязательным, пожалуйста предоставьте его.');
+                        ch = false;
+                    }
+                }
+            });
+            console.log(ch);
+            if (ch === false) {
+                return;
+            } else {
+                $ctrl.curForm += 1;
+                return;
+            }
         }
 
-	    let forms = [];
+        let forms = [];
 
-	    $ctrl.forms.forEach(form => {
-	        let fields = [];
+        $ctrl.forms.forEach(form => {
+            let fields = [];
 
-	        form.fields.forEach(field => {
-                fields.push({id: field.id, value: field.value});
+            form.fields.forEach(field => {
+                if (field.type === 'checkbox') {
+                    let value = [];
+                    field.options.forEach(option => {
+                        if (option.selected) {
+                            value.push(option.val);
+                        }
+                    })
+                    fields.push({id: field.id, value: value, type: field.type});
+                } else {
+                    fields.push({
+                        id: field.id,
+                        value: field.otherOptionValue ? field.otherOptionValue : field.value,
+                        type: field.type
+                    });
+                }
             });
 
-	        forms.push({id: form.id, fields});
+            forms.push({id: form.id, fields});
         });
+        console.log(forms);
+        Upload
 
-	    $http
-
-            .post('/applications', {
-                entity_type: $ctrl.entityType,
-                entity_id: $ctrl.entityId,
-                forms
+            .upload({
+                url: '/applications',
+                data: {
+                    entity_type: $ctrl.entityType,
+                    entity_id: $ctrl.entityId,
+                    forms
+                }
             })
             .then(
                 res => {

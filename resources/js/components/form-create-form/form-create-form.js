@@ -9,21 +9,21 @@ angular
             //
         }
     });
-    
+
 function controller($http) {
- 
+
 	let $ctrl = this;
 
 	window.t = this;
 
 	$ctrl.filesTypes = [
-        {key: 'img', value: 'Изображение'},
-        {key: 'pdf', value: 'PDF'},
-        {key: 'excel', value: 'Excel'},
-        {key: 'word', value: 'Word'},
-        {key: 'ppx', value: 'Powerpoint'},
-        {key: 'audio', value: 'Аудио'},
-        {key: 'video', value: 'Видео'},
+        {key: 'image/*', value: 'Изображение'},
+        {key: 'application/pdf', value: 'PDF'},
+        {key: 'application/vnd.ms-excel', value: 'Excel'},
+        {key: 'application/msword', value: 'Word'},
+        {key: 'application/vnd.ms-powerpoint', value: 'Powerpoint'},
+        {key: 'audio/*', value: 'Аудио'},
+        {key: 'video/*', value: 'Видео'},
     ];
 
 	$ctrl.title = null;
@@ -83,6 +83,8 @@ function controller($http) {
 
 	$ctrl.submit = function () {
 	    $ctrl.loading = true;
+
+        console.log($ctrl.fields);
 
         $http
             .post(`/control-panel/forms`, {

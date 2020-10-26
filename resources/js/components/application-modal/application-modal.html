@@ -1,7 +1,7 @@
 <div class="modal-header">
     <h5 class="modal-title">Отправить заявку</h5>
     <button type="button" class="close" ng-click="$ctrl.dismiss()">
-      <span aria-hidden="true">&times;</span>
+        <span aria-hidden="true">&times;</span>
     </button>
 </div>
 
@@ -16,9 +16,9 @@
 
         <div ng-repeat="form in $ctrl.forms track by $index">
 
-            <form ng-submit="$ctrl.submit($index)">
+            <form ng-submit="$ctrl.submit($index)" ng-if="$ctrl.curForm === $index">
 
-                <div class="form-group" ng-repeat="field in form.fields track by $index">
+                <div class="form-group" ng-repeat="field in form.fields track by field.id">
 
                     <label>{{field.label}}:</label>
 
@@ -26,12 +26,115 @@
                            ng-if="field.type == 'text'"
                            class="form-control"
                            ng-model="field.value"
-                           ng-required="field.isRequired">
+                           ng-required="field.is_required">
 
                     <textarea class="form-control"
                               ng-if="field.type == 'textarea'"
                               ng-model="field.value"
-                              ng-required="field.isRequired"></textarea>
+                              ng-required="field.is_required"></textarea>
+
+
+                    <div ng-if="field.type == 'radio'">
+                        <div class="form-check"
+                             ng-repeat="option in field.options track by $index">
+                            <input ng-model="field.value"
+                                   class="form-check-input"
+                                   type="radio"
+                                   name="field.id"
+                                   id="{{field.id + $index + option.val}}"
+                                   value="{{option.val}}"
+                                   ng-required="field.is_required">
+                            <label class="form-check-label"
+                                   for="{{field.id + $index + option.val}}">
+                                {{option.val}}
+                            </label>
+                        </div>
+
+                        <div class="form-check" ng-if="field.other_option">
+                            <input
+                                   class="form-check-input"
+                                   type="radio"
+                                   ng-change="$ctrl.radioOtherOptionSelected(field)"
+                                   name="field.id"
+                                   id="{{field.id + 'other_option'}}"
+                                   value="'Свой вариант'">
+                            <label class="form-check-label"
+                                   for="{{field.id + 'other_option'}}">
+                                Свой вариант
+                            </label>
+                        </div>
+
+                        <div  ng-if="field.otherOptionSelected" class="mt-2">
+                            <input type="text" ng-model="field.otherOptionValue" class="form-control" placeholder="Свой вариант">
+                        </div>
+                    </div>
+
+                    <div class="form-check"
+                         ng-if="field.type == 'checkbox'"
+                         ng-repeat="option in field.options track by option.val + field.id">
+
+                        <input ng-model="option.selected"
+                               class="form-check-input"
+                               type="checkbox"
+                               value="{{option.val}}"
+                               id="{{field.id + $index + option.val}}">
+
+                        <label class="form-check-label"
+                               for="{{field.id + $index + option.val}}">
+                            {{option.val}}
+                        </label>
+
+                    </div>
+
+                    <div class="" ng-if="field.type == 'select'">
+                        <select class="custom-select mr-sm-2"
+                                ng-init="field.other_option ? field.options.push({'val' : 'Свой вариант'}) : ''"
+                                ng-model="field.value"
+                                ng-change="$ctrl.selectOtherOptionSelected(field)"
+                                ng-options="c as c.val for c in field.options"
+                                ng-required="field.is_required">
+                            <option value="">Выберите...</option>
+                        </select>
+                        <div ng-if="field.otherOptionSelected" class="mt-2">
+                            <input type="text"
+                                   ng-model="field.otherOptionValue"
+                                   class="form-control"
+                                   placeholder="Свой вариант...">
+                        </div>
+                    </div>
+
+                    <div ng-if="field.type == 'file'">
+                        <div ng-show="field.value.length > 0" class="mb-2">
+                            <table class="table table-bordered table-striped table-sm">
+                                <thead class="thead-light">
+                                <tr>
+                                    <th>Название</th>
+                                    <th>Действие</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="file in field.value track by $index">
+                                    <td>{{file.name}}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger btn-sm"
+                                                ng-click="$ctrl.removeFile(field,$index)">
+                                            Удалить
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button type="button" class="form-control-file" ngf-select=""
+                                ng-init="field.value = []"
+                                ng-model="field.value"
+                                ngf-change="$ctrl.validateFile($files, $file, $newFiles, $duplicateFiles, $invalidFiles, $event,field)"
+                                ngf-multiple="{{field.max_files_count === 1 ? 'false' : 'true'}}"
+                                accept="{{field.file_allows === 'specific' ? field.file_types : '*'}}"
+                                ngf-max-size="10MB">
+                            <span>выбрать файл</span>
+                        </button>
+                    </div>
 
                 </div>
 

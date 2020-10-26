@@ -46,7 +46,7 @@ Route::group([
     Route::get('users', 'UsersController@index');
     Route::get('users/get-list', 'UsersController@getList');
     Route::post('users/{id}/change-active', 'UsersController@changeActive');
-    
+
     Route::get('admin-users', 'AdminUsersController@index');
     Route::get('admin-users/get-list', 'AdminUsersController@getList');
     Route::post('admin-users/{id}/change-active', 'AdminUsersController@changeActive');
@@ -67,6 +67,11 @@ Route::group([
     Route::post('programs/{id}/update-main', 'ProgramsController@updateMain');
     Route::post('programs/{id}/update-forms', 'ProgramsController@updateForms');
     Route::post('programs/{id}/update-forms-list', 'ProgramsController@updateFormsList');
+
+    Route::get('events', 'EventsController@index');
+    Route::get('events/get-list', 'EventsController@getList');
+    Route::get('events/create', 'EventsController@create');
+    Route::post('events', 'EventsController@store');
 
     Route::get('applications', 'ApplicationsController@index');
     Route::get('applications/get-list', 'ApplicationsController@getList');

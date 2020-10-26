@@ -35,10 +35,23 @@ class ApplicationsController extends Controller
         foreach ($request->forms as $form) {
             $appForm = $app->forms()->create(['form_id' => $form['id']]);
             foreach ($form['fields'] as $field) {
-                $appForm->fields()->create([
-                    'form_field_id' => $field['id'],
-                    'value' => $field['value'],
-                ]);
+
+                if ($field['type'] === 'file') {
+                    $file_pathes = [];
+                    foreach ($field['value'] as $file) {
+                        $path = \Storage::disk('public')->put('application_files', $file);
+                        array_push($file_pathes, $path);
+                    }
+                    $appForm->fields()->create([
+                        'form_field_id' => $field['id'],
+                        'value' => json_encode($file_pathes),
+                    ]);
+                } else {
+                    $appForm->fields()->create([
+                        'form_field_id' => $field['id'],
+                        'value' => is_array($field['value']) ? json_encode($field['value']) : $field['value'],
+                    ]);
+                }
             }
         }
 
