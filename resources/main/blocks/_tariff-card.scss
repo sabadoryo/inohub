@@ -1,0 +1,70 @@
+.tariff-card {
+
+    width: 304px;
+    background-color: #ffffff;
+    border-radius: 7px;
+    position: relative;
+    padding: 68px 20px 150px 20px;
+
+    &__grey-text {
+        position: absolute;
+        @include text-style(9.6rem, 700, #f3f3f3);
+        line-height: 117px;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 20px;
+    }
+
+    &__title {
+        @include text-style(2rem, 700, #181515);
+        margin-bottom: 50px;
+        text-align: center;
+        position: relative;
+        z-index: 2;
+    }
+
+    &__heading {
+        @include text-style(1.6rem, 600, #181515);
+        line-height: 19.5px;
+        margin-bottom: 20px;
+    }
+
+    &__list {
+
+    }
+
+    &__item {
+        @include text-style(1.4rem, 400, #181515);
+        line-height: 17px;
+        padding-left: 25px;
+        position: relative;
+
+        &:not(:last-child) {
+            margin-bottom: 15px;
+        }
+
+        &:before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 0;
+            height: 1px;
+            width: 15px;
+            background-color: $elem-color;
+        }
+    }
+
+    &__price {
+        @include text-style(2rem, 700, #181515);
+        line-height: 24px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    &__bottom {
+        position: absolute;
+        bottom: 30px;
+        left: 20px;
+        right: 20px;
+    }
+}

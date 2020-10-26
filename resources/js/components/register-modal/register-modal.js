@@ -29,6 +29,10 @@ function controller($http, Upload, $rootScope) {
 
     };
 
+    $ctrl.changeType = (type) => {
+        $ctrl.type = type;
+    };
+
     $ctrl.toStep = function (step) {
         $ctrl.step = step;
     };

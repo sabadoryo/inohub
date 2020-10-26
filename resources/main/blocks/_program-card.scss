@@ -1,0 +1,26 @@
+.program-card {
+
+    width: 588px;
+    height: 369px;
+    border-radius: 7px;
+    background-color: #fafafa;
+    text-align: center;
+    padding: 30px 48px;
+
+    &__icon {
+        width: 130px;
+        height: 130px;
+        margin-bottom: 35px;
+    }
+
+    &__title {
+        @include text-style(1.8rem, 600, #181515);
+        line-height: 17px;
+        margin-bottom: 20px;
+    }
+
+    &__desc {
+        @include text-style(1.4rem, 500, #181515);
+        line-height: 17px;
+    }
+}

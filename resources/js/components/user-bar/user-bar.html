@@ -1,0 +1,40 @@
+<button class="header__login-btn button"
+        ng-show="!$ctrl.user"
+        ng-click="$ctrl.openLoginModal()">
+    <img src="/img/icons/user-avatar.svg" alt="" class="header__user-avatar">
+    Войти
+</button>
+
+<div ng-show="$ctrl.user" uib-dropdown="" uib-dropdown-toggle="">
+
+    <div style="background: white; border-radius: 50%; width: 50px; height: 50px; overflow: hidden; display: inline-block; vertical-align: middle">
+        <img src=""
+             ng-if="$ctrl.user.avatar_url"
+             ng-src="{{$ctrl.user.avatar_url}}"
+             alt="">
+        <div ng-show="!$ctrl.user.avatar_url"
+             style="font-size: 25px; padding-top: 6px; padding-left: 6px; color: blue">
+            {{$ctrl.user.initials}}
+        </div>
+    </div>
+
+    <div style="display: inline-block; color: #ffffff; vertical-align: middle; font-size: 14px;">
+        {{$ctrl.user.full_name}}
+    </div>
+
+    <ul uib-dropdown-menu="" style="font-size: 14px">
+        <li class="">
+            <a href="/cabinet">Кабинет</a>
+        </li>
+        <li class="">
+            <a href="/cabinet/applications">Заявки</a>
+        </li>
+        <li class="">
+            <a href="/cabinet/notifications">Уведомления</a>
+        </li>
+        <li>
+            <a href="" ng-click="$ctrl.logout()">Выйты</a>
+        </li>
+    </ul>
+
+</div>

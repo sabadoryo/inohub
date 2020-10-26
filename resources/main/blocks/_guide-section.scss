@@ -1,0 +1,37 @@
+.guide-section {
+
+    padding: 40px 192px;
+    background-color: #ffffff;
+    border-radius: 7px;
+
+    &__title {
+        @include text-style(1.8rem, 700, #181515);
+        line-height: 22px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    &__subtitle {
+        @include text-style(1.4rem, 400, #181515);
+        line-height: 17px;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    &__list {
+        display: grid;
+        grid-template-columns: 1fr .5fr;
+        grid-row-gap: 15px;
+    }
+
+    &__item {
+        display: flex;
+        align-items: center;
+        @include text-style(1.6rem, 600, #181515);
+        line-height: 19.5px;
+    }
+
+    &__icon {
+        margin-right: 15px;
+    }
+}

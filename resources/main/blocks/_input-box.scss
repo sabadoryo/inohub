@@ -1,0 +1,60 @@
+.input-box {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &__label {
+        display: block;
+        @include text-style(1.3rem, 400, #181515);
+        line-height: 16px;
+        margin-bottom: 5px;
+    }
+
+    &__input {
+        width: 100%;
+        height: 46px;
+        background-color: #f7f7f7;
+        border-radius: 7px;
+
+        @include text-style(1.6rem, 400, #181515);
+        padding: 0 20px;
+
+        -webkit-appearance: none;
+    }
+
+    &__textarea {
+        width: 100%;
+        height: 153px;
+        background-color: #f7f7f7;
+        border-radius: 7px;
+
+        @include text-style(1.6rem, 400, #181515);
+        line-height: 19.5px;
+        padding: 13px 20px;
+
+        resize: none;
+    }
+
+    &__select {
+        position: relative;
+    }
+
+    &__select-icon {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 20px;
+    }
+
+    &__radio-group {
+        display: flex;
+        margin-bottom: 7px;
+    }
+
+    &__radio-box {
+        &:not(:last-child) {
+            margin-right: 24px;
+        }
+    }
+}

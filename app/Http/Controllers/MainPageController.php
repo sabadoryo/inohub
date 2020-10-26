@@ -8,6 +8,8 @@ class MainPageController extends Controller
 {
     public function index()
     {
-        return view('main-page');
+        return view('main.component', [
+            'component' => 'main-page'
+        ]);
     }
 }

@@ -1,0 +1,31 @@
+.about-rd {
+    padding: 40px 65px;
+    background-color: #ffffff;
+    border-radius: 7px;
+
+    display: flex;
+    align-items: center;
+
+    position: relative;
+
+    &__heading {
+        @include text-style(2rem, 700, #181515);
+        line-height: 24px;
+        margin-right: 82px;
+    }
+
+    &__text {
+        @include text-style(1.6rem, 400, #181515);
+        line-height: 19.5px;
+        position: relative;
+        z-index: 2;
+    }
+
+    &__grey-text {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        @include text-style(9.6rem, 700, #f3f3f3);
+        line-height: 117px;
+    }
+}

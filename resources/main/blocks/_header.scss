@@ -1,0 +1,67 @@
+.header {
+
+    padding: 16px 40px;
+    width: 100%;
+    background-color: #181515;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+
+    &__container {
+        @extend %container;
+        display: flex;
+        align-items: center;
+
+        &--space-between {
+            justify-content: space-between;
+        }
+    }
+
+    &__action-box {
+        display: flex;
+        align-items: center;
+    }
+
+    &__hamburger {
+        margin-right: 43px;
+    }
+
+    &__logo {
+        @include text-style(2.2rem, 600, #ffffff);
+    }
+
+    &__logo-accent {
+        color: $elem-color;
+    }
+
+    &__lang-switcher {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        @include text-style(1.6rem, 500, #ffffff);
+        margin-right: 47px;
+    }
+
+    &__language {
+        margin-right: 14px;
+    }
+
+    &__login-btn {
+        display: flex;
+        align-items: center;
+    }
+
+    &__user-avatar {
+        width: 24px;
+        height: 24px;
+        margin-right: 12px;
+    }
+
+    &__search-box {
+        margin-right: auto;
+        margin-left: auto;
+    }
+}

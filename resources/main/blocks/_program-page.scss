@@ -1,0 +1,11 @@
+.program-page {
+
+    padding: 75px 0 100px 0;
+    background-color: #ffffff;
+
+    &__section {
+        &:not(:last-child) {
+            margin-bottom: 120px;
+        }
+    }
+}

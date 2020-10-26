@@ -1,0 +1,68 @@
+.navbar {
+    width: 200px;
+    position: fixed;
+    top: 120px;
+    z-index: 10;
+    background-color: #fafafa;
+
+    white-space: nowrap;
+    overflow: hidden;
+
+    &__item {
+        padding: 15px 16px;
+        border-radius: 7px;
+        display: flex;
+        align-items: center;
+
+        @include text-style(1.6rem, 500, #181515);
+
+        &:not(:last-child) {
+            margin-bottom: 10px;
+        }
+
+        &:link, &:visited {
+            color: #181515;
+        }
+
+        &--active {
+            background-color: #F3F3F3;
+        }
+    }
+
+    &__icon {
+        margin-right: 22px;
+        flex-shrink: 0;
+    }
+
+    &__organization-section {
+        margin-top: 40px;
+    }
+
+    &__organization {
+        display: flex;
+        align-items: center;
+        @include text-style(1.6rem, 500, #181515);
+        width: 200px;
+        height: 48px;
+        border-radius: 7px;
+
+        &--active {
+            background-color: #F3F3F3;
+        }
+
+        &:not(:last-child) {
+            margin-bottom: 10px;
+        }
+    }
+
+    &__organization-icon {
+        width: 42px;
+        height: 42px;
+        margin-right: 14px;
+    }
+
+    &__title {
+        @include text-style(1.6rem, 400, #181515);
+        margin-bottom: 20px;
+    }
+}

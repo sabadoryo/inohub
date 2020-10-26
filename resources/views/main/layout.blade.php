@@ -8,71 +8,136 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
     <!-- Styles -->
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
     <style>
+
         [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
             display: none !important;
         }
+
+        .dropdown.show .dropdown-menu {
+            display: block;
+        }
+
     </style>
+
 </head>
-<body ng-controller="MainController">
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+<body ng-controller="MainController" ng-cloak="">
+
+    <header class="header">
+
+        <div class="header__container">
+
+            <a href="/" class="header__logo">Tech <span class="header__logo-accent">Hub</span></a>
+
+            <div class="header__search-box search-box">
+
+                <a href="#" class="search-box__icon">
+                    <svg width="18" height="18">
+                        <use xlink:href="/img/icons.svg#search"></use>
+                    </svg>
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+                <input type="text" class="search-box__input" placeholder="Поиск">
 
-                    </ul>
+            </div>
 
-                    <div ng-if="user" uib-dropdown ng-cloak>
-                        <button type="button"
-                                uib-dropdown-toggle=""
-                                class="btn btn-primary">
-                            @{{user.full_name}}
-                        </button>
-                        <ul uib-dropdown-menu="">
-                            <li>
-                                <a href="/cabinet">Кабинет</a>
-                            </li>
-                            <li>
-                                <a href="" ng-click="logout()">Выйти</a>
-                            </li>
-                        </ul>
-                    </div>
+            <div class="header__lang-switcher">
+                <div class="header__language">Ru</div>
+                <svg class="header__lang-toggle" width="10" height="5">
+                    <use xlink:href="/img/icons.svg#toggle"></use>
+                </svg>
+            </div>
 
-                    <ul class="navbar-nav ml-auto" ng-if="!user" ng-cloak   >
+            <user-bar></user-bar>
 
-                        <li class="nav-item" ng-show="!user">
-                            <a class="nav-link" ng-click="openLoginModal()">{{ __('Login') }}</a>
-                        </li>
+        </div>
 
-                        <li class="nav-item" ng-show="!user">
-                            <a class="nav-link" ng-click="openRegisterModal()">{{ __('Register') }}</a>
-                        </li>
-                    </ul>
+    </header>
+
+    <main class="main">
+
+        <div class="main__container">
+
+            <nav class="main__navbar navbar">
+
+                <a href="/" class="navbar__item navbar__item--active">
+                    <svg class="navbar__icon" width="20" height="17">
+                        <use xlink:href="/img/icons.svg#house"></use>
+                    </svg>
+                    Лента
+                </a>
+
+                <a href="/events" class="navbar__item">
+                    <svg class="navbar__icon" width="20" height="17">
+                        <use xlink:href="/img/icons.svg#calendar"></use>
+                    </svg>
+                    Мероприятия
+                </a>
+
+                <!--            <a href="#" class="navbar__item">-->
+                <!--                <svg class="navbar__icon" width="20" height="17">-->
+                <!--                    <use xlink:href="/img/icons.svg#blog"></use>-->
+                <!--                </svg>-->
+                <!--                Блог-->
+                <!--            </a>-->
+
+                <!--            <a href="#" class="navbar__item">-->
+                <!--                <svg class="navbar__icon" width="20" height="17">-->
+                <!--                    <use xlink:href="/img/icons.svg#news"></use>-->
+                <!--                </svg>-->
+                <!--                Новости-->
+                <!--            </a>-->
+
+                <a href="" class="navbar__item">
+                    <svg class="navbar__icon" width="20" height="17">
+                        <use xlink:href="/img/icons.svg#jobs"></use>
+                    </svg>
+                    Vacancies
+                </a>
+
+                <a href="#" class="navbar__item">
+                    <svg class="navbar__icon" width="20" height="17">
+                        <use xlink:href="/img/icons.svg#purchases"></use>
+                    </svg>
+                    Закупки
+                </a>
+
+                <div class="navbar__organization-section">
+
+                    <a href="/astana-hub/about" class="navbar__organization">
+                        <img src="/img/icons/astana-hub-icon-sm.png" alt="" class="navbar__organization-icon">
+                        Astana Hub
+                    </a>
+
+                    <a href="#" class="navbar__organization">
+                        <img src="/img/icons/tech-garden-icon-sm.png" alt="" class="navbar__organization-icon">
+                        Tech Garden
+                    </a>
+
+                    <a href="#" class="navbar__organization">
+                        <img src="/img/icons/cett-icon-sm.png" alt="" class="navbar__organization-icon">
+                        ЦИТТ
+                    </a>
 
                 </div>
-            </div>
-        </nav>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
-    </div>
+            </nav>
+
+            <div class="main__content content">
+
+                @yield('content')
+
+            </div>
+
+        </div>
+
+    </main>
+
 
     <script src="{{mix('js/manifest.js')}}"></script>
     <script src="{{mix('js/vendor.js')}}"></script>

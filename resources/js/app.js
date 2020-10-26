@@ -42,8 +42,10 @@ require('./components/organization-create-form/organization-create-form');
 require('./components/organization-form/organization-form');
 require('./components/control-panel/control-panel');
 // require('./components/programs-form/programs-create-form');
-require('./components/astana-hub-page/astana-hub-page');
-require('./components/astana-hub-program/astana-hub-program');
+
+
+
+
 require('./components/application-modal/application-modal');
 require('./components/login-modal/login-modal');
 require('./components/cabinet-profile/cabinet-profile');
@@ -76,3 +78,17 @@ require('./components/program-main-form/program-main-form');
 require('./components/program-page-form/program-page-form');
 require('./components/program-forms/program-forms');
 
+
+require('./components/main-page/main-page');
+
+require('./components/astana-hub-about/astana-hub-about');
+require('./components/astana-hub-programs/astana-hub-programs');
+require('./components/astana-hub-program/astana-hub-program');
+require('./components/astana-hub-corp-innovations/astana-hub-corp-innovations');
+require('./components/astana-hub-hub-space/astana-hub-hub-space');
+require('./components/astana-hub-randd/astana-hub-randd');
+require('./components/astana-hub-resources/astana-hub-resources');
+
+require('./components/user-bar/user-bar');
+
+require('./components/auth-modal/auth-modal');

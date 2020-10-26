@@ -1,0 +1,64 @@
+.modal-full {
+
+    min-height: 100vh;
+    padding-top: 210px;
+
+    position: relative;
+
+    &__close {
+        position: absolute;
+        top: 120px;
+        right: 120px;
+    }
+
+    &__inner {
+        width: 792px;
+        margin: 0 auto;
+    }
+
+    &__step {
+
+    }
+
+    &__row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+
+    &__heading {
+        @include text-style(2.4rem, 700, #c4c4c4);
+        line-height: 29px;
+
+        &--active {
+            color: #181515;
+        }
+    }
+
+    &__autocomplete {
+        display: flex;
+        align-items: center;
+        @include text-style(1.6rem, 500, #181515);
+    }
+
+    &__warning-icon {
+        margin-left: 10px;
+    }
+
+    &__list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 24px;
+        margin-bottom: 45px;
+    }
+
+    &__input-box {
+
+    }
+
+    &__button {
+        display: block;
+        margin-left: auto;
+    }
+}

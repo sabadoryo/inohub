@@ -6,15 +6,6 @@ Route::post('logout', 'Auth\LoginController@logout');
 
 Route::get('/', 'MainPageController@index');
 
-Route::group(['prefix' => 'astana-hub'], function () {
-    Route::get('', 'AstanaHubController@index');
-    Route::get('programs/{id}', 'AstanaHubController@program');
-    Route::get('programs/{id}/get-forms', 'AstanaHubController@getProgramForms');
-});
-
-Route::post('applications', 'ApplicationsController@store');
-Route::post('applications/{id}/send-message', 'ApplicationsController@sendMessage');
-
 Route::group(['prefix' => 'cabinet', 'middleware' => ['auth']], function () {
     Route::get('', 'CabinetController@profile');
     Route::get('project', 'CabinetController@project');
@@ -28,6 +19,20 @@ Route::group(['prefix' => 'cabinet', 'middleware' => ['auth']], function () {
 
 Route::get('register-project', 'RegisterProjectController@form');
 Route::post('register-project', 'RegisterProjectController@store');
+
+Route::group(['prefix' => 'astana-hub'], function () {
+    Route::get('about', 'AstanaHubController@about');
+    Route::get('programs', 'AstanaHubController@programs');
+    Route::get('corporate-innovations', 'AstanaHubController@corporateInnovations');
+    Route::get('hub-space', 'AstanaHubController@hubSpace');
+    Route::get('r-and-d', 'AstanaHubController@randd');
+    Route::get('resources', 'AstanaHubController@resources');
+    Route::get('programs/{id}', 'AstanaHubController@program');
+    Route::get('programs/{id}/get-forms', 'AstanaHubController@getProgramForms');
+});
+
+Route::post('applications', 'ApplicationsController@store');
+Route::post('applications/{id}/send-message', 'ApplicationsController@sendMessage');
 
 Route::group([
     'prefix' => 'control-panel',
