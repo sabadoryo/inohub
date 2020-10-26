@@ -72,7 +72,8 @@ class ProgramsController extends Controller
     
         $breadcrumb = [
             ['/control-panel', 'Главная'],
-            [null, 'Программы']
+            ['/control-panel/programs', 'Программы'],
+            [null, $program->title],
         ];
 
         return view('control-panel.component', [
@@ -113,7 +114,8 @@ class ProgramsController extends Controller
     
         $breadcrumb = [
             ['/control-panel', 'Главная'],
-            [null, 'Программы']
+            ['/control-panel/programs', 'Программы'],
+            [null, $program->title],
         ];
     
         return view('control-panel.component', [
@@ -141,32 +143,6 @@ class ProgramsController extends Controller
             'breadcrumb' => []
         ]);
     }
-
-//    public function update(Request $request)
-//    {
-//        $request->validate([
-//            'title' => 'required|string',
-//            'short_description' => 'required|string',
-//            'limit_date' => 'nullable|date',
-//            'start_date' => 'nullable|date',
-//            'end_date' => 'nullable|date',
-//            'content' => 'nullable|string',
-//            'selected_forms_ids' => 'required',
-//        ]);
-//
-//        $data = $request->all();
-//
-//        $data['user_id'] = \Auth::user()->id;
-//        $data['status'] = 'draft';
-//
-//        $program = Program::create($data);
-//
-//        foreach ($request->selected_forms_ids as $ind => $id) {
-//            $program->forms()->attach($id, ['order_number' => $ind]);
-//        }
-//
-//        return ['id' => $program->id];
-//    }
     
     public function updateMain(Request $request, $id)
     {
