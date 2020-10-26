@@ -69,6 +69,12 @@ class ProgramsController extends Controller
         $program = Program::find($id);
 
         $categories = ProgramCategory::all();
+    
+        $breadcrumb = [
+            ['/control-panel', 'Главная'],
+            ['/control-panel/programs', 'Программы'],
+            [null, $program->title],
+        ];
 
         return view('control-panel.component', [
             'component' => 'program-main-form',
@@ -78,7 +84,48 @@ class ProgramsController extends Controller
             ],
             'PAGE_TITLE' => $program->title,
             'activePage' => 'programs',
-            'breadcrumb' => [],
+            'breadcrumb' => $breadcrumb,
+        ]);
+    }
+    
+    public function pageForm($id)
+    {
+        $program = Program::find($id);
+    
+        $breadcrumb = [
+            ['/control-panel', 'Главная'],
+            [null, 'Программы']
+        ];
+    
+        return view('control-panel.component', [
+            'component' => 'program-page-form',
+            'bindings' => [
+                'program' => $program,
+            ],
+            'PAGE_TITLE' => $program->title,
+            'activePage' => 'programs',
+            'breadcrumb' => $breadcrumb,
+        ]);
+    }
+    
+    public function forms($id)
+    {
+        $program = Program::find($id);
+    
+        $breadcrumb = [
+            ['/control-panel', 'Главная'],
+            ['/control-panel/programs', 'Программы'],
+            [null, $program->title],
+        ];
+    
+        return view('control-panel.component', [
+            'component' => 'program-forms',
+            'bindings' => [
+                'program' => $program,
+            ],
+            'PAGE_TITLE' => $program->title,
+            'activePage' => 'programs',
+            'breadcrumb' => $breadcrumb,
         ]);
     }
 
@@ -96,31 +143,28 @@ class ProgramsController extends Controller
             'breadcrumb' => []
         ]);
     }
-
-    public function update(Request $request)
+    
+    public function updateMain(Request $request, $id)
     {
         $request->validate([
-            'title' => 'required|string',
-            'short_description' => 'required|string',
-            'limit_date' => 'nullable|date',
-            'start_date' => 'nullable|date',
-            'end_date' => 'nullable|date',
-            'content' => 'nullable|string',
-            'selected_forms_ids' => 'required',
+            'title' => 'required|min:3|max:255'
+        ], [
+            'title.required' => 'Введите название программы',
+            'title.min' => 'Название программы должно содержать больше :min символов',
+            'title.max' => 'Название программы должен содержать меньше :max символов',
         ]);
-
-        $data = $request->all();
-
-        $data['user_id'] = \Auth::user()->id;
-        $data['status'] = 'draft';
-
-        $program = Program::create($data);
-
-        foreach ($request->selected_forms_ids as $ind => $id) {
-            $program->forms()->attach($id, ['order_number' => $ind]);
-        }
-
-        return ['id' => $program->id];
+        
+        $program = Program::find($id);
+        
+        $program->update([
+            'title' => $request->title,
+            'program_category_id' => $request->category_id,
+            'limit_date' => $request->limit_date,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+        ]);
+        
+        return [];
     }
 
 }

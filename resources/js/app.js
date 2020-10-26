@@ -63,3 +63,5 @@ require('./components/application-status/application-status');
 require('./components/programs-control/programs-control');
 require('./components/program-create-modal/program-create-modal');
 require('./components/program-main-form/program-main-form');
+require('./components/program-page-form/program-page-form');
+require('./components/program-forms/program-forms');
