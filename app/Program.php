@@ -35,7 +35,7 @@ class Program extends Model
     public function forms()
     {
         return $this->belongsToMany(Form::class)
-            ->withPivot('order_number');
+            ->withPivot('order_number')->orderBy('order_number');
     }
 
     public function members()
