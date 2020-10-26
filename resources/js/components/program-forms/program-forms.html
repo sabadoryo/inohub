@@ -13,5 +13,39 @@
     </ul>
   </div>
   <div class="card-body">
+    <ul class="list-group mb-2">
+      <li class="list-group-item" ng-repeat="form in $ctrl.programForms track by $index">
+        {{ form.title }}
+        <button class="btn btn-danger float-right" type="button" ng-click="$ctrl.deleteForm($index)">
+          <i class="fas fa-trash-alt"></i>
+        </button>
+        <button class="btn btn-outline-primary float-right mr-2" type="button" ng-click="$ctrl.formDown($index)">
+          <i class="fas fa-arrow-down"></i>
+        </button>
+        <button class="btn btn-outline-primary float-right mr-2" type="button" ng-click="$ctrl.formUp($index)">
+          <i class="fas fa-arrow-up"></i>
+        </button>
+      </li>
+    </ul>
+    <div class="d-flex mb-3">
+      <select required
+              class="form-control w-50 mr-2"
+              ng-model="$ctrl.form"
+              ng-options="form.title for form in $ctrl.forms">
+        <option value="">Выберите форму</option>
+      </select>
+      <button class="btn btn-primary mr-2" type="button" ng-click="$ctrl.addForm()">
+        Добавить форму
+      </button>
+      <button class="btn btn-primary" type="button" ng-click="$ctrl.updateFormsList()">
+        Обновить список
+      </button>
+    </div>
+    <p class="mb-0">Если не нашли нужную форму <a href="" ng-click="$ctrl.openFormCreate()">создайте</a> новую</p>
+  </div>
+  <div class="card-footer d-flex">
+    <button class="btn btn-primary mr-auto" type="button" ng-click="$ctrl.save()">
+      Сохранить
+    </button>
   </div>
 </div>

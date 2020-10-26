@@ -110,17 +110,20 @@ class ProgramsController extends Controller
     
     public function forms($id)
     {
-        $program = Program::find($id);
+        $program = Program::with(['forms'])->find($id);
     
         $breadcrumb = [
             ['/control-panel', 'Главная'],
             ['/control-panel/programs', 'Программы'],
             [null, $program->title],
         ];
+        
+        $forms = Form::all();
     
         return view('control-panel.component', [
             'component' => 'program-forms',
             'bindings' => [
+                'forms' => $forms,
                 'program' => $program,
             ],
             'PAGE_TITLE' => $program->title,
@@ -163,6 +166,32 @@ class ProgramsController extends Controller
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
         ]);
+        
+        return [];
+    }
+    
+    public function updateFormsList($id)
+    {
+        $forms = Form::all();
+        
+        return [
+            'forms' => $forms,
+        ];
+    }
+    
+    public function updateForms(Request $request, $id)
+    {
+        $program = Program::find($id);
+        
+        $data = [];
+        
+        foreach ($request->forms as $key => $form) {
+            $data[$form['id']] = [
+                'order_number' => $key,
+            ];
+        }
+        
+        $program->forms()->sync($data);
         
         return [];
     }
