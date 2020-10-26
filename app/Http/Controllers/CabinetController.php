@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Application;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 
@@ -47,4 +48,94 @@ class CabinetController extends Controller
         }
     }
 
+
+    public function applications()
+    {
+        $app = Application::first();
+
+        return view('cabinet-component', [
+            'component' => 'cabinet-applications',
+            'activeTab' => '',
+        ]);
+    }
+
+    public function application($id)
+    {
+        $app = Application::with([
+            'forms',
+            'forms.form',
+            'forms.fields',
+            'forms.fields.formField',
+            'actions' => function ($q) {
+                $q->orderBy('created_at', 'desc');
+            },
+            'actions.user'
+
+        ])->findOrFail($id);
+
+        return view('cabinet-component', [
+            'component' => 'application-status',
+            'bindings' => [
+                'app' => $app,
+            ],
+            'activeTab' => ''
+        ]);
+    }
+
+    public function getApplications()
+    {
+        $applications = \Auth::user()
+            ->applications()
+            ->with('entity')
+            ->get();
+
+        return $applications;
+    }
+
+    public function updateForm(Request $request, $id)
+    {
+        $app = Application::find($id);
+
+        $appForm = $app->forms()->where('id', $request->application_form_id)->first();
+
+        $fields = $appForm->fields()->with('formField')->get();
+
+        $changes = [];
+
+        foreach ($fields as $field) {
+            foreach ($request->fields as $inputField) {
+                if ($field->id == $inputField['id'] &&
+                    $field->value != $inputField['value']) {
+                    $changes[] = [
+                        'label' => $field->formField->label,
+                        'old_value' => $field->value,
+                        'new_value' => $inputField['value']
+                    ];
+                    $field->value = $inputField['value'];
+                    $field->save();
+                }
+            }
+        }
+
+        $action = $app->actions()->create([
+            'user_id' => \Auth::user()->id,
+            'name' => 'update',
+            'additional_data' => json_encode($changes),
+        ]);
+
+        return ['changes' => json_encode($changes), 'action_id' => $action->id];
+    }
+
+    public function sendMessage(Request $request, $id)
+    {
+        $app = Application::find($id);
+
+        $app->actions()->create([
+            'user_id' => \Auth::user()->id,
+            'name' => 'send message',
+            'message' => $request->message
+        ]);
+
+        return [];
+    }
 }

@@ -1,7 +1,7 @@
 <div class="modal-header">
     <h5 class="modal-title">Register modal</h5>
     <button type="button" class="close" ng-click="$ctrl.dismiss()">
-      <span aria-hidden="true">&times;</span>
+        <span aria-hidden="true">&times;</span>
     </button>
 </div>
 
@@ -28,7 +28,37 @@
 
     </form>
 
-    <form ng-submit="$ctrl.register()" ng-show="$ctrl.step == 2">
+    <form ng-submit="$ctrl.toStep(3)" ng-show="$ctrl.step == 2">
+
+        <div class="form-group">
+            <label>Аватар:</label>
+            <div class="d-flex px-0 justify-content-center ">
+
+                <img ng-show="!$ctrl.avatar"
+                     style="vertical-align: middle; width:150px;height: 150px; border-radius: 50%"
+                     alt="user avatar"
+                     src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"/>
+
+                <img ng-show="$ctrl.avatar" ngf-thumbnail="$ctrl.avatar"
+                     style="vertical-align: middle; width:150px;height: 150px; border-radius: 50%" alt="user avatar"/>
+            </div>
+
+            <a class="btn btn-light mt-1 d-flex justify-content-center"
+               ngf-select=""
+               ngf-model-invalid="$ctrl.invalidAvatar"
+               ng-model="$ctrl.avatar"
+               accept="image/*"
+               ngf-max-size="10MB">
+
+                <span ng-show="!$ctrl.avatar">Выбрать аватар</span>
+                <span ng-show="$ctrl.avatar">Изменить аватар</span>
+            </a>
+        </div>
+        <button type="button" ng-click="$ctrl.toStep(1)" class="btn btn-secondary">Назад</button>
+        <button type="submit" class="btn btn-primary">Пропустить</button>
+    </form>
+
+    <form ng-submit="$ctrl.register()" ng-show="$ctrl.step == 3">
 
         <div class="form-group">
             <label>Пароль:</label>
@@ -39,16 +69,15 @@
             <label>Повторите пароль:</label>
             <input type="password" class="form-control" ng-model="$ctrl.passwordConfirmation">
         </div>
-
+        <button type="button" ng-click="$ctrl.toStep(2)" class="btn btn-secondary">Назад</button>
         <button type="submit" class="btn btn-primary">Далее</button>
 
     </form>
-
-    <div ng-show="$ctrl.step == 3">
+    <div ng-show="$ctrl.step == 4">
 
         <h4>Поздравляем, вы успешно зарегистрированы!</h4>
 
-        <a href="">Перейти в личный кабинет</a>
+        <p class="d-flex justify-content-center">Анкета проекта</p>
 
         <div class="alert alert-info">
             <i class="fa fa-alert" style="font-size: 30px;"></i>
@@ -57,17 +86,32 @@
             <a href="/cabinet/project">анкету проекта</a>
         </div>
 
+        <button type="button" ng-click="$ctrl.toStep(5)" class="btn btn-primary offset-5">Продолжить</button>
+    </div>
+
+    <div ng-show="$ctrl.step == 5">
+        <p>Анкета инвестора</p>
+
         <div class="alert alert-info">
             <i class="fa fa-alert" style="font-size: 30px;"></i>
-            Если вы хотите быть в списке инвесторов, пожалуйста, заполните
-            <a href="/cabinet/investor-profile" ng-href="">анкету инвестора</a>
+            Если вы хотите найти проекты для инвестиции, пожалуйста, заполните
+            <a href="/cabinet/investor-profile">анкету инвестора</a>
         </div>
 
+        <button type="button" ng-click="$ctrl.toStep(6)" class="btn btn-primary offset-5">Продолжить</button>
+    </div>
+
+    <div ng-show="$ctrl.step == 6">
+        <h2 class="text-center">
+            Спасибо!
+        </h2>
+
+        <button type="button" ng-click="$ctrl.dismiss()" class="btn btn-primary offset-5">Завершить</button>
     </div>
 
 </div>
 
-<div class="modal-footer">
-    <button type="button" class="btn btn-secondary" ng-click="$ctrl.dismiss()">Close</button>
-    <button type="button" class="btn btn-primary" ng-click="$ctrl.saves()">Save changes</button>
-</div>
+<!--<div class="modal-footer">-->
+<!--    <button type="button" class="btn btn-secondary" ng-click="$ctrl.dismiss()">Close</button>-->
+<!--    <button type="button" class="btn btn-primary" ng-click="$ctrl.saves()">Save changes</button>-->
+<!--</div>-->

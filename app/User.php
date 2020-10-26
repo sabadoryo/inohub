@@ -21,6 +21,7 @@ class User extends Authenticatable
         'is_active',
         'is_admin',
         'last_login',
+        'avatar_path',
     ];
 
     protected $appends = [
@@ -37,7 +38,7 @@ class User extends Authenticatable
         'is_admin' => 'boolean',
         'is_active' => 'boolean',
     ];
-    
+
     protected $dates = [
         'email_verified_at',
         'last_login',
@@ -56,5 +57,16 @@ class User extends Authenticatable
     public function organization()
     {
         return $this->belongsTo(Organization::class);
+    }
+
+    public function getAvatarUrlAttribute()
+    {
+        return $this->avatar_path ? \Storage::disk('public')->url(
+            $this->avatar_path
+        ) : null;
+    }
+    public function applications()
+    {
+        return $this->hasMany(Application::class);
     }
 }

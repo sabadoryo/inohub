@@ -20,7 +20,15 @@ function controller($uibModal) {
 	$ctrl.openApplicationModal = function () {
         $uibModal
             .open({
-                component: 'applicationModal'
+                component: 'applicationModal',
+                resolve: {
+                    entityType: () => {
+                        return 'program';
+                    },
+                    entityId: () => {
+                        return $ctrl.program.id;
+                    }
+                }
             })
             .result
             .then(

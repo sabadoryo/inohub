@@ -12,7 +12,7 @@
                                 <a class="nav-link {{$activeTab == 'profile' ? 'active' : null}}" href="/cabinet">Профиль</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link {{$activeTab == 'projects' ? 'active' : null}}" href="/cabinet/project">Проект</a>
+                                <a class="nav-link {{$activeTab == 'projects' ? 'active' : null}}" href="/cabinet/project">Анкета проекта</a>
                             </li>
                         </ul>
                     </div>

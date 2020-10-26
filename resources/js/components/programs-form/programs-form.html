@@ -24,7 +24,7 @@
                    ng-class="{active: $ctrl.step == 3, disabled: $ctrl.step < 3}"
                    ng-click="$ctrl.toStep(3)"
                    href="">
-                    3. Ознакомтесь с результатом
+                    3. Добавьте формы
                 </a>
             </li>
         </ul>
@@ -83,7 +83,27 @@
 
         <div ng-show="$ctrl.step == 3">
 
-            <div style="height: 500px; margin-bottom: 10px">Result</div>
+            <div style="height: 500px; margin-bottom: 10px">Формы</div>
+
+            <div class="text-muted mb-2">Нет выбранных форм</div>
+
+            <ul class="list-group mb-2">
+                <li class="list-group-item" ng-repeat="f in $ctrl.selectedForms track by $index">
+                    {{f.title}}
+                </li>
+            </ul>
+
+            <form ng-submit="$ctrl.addForm()">
+                <div class="form-group">
+                    <label>Форма:</label>
+                    <select ng-model="$ctrl.selectedForm"
+                            ng-options="f as f.title for f in $ctrl.forms"
+                            class="form-control">
+                        <option value="">Выберите форму</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Добавить</button>
+            </form>
 
             <button type="button" class="btn btn-primary" ng-click="$ctrl.save()" ng-disabled="$ctrl.loading">
                 Сохранить
