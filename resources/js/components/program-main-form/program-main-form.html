@@ -1,3 +1,6 @@
+<div class="alert alert-light">
+  Данная программа находится в режиме черновика. Хотите <a href="" class="alert-link">опубликовать</a> программу?
+</div>
 <div class="card">
   <div class="card-header">
     <ul class="nav nav-tabs card-header-tabs">
@@ -14,14 +17,14 @@
     </ul>
   </div>
   <form role="form" ng-submit="$ctrl.save()">
-    <div class="card-body">
+    <div class="card-body row">
 
-      <div class="form-group">
+      <div class="form-group col-6">
         <label>Название:</label>
         <input type="text" class="form-control" placeholder="Введите название" ng-model="$ctrl.title" required>
       </div>
 
-      <div class="form-group">
+      <div class="form-group col-6">
         <label>Категория:</label>
         <select class="form-control"
                 ng-model="$ctrl.categoryId"
@@ -30,46 +33,61 @@
         </select>
       </div>
 
-      <label>Установить ограничения на прием заявок ?</label>
-      <div class="d-flex mb-2">
-          <div class="form-check form-check-inline">
+      <div class="form-group col-6">
+
+        <label>Выберите цвет</label>
+        <select class="form-control mb-2" ng-model="$ctrl.color">
+          <option value="">Без цвета</option>
+          <option value="red">Красный</option>
+          <option value="green">Зеленый</option>
+          <option value="purple">Фиолетовый</option>
+          <option value="blue">Синий</option>
+          <option value="yellow">Желтый</option>
+        </select>
+
+        <label>Установить дату окончания приема заявок?</label>
+        <div class="d-flex mb-2">
+          <div class="form-check mr-2">
             <input class="form-check-input" type="radio" ng-model="$ctrl.limitDateStatus" ng-value="true">
             <label class="form-check-label">Да</label>
           </div>
-          <div class="form-check form-check-inline">
+          <div class="form-check">
             <input class="form-check-input" type="radio" ng-model="$ctrl.limitDateStatus" ng-value="false">
             <label class="form-check-label">Нет</label>
           </div>
-      </div>
-
-      <div class="form-group" ng-show="$ctrl.limitDateStatus">
-        <label>Дата окончания приема заявок:</label>
-        <input type="date" class="form-control" ng-model="$ctrl.limitDate" required>
-      </div>
-
-      <label>Установить период проведения программы ?</label>
-      <div class="d-flex mb-2">
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" ng-model="$ctrl.termDateStatus" ng-value="true">
-          <label class="form-check-label">Да</label>
         </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" ng-model="$ctrl.termDateStatus" ng-value="false">
-          <label class="form-check-label">Нет</label>
+
+        <div class="form-group" ng-if="$ctrl.limitDateStatus">
+          <input type="date" class="form-control" ng-model="$ctrl.limitDate" required>
         </div>
       </div>
 
-      <div ng-show="$ctrl.termDateStatus">
-        <div class="form-group">
-          <label>Дата начало:</label>
-          <input type="date" class="form-control" ng-model="$ctrl.startDate" required>
+      <div class="form-group col-6">
+        <label>Установить период проведения программы?</label>
+        <div class="d-flex mb-2">
+          <div class="form-check mr-2">
+            <input class="form-check-input" type="radio" ng-model="$ctrl.termDateStatus" ng-value="true">
+            <label class="form-check-label">Да</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" ng-model="$ctrl.termDateStatus" ng-value="false">
+            <label class="form-check-label">Нет</label>
+          </div>
         </div>
 
-        <div class="form-group">
-          <label>Дата окончания:</label>
-          <input type="date" class="form-control" ng-model="$ctrl.endDate" required>
+        <div ng-if="$ctrl.termDateStatus">
+          <div class="form-group">
+            <label>Дата началы:</label>
+            <input type="date" class="form-control" ng-model="$ctrl.startDate" required>
+          </div>
+
+          <div class="form-group">
+            <label>Дата окончания:</label>
+            <input type="date" class="form-control" ng-model="$ctrl.endDate" required>
+          </div>
         </div>
       </div>
+
     </div>
     <div class="card-footer">
       <button class="btn btn-primary" type="submit">
