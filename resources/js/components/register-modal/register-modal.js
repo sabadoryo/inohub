@@ -4,7 +4,7 @@ angular
     .module('app')
     .component('registerModal', {
         template: require('./register-modal.html'),
-        controller: ['$http', controller],
+        controller: ['$http', '$rootScope', controller],
         bindings: {
             resolve: '<',
             close: '&',
@@ -12,7 +12,7 @@ angular
         }
     });
     
-function controller($http) {
+function controller($http, $rootScope) {
  
 	let $ctrl = this;
 

@@ -12,6 +12,38 @@
         <a href="" ng-click="$ctrl.openRegisterModal()">Зарегистрируйтесь</a>
     </div>
 
+    <div ng-if="$ctrl.user">
+
+        <div ng-repeat="form in $ctrl.forms track by $index">
+
+            <form ng-submit="$ctrl.submit($index)">
+
+                <div class="form-group" ng-repeat="field in form.fields track by $index">
+
+                    <label>{{field.label}}:</label>
+
+                    <input type="text"
+                           ng-if="field.type == 'text'"
+                           class="form-control"
+                           ng-model="field.value"
+                           ng-required="field.isRequired">
+
+                    <textarea class="form-control"
+                              ng-if="field.type == 'textarea'"
+                              ng-model="field.value"
+                              ng-required="field.isRequired"></textarea>
+
+                </div>
+
+                <button type="submit" class="btn btn-primary">{{$last ? 'Отправить' : 'Далее'}}</button>
+
+            </form>
+
+        </div>
+
+
+    </div>
+
 </div>
 
 <div class="modal-footer">

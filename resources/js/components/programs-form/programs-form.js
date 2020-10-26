@@ -2,11 +2,11 @@ import angular from "angular";
 
 angular
     .module('app')
-    .component('programsCreateForm', {
-        template: require('./programs-create-form.html'),
+    .component('programsForm', {
+        template: require('./programs-form.html'),
         controller: ['moment', '$http', controller],
         bindings: {
-            //
+            forms: '<',
         }
     });
     
@@ -21,10 +21,16 @@ function controller(moment, $http) {
 	$ctrl.startDate = null;
 	$ctrl.endDate = null;
 	$ctrl.content = null;
+	$ctrl.selectedForm = null;
+	$ctrl.selectedForms = [];
 
 	$ctrl.$onInit = function () {
         //
     };
+
+	$ctrl.addForm = function () {
+		$ctrl.selectedForms.push($ctrl.selectedForm);
+	};
 
 	$ctrl.toStep = (step) => {
 		$ctrl.step = step;
@@ -32,6 +38,10 @@ function controller(moment, $http) {
 
 	$ctrl.save = function () {
 		$ctrl.loading = true;
+
+		let selectedFormsIds = [];
+
+		$ctrl.selectedForms.forEach(f => {selectedFormsIds.push(f.id)});
 
 		$http
 			.post('/control-panel/programs', {
@@ -41,6 +51,7 @@ function controller(moment, $http) {
 				start_date: $ctrl.startDate ? moment($ctrl.startDate).format('YYYY-MM-DD') : null,
 				end_date: $ctrl.endDate ? moment($ctrl.endDate).format('YYYY-MM-DD') : null,
 				content: $ctrl.content,
+				selected_forms_ids: selectedFormsIds,
 			})
 			.then(
 				function (response) {

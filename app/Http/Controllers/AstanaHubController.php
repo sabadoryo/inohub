@@ -38,4 +38,15 @@ class AstanaHubController extends Controller
             'bindings' => $bindings,
         ]);
     }
+
+    public function getProgramForms($id)
+    {
+        $program = Program::findOrFail($id);
+
+        $forms = $program->forms()->orderBy('form_program.order_number')
+            ->with('fields')
+            ->get();
+
+        return ['forms' => $forms];
+    }
 }

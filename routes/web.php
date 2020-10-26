@@ -9,12 +9,21 @@ Route::get('/', 'MainPageController@index');
 Route::group(['prefix' => 'astana-hub'], function () {
     Route::get('', 'AstanaHubController@index');
     Route::get('programs/{id}', 'AstanaHubController@program');
+    Route::get('programs/{id}/get-forms', 'AstanaHubController@getProgramForms');
 });
+
+Route::post('applications', 'ApplicationsController@store');
+Route::post('applications/{id}/send-message', 'ApplicationsController@sendMessage');
 
 Route::group(['prefix' => 'cabinet', 'middleware' => ['auth']], function () {
     Route::get('', 'CabinetController@profile');
     Route::get('project', 'CabinetController@project');
     Route::post('update-roles', 'CabinetController@updateRoles');
+    Route::get('applications', 'CabinetController@applications');
+    Route::get('applications/{id}', 'CabinetController@application');
+    Route::post('applications/{id}/update-form', 'CabinetController@updateForm');
+    Route::post('applications/{id}/send-message', 'CabinetController@sendMessage');
+    Route::get('get-applications', 'CabinetController@getApplications');
 });
 
 Route::get('register-project', 'RegisterProjectController@form');
@@ -45,8 +54,20 @@ Route::group([
 
     Route::get('programs', 'ProgramsController@index');
     Route::get('programs/get-list', 'ProgramsController@getList');
-    Route::get('programs/create', 'ProgramsController@create');
     Route::post('programs', 'ProgramsController@store');
+    Route::get('programs/{id}/main', 'ProgramsController@mainForm');
+    Route::get('programs/{id}/page', 'ProgramsController@pageForm');
+    Route::get('programs/{id}/forms', 'ProgramsController@forms');
 
+
+    Route::get('applications', 'ApplicationsController@index');
+    Route::get('applications/get-list', 'ApplicationsController@getList');
+    Route::get('applications/{id}', 'ApplicationsController@show');
+    Route::post('applications/{id}/take-for-processing', 'ApplicationsController@takeForProcessing');
+    Route::post('applications/{id}/reply', 'ApplicationsController@reply');
+
+    Route::get('forms', 'FormsController@index');
+    Route::get('forms/create', 'FormsController@create');
+    Route::post('forms', 'FormsController@store');
 });
 

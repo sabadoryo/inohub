@@ -9,8 +9,8 @@ class Program extends Model
     //
     protected $fillable = [
         'user_id',
+        'program_category_id',
         'title',
-        'short_description',
         'content',
         'limit_date',
         'start_date',
@@ -24,8 +24,17 @@ class Program extends Model
         'end_date'
     ];
 
+    public function category()
+    {
+        return $this->belongsTo(
+            ProgramCategory::class,
+            'program_category_id'
+        );
+    }
+
     public function forms()
     {
-        return $this->belongsToMany(Form::class);
+        return $this->belongsToMany(Form::class)
+            ->withPivot('order_number');
     }
 }

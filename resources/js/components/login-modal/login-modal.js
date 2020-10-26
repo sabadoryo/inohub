@@ -4,7 +4,7 @@ angular
     .module('app')
     .component('loginModal', {
         template: require('./login-modal.html'),
-        controller: ['$http', controller],
+        controller: ['$http', '$rootScope', controller],
         bindings: {
             resolve: '<',
             close: '&',
@@ -12,7 +12,7 @@ angular
         }
     });
     
-function controller($http) {
+function controller($http, $rootScope) {
  
 	let $ctrl = this;
 
@@ -30,8 +30,8 @@ function controller($http) {
             })
             .then(
                 res => {
+                    $rootScope.$emit('UserAuthenticated', res.data);
                     $ctrl.loading = false;
-                    $ctrl.close({$value: res.data});
                 },
                 err => {
                     $ctrl.loading = false;
