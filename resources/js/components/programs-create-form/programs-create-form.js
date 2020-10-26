@@ -5,13 +5,13 @@ angular
     .module('app')
     .component('programsCreateForm', {
         template: require('./programs-create-form.html'),
-        controller: ['$compile', '$sce', 'moment', '$http', controller],
+        controller: ['$rootScope', '$compile', '$sce', 'moment', '$http', controller],
         bindings: {
             //
         }
     });
 
-function controller($compile, $sce, moment, $http) {
+function controller($rootScope, $compile, $sce, moment, $http) {
 
 	let $ctrl = this;
 
@@ -31,17 +31,28 @@ function controller($compile, $sce, moment, $http) {
 
 	$ctrl.toStep = (step) => {
 	    if (step === 3) {
-            $ctrl.passportHtml = editor.getHtml();
-            $ctrl.passportHtml += `<style>${editor.getCss()}</style>`;
-            $ctrl.passportHtml = $sce.trustAsHtml($ctrl.passportHtml)
-            $compile($ctrl.passportHtml)($ctrl);
-	        console.log($ctrl.passportHtml);
+            $ctrl.passportHtml = `
+                <html>
+                    <head>
+                        <link rel="stylesheet" href="/css/style.css">
+                    </head>
+                    <body>
+                        ${editor.getHtml()}
+                    </body>
+                </html>
+            `;
+            let iframe = document.getElementById('passportResult');
+            iframe.contentWindow.document.open('text/htmlreplace');
+            iframe.contentWindow.document.write($ctrl.passportHtml);
+            iframe.contentWindow.document.close();
+
+	        console.log('$ctrl.passportHtml', $ctrl.passportHtml);
         }
 		$ctrl.step = step;
 	};
 
 	$ctrl.testfunc = function () {
-	    console.log('func test')
+	    alert('func test')
     }
 
 	$ctrl.save = function () {

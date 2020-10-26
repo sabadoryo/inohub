@@ -1,7 +1,6 @@
 
 <div class="card">
     <div class="card-body">
-        <button class="submit-button">asdasd</button>
         <ul class="nav nav-pills nav-fill mb-3">
             <li class="nav-item">
                 <a class="nav-link"
@@ -72,7 +71,7 @@
             <div class="form-group">
                 <label>Страница:</label>
 <!--                <textarea class="form-control" ng-model="$ctrl.content" rows="30"></textarea>-->
-                <div id="gjsProgramPassport">
+                <div id="gjsProgramPassport" class="front-styled">
                 </div>
 
             </div>
@@ -86,14 +85,14 @@
 
         <div ng-show="$ctrl.step == 3">
 
-            <div style="height: 500px; margin-bottom: 10px" ng-bind-html="$ctrl.passportHtml"></div>
+            <iframe allowfullscreen="allowfullscreen" id="passportResult" style="width: 100%; height: 100vh; margin-bottom: 10px" class="front-styled">
+            </iframe>
 
             <button type="button" class="btn btn-primary" ng-click="$ctrl.save()" ng-disabled="$ctrl.loading">
                 Сохранить
             </button>
 
         </div>
-        <button ng-click="openLoginModal()">test</button>
 
     </div>
 </div>

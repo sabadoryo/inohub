@@ -1,0 +1,31 @@
+.program-steps {
+
+    background-color: #181515;
+    padding: 100px 0;
+
+    &__container {
+        @extend %container;
+    }
+
+    &__info {
+        text-align: center;
+        margin-bottom: 60px;
+    }
+
+    &__text {
+        @include text-style(1.6rem, 500, #ffffff);
+        line-height: 19.5px;
+        margin-bottom: 20px;
+    }
+
+    &__heading {
+        @include text-style(2.4rem, 700, #ffffff);
+        line-height: 29px;
+    }
+
+    &__list {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+}
