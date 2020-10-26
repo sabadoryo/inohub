@@ -162,6 +162,7 @@ class ProgramsController extends Controller
         $program->update([
             'title' => $request->title,
             'program_category_id' => $request->category_id,
+            'color' => $request->color,
             'limit_date' => $request->limit_date,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,

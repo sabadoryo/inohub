@@ -21,6 +21,7 @@ function controller(notify, moment, $http) {
 	$ctrl.$onInit = function () {
 	    $ctrl.title = $ctrl.program.title;
 	    $ctrl.categoryId = $ctrl.program.program_category_id;
+	    $ctrl.color = $ctrl.program.color;
 	    if ($ctrl.program.limit_date) {
             $ctrl.limitDate = moment($ctrl.program.limit_date).toDate();
             $ctrl.limitDateStatus = true;
@@ -44,6 +45,7 @@ function controller(notify, moment, $http) {
 	    let params = {
 	        title: $ctrl.title,
             category_id: $ctrl.categoryId,
+            color: $ctrl.color,
             limit_date: $ctrl.limitDate ? moment($ctrl.limitDate).format('YYYY-MM-DD') : null,
             start_date: $ctrl.startDate ? moment($ctrl.startDate).format('YYYY-MM-DD') : null,
             end_date: $ctrl.endDate ? moment($ctrl.endDate).format('YYYY-MM-DD') : null,
@@ -57,7 +59,7 @@ function controller(notify, moment, $http) {
             });
         }, (error) => {
             notify({
-                message: error.data.errors['title'][0],
+                message: error.data.errors['title'] ? error.data.errors['title'][0] : 'Не изветная ошибка!',
                 duration: 2000,
                 classes: 'alert-danger',
             });
