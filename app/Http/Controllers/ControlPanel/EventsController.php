@@ -36,7 +36,24 @@ class EventsController extends Controller
         return $events;
     }
 
-    public function create(Request $request)
+    public function create()
+    {
+        $breadcrumb = [
+            ['/control-panel', 'Главная'],
+            ['/events', 'Мероприятия'],
+            [null, 'Новое мероприятие']
+        ];
+
+
+        return view('control-panel.component', [
+            'PAGE_TITLE' => 'Создание мероприятия',
+            'activePage' => 'events',
+            'breadcrumb' => $breadcrumb,
+            'component' => 'events-create',
+        ]);
+    }
+
+    public function store(Request $request)
     {
         $data = $request->validate([
             'name' => 'required',
@@ -66,6 +83,6 @@ class EventsController extends Controller
             'image_path' => $path,
         ]);
 
-        return $event;
+        return [];
     }
 }

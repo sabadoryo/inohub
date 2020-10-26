@@ -50,6 +50,7 @@ Route::group([
 
     Route::get('events', 'EventsController@index');
     Route::get('events/get-list', 'EventsController@getList');
-    Route::post('events/create', 'EventsController@create');
+    Route::get('events/create', 'EventsController@create');
+    Route::post('events', 'EventsController@store');
 });
 

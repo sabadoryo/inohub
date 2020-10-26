@@ -56,3 +56,5 @@ require('./components/project-register-form/project-register-form');
 require('./components/register-modal/register-modal');
 require('./components/events-control/events-control');
 require('./components/create-event-modal/create-event-modal');
+
+require('./components/events-create/events-create');
