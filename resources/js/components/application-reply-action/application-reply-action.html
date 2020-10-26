@@ -1,0 +1,35 @@
+<div class="modal-header">
+    <h5 class="modal-title">Modal title</h5>
+    <button type="button" class="close" ng-click="$ctrl.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<form ng-submit="$ctrl.submit()">
+
+    <div class="modal-body">
+
+            <div class="form-group">
+
+                <label>Комментарий:</label>
+
+                <textarea class="form-control"
+                          rows="4"
+                          ng-model="$ctrl.message"
+                          ng-required="$ctrl.action != 'accept'"></textarea>
+
+                <small class="form-text text-muted" ng-show="$ctrl.action != 'accept'">Обязательно для заполнения</small>
+
+            </div>
+
+    </div>
+
+    <div class="modal-footer">
+
+        <button type="button" class="btn btn-secondary" ng-click="$ctrl.dismiss()">Отменить</button>
+
+        <button type="submit" class="btn btn-primary" ng-click="$ctrl.save()">Подтвердить</button>
+
+    </div>
+
+</form>

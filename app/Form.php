@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Form extends Model
 {
-    //
     protected $fillable = [
         'title',
         'description'
@@ -14,7 +13,7 @@ class Form extends Model
 
     public function fields()
     {
-        return $this->belongsToMany(Field::class);
+        return $this->hasMany(FormField::class);
     }
 
     public function programs()

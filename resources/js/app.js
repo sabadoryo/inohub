@@ -41,8 +41,7 @@ require('./components/organizations-control/organizations-control');
 require('./components/organization-create-form/organization-create-form');
 require('./components/organization-form/organization-form');
 require('./components/control-panel/control-panel');
-require('./components/programs-control/programs-control');
-require('./components/programs-create-form/programs-create-form');
+// require('./components/programs-form/programs-create-form');
 require('./components/astana-hub-page/astana-hub-page');
 require('./components/astana-hub-program/astana-hub-program');
 require('./components/application-modal/application-modal');
@@ -58,3 +57,14 @@ require('./components/events-control/events-control');
 require('./components/create-event-modal/create-event-modal');
 
 require('./components/events-create/events-create');
+require('./components/cabinet-applications/cabinet-applications');
+require('./components/applications-control/applications-control');
+require('./components/application-manage/application-manage');
+require('./components/application-reply-action/application-reply-action');
+require('./components/forms-control/forms-control');
+require('./components/form-create-form/form-create-form');
+require('./components/application-status/application-status');
+
+require('./components/programs-control/programs-control');
+require('./components/program-create-modal/program-create-modal');
+require('./components/program-main-form/program-main-form');

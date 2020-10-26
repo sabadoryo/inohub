@@ -1,0 +1,63 @@
+<h4>Данные:</h4>
+
+<div class="card mb-3" ng-repeat="appForm in $ctrl.app.forms track by $index">
+    <form ng-submit="$ctrl.updateForm(appForm)">
+
+        <div class="card-header">
+            {{appForm.form.title}}
+            <a href=""
+               ng-click="$ctrl.toggleEditing(appForm)"
+               class="float-right btn btn-primary btn-sm">
+                {{appForm.isEditing ? 'отменить' : 'изменить'}}
+            </a>
+        </div>
+
+        <div class="card-body">
+            <table class="table table-sm table-bordered mb-0">
+                <tr ng-repeat="field in appForm.fields track by $index">
+                    <th>{{field.form_field.label}}</th>
+                    <td>
+                        <div ng-show="!appForm.isEditing">{{field.value}}</div>
+                        <div ng-show="appForm.isEditing">
+                            <input type="text"
+                                   class="form-control"
+                                   ng-model="field.editValue"
+                                   ng-required="field.form_field.is_required">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            <div ng-show="appForm.isEditing" class="mt-2">
+                <button type="submit" class="btn btn-primary btn-sm">Обновить</button>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+<hr>
+
+<h4>Действия:</h4>
+
+<form ng-submit="$ctrl.sendMessage()" class="mb-3">
+    <div class="form-group">
+        <label>Сообщение</label>
+        <textarea class="form-control" ng-model="$ctrl.message" rows="3"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Отправить</button>
+</form>
+
+
+<div class="card mb-2" ng-repeat="action in $ctrl.app.actions track by $index">
+    <div class="card-header">
+        User: {{action.user.full_name}}. Action: {{action.name}}.
+        <span class="float-right">{{action.created_at | amDateFormat : 'DD.MM HH:mm'}}</span>
+    </div>
+    <div class="card-body">
+        <div ng-if="action.name == 'send message'">{{action.message}}</div>
+        <div ng-if="action.name == 'update'">
+            <a href="" ng-click="$ctrl.openDetails()">детали</a>
+        </div>
+    </div>
+</div>

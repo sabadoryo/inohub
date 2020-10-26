@@ -1,0 +1,33 @@
+<table class="table table-bordered table-striped">
+    <thead class="thead-light">
+    <tr>
+        <th>Id</th>
+        <th>Пользователь</th>
+        <th>Тип</th>
+        <th>Название</th>
+        <th>Дата отправки</th>
+        <th>Статус</th>
+        <th>Ответственный</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="app in $ctrl.applications track by $index">
+        <td>{{app.id}}</td>
+        <td>{{app.user.full_name}}</td>
+        <td>{{app.entity_model}}</td>
+        <td>{{app.entity.title}}</td>
+        <td>{{app.created_at | amDateFormat : 'DD.MM.YYYY HH:mm'}}</td>
+        <td ng-switch="app.status">
+            <div class="badge badge-info" ng-switch-when="process">Новая</div>
+        </td>
+        <td>
+            <div ng-if="!app.manager">не назначен</div>
+            <div ng-if="app.manager">{{app.manager.name}}</div>
+        </td>
+        <td class="text-center">
+            <a href="" ng-href="/control-panel/applications/{{app.id}}">открыть</a>
+        </td>
+    </tr>
+    </tbody>
+</table>

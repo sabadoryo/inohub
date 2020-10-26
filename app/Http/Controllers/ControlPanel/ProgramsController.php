@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\ControlPanel;
 
+use App\Form;
 use App\Program;
+use App\ProgramCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -10,13 +12,18 @@ class ProgramsController extends Controller
 {
     public function index()
     {
+        $categories = ProgramCategory::all();
+
         return view('control-panel.component', [
             'component' => 'programs-control',
-            'bindings' => [],
-            'PAGE_TITLE' => 'Программы'
+            'bindings' => [
+                'categories' => $categories,
+            ],
+            'PAGE_TITLE' => 'Программы',
+            'activePage' => 'programs',
+            'breadcrumb' => [],
         ]);
     }
-
 
     public function getList(Request $request)
     {
@@ -34,21 +41,63 @@ class ProgramsController extends Controller
             $query->where('status', $request->status);
         }
 
-        $result = $query->orderBy('id', 'desc')->paginate(6);
+        $result = $query->with('category')
+            ->orderBy('id', 'desc')
+            ->paginate(10);
 
         return $result;
     }
 
-    public function create()
+    public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required|string',
+            'category_id' => 'nullable|exists:program_categories,id',
+        ]);
+
+        $program = Program::create([
+            'user_id' => \Auth::user()->id,
+            'title' => $request->title,
+            'program_category_id' => $request->category_id
+        ]);
+
+        return ['id' => $program->id];
+    }
+
+    public function mainForm($id)
+    {
+        $program = Program::find($id);
+
+        $categories = ProgramCategory::all();
+
         return view('control-panel.component', [
-            'component' => 'programs-create-form',
-            'bindings' => [],
-            'PAGE_TITLE' => 'Добавить программу'
+            'component' => 'program-main-form',
+            'bindings' => [
+                'categories' => $categories,
+                'program' => $program,
+            ],
+            'PAGE_TITLE' => $program->title,
+            'activePage' => 'programs',
+            'breadcrumb' => [],
         ]);
     }
 
-    public function store(Request $request)
+    public function create()
+    {
+        $forms = Form::all();
+
+        return view('control-panel.component', [
+            'component' => 'programs-create-form',
+            'bindings' => [
+                'forms' => $forms,
+            ],
+            'PAGE_TITLE' => 'Добавить программу',
+            'activePage' => 'programs',
+            'breadcrumb' => []
+        ]);
+    }
+
+    public function update(Request $request)
     {
         $request->validate([
             'title' => 'required|string',
@@ -56,7 +105,8 @@ class ProgramsController extends Controller
             'limit_date' => 'nullable|date',
             'start_date' => 'nullable|date',
             'end_date' => 'nullable|date',
-            'content' => 'nullable|string'
+            'content' => 'nullable|string',
+            'selected_forms_ids' => 'required',
         ]);
 
         $data = $request->all();
@@ -65,6 +115,10 @@ class ProgramsController extends Controller
         $data['status'] = 'draft';
 
         $program = Program::create($data);
+
+        foreach ($request->selected_forms_ids as $ind => $id) {
+            $program->forms()->attach($id, ['order_number' => $ind]);
+        }
 
         return ['id' => $program->id];
     }

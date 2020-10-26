@@ -56,4 +56,9 @@ class User extends Authenticatable
     {
         return $this->avatar_path ? \Storage::disk('public')->url($this->avatar_path) : null;
     }
+
+    public function applications()
+    {
+        return $this->hasMany(Application::class);
+    }
 }

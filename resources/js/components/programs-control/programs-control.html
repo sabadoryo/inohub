@@ -1,66 +1,78 @@
 <form class="mb-3" ng-submit="$ctrl.filter()">
+
     <div class="form-row">
+
         <div class="col-3">
-            <input type="text" class="form-control" placeholder="Введите название" ng-model="$ctrl.title">
+            <input type="text"
+                   class="form-control"
+                   placeholder="Название"
+                   ng-model="$ctrl.title">
         </div>
+
+        <div class="col-3">
+            <select ng-model="$ctrl.category"
+                    ng-options="c as c.title for c in $ctrl.categories"
+                    class="form-control">
+                <option value="">Категория:</option>
+            </select>
+        </div>
+
         <div class="col-3">
             <select ng-model="$ctrl.status" class="form-control">
                 <option value="">Выберите статус</option>
                 <option value="draft">Черновик</option>
                 <option value="published">Опубликован</option>
-                <option value="to-check">На проверке</option>
             </select>
         </div>
+
         <div class="col-auto">
-            <button type="submit" class="btn btn-primary btn-sm">Поиск</button>
-            <button type="button" class="btn btn-secondary btn-sm" ng-click="$ctrl.reset()">Сбросить</button>
+
+            <button type="submit" class="btn btn-primary">Поиск</button>
+
+            <button type="button" class="btn btn-secondary" ng-click="$ctrl.reset()">Сбросить</button>
+
         </div>
+
     </div>
+
 </form>
 
-<div class="mb-3">Всего: <b>{{$ctrl.total}}</b> {{$ctrl.total | plural : ['программа', 'программы', 'программ']}}</div>
-
-<div class="row">
-
-    <div class="col-12 col-md-6" ng-repeat="p in $ctrl.programs track by $index">
-        <div class="card">
-            <div class="card-header" ng-switch="p.status">
-
-                <h3 class="card-title mr-2">{{p.title}}</h3>
-
-                <span class="badge badge-warning" ng-switch-when="draft">Черновик</span>
-
-                <div class="float-right" uib-dropdown>
-                    <button type="button" class="btn btn-sm btn-outline-primary" uib-dropdown-toggle>
-                        Действия <span class="caret"></span>
-                    </button>
-                    <div class="dropdown-menu" uib-dropdown-menu role="menu">
-                        <a href="#" class="dropdown-item">Редактировать</a>
-                        <a href="#" class="dropdown-item">Прикрепить ответственного</a>
-                        <a href="#" class="dropdown-item">Предпросмотр</a>
-
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">Удалить</a>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="text-muted card-text">{{p.short_description}}</div>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-                    <i class="fa fa-calendar-check"></i>
-                    Дата окончания приема заявок:
-                    <span ng-show="p.limit_date">{{p.limit_date | amDateFormat : 'D MMM YYYY'}}</span>
-                    <span ng-show="!p.limit_date" class="text-warning">Не установлено</span>
-                </li>
-                <li class="list-group-item">
-                    <i class="fa fa-clock"></i> Период проведение: 01.05.2020 - 02.06.2020
-                </li>
-            </ul>
-        </div>
+<div class="mb-3 clearfix">
+    <div class="float-left">
+        Всего: <b>{{$ctrl.total}}</b> {{$ctrl.total | plural : ['программа', 'программы', 'программ']}}
     </div>
+    <a href="" ng-click="$ctrl.openCreateModal()" class="btn btn-primary float-right">
+        Добавить программу
+    </a>
 </div>
+
+<table class="table table-bordered table-sm bg-white">
+    <thead class="thead-light">
+    <tr>
+        <th>№</th>
+        <th>Название</th>
+        <th>Категория</th>
+        <th>Статус</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tr ng-repeat="program in $ctrl.programs track by $index">
+        <td>{{program.id}}</td>
+        <td>{{program.title}}</td>
+        <td>{{program.category.title}}</td>
+        <td ng-switch="program.status">
+            <div ng-switch-when="draft">Черновик</div>
+            <div ng-switch-when="published">Опубликован</div>
+        </td>
+        <td class="text-center">
+            <a href=""
+               ng-href="/control-panel/programs/{{program.id}}/main"
+               class="btn btn-primary btn-xs">
+                <i class="fa fa-pen"></i>
+            </a>
+        </td>
+    </tr>
+</table>
 
 <ul uib-pagination
     total-items="$ctrl.total"
