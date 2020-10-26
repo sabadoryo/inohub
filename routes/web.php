@@ -58,6 +58,7 @@ Route::group([
     Route::get('programs/{id}/main', 'ProgramsController@mainForm');
     Route::get('programs/{id}/page', 'ProgramsController@pageForm');
     Route::get('programs/{id}/forms', 'ProgramsController@forms');
+    Route::post('programs/{id}/update-main', 'ProgramsController@updateMain');
 
 
     Route::get('applications', 'ApplicationsController@index');
