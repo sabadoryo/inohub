@@ -1,0 +1,12 @@
+.programs {
+
+    &__title {
+        margin-bottom: 30px;
+    }
+
+    &__list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 24px;
+    }
+}

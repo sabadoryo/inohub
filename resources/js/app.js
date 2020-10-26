@@ -11,6 +11,7 @@ import ngFileUpload from "ng-file-upload";
 import angularMoment from "angular-moment";
 import notify from "@cgross/angular-notify";
 
+import 'grapesjs/dist/css/grapes.min.css';
 
 angular
     .module('app', [

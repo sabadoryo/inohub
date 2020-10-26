@@ -72,8 +72,12 @@
 
             <div class="form-group">
                 <label>Страница:</label>
-                <textarea class="form-control" ng-model="$ctrl.content" rows="30"></textarea>
+<!--                <textarea class="form-control" ng-model="$ctrl.content" rows="30"></textarea>-->
+                <div id="gjsProgramPassport" class="front-styled">
+                </div>
+
             </div>
+
 
             <button type="button" class="btn btn-primary" ng-click="$ctrl.toStep(3)">
                 Следующий шаг <span class="fa fa-angle-right"></span>
@@ -83,6 +87,8 @@
 
         <div ng-show="$ctrl.step == 3">
 
+            <iframe allowfullscreen="allowfullscreen" id="passportResult" style="width: 100%; height: 100vh; margin-bottom: 10px" class="front-styled">
+            </iframe>
             <div style="height: 500px; margin-bottom: 10px">Формы</div>
 
             <div class="text-muted mb-2">Нет выбранных форм</div>

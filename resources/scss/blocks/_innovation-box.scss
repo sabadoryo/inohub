@@ -1,0 +1,45 @@
+.innovation-box {
+    $e: &;
+
+    width: 304px;
+    height: 418px;
+
+    border-radius: 7px;
+    overflow: hidden;
+    background-color: #ffffff;
+    position: relative;
+
+    &--closed {
+
+    }
+
+    &__img {
+        width: 304px;
+        height: 188px;
+    }
+
+    &__info {
+        padding: 20px;
+    }
+
+    &__title {
+        @include text-style(1.8rem, 700, #181515);
+        line-height: 22px;
+        height: 44px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-bottom: 10px;
+    }
+
+    &__text {
+        @include text-style(1.6rem, 400, #181515);
+        line-height: 19.5px;
+        height: 40px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        &:not(:last-child) {
+            margin-bottom: 10px;
+        }
+    }
+}

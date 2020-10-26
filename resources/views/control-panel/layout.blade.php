@@ -8,7 +8,7 @@
     <link href="{{ mix('css/control-panel.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/adminlte.min.css')}}">
 </head>
-<body class="layout-fixed sidebar-mini hold-transition">
+<body class="layout-fixed sidebar-mini hold-transition" ng-controller="MainController">
 
     <div class="wrapper" id="app">
 
@@ -28,15 +28,15 @@
 
             <ul class="navbar-nav ml-auto">
 
-{{--                <li class="nav-item">--}}
-{{--                    <form action="{{route('logout')}}" method="post">--}}
-{{--                        @csrf--}}
-{{--                        <button class="btn btn-outline-secondary">--}}
-{{--                            <i class="fas fa-sign-out-alt mr-1"></i>--}}
-{{--                            Выйти--}}
-{{--                        </button>--}}
-{{--                    </form>--}}
-{{--                </li>--}}
+                <li class="nav-item">
+                    <form  method="post">
+                        @csrf
+                        <button class="btn btn-outline-secondary">
+                            <i class="fas fa-sign-out-alt mr-1"></i>
+                            Выйти
+                        </button>
+                    </form>
+                </li>
 
             </ul>
 
