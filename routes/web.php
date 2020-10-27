@@ -8,9 +8,10 @@ Route::get('/', 'MainPageController@index');
 
 Route::group(['prefix' => 'cabinet', 'middleware' => ['auth']], function () {
     Route::get('', 'CabinetController@profile');
+    Route::get('applications', 'CabinetController@applications');
+
     Route::get('project', 'CabinetController@project');
     Route::post('update-roles', 'CabinetController@updateRoles');
-    Route::get('applications', 'CabinetController@applications');
     Route::get('applications/{id}', 'CabinetController@application');
     Route::post('applications/{id}/update-form', 'CabinetController@updateForm');
     Route::post('applications/{id}/send-message', 'CabinetController@sendMessage');
@@ -93,7 +94,7 @@ Route::group([
     Route::get('applications/get-list', 'ApplicationsController@getList');
     Route::get('applications/{id}', 'ApplicationsController@show');
     Route::post('applications/{id}/take-for-processing', 'ApplicationsController@takeForProcessing');
-    Route::post('applications/{id}/reply', 'ApplicationsController@reply');
+    Route::post('applications/{id}/accept', 'ApplicationsController@accept');
 
     Route::get('events', 'EventsController@index');
     Route::get('events/get-list', 'EventsController@getList');
@@ -110,6 +111,9 @@ Route::group([
     Route::get('corp-innovations/tasks/{id}', 'CorpInnovationsController@task');
 
     Route::get('members','MembersController@index');
+    Route::get('members/create', 'MembersController@create');
+    Route::post('members', 'MembersController@store');
+    Route::get('members/get-list', 'MembersController@getList');
 
 });
 

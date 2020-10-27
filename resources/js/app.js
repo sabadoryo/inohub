@@ -98,3 +98,4 @@ require('./components/program-to-publish-modal/program-to-publish-modal');
 require('./components/page-builder/page-builder');
 require('./components/corp-innovations/corp-innovations');
 require('./components/members-control/members-control');
+require('./components/members-create-form/members-create-form');

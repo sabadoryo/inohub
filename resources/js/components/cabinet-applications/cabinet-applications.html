@@ -13,7 +13,10 @@
     <tr ng-repeat="app in $ctrl.applications track by $index">
         <td>{{app.id}}</td>
         <td>{{app.entity_model}}</td>
-        <td>{{app.entity.title}}</td>
+        <td ng-switch="app.entity_model">
+            <div ng-switch-when="App\Program">{{app.entity.title}}</div>
+            <div ng-switch-when="App\Module">{{app.entity.name}}</div>
+        </td>
         <td>{{app.status}}</td>
         <td>{{app.created_at | amDateFormat : 'DD.MM HH:mm'}}</td>
         <td class="text-center">

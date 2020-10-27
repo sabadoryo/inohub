@@ -30,23 +30,22 @@ function controller(Auth, $rootScope, Upload, $http) {
         $ctrl.entityType = $ctrl.resolve.entityType;
         $ctrl.entityId = $ctrl.resolve.entityId;
         $ctrl.getForms();
-
     };
 
     $ctrl.getForms = function () {
 
         let req = null;
 
-        if ($ctrl.entityType == 'member') {
-            req = $http.get('/forms', {
+        if ($ctrl.entityType == 'astanahub_membership') {
+            req = $http.get('/get-forms', {
                 params: {
-                    type: 'member'
+                    type: 'astanahub_membership'
                 }
             });
         }
 
         if ($ctrl.entityType == 'program') {
-            req = $http.get('/forms', {
+            req = $http.get('/get-forms', {
                 params: {
                     type: 'program',
                     program_id: $ctrl.entityId,
@@ -58,6 +57,7 @@ function controller(Auth, $rootScope, Upload, $http) {
             req.then(
                 res => {
                     $ctrl.forms = res.data.forms;
+                    console.log($ctrl.forms);
                     $ctrl.forms.forEach(form => {
                         form.fields.forEach(field => {
                             field.value = null;
@@ -163,7 +163,7 @@ function controller(Auth, $rootScope, Upload, $http) {
                 url: '/applications',
                 data: {
                     entity_type: $ctrl.entityType,
-                    entity_id: $ctrl.entityId,
+                    entity_id: $ctrl.entityId || undefined,
                     forms
                 }
             })

@@ -23,7 +23,7 @@ function controller($uibModal) {
             .open({
                 component: 'applicationModal',
                 resolve: {
-                    entityType: () => 'member',
+                    entityType: () => 'astanahub_membership',
                     entityId: () => null,
                 }
             })

@@ -1,14 +1,89 @@
+<form class="mb-3" ng-submit="$ctrl.filter()">
 
-<table class="table table-border table-condensed bg-white">
+    <div class="form-row">
+
+        <div class="col-3">
+            <input type="text"
+                   class="form-control"
+                   placeholder="Компания"
+                   ng-model="$ctrl.companyName">
+        </div>
+
+        <div class="col-3">
+            <input type="text"
+                   class="form-control"
+                   placeholder="Проект"
+                   ng-model="$ctrl.projectName">
+        </div>
+
+        <div class="col-3">
+            <select ng-model="$ctrl.status" class="form-control">
+                <option value="">Выберите статус</option>
+                <option value="active">Активный</option>
+                <option value="inactive">Неактивный</option>
+            </select>
+        </div>
+
+        <div class="col-auto">
+
+            <button type="submit" class="btn btn-primary">Поиск</button>
+
+            <button type="button" class="btn btn-secondary" ng-click="$ctrl.reset()">Сбросить</button>
+
+        </div>
+
+    </div>
+
+</form>
+
+<div class="mb-3 clearfix">
+    Всего: <b>{{$ctrl.total}}</b> {{$ctrl.total | plural : ['программа', 'программы', 'программ']}}
+</div>
+
+<table class="table bg-white">
     <thead class="thead-light">
     <tr>
         <th>ID</th>
-        <th>Дата регистрации</th>
-        <th>Статус</th>
         <th>Компания</th>
+        <th>Проект</th>
+        <th>Статус</th>
+        <th>Дата регистрации</th>
+        <th>Оператор</th>
+        <th class="text-center">Заявка</th>
+        <th></th>
     </tr>
     </thead>
-    <tr ng-repeat="members in $ctrl.members track by $index">
-        <td></td>
+    <tr ng-repeat="member in $ctrl.members track by $index">
+        <td>{{member.id}}</td>
+        <td>{{member.company_name}}</td>
+        <td>{{member.project_name}}</td>
+        <td>
+            <span ng-show="member.status == 'active'" class="text-success">Активный</span>
+            <span ng-show="member.status == 'inactive'" class="text-success">Неактивный</span>
+        </td>
+        <td>{{member.created_at | amDateFormat : 'DD.MM.YYYY'}}</td>
+        <td>{{member.manager.full_name}}</td>
+        <td class="text-center">
+            <div ng-if="member.application_id">
+                <a href="" ng-href="/control-panel/applications/{{member.application_id}}">
+                    №{{member.application_id}}
+                </a>
+            </div>
+        </td>
+        <td class="text-center">
+            <a href=""
+               ng-href="/control-panel/members/{{member.id}}"
+               class="btn btn-primary btn-sm">
+                <i class="fa fa-external-link"></i>
+            </a>
+        </td>
     </tr>
 </table>
+
+<ul uib-pagination
+    total-items="$ctrl.total"
+    ng-model="$ctrl.page"
+    ng-change="$ctrl.getList()"
+    items-per-page="20"
+    template-url="b4-pagination">
+</ul>

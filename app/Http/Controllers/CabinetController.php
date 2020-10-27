@@ -19,6 +19,24 @@ class CabinetController extends Controller
         ]);
     }
 
+    public function applications()
+    {
+        return view('cabinet-component', [
+            'component' => 'cabinet-applications',
+            'activeTab' => '',
+        ]);
+    }
+
+    public function getApplications()
+    {
+        $applications = \Auth::user()
+            ->applications()
+            ->with('entity')
+            ->get();
+
+        return $applications;
+    }
+
     public function project()
     {
         $component = 'cabinet-project';
@@ -49,15 +67,7 @@ class CabinetController extends Controller
     }
 
 
-    public function applications()
-    {
-        $app = Application::first();
 
-        return view('cabinet-component', [
-            'component' => 'cabinet-applications',
-            'activeTab' => '',
-        ]);
-    }
 
     public function application($id)
     {
@@ -101,15 +111,7 @@ class CabinetController extends Controller
         ]);
     }
 
-    public function getApplications()
-    {
-        $applications = \Auth::user()
-            ->applications()
-            ->with('entity')
-            ->get();
 
-        return $applications;
-    }
 
     public function updateForm(Request $request, $id)
     {
