@@ -29,7 +29,7 @@ class CabinetController extends Controller
             'activeTab' => $activeTab,
         ]);
     }
-    
+
     public function updateRoles(Request $request)
     {
         $startup = Role::findByName('startup');
@@ -73,6 +73,12 @@ class CabinetController extends Controller
 
         ])->findOrFail($id);
 
+        foreach ($app->forms as $form) {
+            foreach ($form->fields as $field) {
+                $field->formField->options = json_decode($field->formField->options, true);
+            }
+        }
+
         return view('cabinet-component', [
             'component' => 'application-status',
             'bindings' => [
@@ -94,6 +100,7 @@ class CabinetController extends Controller
 
     public function updateForm(Request $request, $id)
     {
+        dd($request->all());
         $app = Application::find($id);
 
         $appForm = $app->forms()->where('id', $request->application_form_id)->first();
@@ -106,13 +113,17 @@ class CabinetController extends Controller
             foreach ($request->fields as $inputField) {
                 if ($field->id == $inputField['id'] &&
                     $field->value != $inputField['value']) {
-                    $changes[] = [
-                        'label' => $field->formField->label,
-                        'old_value' => $field->value,
-                        'new_value' => $inputField['value']
-                    ];
-                    $field->value = $inputField['value'];
-                    $field->save();
+                    if ($field->type === 'file') {
+
+                    } else {
+                        $changes[] = [
+                            'label' => $field->formField->label,
+                            'old_value' => $field->value,
+                            'new_value' => $inputField['value']
+                        ];
+                        $field->value = json_encode($inputField['value']);
+                        $field->save();
+                    }
                 }
             }
         }
