@@ -12,6 +12,11 @@ class ProgramsController extends Controller
 {
     public function index()
     {
+        $breadcrumb = [
+            ['/control-panel', 'Главная'],
+            [null, 'Программы']
+        ];
+        
         $categories = ProgramCategory::all();
 
         return view('control-panel.component', [
@@ -21,7 +26,7 @@ class ProgramsController extends Controller
             ],
             'PAGE_TITLE' => 'Программы',
             'activePage' => 'programs',
-            'breadcrumb' => [],
+            'breadcrumb' => $breadcrumb,
         ]);
     }
 
