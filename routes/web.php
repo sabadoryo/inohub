@@ -72,11 +72,18 @@ Route::group([
     Route::post('programs/{id}/update-main', 'ProgramsController@updateMain');
     Route::post('programs/{id}/update-forms', 'ProgramsController@updateForms');
     Route::post('programs/{id}/update-forms-list', 'ProgramsController@updateFormsList');
+    Route::post('programs/{id}/publish', 'ProgramsController@publish');
 
     Route::get('events', 'EventsController@index');
     Route::get('events/get-list', 'EventsController@getList');
-    Route::get('events/create', 'EventsController@create');
     Route::post('events', 'EventsController@store');
+    Route::get('events/{id}/main', 'EventsController@mainForm');
+    Route::get('events/{id}/page', 'EventsController@pageForm');
+    Route::get('events/{id}/forms', 'EventsController@forms');
+    Route::post('events/{id}/update-main', 'EventsController@updateMain');
+    Route::post('events/{id}/update-forms', 'EventsController@updateForms');
+    Route::post('events/{id}/update-forms-list', 'EventsController@updateFormsList');
+    Route::post('events/{id}/publish', 'EventsController@publish');
 
     Route::get('applications', 'ApplicationsController@index');
     Route::get('applications/get-list', 'ApplicationsController@getList');

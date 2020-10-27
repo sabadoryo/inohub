@@ -2,11 +2,11 @@ import angular from "angular";
 
 angular
     .module('app')
-    .component('programPageForm', {
-        template: require('./program-page-form.html'),
+    .component('eventPageForm', {
+        template: require('./event-page-form.html'),
         controller: ['$uibModal', controller],
         bindings: {
-            program: '<',
+            event: '<',
         }
     });
     
@@ -15,16 +15,15 @@ function controller($uibModal) {
 	let $ctrl = this;
 	
 	$ctrl.$onInit = function () {
-
     };
 
     $ctrl.openToPublishModal = () => {
         $uibModal
             .open({
-                component: 'programToPublishModal',
+                component: 'eventToPublishModal',
                 resolve: {
-                    program: function () {
-                        return $ctrl.program;
+                    event: function () {
+                        return $ctrl.event;
                     }
                 }
             })

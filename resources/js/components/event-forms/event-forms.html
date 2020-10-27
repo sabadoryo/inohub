@@ -1,5 +1,5 @@
-<div class="alert alert-light" ng-show="$ctrl.program.status == 'draft'">
-  Данная программа находится в режиме черновика. Хотите <a href="" ng-click="$ctrl.openToPublishModal()" class="alert-link">опубликовать</a> программу?
+<div class="alert alert-light" ng-show="$ctrl.event.status == 'draft'">
+  Данное мероприятие находится в режиме черновика. Хотите <a href="" ng-click="$ctrl.openToPublishModal()" class="alert-link">опубликовать</a> программу?
 </div>
 <a href="" class="btn btn-primary btn-sm mb-3">
   Посмотреть
@@ -8,19 +8,20 @@
   <div class="card-header">
     <ul class="nav nav-tabs card-header-tabs">
       <li class="nav-item">
-        <a class="nav-link" href="" ng-href="/control-panel/programs/{{$ctrl.program.id}}/main">Основная информация</a>
+        <a class="nav-link" href="" ng-href="/control-panel/events/{{$ctrl.event.id}}/main">
+          Основная информация</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="" ng-href="/control-panel/programs/{{$ctrl.program.id}}/page">Страница</a>
+        <a class="nav-link" href="" ng-href="/control-panel/events/{{$ctrl.event.id}}/page">Страница</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link active" href="" ng-href="/control-panel/programs/{{$ctrl.program.id}}/forms">Анкета</a>
+        <a class="nav-link active" href="" ng-href="/control-panel/events/{{$ctrl.event.id}}/forms">Анкета</a>
       </li>
     </ul>
   </div>
   <div class="card-body">
     <ul class="list-group mb-2">
-      <li class="list-group-item" ng-repeat="form in $ctrl.programForms track by $index">
+      <li class="list-group-item" ng-repeat="form in $ctrl.eventForms track by $index">
         {{ form.title }}
         <button class="btn btn-danger btn-sm float-right" type="button" ng-click="$ctrl.deleteForm($index)">
           <i class="fas fa-trash-alt"></i>

@@ -56,7 +56,7 @@ class ProgramsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|string',
+            'title' => 'required|string|min:3|max:255',
             'category_id' => 'nullable|exists:program_categories,id',
         ]);
 
@@ -99,7 +99,8 @@ class ProgramsController extends Controller
     
         $breadcrumb = [
             ['/control-panel', 'Главная'],
-            [null, 'Программы']
+            ['/control-panel/programs', 'Программы'],
+            [null, $program->title],
         ];
     
         return view('control-panel.component', [
@@ -134,21 +135,6 @@ class ProgramsController extends Controller
             'PAGE_TITLE' => $program->title,
             'activePage' => 'programs',
             'breadcrumb' => $breadcrumb,
-        ]);
-    }
-
-    public function create()
-    {
-        $forms = Form::all();
-
-        return view('control-panel.component', [
-            'component' => 'programs-create-form',
-            'bindings' => [
-                'forms' => $forms,
-            ],
-            'PAGE_TITLE' => 'Добавить программу',
-            'activePage' => 'programs',
-            'breadcrumb' => []
         ]);
     }
     
@@ -201,5 +187,13 @@ class ProgramsController extends Controller
         
         return [];
     }
-
+    
+    public function publish($id, Request $request)
+    {
+        $program = Program::find($id);
+    
+        $program->update([
+            'status' => 'published',
+        ]);
+    }
 }
