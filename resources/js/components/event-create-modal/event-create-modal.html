@@ -1,0 +1,25 @@
+<div class="modal-header">
+  <h5 class="modal-title">Добавить мероприятия</h5>
+  <button type="button" class="close" ng-click="$ctrl.dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form ng-submit="$ctrl.save()">
+  <div class="modal-body">
+    <div class="form-group">
+      <label>Название:</label>
+      <input type="text" class="form-control" ng-model="$ctrl.name" required>
+    </div>
+    <div class="form-group">
+      <label>Дата и время провидения:</label>
+      <div class="d-flex">
+        <input type="date" class="form-control" ng-model="$ctrl.startDate" required>
+        <input type="time" class="form-control" ng-model="$ctrl.startDateTime" required>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" ng-click="$ctrl.dismiss()">Закрыть</button>
+    <button type="submit" class="btn btn-primary" ng-disabled="$ctrl.loading">Доавить</button>
+  </div>
+</form>

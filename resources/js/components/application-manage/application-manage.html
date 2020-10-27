@@ -30,14 +30,71 @@
     </div>
 </div>
 
+<div class="card direct-chat direct-chat-primary">
+
+    <div class="card-header">
+        <h3 class="card-title">Чат</h3>
+    </div>
+
+    <div class="card-body">
+
+        <div class="direct-chat-messages">
+
+            <div class="direct-chat-msg">
+                <div class="direct-chat-infos clearfix">
+                    <span class="direct-chat-name float-left">Alexander Pierce</span>
+                    <span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span>
+                </div>
+                <!-- /.direct-chat-img -->
+                <div class="direct-chat-text">
+                    Is this template really for free? That's unbelievable!
+                </div>
+                <!-- /.direct-chat-text -->
+            </div>
+
+            <div class="direct-chat-msg right">
+                <div class="direct-chat-infos clearfix">
+                    <span class="direct-chat-name float-right">Sarah Bullock</span>
+                    <span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span>
+                </div>
+                <!-- /.direct-chat-infos -->
+                <!-- /.direct-chat-img -->
+                <div class="direct-chat-text">
+                    You better believe it!
+                </div>
+                <!-- /.direct-chat-text -->
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="card-footer">
+        <form action="#" method="post">
+            <div class="input-group">
+                <input type="text" name="message" placeholder="Type Message ..." class="form-control">
+                <span class="input-group-append">
+                      <button type="button" class="btn btn-primary">Send</button>
+                    </span>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<div class="mb-2" ng-show="$ctrl.application.entity_model == 'App\\Program'">
+    <button type="button" class="btn btn-success" ng-click="$ctrl.accept()">Принять и добавить в программу</button>
+</div>
+
+<a href=""
+   ng-show="$ctrl.application.entity_model == 'App\\Module' && $ctrl.application.entity.slug == 'astanahub_membership'"
+   ng-href="/control-panel/members/create?application_id={{$ctrl.application.id}}"
+   class="btn btn-success">
+    Принять и зарегестрировать участника
+</a>
+
+<br>
+
 <div>
-
-    <button type="button" class="btn btn-primary" ng-click="$ctrl.sendMessage()">Отправить сообщение</button>
-
-    <button type="button" class="btn btn-success" ng-click="$ctrl.accept()">Принять</button>
-
-    <button type="button" class="btn btn-warning" ng-click="$ctrl.toRemake()">Отправить на доработку</button>
-
     <button type="button" class="btn btn-danger" ng-click="$ctrl.reject()">Отказать</button>
-
 </div>

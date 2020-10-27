@@ -20,4 +20,9 @@ class Form extends Model
     {
         return $this->belongsToMany(Program::class);
     }
+    
+    public function events()
+    {
+        return $this->belongsToMany(Event::class);
+    }
 }

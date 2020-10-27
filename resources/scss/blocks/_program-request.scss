@@ -1,0 +1,16 @@
+.program-request {
+
+    text-align: center;
+
+    &__title {
+        @include text-style(2.4rem, 700, #181515);
+        line-height: 29px;
+        margin-bottom: 20px;
+    }
+
+    &__subtitle {
+        @include text-style(1.8rem, 400, #181515);
+        line-height: 22px;
+        margin-bottom: 30px;
+    }
+}

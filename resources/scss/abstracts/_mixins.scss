@@ -1,0 +1,23 @@
+@mixin respond($breakpoint) {
+//    @if $breakpoint == phone {
+//        @media only screen and (max-width: 37.5em) { @content }; // 600px
+//    }
+//
+//    @if $breakpoint == tab-port {
+//        @media only screen and (max-width: 56.25em) { @content }; // 900px
+//    }
+
+    @if $breakpoint == tab-land {
+        @media only screen and (min-width: 681px) and (max-width: 1128px) { @content }; // 1200px
+    }
+
+    @if $breakpoint == desktop {
+        @media only screen and (min-width: 1129px) { @content }; // 1800px
+    }
+}
+
+@mixin text-style($fs, $fw, $color) {
+    font-size: $fs;
+    font-weight: $fw;
+    color: $color;
+}
