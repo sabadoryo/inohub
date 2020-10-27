@@ -31,7 +31,7 @@ const buildConstructor = elemId => {
 
         },
         canvas: {
-            styles: ['/css/style.css']
+            styles: ['/css/style.css', '/css/ui-components.css']
         }
     });
     editor.on('asset:upload:start', () => {
@@ -45,6 +45,7 @@ const buildConstructor = elemId => {
 <!--        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>-->
     `);
 
+    //examples
     editor.DomComponents.addType('submit-button-component', {
         // isComponent: el => el.tagName === 'BUTTON',
         model: {
@@ -86,7 +87,6 @@ const buildConstructor = elemId => {
             },
         },
     });
-
     editor.DomComponents.addType('droppable-container-component', {
         // isComponent: el => el.tagName === 'DIV',
         model: {
@@ -148,46 +148,233 @@ const buildConstructor = elemId => {
             }
         }
     });
-    editor.DomComponents.addType('header-1-droppable-component', {
+
+    // containers
+    editor.DomComponents.addType('ui-main-component', {
+        extends: 'text',
+        model: {
+            defaults: {
+                tagName: 'main',
+                attributes: {
+                    class: 'ui-main'
+                },
+                droppable: 'section, .main-droppable',
+                components: ``
+            }
+        }
+    });
+    editor.DomComponents.addType('ui-header-component', {
         // isComponent: el => el.tagName === 'DIV',
         model: {
             defaults: {
-                droppable: '.dropping',
-                components: `
-                    <h5 class="my-0 mr-md-auto font-weight-normal">Company name</h5>
-                    <nav class="my-2 my-md-0 mr-md-3">
-                        <a class="p-2 text-dark" href="#">Features</a>
-                        <a class="p-2 text-dark" href="#">Enterprise</a>
-                        <a class="p-2 text-dark" href="#">Support</a>
-                        <a class="p-2 text-dark" href="#">Pricing</a>
-                     </nav>
-                `,
+                // droppable: '.dropping',
                 attributes: {
-                    class: 'd-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm dropping'
+                    class: 'ui-header-1'
                 },
-                tagName: 'div',
+                tagName: 'header',
                 style: {
                     // border: '1px solid red',
+                },
+                components: `
+                    <div class="ui-header-1__container ui-header-1__container--space-between">
+
+                        <a href="/src" class="ui-header-1__logo">
+                            Tech<span class="ui-header-1__logo-accent">Hub</span>
+                        </a>
+
+                        <div class="ui-header-1__action-box">
+                            <div class="ui-header-1__lang-switcher">
+                                <div class="ui-header-1__language">
+                                    Ru
+                                </div>
+
+                                <svg class="ui-header-1__lang-toggle" width="10" height="5">
+                                    <use xlink:href="img/icons.svg#toggle"></use>
+                                </svg>
+                            </div>
+
+                            <button class="ui-header-1__login-btn button button--lg">
+                                Подать заявку
+                            </button>
+                        </div>
+                    </div>
+<!--                    <main class="ui-main" data-gjs-type="box" data-gjs-droppable="section .main-droppable">-->
+<!--                    </main>-->
+                `,
+
+            }
+        }
+    });
+    editor.DomComponents.addType('ui-section-80vh-component', {
+        model: {
+            defaults: {
+                droppable: '.ui-container, img',
+                draggable: 'main',
+                attributes: {
+                    class: 'ui-section-80vh main-droppable'
+                },
+                tagName: 'section',
+            }
+        }
+    });
+    editor.DomComponents.addType('ui-container-component', {
+        model: {
+            defaults: {
+                droppable: '*',
+                draggable: 'section',
+                attributes: {
+                    class: 'ui-container'
                 }
             }
         }
     });
-    editor.DomComponents.addType('text-header-component', {
+    editor.DomComponents.addType('ui-pos-top-left-component', {
+        model: {
+            defaults: {
+                tagName: 'div',
+                draggable: '*',
+                attributes: {
+                    class: 'ui-pos-top-left'
+                }
+            }
+        }
+    });
+    editor.DomComponents.addType('ui-pos-center-left-component', {
+        model: {
+            defaults: {
+                tagName: 'div',
+                draggable: '*',
+                attributes: {
+                    class: 'ui-pos-center-left'
+                }
+            }
+        }
+    });
+    editor.DomComponents.addType('ui-pos-top-center-component', {
+        model: {
+            defaults: {
+                tagName: 'div',
+                draggable: '*',
+                attributes: {
+                    class: 'ui-pos-top-center'
+                }
+            }
+        }
+    });
+    editor.DomComponents.addType('ui-pos-center-component', {
+        model: {
+            defaults: {
+                tagName: 'div',
+                draggable: '*',
+                attributes: {
+                    class: 'ui-pos-center'
+                }
+            }
+        }
+    });
+    editor.DomComponents.addType('ui-pos-top-right-component', {
+        model: {
+            defaults: {
+                tagName: 'div',
+                draggable: '*',
+                attributes: {
+                    class: 'ui-pos-top-right'
+                }
+            }
+        }
+    });
+    editor.DomComponents.addType('ui-pos-center-right-component', {
+        model: {
+            defaults: {
+                tagName: 'div',
+                draggable: '*',
+                attributes: {
+                    class: 'ui-pos-center-right'
+                }
+            }
+        }
+    });
+
+    //grid
+    editor.DomComponents.addType('ui-grid-2-component', {
+        model: {
+            defaults: {
+                tagName: 'div',
+                draggable: '.ui-container',
+                attributes: {
+                    class: 'ui-grid-2'
+                },
+                components: `
+                    <div data-gjs-droppable="*" style="min-height: 100px"></div>
+                    <div data-gjs-droppable="*" style="min-height: 100px"></div>
+                `
+            }
+        }
+    });
+    editor.DomComponents.addType('ui-grid-3-component', {
+        model: {
+            defaults: {
+                tagName: 'div',
+                draggable: '.ui-container',
+                attributes: {
+                    class: 'ui-grid-3'
+                },
+                components: `
+                    <div data-gjs-droppable="*" style="min-height: 100px"></div>
+                    <div data-gjs-droppable="*" style="min-height: 100px"></div>
+                    <div data-gjs-droppable="*" style="min-height: 100px"></div>
+                `
+            }
+        }
+    });
+    editor.DomComponents.addType('ui-grid-4-component', {
+        model: {
+            defaults: {
+                tagName: 'div',
+                draggable: '.ui-container',
+                attributes: {
+                    class: 'ui-grid-4'
+                },
+                components: `
+                    <div data-gjs-droppable="*" style="min-height: 100px"></div>
+                    <div data-gjs-droppable="*" style="min-height: 100px"></div>
+                    <div data-gjs-droppable="*" style="min-height: 100px"></div>
+                    <div data-gjs-droppable="*" style="min-height: 100px"></div>
+                `
+            }
+        }
+    });
+
+    //border
+    editor.DomComponents.addType('ui-border-component', {
+        model: {
+            defaults: {
+                tagName: 'div',
+                droppable: '*',
+                attributes: {
+                    class: 'ui-border'
+                },
+            }
+        }
+    });
+
+    // text and language
+    editor.DomComponents.addType('ui-heading-white-component', {
         extend: 'text',
         model: {
             defaults: {
                 type: 'textnode',
                 components: `
-                    Заглавие
+                    Astana hub heading program slim shady
                 `,
                 tagName: 'span',
                 attributes: {
                     'data-grapes-lang-kz' : '',
                     'data-grapes-lang-en' : '',
                     'data-grapes-lang-ru' : '',
-                    class: 'text-lang'
+                    class: 'text-lang ui-heading-white'
                 },
-                style: {'font-size': '3rem'},
+                // style: {'font-size': '3rem'},
                 traits: [
                     // Strings are automatically converted to text types
                     // 'name', // Same as: { type: 'text', name: 'name' }
@@ -202,13 +389,98 @@ const buildConstructor = elemId => {
                         label: 'Lang EN'
                     }
                 ],
-            },
-            // init() {
-            //     this.on('change:attributes', this.handleHTMLChange);
-            // },
-            // handleHTMLChange() {
-            //     console.log('HTML changed to: ', this.innerHTML);
-            // },
+            }
+        }
+    });
+    editor.DomComponents.addType('ui-heading-black-component', {
+        extend: 'text',
+        model: {
+            defaults: {
+                type: 'textnode',
+                components: `
+                    Astana hub heading program slim shady
+                `,
+                tagName: 'span',
+                attributes: {
+                    'data-grapes-lang-kz' : '',
+                    'data-grapes-lang-en' : '',
+                    'data-grapes-lang-ru' : '',
+                    class: 'text-lang ui-heading-black'
+                },
+                // style: {'font-size': '3rem'},
+                traits: [
+                    // Strings are automatically converted to text types
+                    // 'name', // Same as: { type: 'text', name: 'name' }
+                    {
+                        type: 'text',
+                        name: 'data-grapes-lang-kz',
+                        label: 'Lang KZ'
+                    },
+                    {
+                        type: 'text',
+                        name: 'data-grapes-lang-en',
+                        label: 'Lang EN'
+                    }
+                ],
+            }
+        }
+    });
+    editor.DomComponents.addType('ui-paragraph-white-component', {
+        extend: 'text',
+        model: {
+            defaults: {
+                components: `
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A eveniet explicabo vel! Alias delectus dolores esse ex ipsam iste laudantium natus placeat reiciendis sequi suscipit totam unde, vel vitae voluptatum
+                `,
+                tagName: 'span',
+                attributes: {
+                    'data-grapes-lang-kz' : '',
+                    'data-grapes-lang-en' : '',
+                    'data-grapes-lang-ru' : '',
+                    class: 'text-lang ui-paragraph-white'
+                },
+                traits: [
+                    {
+                        type: 'text',
+                        name: 'data-grapes-lang-kz',
+                        label: 'Lang KZ'
+                    },
+                    {
+                        type: 'text',
+                        name: 'data-grapes-lang-en',
+                        label: 'Lang EN'
+                    }
+                ],
+            }
+        }
+    });
+    editor.DomComponents.addType('ui-paragraph-black-component', {
+        extend: 'text',
+        model: {
+            defaults: {
+                components: `
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A eveniet explicabo vel! Alias delectus dolores esse ex ipsam iste laudantium natus placeat reiciendis sequi suscipit totam unde, vel vitae voluptatum
+                `,
+                tagName: 'span',
+                attributes: {
+                    'data-grapes-lang-kz' : '',
+                    'data-grapes-lang-en' : '',
+                    'data-grapes-lang-ru' : '',
+                    class: 'text-lang ui-paragraph-black'
+                },
+                traits: [
+                    {
+                        type: 'text',
+                        name: 'data-grapes-lang-kz',
+                        label: 'Lang KZ'
+                    },
+                    {
+                        type: 'text',
+                        name: 'data-grapes-lang-en',
+                        label: 'Lang EN'
+                    }
+                ],
+            }
         }
     });
     editor.DomComponents.addType('lang-switcher-component', {
@@ -230,49 +502,13 @@ const buildConstructor = elemId => {
         }
     })
 
-    // editor.BlockManager.add('droppable-container-block', {
-    //     label: 'Droppable container',
-    //     content: {
-    //         type: 'droppable-container-component',
-    //     }
-    // });
-    // editor.BlockManager.add('droppable-card-deck-block', {
-    //     label: 'Droppable card deck',
-    //     content: {
-    //         type: 'droppable-card-deck-component',
-    //     }
-    // });
-    // editor.BlockManager.add('droppable-card-block', {
-    //     label: 'Droppable card',
-    //     content: {
-    //         type: 'droppable-card-component',
-    //     }
-    // });
-    // editor.BlockManager.add('header-1-droppable-block', {
-    //     label: 'Droppable header',
-    //     content: {
-    //         type: 'header-1-droppable-component',
-    //     }
-    // });
-    // editor.BlockManager.add('button-link', {
-    //     label: 'Button link',
-    //     content: {
-    //         type: 'link',
-    //         attributes: {
-    //             class: 'btn mx-auto btn-lg btn-block btn-primary dropping'
-    //         },
-    //         style: {
-    //             'max-width': '150px',
-    //             position: 'absolute',
-    //             bottom: '5%'
-    //         }
-    //     }
-    // });
 
     // editor.CssComposer.setRule('.submit-button', {
     //
     // });
 
+    // BLOCKS
+    // texts and lang
     editor.BlockManager.add('lang-switcher-block', {
         label: 'Language Switcher',
         category: 'Util',
@@ -312,67 +548,47 @@ const buildConstructor = elemId => {
             }
         }
     });
-    editor.BlockManager.add('text-header-block', {
-        label: 'Text Header Block',
+    editor.BlockManager.add('ui-heading-white-block', {
+        label: 'Text Heading White',
         category: 'Text',
         content: {
-            type: 'text-header-component'
+            type: 'ui-heading-white-component'
         }
     });
-    editor.BlockManager.add('ui-header-block', {
-        label: 'UI Header 1',
-        category: 'Header',
-        content: `
-            <header class="header">
-
-                <div class="header__container header__container--space-between">
-
-                    <!--    <svg class="header__hamburger" width="18" height="12">-->
-                    <!--        <use xlink:href="img/icons.svg#hamburger"></use>-->
-                    <!--    </svg>-->
-
-                    <a href="/src" class="header__logo">
-                        Tech<span class="header__logo-accent">Hub</span>
-                    </a>
-
-
-                    <div class="header__action-box">
-                        <div class="header__lang-switcher">
-                            <div class="header__language">
-                                Ru
-                            </div>
-
-                            <svg class="header__lang-toggle" width="10" height="5">
-                                <use xlink:href="img/icons.svg#toggle"></use>
-                            </svg>
-                        </div>
-
-                        <button class="header__login-btn button button--lg">
-                            Подать заявку
-                        </button>
-                    </div>
-
-                </div>
-            </header>
-        `
+    editor.BlockManager.add('ui-heading-black-block', {
+        label: 'Text Heading Black',
+        category: 'Text',
+        content: {
+            type: 'ui-heading-black-component'
+        }
     });
+    editor.BlockManager.add('ui-paragraph-white-block', {
+        label: 'Text Paragraph White',
+        category: 'Text',
+        content: {
+            type: 'ui-paragraph-white-component'
+        }
+    });
+    editor.BlockManager.add('ui-paragraph-black-block', {
+        label: 'Text Paragraph Black',
+        category: 'Text',
+        content: {
+            type: 'ui-paragraph-black-component'
+        }
+    });
+
+    //TEST
     editor.BlockManager.add('ui-main-container-block', {
         label: 'FILLABLE: UI Main Container',
-        category: 'Container',
+        // category: 'Container',
         content: `
             <main data-gjs-droppable=".dropping" class="program-page"></main>
         `
     });
-    // editor.BlockManager.add('ui-section-container-block', {
-    //     label: 'FILLABLE: UI Section Container',
-    //     content: `
-    //         <div data-gjs-droppable=".dropping" class="program-page__section dropping">
-    //         </div>
-    //     `
-    // });
+    //TEST
     editor.BlockManager.add('ui-welcome-section-block', {
         label: 'Welcome Section',
-        category: 'Basic',
+        // category: 'Basic',
         content: `
             <div data-gjs-droppable=".dropping" class="program-page__section program-welcome-section dropping">
                 <img data-gjs-type="image" alt="" class="program-welcome-section__img dropping">
@@ -385,10 +601,10 @@ const buildConstructor = elemId => {
             </div>
         `
     });
-
+    //TEST
     editor.BlockManager.add('ui-cards-block', {
         label: 'Cards section',
-        category: 'Basic',
+        // category: 'Basic',
         content: `
             <div class="program-page__section program-cards dropping">
 
@@ -467,10 +683,10 @@ const buildConstructor = elemId => {
             </div>
         `
     });
-
+    //TEST
     editor.BlockManager.add('ui-info-block', {
         label: 'Info Block',
-        category: 'Basic',
+        // category: 'Basic',
 
         content: `
             <div class="program-page__section program-info">
@@ -506,10 +722,10 @@ const buildConstructor = elemId => {
             </div>
         `
     });
-
+    //TEST
     editor.BlockManager.add('ui-steps-block', {
         label: 'Steps',
-        category: 'Basic',
+        // category: 'Basic',
 
         content: `
             <div class="program-page__section program-steps">
@@ -544,10 +760,10 @@ const buildConstructor = elemId => {
             </div>
         `
     });
-
+    //TEST
     editor.BlockManager.add('ui-request', {
         label: 'Request form',
-        category: 'Section',
+        // category: 'Section',
         content: `
             <div class="program-page__section program-request">
                 <div class="program-request__title">
@@ -566,9 +782,11 @@ const buildConstructor = elemId => {
         `
     });
 
+    // Opening the block panel on init
     editor.Panels.getButton('views', 'open-blocks').set('active', true)
 
     // submit button with script
+    //TEST
     editor.BlockManager.add('submit-button', {
         label: 'Submit button',
         content: {
@@ -576,7 +794,7 @@ const buildConstructor = elemId => {
         }
     });
 
-    // image
+    //TEST
     editor.BlockManager.add('image', {
         id: 'image',
         label: 'Image',
@@ -594,11 +812,110 @@ const buildConstructor = elemId => {
         content: `<div class="test-class">SOME THINGS HERE</div>`
     })
 
-    // important to make canvas work right, do not touch, always set attributes: {class: 'default-wrapper'} on every new block (except droppable components)
-    // droppable components should not use it, otherwise they will not be able to be droppable
-    // cssComposer.setRule('.default-wrapper', {
-    //     display:'inline-block'
-    // });
+    // used blocks
+    editor.BlockManager.add('ui-header-block', {
+        label: 'UI Header',
+        category: 'UI Headers',
+        content: `
+            <header data-gjs-type="ui-header-component"></header>
+            <main data-gjs-type="ui-main-component"></main>
+        `
+    });
+    editor.BlockManager.add('ui-section-80vh-block', {
+        label: 'UI Section 80vh',
+        category: 'UI Section',
+        content: {
+            type: 'ui-section-80vh-component'
+        }
+    });
+    editor.BlockManager.add('ui-container-block', {
+        label: 'UI Container',
+        category: 'UI Container',
+        content: {
+            type: 'ui-container-component'
+        }
+    });
+    editor.BlockManager.add('ui-bg-img-block', {
+        label: 'UI Background Image',
+        category: 'UI Image',
+        content: {
+            attributes: {
+                class: 'ui-bg-img'
+            },
+            type: 'image'
+        }
+    });
+    editor.BlockManager.add('ui-pos-top-left-block', {
+        label: 'UI Position Top Left Container',
+        category: 'UI Position Container',
+        content: {
+            type: 'ui-pos-top-left-component'
+        }
+    });
+    editor.BlockManager.add('ui-pos-center-left-block', {
+        label: 'UI Position Center Left Container',
+        category: 'UI Position Container',
+        content: {
+            type: 'ui-pos-center-left-component'
+        }
+    });
+    editor.BlockManager.add('ui-pos-top-center-block', {
+        label: 'UI Position Top Center Container',
+        category: 'UI Position Container',
+        content: {
+            type: 'ui-pos-top-center-component'
+        }
+    });
+    editor.BlockManager.add('ui-pos-center-block', {
+        label: 'UI Position Center Container',
+        category: 'UI Position Container',
+        content: {
+            type: 'ui-pos-center-component'
+        }
+    });
+    editor.BlockManager.add('ui-pos-top-right-block', {
+        label: 'UI Position Top Right Container',
+        category: 'UI Position Container',
+        content: {
+            type: 'ui-pos-top-right-component'
+        }
+    });
+    editor.BlockManager.add('ui-pos-center-right-block', {
+        label: 'UI Position Center Right Container',
+        category: 'UI Position Container',
+        content: {
+            type: 'ui-pos-center-right-component'
+        }
+    });
+    editor.BlockManager.add('ui-border-block', {
+        label: 'UI Border',
+        category: 'UI Borders',
+        content: {
+            type: 'ui-border-component'
+        }
+    });
+    editor.BlockManager.add('ui-grid-2-block', {
+        label: 'UI Grid 2',
+        category: 'UI Grid',
+        content: {
+            type: 'ui-grid-2-component'
+        }
+    });
+    editor.BlockManager.add('ui-grid-3-block', {
+        label: 'UI Grid 3',
+        category: 'UI Grid',
+        content: {
+            type: 'ui-grid-3-component'
+        }
+    });
+    editor.BlockManager.add('ui-grid-4-block', {
+        label: 'UI Grid 4',
+        category: 'UI Grid',
+        content: {
+            type: 'ui-grid-4-component'
+        }
+    });
+
     return editor;
 }
 
