@@ -1,0 +1,59 @@
+%buttons-style {
+    @include text-style(1.5rem, 500, #ffffff);
+    border-radius: 7px;
+
+    &:focus {
+        outline: none !important;
+    }
+}
+
+.ui-button-red-sm {
+    @extend %buttons-style;
+    background-color: $elem-color;
+    padding: 12px 20px;
+}
+
+.ui-button-red-md {
+    @extend %buttons-style;
+    background-color: $elem-color;
+    padding: 12px 45px;
+}
+
+.ui-button-red-lg {
+    @extend %buttons-style;
+    background-color: $elem-color;
+    padding: 12px 84px;
+}
+
+.ui-button-white-sm {
+    @extend %buttons-style;
+    background-color: #ffffff;
+    @include text-style(1.5rem, 500, #181515);
+    padding: 12px 20px;
+}
+
+.ui-button-white-md {
+    @extend %buttons-style;
+    background-color: #ffffff;
+    @include text-style(1.5rem, 500, #181515);
+    padding: 12px 45px;
+}
+
+.ui-button-white-lg {
+    @extend %buttons-style;
+    background-color: #ffffff;
+    @include text-style(1.5rem, 500, #181515);
+    padding: 12px 84px;
+}
+
+.ui-button-red-w100 {
+    @extend %buttons-style;
+    padding: 12px 0;
+}
+
+.ui-button-white-w100 {
+    @extend %buttons-style;
+    background-color: #ffffff;
+    @include text-style(1.5rem, 500, #181515);
+    padding: 12px 0;
+}

@@ -1,0 +1,23 @@
+.ui-centered-text {
+    text-align: center;
+}
+
+.ui-heading-white {
+    @include text-style(3.6rem, 700, #ffffff);
+    line-height: 44px;
+}
+
+.ui-heading-black {
+    @include text-style(3.6rem, 700, #181515);
+    line-height: 44px;
+}
+
+.ui-paragraph-white {
+    @include text-style(1.6rem, 500, #ffffff);
+    line-height: 19.5px;
+}
+
+.ui-paragraph-black {
+    @include text-style(1.6rem, 500, #181515);
+    line-height: 19.5px;
+}
