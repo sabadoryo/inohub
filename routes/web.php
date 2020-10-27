@@ -31,6 +31,8 @@ Route::group(['prefix' => 'astana-hub'], function () {
     Route::get('programs/{id}/get-forms', 'AstanaHubController@getProgramForms');
 });
 
+Route::get('get-forms', 'FormsController@getList');
+
 Route::post('applications', 'ApplicationsController@store');
 Route::post('applications/{id}/send-message', 'ApplicationsController@sendMessage');
 
@@ -101,5 +103,13 @@ Route::group([
     Route::get('forms', 'FormsController@index');
     Route::get('forms/create', 'FormsController@create');
     Route::post('forms', 'FormsController@store');
+
+
+    Route::get('corp-innovations', 'CorpInnovationsController@index');
+    Route::get('corp-innovations/tasks/get-list', 'CorpInnovationsController@getTasksList');
+    Route::get('corp-innovations/tasks/{id}', 'CorpInnovationsController@task');
+
+    Route::get('members','MembersController@index');
+
 });
 

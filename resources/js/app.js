@@ -95,3 +95,5 @@ require('./components/event-forms/event-forms');
 require('./components/event-to-publish-modal/event-to-publish-modal');
 require('./components/program-to-publish-modal/program-to-publish-modal');
 require('./components/page-builder/page-builder');
+require('./components/corp-innovations/corp-innovations');
+require('./components/members-control/members-control');

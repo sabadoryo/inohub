@@ -34,9 +34,28 @@ function controller(Auth, $rootScope, Upload, $http) {
     };
 
     $ctrl.getForms = function () {
-        $http
-            .get(`/astana-hub/programs/${$ctrl.entityId}/get-forms`)
-            .then(
+
+        let req = null;
+
+        if ($ctrl.entityType == 'member') {
+            req = $http.get('/forms', {
+                params: {
+                    type: 'member'
+                }
+            });
+        }
+
+        if ($ctrl.entityType == 'program') {
+            req = $http.get('/forms', {
+                params: {
+                    type: 'program',
+                    program_id: $ctrl.entityId,
+                }
+            });
+        }
+
+        if (req) {
+            req.then(
                 res => {
                     $ctrl.forms = res.data.forms;
                     $ctrl.forms.forEach(form => {
@@ -47,7 +66,8 @@ function controller(Auth, $rootScope, Upload, $http) {
                 },
                 err => {
                 }
-            )
+            );
+        }
     };
 
     $ctrl.openLoginModal = () => {
