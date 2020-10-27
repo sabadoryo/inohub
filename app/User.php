@@ -26,7 +26,8 @@ class User extends Authenticatable
 
     protected $appends = [
         'full_name',
-        'status'
+        'avatar_url',
+        'initials',
     ];
 
     protected $hidden = [
@@ -49,9 +50,17 @@ class User extends Authenticatable
         return $this->last_name . ' ' . $this->first_name;
     }
 
-    public function getStatusAttribute()
+    public function getAvatarUrlAttribute()
     {
-        return $this->is_active ? 'Активный' : 'Неактивный';
+        return $this->avatar_path ? \Storage::disk('public')->url(
+            $this->avatar_path
+        ) : null;
+    }
+
+    public function getInitialsAttribute()
+    {
+        $r = mb_substr($this->last_name, 0, 1) . mb_substr($this->first_name, 0, 1);
+        return mb_strtoupper($r);
     }
 
     public function organization()
@@ -59,12 +68,7 @@ class User extends Authenticatable
         return $this->belongsTo(Organization::class);
     }
 
-    public function getAvatarUrlAttribute()
-    {
-        return $this->avatar_path ? \Storage::disk('public')->url(
-            $this->avatar_path
-        ) : null;
-    }
+
     public function applications()
     {
         return $this->hasMany(Application::class);

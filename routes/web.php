@@ -6,15 +6,6 @@ Route::post('logout', 'Auth\LoginController@logout');
 
 Route::get('/', 'MainPageController@index');
 
-Route::group(['prefix' => 'astana-hub'], function () {
-    Route::get('', 'AstanaHubController@index');
-    Route::get('programs/{id}', 'AstanaHubController@program');
-    Route::get('programs/{id}/get-forms', 'AstanaHubController@getProgramForms');
-});
-
-Route::post('applications', 'ApplicationsController@store');
-Route::post('applications/{id}/send-message', 'ApplicationsController@sendMessage');
-
 Route::group(['prefix' => 'cabinet', 'middleware' => ['auth']], function () {
     Route::get('', 'CabinetController@profile');
     Route::get('project', 'CabinetController@project');
@@ -28,6 +19,20 @@ Route::group(['prefix' => 'cabinet', 'middleware' => ['auth']], function () {
 
 Route::get('register-project', 'RegisterProjectController@form');
 Route::post('register-project', 'RegisterProjectController@store');
+
+Route::group(['prefix' => 'astana-hub'], function () {
+    Route::get('about', 'AstanaHubController@about');
+    Route::get('programs', 'AstanaHubController@programs');
+    Route::get('corporate-innovations', 'AstanaHubController@corporateInnovations');
+    Route::get('hub-space', 'AstanaHubController@hubSpace');
+    Route::get('r-and-d', 'AstanaHubController@randd');
+    Route::get('resources', 'AstanaHubController@resources');
+    Route::get('programs/{id}', 'AstanaHubController@program');
+    Route::get('programs/{id}/get-forms', 'AstanaHubController@getProgramForms');
+});
+
+Route::post('applications', 'ApplicationsController@store');
+Route::post('applications/{id}/send-message', 'ApplicationsController@sendMessage');
 
 Route::group([
     'prefix' => 'control-panel',
@@ -46,7 +51,7 @@ Route::group([
     Route::get('users', 'UsersController@index');
     Route::get('users/get-list', 'UsersController@getList');
     Route::post('users/{id}/change-active', 'UsersController@changeActive');
-    
+
     Route::get('admin-users', 'AdminUsersController@index');
     Route::get('admin-users/get-list', 'AdminUsersController@getList');
     Route::post('admin-users/{id}/change-active', 'AdminUsersController@changeActive');
@@ -67,6 +72,11 @@ Route::group([
     Route::post('programs/{id}/update-main', 'ProgramsController@updateMain');
     Route::post('programs/{id}/update-forms', 'ProgramsController@updateForms');
     Route::post('programs/{id}/update-forms-list', 'ProgramsController@updateFormsList');
+
+    Route::get('events', 'EventsController@index');
+    Route::get('events/get-list', 'EventsController@getList');
+    Route::get('events/create', 'EventsController@create');
+    Route::post('events', 'EventsController@store');
 
     Route::get('applications', 'ApplicationsController@index');
     Route::get('applications/get-list', 'ApplicationsController@getList');

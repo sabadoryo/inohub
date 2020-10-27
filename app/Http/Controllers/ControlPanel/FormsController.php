@@ -61,19 +61,32 @@ class FormsController extends Controller
         ]);
 
         foreach ($request->fields as $field) {
-            $form->fields()->create([
-                'type' => $field['type'],
-                'label' => $field['label'],
-                'is_required' => $field['isRequired'],
-                'options' => $field['options'] ? join(',', $field['options']) : null,
-                'prompt' => $field['prompt'],
-                'other_option' => $field['otherOption'],
-                'max_files_count' => $field['maxFilesCount'],
-                'file_allows' => $field['fileAllows'],
-                'file_type' => $field['fileTypes'],
-            ]);
+            if ($field['type'] === 'radio' || $field['type'] === 'select' || $field['type'] === 'checkbox') {
+                $form->fields()->create([
+                    'type' => $field['type'],
+                    'label' => $field['label'],
+                    'is_required' => $field['isRequired'],
+                    'options' => json_encode($field['options']),
+                    'prompt' => $field['prompt'],
+                    'other_option' => $field['otherOption'],
+                    'max_files_count' => $field['maxFilesCount'],
+                    'file_allows' => $field['fileAllows'],
+                    'file_type' => $field['fileTypes'],
+                ]);
+            } else {
+                $form->fields()->create([
+                    'type' => $field['type'],
+                    'label' => $field['label'],
+                    'is_required' => $field['isRequired'],
+                    'options' => $field['options'] ? join(',', $field['options']) : null,
+                    'prompt' => $field['prompt'],
+                    'other_option' => $field['otherOption'],
+                    'max_files_count' => $field['maxFilesCount'],
+                    'file_allows' => $field['fileAllows'],
+                    'file_types' => json_encode($field['fileTypes']),
+                ]);
+            }
         }
-
         return [];
     }
 
