@@ -71,10 +71,6 @@
         }
     }
 
-    &__password {
-        position: relative;
-    }
-
     &__pass-eye {
         position: absolute;
         top: 50%;
@@ -85,5 +81,16 @@
     &__error-text {
         @include text-style(1.2rem, 400, $elem-color);
         line-height: 14.6px;
+    }
+
+    &__container {
+        position: relative;
+    }
+
+    &__edit {
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        transform: translateY(-50%);
     }
 }

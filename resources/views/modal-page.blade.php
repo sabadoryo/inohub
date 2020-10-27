@@ -57,7 +57,7 @@
 
             <div class="as-modal__input-box input-box input-box--error">
                 <label class="input-box__label">Пароль</label>
-                <div class="input-box__password">
+                <div class="input-box__container">
                     <input type="password" class="input-box__input" placeholder="Введите пароль">
                     <a href="#" class="input-box__pass-eye">
                         <svg width="24" height="24">

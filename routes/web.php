@@ -101,3 +101,15 @@ Route::get('test-page', function () {
 Route::get('modal-page', function () {
     return view('modal-page');
 });
+
+Route::get('profile-page', function () {
+    return view('profile-page');
+});
+
+Route::get('profile-page-2', function () {
+    return view('profile-page-2');
+});
+
+Route::get('profile-page-3', function () {
+    return view('profile-page-3');
+});

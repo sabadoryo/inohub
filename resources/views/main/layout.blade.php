@@ -12,7 +12,8 @@
     <link href="{{ asset('css/ui-components.css') }}" rel="stylesheet">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+          integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
     <style>
 
@@ -29,129 +30,177 @@
 </head>
 <body ng-controller="MainController" ng-cloak="">
 
-    <header class="header">
+<header class="header">
 
-        <div class="header__container">
+    <div class="header__container">
 
-            <a href="/" class="header__logo">Tech <span class="header__logo-accent">Hub</span></a>
+        <a href="/" class="header__logo">Tech <span class="header__logo-accent">Hub</span></a>
 
-            <div class="header__search-box search-box">
+        <div class="header__search-box search-box">
 
-                <a href="#" class="search-box__icon">
-                    <svg width="18" height="18">
-                        <use xlink:href="/img/icons.svg#search"></use>
-                    </svg>
-                </a>
-
-                <input type="text" class="search-box__input" placeholder="Поиск">
-
-            </div>
-
-            <div class="header__lang-switcher">
-                <div class="header__language">Ru</div>
-                <svg class="header__lang-toggle" width="10" height="5">
-                    <use xlink:href="/img/icons.svg#toggle"></use>
+            <a href="#" class="search-box__icon">
+                <svg width="18" height="18">
+                    <use xlink:href="/img/icons.svg#search"></use>
                 </svg>
-            </div>
+            </a>
 
-            <user-bar></user-bar>
+            <input type="text" class="search-box__input" placeholder="Поиск">
 
-        </div>
+            <div class="search-box__dropdown search-dropdown">
 
-    </header>
+                <a href="#" class="search-dropdown__item">
+                    <img src="/img/icons/astana-hub-icon-xs.png" alt="" class="search-dropdown__icon">
 
-    <main class="main">
+                    <div class="search-dropdown__info">
+                        <div class="search-dropdown__title">Speaker Night</div>
 
-        <div class="main__container">
-
-            <nav class="main__as-navbar as-navbar">
-
-                <a href="/" class="as-navbar__item as-navbar__item--active">
-                    <svg class="as-navbar__icon" width="20" height="17">
-                        <use xlink:href="/img/icons.svg#house"></use>
-                    </svg>
-                    Лента
+                        <div class="search-dropdown__subtitle">
+                            “Как презентовать стартап потенциальному инвестору”
+                        </div>
+                    </div>
                 </a>
 
-                <a href="/events" class="as-navbar__item">
-                    <svg class="as-navbar__icon" width="20" height="17">
-                        <use xlink:href="/img/icons.svg#calendar"></use>
-                    </svg>
-                    Мероприятия
+                <a href="#" class="search-dropdown__item">
+                    <img src="/img/icons/astana-hub-icon-xs.png" alt="" class="search-dropdown__icon">
+
+                    <div class="search-dropdown__info">
+                        <div class="search-dropdown__title">Speaker Night</div>
+
+                        <div class="search-dropdown__subtitle">
+                            “Ключевые правила ЭФФЕКТИВНЫХ ПРОДАЖ 2020”
+                        </div>
+                    </div>
                 </a>
-
-                <!--            <a href="#" class="as-navbar__item">-->
-                <!--                <svg class="as-navbar__icon" width="20" height="17">-->
-                <!--                    <use xlink:href="/img/icons.svg#blog"></use>-->
-                <!--                </svg>-->
-                <!--                Блог-->
-                <!--            </a>-->
-
-                <!--            <a href="#" class="as-navbar__item">-->
-                <!--                <svg class="as-navbar__icon" width="20" height="17">-->
-                <!--                    <use xlink:href="/img/icons.svg#news"></use>-->
-                <!--                </svg>-->
-                <!--                Новости-->
-                <!--            </a>-->
-
-                <a href="" class="as-navbar__item">
-                    <svg class="as-navbar__icon" width="20" height="17">
-                        <use xlink:href="/img/icons.svg#jobs"></use>
-                    </svg>
-                    Vacancies
-                </a>
-
-                <a href="#" class="as-navbar__item">
-                    <svg class="as-navbar__icon" width="20" height="17">
-                        <use xlink:href="/img/icons.svg#purchases"></use>
-                    </svg>
-                    Закупки
-                </a>
-
-                <div class="as-navbar__organization-section">
-
-                    <a href="/astana-hub/about" class="as-navbar__organization">
-                        <img src="/img/icons/astana-hub-icon-sm.png" alt="" class="as-navbar__organization-icon">
-                        Astana Hub
-                    </a>
-
-                    <a href="#" class="as-navbar__organization">
-                        <img src="/img/icons/tech-garden-icon-sm.png" alt="" class="as-navbar__organization-icon">
-                        Tech Garden
-                    </a>
-
-                    <a href="#" class="as-navbar__organization">
-                        <img src="/img/icons/cett-icon-sm.png" alt="" class="as-navbar__organization-icon">
-                        ЦИТТ
-                    </a>
-
-                </div>
-
-            </nav>
-
-            <div class="main__content content">
-
-                @yield('content')
-
             </div>
 
         </div>
 
-    </main>
+        <div class="header__lang-switcher">
+            <div class="header__language">Ru</div>
+            <svg class="header__lang-toggle" width="10" height="5">
+                <use xlink:href="/img/icons.svg#toggle"></use>
+            </svg>
+
+            <ui class="header__lang-dropdown lang-dropdown">
+                <li class="lang-dropdown__item"><a href="#" class="lang-dropdown__link">Қазақша</a></li>
+                <li class="lang-dropdown__item"><a href="#" class="lang-dropdown__link">Русский</a></li>
+                <li class="lang-dropdown__item"><a href="#" class="lang-dropdown__link">English</a></li>
+            </ui>
+        </div>
 
 
-    <script src="{{mix('js/manifest.js')}}"></script>
-    <script src="{{mix('js/vendor.js')}}"></script>
-    <script src="{{mix('js/app.js')}}"></script>
+        <user-bar></user-bar>
 
-    <script>
-        window
-            .angular
-            .module('app')
-            .constant('AUTH_USER', {!! \Auth::user() !!})
-            .constant('AUTH_ROLES', {!! $AUTH_ROLES !!})
-            .constant('AUTH_PERMISSIONS', {!! $AUTH_PERMISSIONS !!})
-    </script>
+    </div>
+
+</header>
+
+<main class="main">
+
+    <div class="main__container">
+
+        <nav class="main__as-navbar as-navbar">
+
+            <a href="/" class="as-navbar__item as-navbar__item--active">
+                <svg class="as-navbar__icon" width="20" height="17">
+                    <use xlink:href="/img/icons.svg#house"></use>
+                </svg>
+                Лента
+            </a>
+
+            <a href="/events" class="as-navbar__item">
+                <svg class="as-navbar__icon" width="20" height="17">
+                    <use xlink:href="/img/icons.svg#calendar"></use>
+                </svg>
+                Мероприятия
+            </a>
+
+            <!--            <a href="#" class="as-navbar__item">-->
+            <!--                <svg class="as-navbar__icon" width="20" height="17">-->
+            <!--                    <use xlink:href="/img/icons.svg#blog"></use>-->
+            <!--                </svg>-->
+            <!--                Блог-->
+            <!--            </a>-->
+
+            <!--            <a href="#" class="as-navbar__item">-->
+            <!--                <svg class="as-navbar__icon" width="20" height="17">-->
+            <!--                    <use xlink:href="/img/icons.svg#news"></use>-->
+            <!--                </svg>-->
+            <!--                Новости-->
+            <!--            </a>-->
+
+            <a href="" class="as-navbar__item">
+                <svg class="as-navbar__icon" width="20" height="17">
+                    <use xlink:href="/img/icons.svg#rocket"></use>
+                </svg>
+                Компании
+            </a>
+
+            <a href="" class="as-navbar__item">
+                <svg class="as-navbar__icon" width="20" height="17">
+                    <use xlink:href="/img/icons.svg#handshake"></use>
+                </svg>
+                Инвесторы
+            </a>
+
+            <a href="" class="as-navbar__item">
+                <svg class="as-navbar__icon" width="20" height="17">
+                    <use xlink:href="/img/icons.svg#jobs"></use>
+                </svg>
+                Вакансии
+            </a>
+
+            <a href="#" class="as-navbar__item">
+                <svg class="as-navbar__icon" width="20" height="17">
+                    <use xlink:href="/img/icons.svg#purchases"></use>
+                </svg>
+                Закупки
+            </a>
+
+            <div class="as-navbar__organization-section">
+
+                <a href="/astana-hub/about" class="as-navbar__organization">
+                    <img src="/img/icons/astana-hub-icon-sm.png" alt="" class="as-navbar__organization-icon">
+                    Astana Hub
+                </a>
+
+                <a href="#" class="as-navbar__organization">
+                    <img src="/img/icons/tech-garden-icon-sm.png" alt="" class="as-navbar__organization-icon">
+                    Tech Garden
+                </a>
+
+                <a href="#" class="as-navbar__organization">
+                    <img src="/img/icons/cett-icon-sm.png" alt="" class="as-navbar__organization-icon">
+                    ЦИТТ
+                </a>
+
+            </div>
+
+        </nav>
+
+        <div class="main__content content">
+
+            @yield('content')
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<script src="{{mix('js/manifest.js')}}"></script>
+<script src="{{mix('js/vendor.js')}}"></script>
+<script src="{{mix('js/app.js')}}"></script>
+
+<script>
+    window
+        .angular
+        .module('app')
+        .constant('AUTH_USER', {!! \Auth::user() !!})
+        .constant('AUTH_ROLES', {!! $AUTH_ROLES !!})
+        .constant('AUTH_PERMISSIONS', {!! $AUTH_PERMISSIONS !!})
+</script>
 
 </body>
 </html>

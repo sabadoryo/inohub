@@ -40,6 +40,7 @@
         display: flex;
         align-items: center;
         cursor: pointer;
+        position: relative;
 
         @include text-style(1.6rem, 500, #ffffff);
         margin-right: 47px;
@@ -63,5 +64,13 @@
     &__search-box {
         margin-right: auto;
         margin-left: auto;
+    }
+
+    &__lang-dropdown {
+        position: absolute;
+        top: 43px !important;
+        right: 0 !important;
+        left: unset !important;
+        margin: 0 !important;
     }
 }

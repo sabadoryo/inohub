@@ -1,0 +1,11 @@
+.as-badge {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: $elem-color;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    @include text-style(1.4rem, 500, #ffffff);
+}
