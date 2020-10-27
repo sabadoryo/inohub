@@ -76,6 +76,14 @@ class CabinetController extends Controller
         foreach ($app->forms as $form) {
             foreach ($form->fields as $field) {
                 $field->formField->options = json_decode($field->formField->options, true);
+
+                if ($field->formField->type === 'file') {
+                    $values = [];
+                    foreach ($field->value as $value) {
+                        array_push($values, ['name' => $value]);
+                    }
+                    $field->value = json_encode($values);
+                }
             }
         }
 
@@ -100,7 +108,6 @@ class CabinetController extends Controller
 
     public function updateForm(Request $request, $id)
     {
-        dd($request->all());
         $app = Application::find($id);
 
         $appForm = $app->forms()->where('id', $request->application_form_id)->first();
@@ -113,8 +120,25 @@ class CabinetController extends Controller
             foreach ($request->fields as $inputField) {
                 if ($field->id == $inputField['id'] &&
                     $field->value != $inputField['value']) {
-                    if ($field->type === 'file') {
-
+                    if ($inputField['type'] === 'file') {
+                        $newFile_pathes = [];
+                        if ($inputField['value'] != 'null') {
+                            foreach ($inputField['value'] as $value) {
+                                if (!is_array($value)) {
+                                    $path = \Storage::disk('public')->put('application_files',$value);
+                                    array_push($newFile_pathes, $path);
+                                } else {
+                                    array_push($newFile_pathes, $value['name']);
+                                }
+                            }
+                        }
+                        $changes[] = [
+                            'label' => $field->formField->label,
+                            'old_value' => $field->value,
+                            'new_value' => json_encode($newFile_pathes),
+                        ];
+                        $field->value = json_encode($newFile_pathes);
+                        $field->save();
                     } else {
                         $changes[] = [
                             'label' => $field->formField->label,
