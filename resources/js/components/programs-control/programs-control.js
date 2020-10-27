@@ -48,6 +48,7 @@ function controller($http, $uibModal) {
             })
             .then(
                 response => {
+                    console.log(response)
                     $ctrl.programs = response.data.data;
                     $ctrl.total = response.data.total;
                 },
