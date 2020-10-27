@@ -60,10 +60,6 @@ require('./components/user-roles-modal/user-roles-modal');
 require('./components/admin-users-control/admin-users-control');
 
 require('./components/events-control/events-control');
-require('./components/create-event-modal/create-event-modal');
-
-require('./components/events-create/events-create');
-
 require('./components/cabinet-applications/cabinet-applications');
 require('./components/applications-control/applications-control');
 require('./components/application-manage/application-manage');
@@ -92,4 +88,10 @@ require('./components/astana-hub-resources/astana-hub-resources');
 require('./components/user-bar/user-bar');
 
 require('./components/auth-modal/auth-modal');
+require('./components/event-create-modal/event-create-modal');
+require('./components/event-main-form/event-main-form');
+require('./components/event-page-form/event-page-form');
+require('./components/event-forms/event-forms');
+require('./components/event-to-publish-modal/event-to-publish-modal');
+require('./components/program-to-publish-modal/program-to-publish-modal');
 require('./components/page-builder/page-builder');

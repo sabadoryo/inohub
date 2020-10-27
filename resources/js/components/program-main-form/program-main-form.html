@@ -1,18 +1,20 @@
-<div class="alert alert-light">
-  Данная программа находится в режиме черновика. Хотите <a href="" class="alert-link">опубликовать</a> программу?
+<div class="alert alert-light" ng-show="$ctrl.program.status == 'draft'">
+  Данная программа находится в режиме черновика. Хотите <a href="" ng-click="$ctrl.openToPublishModal()" class="alert-link">опубликовать</a> программу?
 </div>
+<a href="" class="btn btn-primary btn-sm mb-3">
+  Посмотреть
+</a>
 <div class="card">
   <div class="card-header">
     <ul class="nav nav-tabs card-header-tabs">
       <li class="nav-item">
-        <a class="nav-link active" href="" ng-href="/control-panel/programs/{{$ctrl.program.id}}/main">Основная
-          информация</a>
+        <a class="nav-link active" href="" ng-href="/control-panel/programs/{{$ctrl.program.id}}/main">Основная информация</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="" ng-href="/control-panel/programs/{{$ctrl.program.id}}/page">Страница</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="" ng-href="/control-panel/programs/{{$ctrl.program.id}}/forms">Формы</a>
+        <a class="nav-link" href="" ng-href="/control-panel/programs/{{$ctrl.program.id}}/forms">Анкета</a>
       </li>
     </ul>
   </div>
@@ -93,6 +95,9 @@
       <button class="btn btn-primary" type="submit">
         Сохранить
       </button>
+      <a href="" class="btn btn-primary float-right">
+        Посмотреть
+      </a>
     </div>
   </form>
 </div>
