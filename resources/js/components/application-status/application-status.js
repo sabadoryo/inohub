@@ -4,13 +4,13 @@ angular
     .module('app')
     .component('applicationStatus', {
         template: require('./application-status.html'),
-        controller: ['$http', 'Auth', 'moment', controller],
+        controller: ['$http', 'Auth', 'moment', 'Upload', controller],
         bindings: {
             app: '<'
         }
     });
 
-function controller($http, Auth, moment) {
+function controller($http, Auth, moment, Upload) {
 
     let $ctrl = this;
 
@@ -101,15 +101,13 @@ function controller($http, Auth, moment) {
                     value: field.editValueOtherOption ? field.editValueOtherOption : field.value,
                     type: field.form_field.type,
                 });
-            }
-            else if (field.form_field.type === 'select') {
+            } else if (field.form_field.type === 'select') {
                 fields.push({
                     id: field.id,
                     value: field.editValueOtherOption ? field.editValueOtherOption : field.editValue.val,
                     type: field.form_field.type,
                 });
-            }
-            else if (field.form_field.type === 'checkbox') {
+            } else if (field.form_field.type === 'checkbox') {
                 let values = [];
 
                 if (field.other_option_selected) {
@@ -125,9 +123,12 @@ function controller($http, Auth, moment) {
                     value: values,
                     type: field.form_field.type,
                 });
-            }
-            else if (field.form_field.type === 'file') {
-                console.log(field);
+            } else if (field.form_field.type === 'file') {
+                fields.push({
+                    id: field.id,
+                    value: field.value.length > 0 ? field.value : null,
+                    type: field.form_field.type,
+                });
 
             } else {
                 fields.push({
@@ -138,10 +139,13 @@ function controller($http, Auth, moment) {
             }
         });
 
-        $http
-            .post(`/cabinet/applications/${$ctrl.app.id}/update-form`, {
-                application_form_id: appForm.id,
-                fields: fields
+        Upload
+            .upload({
+                url: `/cabinet/applications/${$ctrl.app.id}/update-form`,
+                data: {
+                    application_form_id: appForm.id,
+                    fields: fields
+                }
             })
             .then(
                 res => {

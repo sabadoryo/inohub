@@ -138,7 +138,7 @@
                                         </thead>
                                         <tbody>
                                         <tr ng-repeat="file in field.value track by $index">
-                                            <td>{{file}}</td>
+                                            <td>{{file.name}}</td>
                                             <td>
                                                 <button type="button" class="btn btn-danger btn-sm"
                                                         ng-click="$ctrl.removeFile(field,$index)">
@@ -149,6 +149,15 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                <button type="button" class="form-control-file" ngf-select=""
+                                        ngf-keep="true"
+                                        ng-model="field.value"
+                                        ngf-change="$ctrl.validateFile($files, $file, $newFiles, $duplicateFiles, $invalidFiles, $event,field)"
+                                        ngf-multiple="{{field.form_field.max_files_count === 1 ? 'false' : 'true'}}"
+                                        accept="{{field.form_field.file_allows === 'specific' ? field.file_types : '*'}}"
+                                        ngf-max-size="10MB">
+                                    <span>выбрать файл</span>
+                                </button>
                             </div>
 
                         </div>
