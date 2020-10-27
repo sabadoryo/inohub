@@ -58,9 +58,7 @@ const buildConstructor = elemId => {
                     border: '1px solid grey',
                     'height': '50px',
                     'width': '100px',
-                    position: 'absolute',
-                    bottom: '5%',
-                    'right': '2%'
+
                 }
                 // As by default, traits are binded to attributes, so to define
                 // their initial value we can use attributes
@@ -154,7 +152,64 @@ const buildConstructor = elemId => {
             }
         }
     });
-    //
+    editor.DomComponents.addType('text-header-component', {
+        extend: 'text',
+        model: {
+            defaults: {
+                type: 'textnode',
+                components: `
+                    Заглавие
+                `,
+                tagName: 'span',
+                attributes: {
+                    'data-grapes-lang-kz' : '',
+                    'data-grapes-lang-en' : '',
+                    'data-grapes-lang-ru' : '',
+                    class: 'text-lang'
+                },
+                style: {'font-size': '3rem'},
+                traits: [
+                    // Strings are automatically converted to text types
+                    // 'name', // Same as: { type: 'text', name: 'name' }
+                    {
+                        type: 'text',
+                        name: 'data-grapes-lang-kz',
+                        label: 'Lang KZ'
+                    },
+                    {
+                        type: 'text',
+                        name: 'data-grapes-lang-en',
+                        label: 'Lang EN'
+                    }
+                ],
+            },
+            // init() {
+            //     this.on('change:attributes', this.handleHTMLChange);
+            // },
+            // handleHTMLChange() {
+            //     console.log('HTML changed to: ', this.innerHTML);
+            // },
+        }
+    });
+    editor.DomComponents.addType('lang-switcher-component', {
+        model: {
+            defaults: {
+                components: `
+                    <button id="lang-kz-button">KZ</button>
+                    <button id="lang-ru-button">RU</button>
+                    <button id="lang-en-button">EN</button>
+                `,
+                tagName: 'span',
+                style: {
+                    'font-size': '2rem',
+                    width: '100px',
+                    height: '45px',
+                    display: 'flex'
+                },
+            }
+        }
+    })
+
     // editor.BlockManager.add('droppable-container-block', {
     //     label: 'Droppable container',
     //     content: {
@@ -198,6 +253,52 @@ const buildConstructor = elemId => {
     //
     // });
 
+    editor.BlockManager.add('lang-switcher-block', {
+        label: 'Language Switcher',
+        category: 'Util',
+        content: {
+            type: 'lang-switcher-component',
+            script: function () {
+                document.getElementById('lang-kz-button').addEventListener('click', e => {
+                    console.log('kazakh')
+                    document.querySelectorAll('.text-lang').forEach(elem => {
+
+                        if (!elem.getAttribute('data-grapes-lang-ru'))
+                            elem.setAttribute('data-grapes-lang-ru', elem.innerHTML);
+
+                        elem.innerHTML = elem.getAttribute('data-grapes-lang-kz');
+                    })
+                });
+
+                document.getElementById('lang-en-button').addEventListener('click', e => {
+                    document.querySelectorAll('.text-lang').forEach(elem => {
+
+                        if (!elem.getAttribute('data-grapes-lang-ru'))
+                            elem.setAttribute('data-grapes-lang-ru', elem.innerHTML);
+
+                        elem.innerHTML = elem.getAttribute('data-grapes-lang-en');
+                    })
+                });
+
+                document.getElementById('lang-ru-button').addEventListener('click', e => {
+                    document.querySelectorAll('.text-lang').forEach(elem => {
+
+                        if (!elem.getAttribute('data-grapes-lang-ru'))
+                            elem.setAttribute('data-grapes-lang-ru', elem.innerHTML);
+
+                        elem.innerHTML = elem.getAttribute('data-grapes-lang-ru');
+                    })
+                });
+            }
+        }
+    });
+    editor.BlockManager.add('text-header-block', {
+        label: 'Text Header Block',
+        category: 'Text',
+        content: {
+            type: 'text-header-component'
+        }
+    });
     editor.BlockManager.add('ui-header-block', {
         label: 'UI Header 1',
         category: 'Header',
