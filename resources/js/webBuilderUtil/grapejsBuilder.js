@@ -9,15 +9,35 @@ const buildConstructor = elemId => {
         // As an alternative we could use: `components: '<h1>Hello World Component!</h1>'`,
         fromElement: false,
         // Size of the editor
-        height: '100vh',
+        height: '800px',
         width: 'auto',
         // Disable the storage manager for the moment
         storageManager: false,
+        assetManager: {
+            assets: [
+                '/img/program-poster.png'
+            ],
+            upload: '/control-panel/images/',
+            uploadName: 'files',
+            // Custom headers to pass with the upload request
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+            },
+            // Custom parameters to pass with the upload request, eg. csrf token
+            params: {
+
+            },
+            credentials: 'include'
+
+        },
         canvas: {
             styles: ['/css/style.css']
         }
     });
+    editor.on('asset:upload:start', () => {
+        console.log('here is uploading')
 
+    });
     editor.addComponents(`
 <!--        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">-->
 

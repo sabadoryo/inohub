@@ -75,6 +75,9 @@ Route::group([
     Route::post('programs/{id}/update-forms', 'ProgramsController@updateForms');
     Route::post('programs/{id}/update-forms-list', 'ProgramsController@updateFormsList');
 
+    Route::get('images', 'ImagesController@index');
+    Route::post('images', 'ImagesController@store');
+
     Route::get('events', 'EventsController@index');
     Route::get('events/get-list', 'EventsController@getList');
     Route::get('events/create', 'EventsController@create');
