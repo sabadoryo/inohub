@@ -4,13 +4,13 @@ angular
     .module('app')
     .component('applicationStatus', {
         template: require('./application-status.html'),
-        controller: ['$http', 'Auth', 'moment', 'Upload', controller],
+        controller: ['$http', 'Auth', 'moment', '$uibModal', 'Upload', controller],
         bindings: {
             app: '<'
         }
     });
 
-function controller($http, Auth, moment, Upload) {
+function controller($http, Auth, moment, $uibModal, Upload) {
 
     let $ctrl = this;
 
@@ -187,18 +187,30 @@ function controller($http, Auth, moment, Upload) {
             );
 
     };
-    $ctrl.selectFieldChanged = function (field) {
-        console.log(field);
-    }
-
-    $ctrl.radioOtherOptionSelected = function (field) {
-        console.log(field);
-    };
 
     $ctrl.removeFile = function (field, index) {
-        $ctrl.removeFile = function (field, index) {
-            console.log(field, index);
-            field.value.splice(index, 1);
-        };
+        console.log(field, index);
+        field.value.splice(index, 1);
+    };
+
+    $ctrl.openDetails = function (action) {
+        $uibModal
+            .open({
+                component: 'applicationActionDetailsModal',
+                resolve: {
+                    action: () => {
+                        return action;
+                    }
+                }
+            })
+            .result
+            .then(
+                function (result) {
+
+                },
+                function () {
+
+                }
+            );
     }
 }

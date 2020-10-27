@@ -17,7 +17,8 @@
                 <tr ng-repeat="field in appForm.fields track by $index">
                     <th>{{field.form_field.label}}</th>
                     <td>
-                        <div ng-show="!appForm.isEditing && field.form_field.type !== 'file'">{{field.value}}</div>
+                        <div ng-show="!appForm.isEditing && field.form_field.type !== 'file' && field.form_field.type !== 'checkbox' ">{{field.value}}</div>
+                        <div ng-show="!appForm.isEditing && field.form_field.type == 'checkbox'">{{field.stringValue}}</div>
                         <div ng-show="!appForm.isEditing && field.form_field.type === 'file'">
                             <div class="d-flex flex-column">
                                 <div ng-repeat="file in field.value track by $index">
@@ -194,7 +195,7 @@
     <div class="card-body">
         <div ng-if="action.name == 'send message'">{{action.message}}</div>
         <div ng-if="action.name == 'update'">
-            <a href="" ng-click="$ctrl.openDetails()">детали</a>
+            <button class="btn btn-link" ng-click="$ctrl.openDetails(action)">детали</button>
         </div>
     </div>
 </div>

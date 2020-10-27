@@ -92,3 +92,4 @@ require('./components/astana-hub-resources/astana-hub-resources');
 require('./components/user-bar/user-bar');
 
 require('./components/auth-modal/auth-modal');
+require('./components/application-action-details-modal/application-action-details-modal');

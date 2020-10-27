@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ApplicationFormField extends Model
 {
-    protected $fillable = ['form_field_id', 'value'];
+    protected $fillable = ['form_field_id', 'value', 'type'];
 
     public function formField()
     {

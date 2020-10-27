@@ -84,6 +84,11 @@ class CabinetController extends Controller
                     }
                     $field->value = json_encode($values);
                 }
+                if ($field->formField->type === 'checkbox') {
+                    if (count($field->value) > 0) {
+                        $field->stringValue = implode(',', $field->value);
+                    }
+                }
             }
         }
 
@@ -125,7 +130,7 @@ class CabinetController extends Controller
                         if ($inputField['value'] != 'null') {
                             foreach ($inputField['value'] as $value) {
                                 if (!is_array($value)) {
-                                    $path = \Storage::disk('public')->put('application_files',$value);
+                                    $path = \Storage::disk('public')->put('application_files', $value);
                                     array_push($newFile_pathes, $path);
                                 } else {
                                     array_push($newFile_pathes, $value['name']);
@@ -135,7 +140,8 @@ class CabinetController extends Controller
                         $changes[] = [
                             'label' => $field->formField->label,
                             'old_value' => $field->value,
-                            'new_value' => json_encode($newFile_pathes),
+                            'new_value' => $newFile_pathes,
+                            'type' => $field->formField->type,
                         ];
                         $field->value = json_encode($newFile_pathes);
                         $field->save();
@@ -143,7 +149,8 @@ class CabinetController extends Controller
                         $changes[] = [
                             'label' => $field->formField->label,
                             'old_value' => $field->value,
-                            'new_value' => $inputField['value']
+                            'new_value' => $inputField['value'],
+                            'type' => $field->formField->type,
                         ];
                         $field->value = json_encode($inputField['value']);
                         $field->save();

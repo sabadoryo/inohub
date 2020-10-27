@@ -89,7 +89,6 @@ function controller(Auth, $rootScope, Upload, $http) {
                     }
                 }
             });
-            console.log(ch);
             if (ch === false) {
                 return;
             } else {
@@ -107,7 +106,6 @@ function controller(Auth, $rootScope, Upload, $http) {
 
                 if (field.type === 'checkbox') {
                     let value = [];
-                    console.log(field.otherOptionValue);
                     if (field.otherOptionValue) {
                         value.push(field.otherOptionValue);
                     }
