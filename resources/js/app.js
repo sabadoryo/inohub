@@ -95,3 +95,7 @@ require('./components/event-forms/event-forms');
 require('./components/event-to-publish-modal/event-to-publish-modal');
 require('./components/program-to-publish-modal/program-to-publish-modal');
 require('./components/page-builder/page-builder');
+require('./components/news-control/news-control');
+require('./components/news-create-modal/news-create-modal');
+require('./components/news-main-form/news-main-form');
+require('./components/news-upload-image/news-upload-image');

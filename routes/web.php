@@ -86,6 +86,11 @@ Route::group([
     Route::post('events/{id}/update-forms', 'EventsController@updateForms');
     Route::post('events/{id}/update-forms-list', 'EventsController@updateFormsList');
     Route::post('events/{id}/publish', 'EventsController@publish');
+    
+    Route::get('news', 'NewsController@index');
+    Route::get('news/get-list', 'NewsController@getList');
+    Route::post('news', 'NewsController@store');
+    Route::get('news/{id}/main', 'NewsController@mainForm');
 
     Route::get('applications', 'ApplicationsController@index');
     Route::get('applications/get-list', 'ApplicationsController@getList');
