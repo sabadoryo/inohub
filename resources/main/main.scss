@@ -61,10 +61,12 @@
 @import "blocks/modal-full";
 @import "blocks/input-box";
 @import "blocks/custom-radio-box";
+@import "blocks/as-modal-box";
+@import "blocks/as-modal";
 
 html, body {
     font-size: 62.5%;
-    font-family: $base-font;
+    font-family: $base-font !important;
     background-color: #fafafa;
 }
 

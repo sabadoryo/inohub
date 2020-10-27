@@ -1,0 +1,114 @@
+.as-modal {
+
+    background-color: #ffffff;
+    border-radius: 7px;
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+
+    //&:before {
+    //    content: '';
+    //    position: absolute;
+    //    top: 0;
+    //    left: 0;
+    //    width: 100vw;
+    //    height: 100vh;
+    //    z-index: 9;
+    //    background-color: rgba(24, 21, 21, 0.2);
+    //}
+
+    &--sm {
+        width: 386px;
+    }
+
+    &__close-btn {
+        position: absolute;
+        top: 25px;
+        right: 25px;
+    }
+
+    &__heading {
+        @include text-style(2rem, 700, #181515);
+        margin-bottom: 30px;
+    }
+
+    &__form {
+        & > * {
+            &:not(:last-child) {
+                margin-bottom: 24px;
+            }
+        }
+
+        margin-bottom: 24px;
+    }
+
+    &__section {
+        &:not(:last-child) {
+            margin-bottom: 24px;
+        }
+
+        &--centered {
+            text-align: center;
+        }
+
+        &--bordered {
+            padding-bottom: 24px;
+            border-bottom: 1px solid #E8E8E8;
+        }
+    }
+
+    &__link:link,
+    &__link:visited {
+        @include text-style(1.4rem, 400, $elem-color);
+    }
+
+    &__text {
+        @include text-style(1.4rem, 400, #181515);
+    }
+
+    &__border-side {
+        @include text-style(1.4rem, 400, #a3a1a1);
+        position: relative;
+
+        &:before, &:after {
+            content: '';
+            height: 1px;
+            width: 40%;
+            position: absolute;
+            display: block;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #E8E8E8;
+        }
+
+        &:before {
+            left: 0;
+        }
+
+        &:after {
+            right: 0;
+        }
+    }
+
+    &__btn-group {
+        display: flex;
+        align-items: center;
+    }
+
+    &__btn-item {
+        &:not(:last-child) {
+            margin-right: 24px;
+        }
+    }
+
+    &__profile-photo {
+        width: 142px;
+        height: 142px;
+        border-radius: 50%;
+        display: block;
+        margin: 0 auto 10px auto;
+    }
+}

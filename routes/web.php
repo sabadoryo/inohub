@@ -97,3 +97,7 @@ Route::group([
 Route::get('test-page', function () {
     return view('test-page');
 });
+
+Route::get('modal-page', function () {
+    return view('modal-page');
+});
