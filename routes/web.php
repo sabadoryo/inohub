@@ -99,3 +99,10 @@ Route::group([
     Route::post('forms', 'FormsController@store');
 });
 
+Route::get('test-page', function () {
+    return view('test-page');
+});
+
+Route::get('modal-page', function () {
+    return view('modal-page');
+});

@@ -9,6 +9,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
+    <link href="{{ asset('css/ui-components.css') }}" rel="stylesheet">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
@@ -63,64 +64,64 @@
 
         <div class="main__container">
 
-            <nav class="main__navbar navbar">
+            <nav class="main__as-navbar as-navbar">
 
-                <a href="/" class="navbar__item navbar__item--active">
-                    <svg class="navbar__icon" width="20" height="17">
+                <a href="/" class="as-navbar__item as-navbar__item--active">
+                    <svg class="as-navbar__icon" width="20" height="17">
                         <use xlink:href="/img/icons.svg#house"></use>
                     </svg>
                     Лента
                 </a>
 
-                <a href="/events" class="navbar__item">
-                    <svg class="navbar__icon" width="20" height="17">
+                <a href="/events" class="as-navbar__item">
+                    <svg class="as-navbar__icon" width="20" height="17">
                         <use xlink:href="/img/icons.svg#calendar"></use>
                     </svg>
                     Мероприятия
                 </a>
 
-                <!--            <a href="#" class="navbar__item">-->
-                <!--                <svg class="navbar__icon" width="20" height="17">-->
+                <!--            <a href="#" class="as-navbar__item">-->
+                <!--                <svg class="as-navbar__icon" width="20" height="17">-->
                 <!--                    <use xlink:href="/img/icons.svg#blog"></use>-->
                 <!--                </svg>-->
                 <!--                Блог-->
                 <!--            </a>-->
 
-                <!--            <a href="#" class="navbar__item">-->
-                <!--                <svg class="navbar__icon" width="20" height="17">-->
+                <!--            <a href="#" class="as-navbar__item">-->
+                <!--                <svg class="as-navbar__icon" width="20" height="17">-->
                 <!--                    <use xlink:href="/img/icons.svg#news"></use>-->
                 <!--                </svg>-->
                 <!--                Новости-->
                 <!--            </a>-->
 
-                <a href="" class="navbar__item">
-                    <svg class="navbar__icon" width="20" height="17">
+                <a href="" class="as-navbar__item">
+                    <svg class="as-navbar__icon" width="20" height="17">
                         <use xlink:href="/img/icons.svg#jobs"></use>
                     </svg>
                     Vacancies
                 </a>
 
-                <a href="#" class="navbar__item">
-                    <svg class="navbar__icon" width="20" height="17">
+                <a href="#" class="as-navbar__item">
+                    <svg class="as-navbar__icon" width="20" height="17">
                         <use xlink:href="/img/icons.svg#purchases"></use>
                     </svg>
                     Закупки
                 </a>
 
-                <div class="navbar__organization-section">
+                <div class="as-navbar__organization-section">
 
-                    <a href="/astana-hub/about" class="navbar__organization">
-                        <img src="/img/icons/astana-hub-icon-sm.png" alt="" class="navbar__organization-icon">
+                    <a href="/astana-hub/about" class="as-navbar__organization">
+                        <img src="/img/icons/astana-hub-icon-sm.png" alt="" class="as-navbar__organization-icon">
                         Astana Hub
                     </a>
 
-                    <a href="#" class="navbar__organization">
-                        <img src="/img/icons/tech-garden-icon-sm.png" alt="" class="navbar__organization-icon">
+                    <a href="#" class="as-navbar__organization">
+                        <img src="/img/icons/tech-garden-icon-sm.png" alt="" class="as-navbar__organization-icon">
                         Tech Garden
                     </a>
 
-                    <a href="#" class="navbar__organization">
-                        <img src="/img/icons/cett-icon-sm.png" alt="" class="navbar__organization-icon">
+                    <a href="#" class="as-navbar__organization">
+                        <img src="/img/icons/cett-icon-sm.png" alt="" class="as-navbar__organization-icon">
                         ЦИТТ
                     </a>
 

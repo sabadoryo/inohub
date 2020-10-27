@@ -1,9 +1,13 @@
 .button {
     padding: 12px 20px;
-    @include text-style(1.5rem, 500, #ffffff);
+    @include text-style(1.6rem, 500, #ffffff);
 
     border-radius: 7px;
     background-color: $elem-color;
+
+    &:focus {
+        outline: none !important;
+    }
 
     &[disabled] {
         background-color: #c4c4c4;
@@ -25,7 +29,41 @@
         padding: 10px 20px;
     }
 
+    &--grey {
+        background-color: #FAFAFA;
+        color: $elem-color;
+    }
+
     &--w100 {
         width: 100%;
+    }
+}
+
+.button-w-icon {
+    padding: 13px 16px;
+    border-radius: 7px;
+    @include text-style(1.8rem, 400, #ffffff);
+
+    background-color: #dc4e41;
+
+    display: flex;
+    align-items: center;
+
+    &:focus {
+        outline: none !important;
+    }
+
+    &[disabled] {
+        background-color: #c4c4c4;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+
+    &--blue {
+        background-color: #3B5998;
+    }
+
+    svg {
+        margin-left: 15px;
     }
 }

@@ -1,0 +1,14 @@
+.ui-step {
+    text-align: center;
+
+    &__number {
+        @include text-style(6.4rem, 700, #999999);
+        line-height: 78px;
+        margin-bottom: 10px;
+    }
+
+    &__text {
+        @include text-style(2rem, 600, #ffffff);
+        line-height: 24px;
+    }
+}
