@@ -17,4 +17,18 @@ class ApplicationAction extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function getAdditionalDataAttribute($value)
+    {
+        if ($this->isJson($value)) {
+            return json_decode($value);
+        } else {
+            return $value;
+        }
+    }
+
+    function isJson($string) {
+        json_decode($string);
+        return (json_last_error() == JSON_ERROR_NONE);
+    }
 }
