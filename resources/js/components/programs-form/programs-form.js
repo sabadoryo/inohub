@@ -29,6 +29,7 @@ function controller($rootScope, $compile, $sce, moment, $http) {
 
 	$ctrl.$onInit = function () {
 	    editor = buildConstructor('gjsProgramPassport');
+	    console.log(editor);
     };
 
 	$ctrl.addForm = function () {

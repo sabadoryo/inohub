@@ -7,6 +7,38 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
     <link href="{{ mix('css/control-panel.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/adminlte.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/grapes.min.css')}}">
+    <style>
+        #gjs {
+            border: 3px solid #444;
+        }
+
+        .gjs-cv-canvas {
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .gjs-block {
+            width: auto;
+            height: auto;
+            min-height: auto;
+        }
+
+        .panel__top {
+            padding: 0;
+            width: 100%;
+            display: flex;
+            position: initial;
+            justify-content: center;
+            justify-content: space-between;
+        }
+
+        .panel__basic-actions {
+            position: initial;
+        }
+
+    </style>
 </head>
 <body class="layout-fixed sidebar-mini hold-transition" ng-controller="MainController">
 

@@ -11,7 +11,6 @@ import ngFileUpload from "ng-file-upload";
 import angularMoment from "angular-moment";
 import notify from "@cgross/angular-notify";
 
-import 'grapesjs/dist/css/grapes.min.css';
 
 angular
     .module('app', [
@@ -93,3 +92,4 @@ require('./components/astana-hub-resources/astana-hub-resources');
 require('./components/user-bar/user-bar');
 
 require('./components/auth-modal/auth-modal');
+require('./components/page-builder/page-builder');
