@@ -40,6 +40,8 @@ Route::group([
     'middleware' => 'auth'
 ], function () {
 
+    Route::view('test', 'test', ['activePage' => 'test', 'breadcrumb' => []]);
+
     Route::get('/', 'ControlPanelController@index');
 
     Route::get('organizations', 'OrganizationsController@index');

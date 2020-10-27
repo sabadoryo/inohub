@@ -15,6 +15,8 @@ angular
 function controller(Auth, $rootScope, Upload, $http) {
 
     let $ctrl = this;
+
+
     $ctrl.curForm = 0;
     $rootScope.$on('UserAuthenticated', (event, data) => {
         $ctrl.user = data.user;
@@ -57,11 +59,13 @@ function controller(Auth, $rootScope, Upload, $http) {
         console.log(field);
     };
 
-    $ctrl.radioOtherOptionSelected = function (field) {
+    $ctrl.checkboxOtherOptionSelected = function (field) {
+        field.other_option_selected = true;
         console.log(field);
     };
 
     $ctrl.validateFile = function (files, file, newFiles, duplicateFiles, invalidFiles, event, field) {
+        console.log(field.value);
         if (files.length > field.max_files_count) {
             alert('Выбрано сликшмо много файлов, максимальное количество:' + field.max_files_count);
             field.value = [];
@@ -100,20 +104,35 @@ function controller(Auth, $rootScope, Upload, $http) {
             let fields = [];
 
             form.fields.forEach(field => {
+
                 if (field.type === 'checkbox') {
                     let value = [];
+                    console.log(field.otherOptionValue);
+                    if (field.otherOptionValue) {
+                        value.push(field.otherOptionValue);
+                    }
                     field.options.forEach(option => {
                         if (option.selected) {
                             value.push(option.val);
                         }
-                    })
-                    fields.push({id: field.id, value: value, type: field.type});
-                } else {
-                    fields.push({
-                        id: field.id,
-                        value: field.otherOptionValue ? field.otherOptionValue : field.value,
-                        type: field.type
                     });
+                    fields.push({id: field.id, value: value, type: field.type});
+
+                } else {
+
+                    if (field.type === 'select') {
+                        fields.push({
+                            id: field.id,
+                            value: field.otherOptionValue ? field.otherOptionValue : field.value.val,
+                            type: field.type
+                        });
+                    } else {
+                        fields.push({
+                            id: field.id,
+                            value: field.otherOptionValue ? field.otherOptionValue : field.value,
+                            type: field.type
+                        });
+                    }
                 }
             });
 
@@ -132,7 +151,7 @@ function controller(Auth, $rootScope, Upload, $http) {
             })
             .then(
                 res => {
-
+                    $ctrl.curForm = 'finished';
                 },
                 err => {
 

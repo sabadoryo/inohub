@@ -1,0 +1,15 @@
+.innovations {
+
+    &__title {
+        @include text-style(2rem, 700, #181515);
+        margin-bottom: 30px;
+    }
+
+    &__list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 24px;
+    }
+
+
+}

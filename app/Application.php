@@ -42,4 +42,9 @@ class Application extends Model
     {
         return $this->hasMany(ApplicationAction::class);
     }
+
+    public function get()
+    {
+        
+    }
 }

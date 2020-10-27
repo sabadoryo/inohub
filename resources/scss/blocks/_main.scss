@@ -1,0 +1,16 @@
+.main {
+    padding: 120px 0 100px 0;
+    background-color: #fafafa;
+
+    display: flex;
+
+    &__container {
+        @extend %container;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    &__navbar {
+        margin-right: 40px;
+    }
+}

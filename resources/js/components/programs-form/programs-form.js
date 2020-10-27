@@ -1,17 +1,18 @@
 import angular from "angular";
+import buildConstructor from '../../webBuilderUtil/grapejsBuilder';
 
 angular
     .module('app')
-    .component('programsForm', {
-        template: require('./programs-form.html'),
-        controller: ['moment', '$http', controller],
+    .component('programsCreateForm', {
+        template: require('./programs-create-form.html'),
+        controller: ['$rootScope', '$compile', '$sce', 'moment', '$http', controller],
         bindings: {
             forms: '<',
         }
     });
-    
-function controller(moment, $http) {
- 
+
+function controller($rootScope, $compile, $sce, moment, $http) {
+
 	let $ctrl = this;
 
 	$ctrl.step = 1;
@@ -21,11 +22,14 @@ function controller(moment, $http) {
 	$ctrl.startDate = null;
 	$ctrl.endDate = null;
 	$ctrl.content = null;
+	$ctrl.passportHtml = null;
+    let editor = null;
 	$ctrl.selectedForm = null;
 	$ctrl.selectedForms = [];
 
 	$ctrl.$onInit = function () {
-        //
+	    editor = buildConstructor('gjsProgramPassport');
+	    console.log(editor);
     };
 
 	$ctrl.addForm = function () {
@@ -33,8 +37,30 @@ function controller(moment, $http) {
 	};
 
 	$ctrl.toStep = (step) => {
+	    if (step === 3) {
+            $ctrl.passportHtml = `
+                <html>
+                    <head>
+                        <link rel="stylesheet" href="/css/style.css">
+                    </head>
+                    <body>
+                        ${editor.getHtml()}
+                    </body>
+                </html>
+            `;
+            let iframe = document.getElementById('passportResult');
+            iframe.contentWindow.document.open('text/htmlreplace');
+            iframe.contentWindow.document.write($ctrl.passportHtml);
+            iframe.contentWindow.document.close();
+
+	        console.log('$ctrl.passportHtml', $ctrl.passportHtml);
+        }
 		$ctrl.step = step;
 	};
+
+	$ctrl.testfunc = function () {
+	    alert('func test')
+    }
 
 	$ctrl.save = function () {
 		$ctrl.loading = true;

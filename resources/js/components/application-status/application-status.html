@@ -17,12 +17,140 @@
                 <tr ng-repeat="field in appForm.fields track by $index">
                     <th>{{field.form_field.label}}</th>
                     <td>
-                        <div ng-show="!appForm.isEditing">{{field.value}}</div>
+                        <div ng-show="!appForm.isEditing && field.form_field.type !== 'file'">{{field.value}}</div>
+                        <div ng-show="!appForm.isEditing && field.form_field.type === 'file'">
+                            <div class="d-flex flex-column">
+                                <div ng-repeat="file in field.value track by $index">
+                                    <a href="/cabinet/download-file/{{file}}">Отправленный файл</a>
+                                </div>
+                            </div>
+                        </div>
                         <div ng-show="appForm.isEditing">
                             <input type="text"
+                                   ng-if="field.form_field.type == 'text'"
                                    class="form-control"
                                    ng-model="field.editValue"
                                    ng-required="field.form_field.is_required">
+
+                            <textarea ng-if="field.form_field.type == 'textarea'"
+                                      class="form-control"
+                                      rows="3"
+                                      ng-model="field.editValue" required></textarea>
+
+                            <div ng-if="field.form_field.type == 'select'">
+                                <select class="custom-select mr-sm-2"
+                                        ng-init="field.form_field.other_option ? field.form_field.options.push({'val' : 'Свой вариант'}) : ''"
+                                        ng-model="field.editValue"
+                                        ng-change="$ctrl.selectFieldChanged(field)"
+                                        ng-options="c as c.val for c in field.form_field.options"
+                                        ng-required="field.form_field.is_required">
+                                </select>
+                                <div ng-if="field.editValue.val === 'Свой вариант'" class="mt-2">
+                                    <input type="text"
+                                           ng-model="field.editValueOtherOption"
+                                           class="form-control"
+                                           placeholder="Свой вариант...">
+                                </div>
+                            </div>
+
+                            <div ng-if="field.form_field.type == 'radio'">
+                                <div class="form-check"
+                                     ng-repeat="option in field.form_field.options track by $index">
+                                    <input ng-model="field.value"
+                                           class="form-check-input"
+                                           type="radio"
+                                           name="field.id"
+                                           id="{{field.id + $index + option.val}}"
+                                           value="{{option.val}}"
+                                           ng-required="field.is_required">
+                                    <label class="form-check-label"
+                                           for="{{field.id + $index + option.val}}">
+                                        {{option.val}}
+                                    </label>
+                                </div>
+
+                                <div class="form-check" ng-if="field.form_field.other_option">
+                                    <input
+                                        ng-model="field.value"
+                                        class="form-check-input"
+                                        type="radio"
+                                        name="field.id"
+                                        id="{{field.id + 'other_option'}}"
+                                        value="Свой вариант">
+                                    <label class="form-check-label"
+                                           for="{{field.id + 'other_option'}}">
+                                        Свой вариант
+                                    </label>
+                                </div>
+
+                                <div ng-if="field.value === 'Свой вариант'" class="mt-2">
+                                    <input type="text" ng-model="field.editValueOtherOption" class="form-control"
+                                           placeholder="Свой вариант">
+                                </div>
+                            </div>
+
+                            <div ng-if="field.form_field.type == 'checkbox'">
+                                <div class="form-check"
+                                     ng-repeat="option in field.form_field.options track by option.val + field.id">
+
+                                    <input ng-model="option.isSelected"
+                                           class="form-check-input"
+                                           type="checkbox"
+                                           ng-checked="option.isSelected"
+                                           value="{{option.val}}"
+                                           id="{{field.id + $index + option.val}}">
+
+                                    <label class="form-check-label"
+                                           for="{{field.id + $index + option.val}}">
+                                        {{option.val}}
+                                    </label>
+                                </div>
+
+                                <div class="form-check" ng-if="field.form_field.other_option">
+                                    <input ng-model="field.other_option_selected"
+                                           class="form-check-input"
+                                           type="checkbox"
+                                           ng-click="$ctrl.checkboxOtherOptionSelected(field)"
+                                           value="Свой вариант"
+                                           ng-checked="field.other_option_selected"
+                                           id="{{field.id + 'other_option_checkbox'}}">
+
+                                    <label class="form-check-label"
+                                           for="{{field.id + 'other_option_checkbox'}}">
+                                        Свой вариант
+                                    </label>
+                                </div>
+
+                                <div ng-if="field.other_option_selected" class="mt-2">
+                                    <input type="text" ng-model="field.editValueOtherOption" class="form-control"
+                                           placeholder="Свой вариант">
+                                </div>
+                            </div>
+
+                            <div ng-if="field.form_field.type == 'file'">
+                                <div ng-if="field.value.length > 0">
+                                    <table class="table table-bordered table-striped table-sm">
+                                        <thead class="thead-light">
+                                        <tr>
+                                            <th>Название</th>
+                                            <th>Действие</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="file in field.value track by $index">
+                                            <td>{{file}}</td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-sm"
+                                                        ng-click="$ctrl.removeFile(field,$index)">
+                                                    Удалить
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
                         </div>
                     </td>
                 </tr>

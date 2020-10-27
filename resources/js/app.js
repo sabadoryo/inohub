@@ -94,3 +94,4 @@ require('./components/event-page-form/event-page-form');
 require('./components/event-forms/event-forms');
 require('./components/event-to-publish-modal/event-to-publish-modal');
 require('./components/program-to-publish-modal/program-to-publish-modal');
+require('./components/page-builder/page-builder');
