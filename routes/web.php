@@ -94,6 +94,8 @@ Route::group([
     Route::get('news/get-list', 'NewsController@getList');
     Route::post('news', 'NewsController@store');
     Route::get('news/{id}/main', 'NewsController@mainForm');
+    Route::post('news/{id}/update-main', 'NewsController@updateMain');
+    Route::post('news/{id}/publish', 'NewsController@publish');
 
     Route::get('applications', 'ApplicationsController@index');
     Route::get('applications/get-list', 'ApplicationsController@getList');

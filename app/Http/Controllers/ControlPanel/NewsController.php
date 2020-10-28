@@ -4,7 +4,9 @@ namespace App\Http\Controllers\ControlPanel;
 
 use App\Http\Controllers\Controller;
 use App\News;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class NewsController extends Controller
 {
@@ -86,6 +88,67 @@ class NewsController extends Controller
             'PAGE_TITLE' => $news->title,
             'activePage' => 'news',
             'breadcrumb' => $breadcrumb,
+        ]);
+    }
+    
+    public function updateMain(Request $request, $id)
+    {
+        $request->validate([
+            'title' => 'required',
+            'short_description' => 'required',
+            'data' => 'array',
+            'data.*.type' => [
+                'required_without:data',
+                Rule::in(['text', 'image'])
+            ],
+            'data.*.content' => 'required_if:data.*.type,text',
+        ]);
+        
+        $news = News::find($id);
+    
+        $news->texts()->delete();
+        $news->images()->delete();
+        
+        $news->update([
+            'title' => $request->title,
+            'short_description' => $request->short_description,
+        ]);
+    
+        if ($request->data) {
+            foreach ($request->data as $ind => $item) {
+                
+                if ($item['type'] == 'text') {
+                    $news->texts()->create([
+                        'content' => $item['content'],
+                        'order' => $ind
+                    ]);
+                }
+            
+                if ($item['type'] == 'image') {
+                    if (isset($item['image_id'])) {
+                        $news->images()->create([
+                            'path' => $item['path'],
+                            'order' => $ind
+                        ]);
+                    } else {
+                        $path = \Storage::disk('public')->put('news', $item['image']);
+                        $news->images()->create([
+                            'path' => $path,
+                            'order' => $ind
+                        ]);
+                    }
+                }
+            }
+        }
+    }
+    
+    public function publish($id, Request $request)
+    {
+        $event = News::find($id);
+        
+        $event->update([
+            'published_at' => Carbon::now(),
+            'status' => 'published',
         ]);
     }
 }

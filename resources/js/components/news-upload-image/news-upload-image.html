@@ -9,22 +9,16 @@
   <div class="text-center">
     <a class="btn btn-default mb-3"
        ngf-select=""
-       ngf-model-invalid="$ctrl.invalidImg"
        ng-model="$ctrl.image"
-       accept="image/*"
-       ngf-max-size="10MB"
-       ngf-min-width="800">
+       accept="image/*">
 
       <span ng-show="!$ctrl.image">Выбрать изображение</span>
       <span ng-show="$ctrl.image">Изменить изображение</span>
       <i class="fas fa-image"></i>
     </a>
   </div>
-  <label class="text-danger" ng-if="$ctrl.invalidImg">
-    Выберите картинку размером не менее 800px в ширину.
-  </label>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-secondary" ng-click="$ctrl.dismiss()">Close</button>
-  <button type="button" class="btn btn-primary" ng-click="$ctrl.save()">Save changes</button>
+  <button type="button" class="btn btn-secondary" ng-click="$ctrl.dismiss()">Закрыть</button>
+  <button type="button" class="btn btn-primary" ng-click="$ctrl.save()">Добавить</button>
 </div>

@@ -10,7 +10,7 @@
 
       <div class="form-group">
         <label>Заголовок новости:</label>
-        <input type="text" class="form-control" placeholder="Введите заголовок" ng-model="$ctrl.title">
+        <input type="text" class="form-control" placeholder="Введите заголовок" ng-model="$ctrl.title" required>
       </div>
 
       <div class="form-group">
@@ -69,7 +69,7 @@
 
     </div>
     <div class="card-footer">
-      <button class="btn btn-primary" type="submit">
+      <button class="btn btn-primary" type="submit" ng-disabled="$ctrl.loading">
         Сохранить
       </button>
     </div>

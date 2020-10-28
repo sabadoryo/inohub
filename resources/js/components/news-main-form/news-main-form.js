@@ -4,25 +4,49 @@ angular
     .module('app')
     .component('newsMainForm', {
         template: require('./news-main-form.html'),
-        controller: ['$uibModal', controller],
+        controller: ['$uibModal', 'Upload', 'notify', controller],
         bindings: {
             news: '<',
         }
     });
     
-function controller($uibModal) {
+function controller($uibModal, Upload, notify) {
  
 	let $ctrl = this;
-	
+
+	$ctrl.loading = false;
+
 	$ctrl.$onInit = function () {
 	    $ctrl.data = $ctrl.news.data;
 	    $ctrl.title = $ctrl.news.title;
 	    $ctrl.description = $ctrl.news.short_description;
     };
 
-	$ctrl.save = () => {
-	    console.log($ctrl.data);
-    }
+    $ctrl.openToPublishModal = () => {
+        $uibModal
+            .open({
+                component: 'newsToPublishModal',
+                resolve: {
+                    news: function () {
+                        return $ctrl.news;
+                    }
+                }
+            })
+            .result
+            .then(
+                res => {
+                    window.Swal.fire({
+                        icon: 'success',
+                        title: 'Опубликовано',
+                        timer: 2000,
+                        showConfirmButton: false,
+                    });
+                },
+                err => {
+
+                }
+            );
+    };
 
     $ctrl.addText = () => {
         $ctrl.data.push({
@@ -70,5 +94,44 @@ function controller($uibModal) {
 
                 }
             )
+    };
+
+	$ctrl.save = () => {
+	    $ctrl.loading = true;
+	    let url = '/control-panel/news/' + $ctrl.news.id + '/update-main';
+	    let params = {
+	        title: $ctrl.title,
+            short_description: $ctrl.description,
+            data: $ctrl.data,
+        };
+
+        Upload.upload({
+            url: url,
+            data: params,
+        }).then((response) => {
+                window.Swal.fire({
+                    icon: 'success',
+                    title: 'Сохранено',
+                    timer: 2000,
+                    showConfirmButton: false,
+                });
+                $ctrl.loading = false;
+            }, (error) => {
+                let checked = false;
+                let message = '';
+                angular.forEach(error.data.errors, (value, key) => {
+                    if (!checked && value[0]) {
+                        message += value[0];
+                        checked = true;
+                    }
+                });
+                notify({
+                    message: message ? message : 'Неизвестная ошибка',
+                    duration: 2000,
+                    classes: 'alert-danger',
+                });
+                $ctrl.loading = false;
+            }
+        );
     };
 }
