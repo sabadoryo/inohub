@@ -48,16 +48,14 @@ class FormsController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'description' => 'required',
             'fields' => 'required|array',
             'fields.*.type' => 'required',
             'fields.*.label' => 'required',
-            'fields.*.isRequired' => 'required|boolean',
+            'fields.*.isRequired' => 'required',
         ]);
 
         $form = Form::create([
             'title' => $request->title,
-            'description' => $request->description
         ]);
 
         foreach ($request->fields as $field) {
@@ -65,29 +63,58 @@ class FormsController extends Controller
                 $form->fields()->create([
                     'type' => $field['type'],
                     'label' => $field['label'],
-                    'is_required' => $field['isRequired'],
-                    'options' => json_encode($field['options']),
-                    'prompt' => $field['prompt'],
-                    'other_option' => $field['otherOption'],
-                    'max_files_count' => $field['maxFilesCount'],
-                    'file_allows' => $field['fileAllows'],
-                    'file_type' => $field['fileTypes'],
+                    'is_required' => $field['isRequired'] === 'true' ? true : false,
+                    'options' => $field['options'] !== 'null' ? json_encode($field['options']) : null,
+                    'prompt' => $field['prompt'] !== 'null' ? $field['prompt'] : null,
+                    'other_option' => $field['otherOption'] === 'true' ? true : false,
                 ]);
             } else {
-                $form->fields()->create([
-                    'type' => $field['type'],
-                    'label' => $field['label'],
-                    'is_required' => $field['isRequired'],
-                    'options' => $field['options'] ? join(',', $field['options']) : null,
-                    'prompt' => $field['prompt'],
-                    'other_option' => $field['otherOption'],
-                    'max_files_count' => $field['maxFilesCount'],
-                    'file_allows' => $field['fileAllows'],
-                    'file_types' => json_encode($field['fileTypes']),
-                ]);
+                if ($field['type'] === 'file') {
+                    $exampleFilesPath = [];
+                    $exampleFilesName = [];
+                    if (count($field['exampleFiles'])) {
+                        foreach ($field['exampleFiles'] as $exampleFile) {
+                            $path = \Storage::disk('public')->put('application_example_files', $exampleFile);
+                            array_push($exampleFilesPath, $path);
+                            array_push($exampleFilesName, $exampleFile->getClientOriginalName());
+                        }
+                    }
+                    $form->fields()->create([
+                        'type' => $field['type'],
+                        'label' => $field['label'],
+                        'is_required' => $field['isRequired'] === 'true' ? true : false,
+                        'options' => $field['options'] !== 'null' ? join(',', $field['options']) : null,
+                        'prompt' => $field['prompt'] !== 'null' ? $field['prompt'] : null,
+                        'max_files_count' => $field['maxFilesCount'] != 'null' ? $field['maxFilesCount'] : null,
+                        'file_allows' => $field['fileAllows'],
+                        'file_types' => isset($field['fileTypes']) ? json_encode($field['fileTypes']) : null,
+                        'example_files_path' => json_encode($exampleFilesPath),
+                        'example_files_name' => json_encode($exampleFilesName),
+                    ]);
+                } else {
+                    $form->fields()->create([
+                        'type' => $field['type'],
+                        'label' => $field['label'],
+                        'is_required' => $field['isRequired'] === 'true' ? true : false,
+                        'options' => $field['options'] !== 'null' ? join(',', $field['options']) : null,
+                        'prompt' => $field['prompt'] !== 'null' ? $field['prompt'] : null,
+                        'other_option' => $field['otherOption'] === 'true' ? true : false,
+                    ]);
+                }
             }
         }
         return [];
+    }
+
+    public function getList(Request $request)
+    {
+        $query = Form::query();
+
+        $result = $query
+            ->orderBy('id', 'desc')
+            ->paginate(20);
+
+        return $result;
     }
 
 

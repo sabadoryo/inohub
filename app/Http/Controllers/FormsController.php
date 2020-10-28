@@ -30,10 +30,19 @@ class FormsController extends Controller
                 }
 
                 if ($field->type === 'file') {
-                    $field->file_types = implode(
-                        ',',
-                        json_decode($field->file_types)
-                    );
+                    if ($field->file_allows !== 'any') {
+                        $field->file_types = implode(
+                            ',',
+                            json_decode($field->file_types)
+                        );
+                    }
+                    if ($field->example_files_path) {
+                        $exampleFiles = [];
+                        foreach ($field->example_files_path as $ind => $path) {
+                            array_push($exampleFiles, ['name' => $field->example_files_name[$ind], 'path' => $path]);
+                        }
+                        $field->example_files = $exampleFiles;
+                    }
                 }
             }
         }

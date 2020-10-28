@@ -4,19 +4,19 @@ angular
     .module('app')
     .component('formCreateForm', {
         template: require('./form-create-form.html'),
-        controller: ['$http', controller],
+        controller: ['$http', 'Upload', controller],
         bindings: {
             //
         }
     });
 
-function controller($http) {
+function controller($http, Upload) {
 
-	let $ctrl = this;
+    let $ctrl = this;
 
-	window.t = this;
+    window.t = this;
 
-	$ctrl.filesTypes = [
+    $ctrl.filesTypes = [
         {key: 'image/*', value: 'Изображение'},
         {key: 'application/pdf', value: 'PDF'},
         {key: 'application/vnd.ms-excel', value: 'Excel'},
@@ -26,15 +26,15 @@ function controller($http) {
         {key: 'video/*', value: 'Видео'},
     ];
 
-	$ctrl.title = null;
-	$ctrl.description = null;
-	$ctrl.fields = [];
+    $ctrl.title = null;
+    $ctrl.description = null;
+    $ctrl.fields = [];
 
-	$ctrl.$onInit = function () {
-	    $ctrl.addField();
+    $ctrl.$onInit = function () {
+        $ctrl.addField();
     };
 
-	$ctrl.addField = function () {
+    $ctrl.addField = function () {
         $ctrl.fields.push({
             type: 'text',
             label: null,
@@ -45,52 +45,55 @@ function controller($http) {
             maxFilesCount: null,
             fileAllows: null,
             fileTypes: null,
+            exampleFiles: [],
         });
     };
 
-	$ctrl.delField = function (ind) {
-	    if (confirm('Вы действительно хотите удалить поле?')) {
+    $ctrl.delField = function (ind) {
+        if (confirm('Вы действительно хотите удалить поле?')) {
             $ctrl.fields.splice(ind, 1);
         }
     };
 
-	$ctrl.fieldTypeChanged = function (field) {
+    $ctrl.fieldTypeChanged = function (field) {
         field.options = null;
         field.otherOption = false;
         field.maxFilesCount = null;
         field.fileAllows = null;
         field.fileTypes = null;
 
-	    if (field.type == 'radio' || field.type == 'checkbox' || field.type == 'select') {
+        if (field.type == 'radio' || field.type == 'checkbox' || field.type == 'select') {
             field.options = [];
             field.options.push({val: null});
         }
 
-	    if (field.type == 'file') {
+        if (field.type == 'file') {
             field.maxFilesCount = 1;
             field.fileAllows = 'any';
             field.fileTypes = [];
         }
-	};
+    };
 
-	$ctrl.addOption = function (field) {
+    $ctrl.addOption = function (field) {
         field.options.push({val: null});
     };
 
-	$ctrl.delOption = function (field, ind) {
-	    field.options.splice(ind, 1);
+    $ctrl.delOption = function (field, ind) {
+        field.options.splice(ind, 1);
     };
 
-	$ctrl.submit = function () {
-	    $ctrl.loading = true;
+    $ctrl.submit = function () {
+        $ctrl.loading = false;
 
-        console.log($ctrl.fields);
-
-        $http
-            .post(`/control-panel/forms`, {
-                title: $ctrl.title,
-                description: $ctrl.description,
-                fields: $ctrl.fields,
+        Upload
+            .upload({
+                headers:{'Content-Type': undefined },
+                url: `/control-panel/forms`,
+                data: {
+                    title: $ctrl.title,
+                    description: $ctrl.description,
+                    fields: $ctrl.fields,
+                }
             })
             .then(
                 res => {
@@ -101,5 +104,9 @@ function controller($http) {
                 }
             );
     };
+
+    $ctrl.removeFile = function (field, index) {
+        field.exampleFiles.splice(index, 1);
+    }
 }
 

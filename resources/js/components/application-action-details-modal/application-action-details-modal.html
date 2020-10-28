@@ -16,8 +16,8 @@
                 <td>{{data.label}}</td>
                 <td>
                     <div ng-if="data.type === 'file'">
-                        <div ng-repeat="file in data.old_value">
-                            <a href="/cabinet/download-file/{{file}}">Старый файл</a>
+                        <div ng-repeat="(name,path) in data.old_data">
+                            <a href="/cabinet/download-file/{{path}}">{{name}}</a>
                         </div>
                     </div>
                     <div ng-if="data.type !== 'file'">
@@ -27,8 +27,8 @@
                 </td>
                 <td>
                     <div ng-if="data.type === 'file'">
-                        <div ng-repeat="file in data.new_value">
-                            <a href="/cabinet/download-file/{{file}}">Новый файл</a>
+                        <div ng-repeat="(name,path) in data.new_data">
+                            <a href="/cabinet/download-file/{{path}}">{{name}}</a>
                         </div>
                     </div>
                     <div ng-if="data.type !== 'file'">

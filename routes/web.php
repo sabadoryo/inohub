@@ -9,6 +9,7 @@ Route::get('/', 'MainPageController@index');
 Route::group(['prefix' => 'cabinet', 'middleware' => ['auth']], function () {
     Route::get('', 'CabinetController@profile');
     Route::get('applications', 'CabinetController@applications');
+    Route::get('download-file/{path}', 'CabinetController@downloadFile')->where('path',  '(.*)');
 
     Route::get('project', 'CabinetController@project');
     Route::post('update-roles', 'CabinetController@updateRoles');
@@ -120,6 +121,7 @@ Route::group([
     Route::post('events', 'EventsController@store');
 
     Route::get('forms', 'FormsController@index');
+    Route::get('forms/get-list', 'FormsController@getList');
     Route::get('forms/create', 'FormsController@create');
     Route::post('forms', 'FormsController@store');
 

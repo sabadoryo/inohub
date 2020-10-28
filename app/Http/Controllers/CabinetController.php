@@ -67,8 +67,6 @@ class CabinetController extends Controller
     }
 
 
-
-
     public function application($id)
     {
         $app = Application::with([
@@ -89,8 +87,8 @@ class CabinetController extends Controller
 
                 if ($field->formField->type === 'file') {
                     $values = [];
-                    foreach ($field->value as $value) {
-                        array_push($values, ['name' => $value]);
+                    foreach ($field->value as $ind => $value) {
+                        array_push($values, ['path' => $value, 'name' => $field['file_name'][$ind]]);
                     }
                     $field->value = json_encode($values);
                 }
@@ -112,7 +110,6 @@ class CabinetController extends Controller
     }
 
 
-
     public function updateForm(Request $request, $id)
     {
         $app = Application::find($id);
@@ -129,23 +126,29 @@ class CabinetController extends Controller
                     $field->value != $inputField['value']) {
                     if ($inputField['type'] === 'file') {
                         $newFile_pathes = [];
+                        $newFile_names = [];
                         if ($inputField['value'] != 'null') {
                             foreach ($inputField['value'] as $value) {
                                 if (!is_array($value)) {
                                     $path = \Storage::disk('public')->put('application_files', $value);
                                     array_push($newFile_pathes, $path);
+                                    array_push($newFile_names, $value->getClientOriginalName());
                                 } else {
-                                    array_push($newFile_pathes, $value['name']);
+                                    array_push($newFile_pathes, $value['path']);
+                                    array_push($newFile_names, $value['name']);
                                 }
                             }
                         }
                         $changes[] = [
                             'label' => $field->formField->label,
                             'old_value' => $field->value,
+                            'old_value_names' => $field->file_name,
                             'new_value' => $newFile_pathes,
+                            'new_value_names' => $newFile_names,
                             'type' => $field->formField->type,
                         ];
                         $field->value = json_encode($newFile_pathes);
+                        $field->file_name = json_encode($newFile_names);
                         $field->save();
                     } else {
                         $changes[] = [
@@ -181,5 +184,10 @@ class CabinetController extends Controller
         ]);
 
         return [];
+    }
+
+    public function downloadFile($path)
+    {
+        return \Storage::disk('public')->download($path);
     }
 }
