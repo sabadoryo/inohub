@@ -46,6 +46,10 @@ class ProgramsController extends Controller
         if ($request->status) {
             $query->where('status', $request->status);
         }
+        
+        if ($request->category_id) {
+            $query->where('program_category_id', $request->category_id);
+        }
 
         $result = $query->with('category')
             ->orderBy('id', 'desc')

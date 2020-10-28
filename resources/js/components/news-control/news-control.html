@@ -8,7 +8,7 @@
     </div>
     <div class="col-3">
       <select ng-model="$ctrl.status" class="form-control">
-        <option value="">Все</option>
+        <option value="">Выберите статус</option>
         <option value="draft">Черновик</option>
         <option value="published">Опубликован</option>
       </select>
@@ -22,7 +22,7 @@
 
 <div class="mb-3 clearfix">
   <div class="float-left">
-    Всего: <b>{{$ctrl.total}}</b> {{$ctrl.total | plural : ['новость', 'новости']}}
+    Всего: <b>{{$ctrl.total}}</b> {{$ctrl.total | plural : ['новость', 'новости', 'новостей']}}
   </div>
   <a href="" ng-click="$ctrl.openCreateModal()" class="btn btn-primary float-right">
     Добавить новость
@@ -42,8 +42,8 @@
     <td>{{val.id}}</td>
     <td>{{val.title}}</td>
     <td ng-switch="val.status">
-      <div ng-switch-when="draft">Черновик</div>
-      <div ng-switch-when="published">Опубликован</div>
+      <div ng-switch-when="draft" class="text-danger">Черновик</div>
+      <div ng-switch-when="published" class="text-success">Опубликован</div>
     </td>
     <td class="text-center">
       <a href=""
@@ -59,6 +59,6 @@
     total-items="$ctrl.total"
     ng-model="$ctrl.page"
     ng-change="$ctrl.getList()"
-    items-per-page="$ctrl.perPage"
+    items-per-page="10"
     template-url="b4-pagination">
 </ul>

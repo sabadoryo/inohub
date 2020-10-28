@@ -32,19 +32,17 @@ class NewsController extends Controller
     public function getList(Request $request)
     {
         $query = News::query();
-    
-        if ($request->status == 'draft') {
-            $query->where('status', $request->status);
-        } elseif ($request->status == 'published') {
-            $query->where('status', $request->status);
-        }
-    
-        if ($request->name) {
+        
+        if ($request->title) {
             $query->where(
                 'title',
                 'like',
                 $request->title . '%'
             );
+        }
+    
+        if ($request->status) {
+            $query->where('status', $request->status);
         }
         
         $result = $query->orderBy('id', 'desc')
