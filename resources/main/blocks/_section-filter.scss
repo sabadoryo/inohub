@@ -1,0 +1,21 @@
+.section-filter {
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &__title {
+        @include text-style(2rem, 700, #181515);
+    }
+
+    &__btn-group {
+        display: flex;
+        align-items: center;
+    }
+
+    &__btn {
+        &:not(:last-child) {
+            margin-right: 24px;
+        }
+    }
+}

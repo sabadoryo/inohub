@@ -1,0 +1,39 @@
+.about-simp {
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 7px;
+    position: relative;
+
+    &__row {
+        display: flex;
+        align-items: flex-start;
+    }
+
+    &__heading {
+        flex-shrink: 0;
+        @include text-style(2rem, 700, #181515);
+        line-height: 24px;
+        margin-right: 58px;
+        position: relative;
+        z-index: 2;
+    }
+
+    &__info {
+        position: relative;
+        z-index: 2;
+    }
+
+    &__text {
+        @include text-style(1.6rem, 400, #181515);
+        line-height: 19.5px;
+        margin-bottom: 20px;
+    }
+
+    &__grey-text {
+        position: absolute;
+        bottom: 10px;
+        left: 15px;
+        @include text-style(9.6rem, 700, #f3f3f3);
+        line-height: 117px;
+    }
+}
