@@ -101,7 +101,7 @@ Route::group([
     Route::post('events/{id}/update-forms', 'EventsController@updateForms');
     Route::post('events/{id}/update-forms-list', 'EventsController@updateFormsList');
     Route::post('events/{id}/publish', 'EventsController@publish');
-    
+
     Route::get('news', 'NewsController@index');
     Route::get('news/get-list', 'NewsController@getList');
     Route::post('news', 'NewsController@store');
@@ -179,4 +179,16 @@ Route::get('profile-page-7', function () {
 
 Route::get('tech-garden-about', function () {
     return view('tech-garden-about');
+});
+
+Route::get('tech-garden-programs', function () {
+    return view('tech-garden-programs');
+});
+
+Route::get('tech-garden-store', function () {
+    return view('tech-garden-store');
+});
+
+Route::get('tech-garden-resources', function () {
+    return view('tech-garden-resources');
 });

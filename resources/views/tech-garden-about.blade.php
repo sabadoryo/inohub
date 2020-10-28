@@ -20,16 +20,13 @@
                 Программы
             </a>
             <a href="/astana-hub/corporate-innovations" class="tabs__link">
-                Корпоративные инновации
+                Smart Store
             </a>
             <a href="/astana-hub/hub-space" class="tabs__link">
-                Hub Space
+                Технологические лаборатории
             </a>
             <a href="/astana-hub/r-and-d" class="tabs__link">
-                R&D
-            </a>
-            <a href="/astana-hub/resources" class="tabs__link">
-                Ресурсы
+                База знаний
             </a>
         </div>
 
@@ -85,6 +82,7 @@
 
                         <div class="feature-card__title">
                             Компании
+                            <img src="/img/icons/building.svg" alt="">
                         </div>
 
                         <div class="feature-card__inner">
@@ -105,28 +103,22 @@
 
             <div class="tabs-inner__section about-company">
                 <div class="about-company__title">
-                    Astana Hub Международный <br>
-                    технопарк IT стартапов
+                    Автономный кластерный фонд «Парк <br>
+                    Инновационных технологий»
                 </div>
 
                 <table class="about-company__table">
                     <tr>
                         <th>Миссия</th>
-                        <td>Развивать стартап-культуру и поддерживать высокотехнологичные проекты для укрепления
-                            экономики страны.
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Видение</th>
-                        <td>Международный технопарк IT-стартапов “Astana Hub” должен стать ядром и локомотивом
-                            развития экосистемы инноваций Казахстана и международно признанным хабом для
-                            развития технологического бизнеса.
+                        <td>Создание экосистемы для поддержки промышленных предприятий в их цифровой трансформации и
+                            стимулирования активного внедрения цифровых технологий.
                         </td>
                     </tr>
                     <tr>
                         <th>Цель</th>
-                        <td>67 миллиардов тенге должно быть инвестировано в стартапы-резиденты (выпускники
-                            программ Astana Hub) к 2022 году.
+                        <td>Достижение критической массы предприятий «маяков» – драйверов рынка (~20% пула предприятий
+                            ГМК, НГС, машиностроения и др.), активно внедряющих новые технологии для приобретения
+                            финансовых и операционных преимуществ.
                         </td>
                     </tr>
                     <tr>
@@ -135,15 +127,15 @@
                             <table class="about-company__inner-table">
                                 <tr>
                                     <th>Адрес:</th>
-                                    <td>Республика Казахстан, г. Астана, пр. Мангилик ел, павильон С 4.6</td>
+                                    <td>г. Алматы, пр. Жибек-Жолы, д. 135, 5 этаж</td>
                                 </tr>
                                 <tr>
                                     <th>Email:</th>
-                                    <td>info@astanahub.kz</td>
+                                    <td>info@techgarden.kz</td>
                                 </tr>
                                 <tr>
                                     <th>Телефон:</th>
-                                    <td>+7 7172 79-97-61 (220, 222)</td>
+                                    <td>+7 (727) 355-70-40</td>
                                 </tr>
                             </table>
                         </td>
@@ -172,7 +164,7 @@
                     </a>
                 </div>
 
-                <div class="about-company__grey-title">astana hub</div>
+                <div class="about-company__grey-title">tech garden</div>
 
             </div>
 

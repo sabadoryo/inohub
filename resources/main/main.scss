@@ -1,6 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
-
-
 @import "nullstyle.scss";
 
 //* {
@@ -80,7 +77,9 @@
 @import "blocks/application-list";
 @import "blocks/chat-section";
 @import "blocks/message-block";
-
+@import "blocks/about-simp";
+@import "blocks/smart-store";
+@import "blocks/smart-box";
 
 html, body {
     font-size: 62.5%;

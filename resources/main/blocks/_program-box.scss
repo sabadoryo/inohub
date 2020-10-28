@@ -1,5 +1,7 @@
 .program-box {
 
+    $e: &;
+
     width: 304px;
     height: 210px;
     border-radius: 7px;
@@ -13,7 +15,10 @@
 
     &--purple {
         background-color: #6E60C9;
-        color: #ffffff;
+
+        #{$e}__title {
+            color: #ffffff;
+        }
     }
 
     &--green {
@@ -34,12 +39,18 @@
 
     &--grey-purple {
         background-color: #4B5D8E;
-        color: #ffffff;
+
+        #{$e}__title {
+            color: #ffffff;
+        }
     }
 
     &--dark-red {
         background-color: #6A0000;
-        color: #ffffff;
+
+        #{$e}__title {
+            color: #ffffff;
+        }
     }
 
     &__circles {
