@@ -226,3 +226,7 @@ Route::get('tech-garden-store', function () {
 Route::get('tech-garden-resources', function () {
     return view('tech-garden-resources');
 });
+
+Route::get('test-modal', function () {
+    return view('test-modal');
+});

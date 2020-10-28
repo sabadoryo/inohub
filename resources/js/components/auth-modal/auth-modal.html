@@ -128,17 +128,32 @@
 
   </form>
 
-  <form ng-submit="$ctrl.toStep(3)" ng-show="$ctrl.register.step == 2">
+  <form ng-submit="$ctrl.toStep(3)" ng-show="$ctrl.register.step == 2" class="as-modal__form">
 
-    <img src="/img/avatar-placeholder.svg" alt="" class="as-modal__profile-photo">
+    <img src="/img/avatar-placeholder.svg" alt="" class="as-modal__profile-photo" ng-show="!$ctrl.register.avatar">
+    <img alt="" class="as-modal__profile-photo" ng-show="$ctrl.register.avatar" ngf-thumbnail="$ctrl.register.avatar">
+
 
     <div class="as-modal__section as-modal__section--centered">
-      <a href="#" class="as-modal__link">Добавить фото профиля</a>
+      <a class="as-modal__link"
+         href=""
+         ngf-select=""
+         ng-model="$ctrl.register.avatar"
+         accept="image/*">
+        <div ng-show="!$ctrl.register.avatar">Добавить фото профиля</div>
+        <div ng-show="$ctrl.register.avatar">Изменить фото профиля</div>
+      </a>
     </div>
 
-    <button class="as-modal__button button button--w100" type="submit">Далее</button>
+    <button type="submit"
+            ng-show="$ctrl.register.avatar"
+            class="as-modal__button button button--w100">
+      Далее
+    </button>
 
-    <button class="as-modal__button button button--grey button--w100" type="submit">
+    <button type="submit"
+            ng-show="!$ctrl.register.avatar"
+            class="as-modal__button button button--grey button--w100">
       Пропустить
     </button>
 
@@ -237,8 +252,6 @@
   </form>
 
   <div ng-show="$ctrl.register.step == 4">
-
-    <h4>Поздравляем, вы успешно зарегистрированы!</h4>
 
     <div class="as-modal__section">
       <div class="as-modal__text">

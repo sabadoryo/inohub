@@ -116,7 +116,6 @@
                 <li class="nav-item has-treeview">
                     <a href=""
                        class="nav-link"
-                       ng-class="{active: {{$activePage === 'sm-solutions' || $activePage === 'sm-tasks'}}}"
                        uib-dropdown-toggle>
                         <i class="nav-icon fas fa-credit-card"></i>
                         <p>
