@@ -133,4 +133,5 @@ function controller($timeout, $http, Auth, $uibModal, Upload, moment) {
                 }
             )
     }
+
 }

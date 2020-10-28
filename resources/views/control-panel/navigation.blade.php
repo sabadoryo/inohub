@@ -33,6 +33,15 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="/control-panel/applications" class="nav-link {{$activePage == 'applications' ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-copy"></i>
+                        <p>
+                            Заявки
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="/control-panel/programs" class="nav-link {{$activePage == 'programs' ? 'active' : ''}}">
                         <i class="nav-icon fab fa-buromobelexperte"></i>
                         <p>Программы</p>
@@ -50,6 +59,13 @@
                     <a href="/control-panel/events" class="nav-link {{$activePage == 'events' ? 'active' : ''}}">
                         <i class="nav-icon fas fa-calendar"></i>
                         <p>Мероприятия</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/control-panel/vacancies" class="nav-link {{$activePage == 'vacancies' ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-scroll"></i>
+                        <p>Вакансии</p>
                     </a>
                 </li>
 
@@ -115,8 +131,7 @@
 
                 <li class="nav-item has-treeview">
                     <a href=""
-                       class="nav-link"
-                       uib-dropdown-toggle>
+                       class="nav-link {{$activePage === 'sm-solutions' || $activePage === 'sm-tasks' ? 'active' : ''}}">
                         <i class="nav-icon fas fa-credit-card"></i>
                         <p>
                             Smart Store
@@ -131,7 +146,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="/control-panel/sm/tasks" class="nav-link {{$activePage === 'sm-tasks' ? 'active' : ''}}">
-                                Пром.компании
+                                Задачи
                             </a>
                         </li>
                     </ul>

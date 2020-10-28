@@ -40,12 +40,18 @@ Route::group(['prefix' => 'astana-hub'], function () {
 Route::group(['prefix' => 'tech-garden'], function () {
     Route::get('about', 'TechGardenController@about');
     Route::get('programs', 'TechGardenController@programs');
+    Route::get('smart-store', 'TechGardenController@smartStore');
     Route::get('corporate-innovations', 'TechGardenController@corporateInnovations');
     Route::get('hub-space', 'TechGardenController@hubSpace');
     Route::get('r-and-d', 'TechGardenController@randd');
     Route::get('resources', 'TechGardenController@resources');
     Route::get('programs/{id}', 'TechGardenController@program');
     Route::get('programs/{id}/get-forms', 'TechGardenController@getProgramForms');
+});
+
+Route::group(['prefix' => 'tech-garden/smart-store'], function () {
+    Route::get('get-tasks-list', 'TechGardenSmartStoreController@getTasksList');
+    Route::get('get-solutions-list', 'TechGardenSmartStoreController@getSolutionsList');
 });
 
 Route::get('get-forms', 'FormsController@getList');
@@ -110,6 +116,13 @@ Route::group([
     Route::get('news/{id}/main', 'NewsController@mainForm');
     Route::post('news/{id}/update-main', 'NewsController@updateMain');
     Route::post('news/{id}/publish', 'NewsController@publish');
+
+    Route::get('vacancies', 'VacanciesController@index');
+    Route::get('vacancies/get-list', 'VacanciesController@getList');
+    Route::post('vacancies', 'VacanciesController@store');
+    Route::get('vacancies/{id}/main', 'VacanciesController@mainForm');
+    Route::post('vacancies/{id}/update-main', 'VacanciesController@updateMain');
+    Route::post('vacancies/{id}/publish', 'VacanciesController@publish');
 
     Route::get('applications', 'ApplicationsController@index');
     Route::get('applications/get-list', 'ApplicationsController@getList');

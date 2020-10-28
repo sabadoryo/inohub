@@ -162,3 +162,7 @@ require('./components/smart-store-task-companies-edit/smart-store-task-companies
 
 require('./components/feeds-list/feeds-list');
 require('./components/application-form/application-form');
+require('./components/tech-garden-smart-store/tech-garden-smart-store');
+require('./components/vacancies-control/vacancies-control');
+require('./components/vacancy-create-modal/vacancy-create-modal');
+require('./components/vacancy-main-form/vacancy-main-form');
