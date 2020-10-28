@@ -19,12 +19,13 @@ function controller($http, moment) {
 	$ctrl.name = null;
     $ctrl.startDate = null;
     $ctrl.startDateTime = null;
+    $ctrl.loading = false;
+
 	$ctrl.$onInit = function () {
     };
 
 	$ctrl.save = () => {
 	    $ctrl.loading = true;
-
 	    $http
             .post('/control-panel/events', {
                 name: $ctrl.name,
@@ -40,6 +41,6 @@ function controller($http, moment) {
                     $ctrl.loading = false;
                     // todo Alert error
                 }
-            )
+            );
     }
 }
