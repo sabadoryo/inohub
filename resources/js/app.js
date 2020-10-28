@@ -93,3 +93,8 @@ require('./components/user-bar/user-bar');
 
 require('./components/auth-modal/auth-modal');
 require('./components/page-builder/page-builder');
+
+require('./components/smart-store-solution-companies/smart-store-solution-companies');
+require('./components/smart-store-task-companies/smart-store-task-companies');
+
+require('./components/smart-store-solution-companies-create/smart-store-solution-companies-create');

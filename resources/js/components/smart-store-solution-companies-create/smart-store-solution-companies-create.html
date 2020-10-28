@@ -1,0 +1,78 @@
+<div class="card">
+    <div class="card-header">
+        <h5 class="modal-title">Компания для ИТ-решении</h5>
+    </div>
+
+    <div class="card-body">
+
+        <form ng-submit="$ctrl.submit()">
+
+            <div class="form-group">
+                <label>Название:</label>
+                <input type="text" class="form-control" ng-model="$ctrl.name" required>
+            </div>
+
+            <div class="form-group">
+                <label>Описание:</label>
+                <textarea class="form-control" ng-model="$ctrl.description" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Сайт компании:</label>
+                <input class="form-control" ng-model="$ctrl.link">
+            </div>
+
+            <div class="form-group">
+                <label>Список решении:</label>
+                <ul class="list-group border-0">
+                    <li class="list-group-item border-0"
+                        ng-repeat="solution in $ctrl.addedSolutions">
+                        {{solution}}
+                        <a href=""
+                           class="text-danger"
+                           ng-click="$ctrl.removeSolution()"
+                           ng-show="$index === ($ctrl.addedSolutions.length - 1)">
+                            <span class="fas fa-times"></span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <input class="form-control w-50 mr-3" ng-model="$ctrl.solution">
+                    <button class="btn btn-primary" type="button" ng-click="$ctrl.addSolution()">Добавить</button>
+                </div>
+            </div>
+
+            <div class="form-group" style="display: flex">
+                <div>
+                    <label>Изображение:</label>
+                    <div>
+                        <img ng-show="$ctrl.image" ngf-thumbnail="$ctrl.image"
+                             style="vertical-align: middle; margin-bottom: 10px; width:100px; height: 100px"
+                             alt="user avatar"/>
+                    </div>
+                    <div>
+                        <a class="btn btn-light ml-2"
+                           ngf-select=""
+                           ngf-model-invalid="$ctrl.invalidAvatar"
+                           ng-model="$ctrl.image"
+                           accept="image/*"
+                           ngf-max-size="10MB">
+
+                            <span ng-show="!$ctrl.image">Выбрать изображение</span>
+                            <span ng-show="$ctrl.image">Изменить изображение</span>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <label>Презентация:</label>
+                    <input class="form-control" type="file" required ng-model="$ctrl.presentation" ngf-select="">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary d-flex ml-auto">Создать</button>
+        </form>
+    </div>
+    <div class="card-footer">
+
+
+    </div>
+</div>

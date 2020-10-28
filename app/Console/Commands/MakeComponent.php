@@ -48,7 +48,7 @@ class MakeComponent extends Command
 
         $this->addToApp($componentName);
 
-        $this->info('component success created');
+        $this->info('Component successfully created');
     }
 
     private function getCamelCaseName($componentName)
@@ -104,11 +104,11 @@ angular
             dismiss: \'&\'
         }
     });
-    
+
 function controller() {
- 
+
 	let $ctrl = this;
-	
+
 	$ctrl.$onInit = function () {
         //
     };
@@ -125,11 +125,11 @@ angular
             //
         }
     });
-    
+
 function controller() {
- 
+
 	let $ctrl = this;
-	
+
 	$ctrl.$onInit = function () {
         //
     };

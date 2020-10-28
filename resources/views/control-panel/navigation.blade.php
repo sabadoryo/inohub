@@ -100,6 +100,26 @@
                     </a>
                 </li>
 
+                <li class="nav-item" uib-dropdown>
+                    <a href=""
+                       class="nav-link"
+                       ng-class="{active: {{$activePage === 'sm-solutions' || $activePage === 'sm-tasks'}}}"
+                       uib-dropdown-toggle>
+                        <i class="nav-icon fas fa-credit-card"></i>
+                        <p>
+                            Smart Store
+                        </p>
+                    </a>
+                    <div uib-dropdown-menu>
+                        <a href="/control-panel/sm/solutions" class="nav-link {{$activePage === 'sm-solutions' ? 'active' : ''}}">
+                            Solutions
+                        </a>
+                        <a href="/control-panel/sm/tasks" class="nav-link {{$activePage === 'sm-tasks' ? 'active' : ''}}">
+                            Tasks
+                        </a>
+                    </div>
+                </li>
+
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon far fa-plus-square"></i>

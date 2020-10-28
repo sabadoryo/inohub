@@ -94,5 +94,11 @@ Route::group([
     Route::get('forms', 'FormsController@index');
     Route::get('forms/create', 'FormsController@create');
     Route::post('forms', 'FormsController@store');
+
+    Route::get('sm/solutions', 'SmartStoreSolutionCompaniesController@index');
+    Route::get('sm/solutions/get-companies-list', 'SmartStoreSolutionCompaniesController@getList');
+    Route::get('sm/solutions/create', 'SmartStoreSolutionCompaniesController@create');
+    Route::post('sm/solutions', 'SmartStoreSolutionCompaniesController@store');
+//    Route::get('sm/solutions', 'SmartStoreSolutionCompaniesController@index');
 });
 
