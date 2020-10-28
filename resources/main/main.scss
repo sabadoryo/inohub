@@ -98,9 +98,10 @@ img {
     left: 0;
     z-index: 1050;
     display: none;
-    overflow: hidden;
     -webkit-overflow-scrolling: touch;
     outline: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .modal-backdrop {
