@@ -113,3 +113,7 @@ Route::get('profile-page-2', function () {
 Route::get('profile-page-3', function () {
     return view('profile-page-3');
 });
+
+Route::get('modal-full', function () {
+    return view('modal-full');
+});
