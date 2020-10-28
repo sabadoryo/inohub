@@ -1,23 +1,65 @@
 
 // parameter: elemId is an id of html element that will hold the grapejs instance
-const buildConstructor = elemId => {
+const buildConstructor = (elemId, options) => {
+
+    let idCounter = 0;
 
     let editor = grapesjs.init({
         // Indicate where to init the editor. You can also pass an HTMLElement
         container: '#' + elemId,
         // Get the content for the canvas directly from the element
         // As an alternative we could use: `components: '<h1>Hello World Component!</h1>'`,
-        fromElement: false,
+        // fromElement: true,
+        components: options.passport.content,
         // Size of the editor
-        height: '100vh',
+        height: '800px',
         width: 'auto',
+        avoidInlineStyle: 1,
         // Disable the storage manager for the moment
-        storageManager: false,
+        storageManager: {
+            type: 'remote',
+            autosave: true,
+            stepsBeforeSave: 1,
+            storeHtml: 1,
+            storeCss: 1,
+            storeComponents: 0,
+            urlStore: `/control-panel/passports/${options.passport.id}/save-changes`,
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+            },
+            beforeSend(xhr, setting) {
+                console.log('sending html to server', xhr, setting)
+            }
+        },
+        assetManager: {
+            assets: [
+                '/img/program-poster.png'
+            ],
+            upload: '/control-panel/images/',
+            uploadName: 'files',
+            // Custom headers to pass with the upload request
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+            },
+            // Custom parameters to pass with the upload request, eg. csrf token
+            params: {
+
+            },
+            credentials: 'include'
+
+        },
         canvas: {
-            styles: ['/css/style.css']
+            styles: ['/css/style.css', '/css/ui-components.css']
         }
     });
+    editor.SelectorManager.getAll().each(selector => selector.set('private', 1));
 
+// All new selectors will be private
+    editor.on('selector:add', selector => selector.set('private', 1));
+    editor.on('component:add', model => {
+        // model.addСlass(` ${model.attributes.type + '-' + model.ccid}`);
+        console.log('model', model)
+    });
     editor.addComponents(`
 <!--        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">-->
 
@@ -25,6 +67,7 @@ const buildConstructor = elemId => {
 <!--        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>-->
     `);
 
+    //examples
     editor.DomComponents.addType('submit-button-component', {
         // isComponent: el => el.tagName === 'BUTTON',
         model: {
@@ -58,9 +101,7 @@ const buildConstructor = elemId => {
                     border: '1px solid grey',
                     'height': '50px',
                     'width': '100px',
-                    position: 'absolute',
-                    bottom: '5%',
-                    'right': '2%'
+
                 }
                 // As by default, traits are binded to attributes, so to define
                 // their initial value we can use attributes
@@ -68,7 +109,6 @@ const buildConstructor = elemId => {
             },
         },
     });
-
     editor.DomComponents.addType('droppable-container-component', {
         // isComponent: el => el.tagName === 'DIV',
         model: {
@@ -130,128 +170,522 @@ const buildConstructor = elemId => {
             }
         }
     });
-    editor.DomComponents.addType('header-1-droppable-component', {
+
+    // containers
+    editor.DomComponents.addType('ui-main-component', {
+        extend: 'text',
+        model: {
+            defaults: {
+                tagName: 'main',
+                attributes: {
+                    class: 'ui-main'
+                },
+                droppable: 'section, .main-droppable',
+                components: ``
+            }
+        }
+    });
+    editor.DomComponents.addType('ui-header-component', {
         // isComponent: el => el.tagName === 'DIV',
         model: {
             defaults: {
-                droppable: '.dropping',
-                components: `
-                    <h5 class="my-0 mr-md-auto font-weight-normal">Company name</h5>
-                    <nav class="my-2 my-md-0 mr-md-3">
-                        <a class="p-2 text-dark" href="#">Features</a>
-                        <a class="p-2 text-dark" href="#">Enterprise</a>
-                        <a class="p-2 text-dark" href="#">Support</a>
-                        <a class="p-2 text-dark" href="#">Pricing</a>
-                     </nav>
-                `,
+                // droppable: '.dropping',
                 attributes: {
-                    class: 'd-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm dropping'
+                    class: 'ui-header-1'
                 },
-                tagName: 'div',
+                tagName: 'header',
                 style: {
                     // border: '1px solid red',
+                },
+                components: `
+                    <div class="ui-header-1__container ui-header-1__container--space-between">
+
+                        <a href="/src" class="ui-header-1__logo">
+                            Tech<span class="ui-header-1__logo-accent">Hub</span>
+                        </a>
+
+                        <div class="ui-header-1__action-box">
+                            <div class="ui-header-1__lang-switcher">
+                                <div class="ui-header-1__language">
+                                    Ru
+                                </div>
+
+                                <svg class="ui-header-1__lang-toggle" width="10" height="5">
+                                    <use xlink:href="img/icons.svg#toggle"></use>
+                                </svg>
+                            </div>
+
+                            <button data-gjs-type="ui-button-red-md-component" class="ui-header-1__login-btn button button--lg">
+
+                            </button>
+                        </div>
+                    </div>
+<!--                    <main class="ui-main" data-gjs-type="box" data-gjs-droppable="section .main-droppable">-->
+<!--                    </main>-->
+                `,
+
+            }
+        }
+    });
+    editor.DomComponents.addType('ui-section-80vh-component', {
+        model: {
+            defaults: {
+                droppable: '.ui-container, .ui-container-fix, img',
+                draggable: 'main',
+                attributes: {
+                    class: 'ui-section-80vh main-droppable'
+                },
+                tagName: 'section',
+            }
+        }
+    });
+    editor.DomComponents.addType('ui-section-component', {
+        model: {
+            defaults: {
+                droppable: '.ui-container, .ui-container-fix, img',
+                draggable: 'main',
+                attributes: {
+                    class: 'ui-section main-droppable'
+                },
+                tagName: 'section',
+            }
+        }
+    });
+    editor.DomComponents.addType('ui-section-black-component', {
+        model: {
+            defaults: {
+                droppable: '.ui-container, .ui-container-fix, img',
+                draggable: 'main',
+                attributes: {
+                    class: 'ui-section-black main-droppable'
+                },
+                tagName: 'section',
+            }
+        }
+    });
+    editor.DomComponents.addType('ui-container-component', {
+        model: {
+            defaults: {
+                droppable: '*',
+                draggable: 'section',
+                attributes: {
+                    class: 'ui-container'
                 }
             }
         }
     });
-    //
-    // editor.BlockManager.add('droppable-container-block', {
-    //     label: 'Droppable container',
-    //     content: {
-    //         type: 'droppable-container-component',
-    //     }
-    // });
-    // editor.BlockManager.add('droppable-card-deck-block', {
-    //     label: 'Droppable card deck',
-    //     content: {
-    //         type: 'droppable-card-deck-component',
-    //     }
-    // });
-    // editor.BlockManager.add('droppable-card-block', {
-    //     label: 'Droppable card',
-    //     content: {
-    //         type: 'droppable-card-component',
-    //     }
-    // });
-    // editor.BlockManager.add('header-1-droppable-block', {
-    //     label: 'Droppable header',
-    //     content: {
-    //         type: 'header-1-droppable-component',
-    //     }
-    // });
-    // editor.BlockManager.add('button-link', {
-    //     label: 'Button link',
-    //     content: {
-    //         type: 'link',
-    //         attributes: {
-    //             class: 'btn mx-auto btn-lg btn-block btn-primary dropping'
-    //         },
-    //         style: {
-    //             'max-width': '150px',
-    //             position: 'absolute',
-    //             bottom: '5%'
-    //         }
-    //     }
-    // });
+    editor.DomComponents.addType('ui-container-fix-component', {
+        model: {
+            defaults: {
+                droppable: '*',
+                draggable: 'section',
+                attributes: {
+                    class: 'ui-container-fix'
+                }
+            }
+        }
+    });
+    editor.DomComponents.addType('ui-pos-top-left-component', {
+        model: {
+            defaults: {
+                tagName: 'div',
+                draggable: '*',
+                attributes: {
+                    class: 'ui-pos-top-left'
+                }
+            }
+        }
+    });
+    editor.DomComponents.addType('ui-pos-center-left-component', {
+        model: {
+            defaults: {
+                tagName: 'div',
+                draggable: '*',
+                attributes: {
+                    class: 'ui-pos-center-left'
+                }
+            }
+        }
+    });
+    editor.DomComponents.addType('ui-pos-top-center-component', {
+        model: {
+            defaults: {
+                tagName: 'div',
+                draggable: '*',
+                attributes: {
+                    class: 'ui-pos-top-center'
+                }
+            }
+        }
+    });
+    editor.DomComponents.addType('ui-pos-center-component', {
+        model: {
+            defaults: {
+                tagName: 'div',
+                draggable: '*',
+                attributes: {
+                    class: 'ui-pos-center'
+                }
+            }
+        }
+    });
+    editor.DomComponents.addType('ui-pos-top-right-component', {
+        model: {
+            defaults: {
+                tagName: 'div',
+                draggable: '*',
+                attributes: {
+                    class: 'ui-pos-top-right'
+                }
+            }
+        }
+    });
+    editor.DomComponents.addType('ui-pos-center-right-component', {
+        model: {
+            defaults: {
+                tagName: 'div',
+                draggable: '*',
+                attributes: {
+                    class: 'ui-pos-center-right'
+                }
+            }
+        }
+    });
+
+    //grid
+    editor.DomComponents.addType('ui-grid-2-component', {
+        model: {
+            defaults: {
+                tagName: 'div',
+                draggable: '.ui-container, *',
+                attributes: {
+                    class: 'ui-grid-2'
+                },
+                components: `
+                    <div data-gjs-droppable="*" style="min-height: 100px"></div>
+                    <div data-gjs-droppable="*" style="min-height: 100px"></div>
+                `
+            }
+        }
+    });
+    editor.DomComponents.addType('ui-grid-3-component', {
+        model: {
+            defaults: {
+                tagName: 'div',
+                draggable: '.ui-container, *',
+                attributes: {
+                    class: 'ui-grid-3'
+                },
+                components: `
+                    <div data-gjs-droppable="*" style="min-height: 100px"></div>
+                    <div data-gjs-droppable="*" style="min-height: 100px"></div>
+                    <div data-gjs-droppable="*" style="min-height: 100px"></div>
+                `
+            }
+        }
+    });
+    editor.DomComponents.addType('ui-grid-4-component', {
+        model: {
+            defaults: {
+                tagName: 'div',
+                draggable: '.ui-container, *',
+                attributes: {
+                    class: 'ui-grid-4'
+                },
+                components: `
+                    <div data-gjs-droppable="*" style="min-height: 100px"></div>
+                    <div data-gjs-droppable="*" style="min-height: 100px"></div>
+                    <div data-gjs-droppable="*" style="min-height: 100px"></div>
+                    <div data-gjs-droppable="*" style="min-height: 100px"></div>
+                `
+            }
+        }
+    });
+
+    //border
+    editor.DomComponents.addType('ui-border-component', {
+        model: {
+            defaults: {
+                tagName: 'div',
+                droppable: '*',
+                attributes: {
+                    class: 'ui-border'
+                },
+            }
+        }
+    });
+
+    // text and language
+    editor.DomComponents.addType('ui-heading-white-component', {
+        extend: 'text',
+        model: {
+            defaults: {
+                components: `
+                    Astana hub heading program slim shady
+                `,
+                tagName: 'p',
+                attributes: {
+                    'data-grapes-lang-kz' : '',
+                    'data-grapes-lang-en' : '',
+                    'data-grapes-lang-ru' : '',
+                    class: 'text-lang ui-heading-white'
+                },
+                // style: {'font-size': '3rem'},
+                traits: [
+                    // Strings are automatically converted to text types
+                    // 'name', // Same as: { type: 'text', name: 'name' }
+                    {
+                        type: 'text',
+                        name: 'data-grapes-lang-kz',
+                        label: 'Lang KZ'
+                    },
+                    {
+                        type: 'text',
+                        name: 'data-grapes-lang-en',
+                        label: 'Lang EN'
+                    }
+                ],
+            }
+        }
+    });
+    editor.DomComponents.addType('ui-heading-black-component', {
+        extend: 'text',
+        model: {
+            defaults: {
+                type: 'textnode',
+                components: `
+                    Astana hub heading program slim shady
+                `,
+                tagName: 'p',
+                attributes: {
+                    'data-grapes-lang-kz' : '',
+                    'data-grapes-lang-en' : '',
+                    'data-grapes-lang-ru' : '',
+                    class: 'text-lang ui-heading-black'
+                },
+                // style: {'font-size': '3rem'},
+                traits: [
+                    // Strings are automatically converted to text types
+                    // 'name', // Same as: { type: 'text', name: 'name' }
+                    {
+                        type: 'text',
+                        name: 'data-grapes-lang-kz',
+                        label: 'Lang KZ'
+                    },
+                    {
+                        type: 'text',
+                        name: 'data-grapes-lang-en',
+                        label: 'Lang EN'
+                    }
+                ],
+            }
+        }
+    });
+    editor.DomComponents.addType('ui-paragraph-white-component', {
+        extend: 'text',
+        model: {
+            defaults: {
+                components: `
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A eveniet explicabo vel! Alias delectus dolores esse ex ipsam iste laudantium natus placeat reiciendis sequi suscipit totam unde, vel vitae voluptatum
+                `,
+                tagName: 'p',
+                attributes: {
+                    'data-grapes-lang-kz' : '',
+                    'data-grapes-lang-en' : '',
+                    'data-grapes-lang-ru' : '',
+                    class: 'text-lang ui-paragraph-white'
+                },
+                traits: [
+                    {
+                        type: 'text',
+                        name: 'data-grapes-lang-kz',
+                        label: 'Lang KZ'
+                    },
+                    {
+                        type: 'text',
+                        name: 'data-grapes-lang-en',
+                        label: 'Lang EN'
+                    }
+                ],
+            }
+        }
+    });
+    editor.DomComponents.addType('ui-paragraph-black-component', {
+        extend: 'text',
+        model: {
+            defaults: {
+                components: `
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A eveniet explicabo vel! Alias delectus dolores esse ex ipsam iste laudantium natus placeat reiciendis sequi suscipit totam unde, vel vitae voluptatum
+                `,
+                tagName: 'p',
+                attributes: {
+                    'data-grapes-lang-kz' : '',
+                    'data-grapes-lang-en' : '',
+                    'data-grapes-lang-ru' : '',
+                    class: 'text-lang ui-paragraph-black'
+                },
+                traits: [
+                    {
+                        type: 'text',
+                        name: 'data-grapes-lang-kz',
+                        label: 'Lang KZ'
+                    },
+                    {
+                        type: 'text',
+                        name: 'data-grapes-lang-en',
+                        label: 'Lang EN'
+                    }
+                ],
+            }
+        }
+    });
+    editor.DomComponents.addType('lang-switcher-component', {
+        model: {
+            defaults: {
+                components: `
+                    <button id="lang-kz-button">KZ</button>
+                    <button id="lang-ru-button">RU</button>
+                    <button id="lang-en-button">EN</button>
+                `,
+                tagName: 'span',
+                style: {
+                    'font-size': '2rem',
+                    width: '100px',
+                    height: '45px',
+                    display: 'flex'
+                },
+            }
+        }
+    })
+
+    // cards
+    editor.DomComponents.addType('ui-card-column-component', {
+        model: {
+            defaults: {
+                tagName: 'div',
+                attributes: {
+                    class: 'ui-card-column'
+                },
+                components: `
+                    <img data-gjs-type="image" src="/img/icons/lamp.svg" alt="" class="ui-card-column__icon">
+
+                    <div class="ui-card-column__title">
+                        С конкурентоспособной идеей
+                    </div>
+
+                    <div class="ui-card-column__subtitle">
+                        В стартап-индустрии мы называем это "MCI" - максимально конкурентоспособная идея, надобность
+                        которой уже прощупана среди целевых клиентов. Идея должна быть осуществимой и иметь
+                        потенциал на развитие.
+                    </div>
+                `
+            }
+        }
+    });
+
+    // steps
+    editor.DomComponents.addType('ui-step-component', {
+        model: {
+            defaults: {
+                tagName: 'div',
+                attributes: {
+                    class: 'ui-step'
+                },
+                components: `
+                    <div class="ui-step__number">
+                        01
+                    </div>
+                    <div class="ui-step__text">
+                        Сформулируй идею
+                    </div>
+                `
+            }
+        }
+    });
+
+    // buttons
+    editor.DomComponents.addType('ui-button-red-md-component', {
+        extend: 'link',
+        model: {
+            defaults: {
+                tagName: 'button',
+                attributes: {
+                    'data-grapes-lang-kz' : '',
+                    'data-grapes-lang-en' : '',
+                    'data-grapes-lang-ru' : '',
+                    class: 'text-lang ui-button-red-md',
+                    'onclick': `window.open('/')`
+                },
+                components: `Подать заявку`,
+                traits: [
+                    // Strings are automatically converted to text types
+                    // 'name', // Same as: { type: 'text', name: 'name' }
+                    {
+                        type: 'text',
+                        name: 'data-grapes-lang-kz',
+                        label: 'Lang KZ'
+                    },
+                    {
+                        type: 'text',
+                        name: 'data-grapes-lang-en',
+                        label: 'Lang EN'
+                    }
+                ],
+            }
+        }
+    });
+
+    // socials
+    editor.DomComponents.addType('ui-socials-component', {
+        model: {
+            defaults: {
+                tagName: 'div',
+                attributes: {
+                    class: 'ui-socials'
+                },
+                components: `
+                    <a href="#" class="ui-socials__item">
+                        <img src="/img/icons/fb-icon.png" alt="">
+                    </a>
+
+                    <a href="#" class="ui-socials__item">
+                        <img src="/img/icons/linkeddn-icon.png" alt="">
+                    </a>
+
+                    <a href="#" class="ui-socials__item">
+                        <img src="/img/icons/inst-icon.png" alt="">
+                    </a>
+
+                    <a href="#" class="ui-socials__item">
+                        <img src="/img/icons/tg-icon.png" alt="">
+                    </a>
+
+                    <a href="#" class="ui-socials__item">
+                        <img src="/img/icons/youtube-icon.png" alt="">
+                    </a>
+                `
+            }
+        }
+    });
 
     // editor.CssComposer.setRule('.submit-button', {
     //
     // });
 
-    editor.BlockManager.add('ui-header-block', {
-        label: 'UI Header 1',
-        category: 'Header',
-        content: `
-            <header class="header">
+    // BLOCKS
 
-                <div class="header__container header__container--space-between">
-
-                    <!--    <svg class="header__hamburger" width="18" height="12">-->
-                    <!--        <use xlink:href="img/icons.svg#hamburger"></use>-->
-                    <!--    </svg>-->
-
-                    <a href="/src" class="header__logo">
-                        Tech<span class="header__logo-accent">Hub</span>
-                    </a>
-
-
-                    <div class="header__action-box">
-                        <div class="header__lang-switcher">
-                            <div class="header__language">
-                                Ru
-                            </div>
-
-                            <svg class="header__lang-toggle" width="10" height="5">
-                                <use xlink:href="img/icons.svg#toggle"></use>
-                            </svg>
-                        </div>
-
-                        <button class="header__login-btn button button--lg">
-                            Подать заявку
-                        </button>
-                    </div>
-
-                </div>
-            </header>
-        `
-    });
+    //TEST
     editor.BlockManager.add('ui-main-container-block', {
         label: 'FILLABLE: UI Main Container',
-        category: 'Container',
+        // category: 'Container',
         content: `
             <main data-gjs-droppable=".dropping" class="program-page"></main>
         `
     });
-    // editor.BlockManager.add('ui-section-container-block', {
-    //     label: 'FILLABLE: UI Section Container',
-    //     content: `
-    //         <div data-gjs-droppable=".dropping" class="program-page__section dropping">
-    //         </div>
-    //     `
-    // });
+    //TEST
     editor.BlockManager.add('ui-welcome-section-block', {
         label: 'Welcome Section',
-        category: 'Basic',
+        // category: 'Basic',
         content: `
             <div data-gjs-droppable=".dropping" class="program-page__section program-welcome-section dropping">
                 <img data-gjs-type="image" alt="" class="program-welcome-section__img dropping">
@@ -264,10 +698,10 @@ const buildConstructor = elemId => {
             </div>
         `
     });
-
+    //TEST
     editor.BlockManager.add('ui-cards-block', {
         label: 'Cards section',
-        category: 'Basic',
+        // category: 'Basic',
         content: `
             <div class="program-page__section program-cards dropping">
 
@@ -346,10 +780,10 @@ const buildConstructor = elemId => {
             </div>
         `
     });
-
+    //TEST
     editor.BlockManager.add('ui-info-block', {
         label: 'Info Block',
-        category: 'Basic',
+        // category: 'Basic',
 
         content: `
             <div class="program-page__section program-info">
@@ -385,10 +819,10 @@ const buildConstructor = elemId => {
             </div>
         `
     });
-
+    //TEST
     editor.BlockManager.add('ui-steps-block', {
         label: 'Steps',
-        category: 'Basic',
+        // category: 'Basic',
 
         content: `
             <div class="program-page__section program-steps">
@@ -423,10 +857,10 @@ const buildConstructor = elemId => {
             </div>
         `
     });
-
+    //TEST
     editor.BlockManager.add('ui-request', {
         label: 'Request form',
-        category: 'Section',
+        // category: 'Section',
         content: `
             <div class="program-page__section program-request">
                 <div class="program-request__title">
@@ -445,9 +879,11 @@ const buildConstructor = elemId => {
         `
     });
 
+    // Opening the block panel on init
     editor.Panels.getButton('views', 'open-blocks').set('active', true)
 
     // submit button with script
+    //TEST
     editor.BlockManager.add('submit-button', {
         label: 'Submit button',
         content: {
@@ -455,7 +891,7 @@ const buildConstructor = elemId => {
         }
     });
 
-    // image
+    //TEST
     editor.BlockManager.add('image', {
         id: 'image',
         label: 'Image',
@@ -473,11 +909,230 @@ const buildConstructor = elemId => {
         content: `<div class="test-class">SOME THINGS HERE</div>`
     })
 
-    // important to make canvas work right, do not touch, always set attributes: {class: 'default-wrapper'} on every new block (except droppable components)
-    // droppable components should not use it, otherwise they will not be able to be droppable
-    // cssComposer.setRule('.default-wrapper', {
-    //     display:'inline-block'
-    // });
+    // used blocks
+    editor.BlockManager.add('ui-header-block', {
+        label: 'UI Header',
+        category: 'UI Headers',
+        content: `
+            <header data-gjs-type="ui-header-component"></header>
+            <main data-gjs-type="ui-main-component"></main>
+        `
+    });
+    editor.BlockManager.add('ui-section-80vh-block', {
+        label: 'UI Section 80vh',
+        category: 'UI Section',
+        content: {
+            type: 'ui-section-80vh-component'
+        }
+    });
+    editor.BlockManager.add('ui-section-block', {
+        label: 'UI Section',
+        category: 'UI Section',
+        content: {
+            type: 'ui-section-component'
+        }
+    });
+    editor.BlockManager.add('ui-section-black-block', {
+        label: 'UI Section Black',
+        category: 'UI Section',
+        content: {
+            type: 'ui-section-black-component'
+        }
+    });
+    editor.BlockManager.add('ui-container-block', {
+        label: 'UI Container h100',
+        category: 'UI Container',
+        content: {
+            type: 'ui-container-component'
+        }
+    });
+    editor.BlockManager.add('ui-container-fix-block', {
+        label: 'UI Container Fix',
+        category: 'UI Container',
+        content: {
+            type: 'ui-container-fix-component'
+        }
+    });
+    editor.BlockManager.add('ui-bg-img-block', {
+        label: 'UI Background Image',
+        category: 'UI Image',
+        content: {
+            attributes: {
+                class: 'ui-bg-img',
+                'data-gjs-draggable': '.ui-container, .ui-container-fix'
+            },
+            type: 'image'
+        }
+    });
+    editor.BlockManager.add('ui-pos-top-left-block', {
+        label: 'UI Position Top Left Container',
+        category: 'UI Position Container',
+        content: {
+            type: 'ui-pos-top-left-component'
+        }
+    });
+    editor.BlockManager.add('ui-pos-center-left-block', {
+        label: 'UI Position Center Left Container',
+        category: 'UI Position Container',
+        content: {
+            type: 'ui-pos-center-left-component'
+        }
+    });
+    editor.BlockManager.add('ui-pos-top-center-block', {
+        label: 'UI Position Top Center Container',
+        category: 'UI Position Container',
+        content: {
+            type: 'ui-pos-top-center-component'
+        }
+    });
+    editor.BlockManager.add('ui-pos-center-block', {
+        label: 'UI Position Center Container',
+        category: 'UI Position Container',
+        content: {
+            type: 'ui-pos-center-component'
+        }
+    });
+    editor.BlockManager.add('ui-pos-top-right-block', {
+        label: 'UI Position Top Right Container',
+        category: 'UI Position Container',
+        content: {
+            type: 'ui-pos-top-right-component'
+        }
+    });
+    editor.BlockManager.add('ui-pos-center-right-block', {
+        label: 'UI Position Center Right Container',
+        category: 'UI Position Container',
+        content: {
+            type: 'ui-pos-center-right-component'
+        }
+    });
+    editor.BlockManager.add('ui-border-block', {
+        label: 'UI Border',
+        category: 'UI Borders',
+        content: {
+            type: 'ui-border-component'
+        }
+    });
+    editor.BlockManager.add('ui-grid-2-block', {
+        label: 'UI Grid 2',
+        category: 'UI Grid',
+        content: {
+            type: 'ui-grid-2-component'
+        }
+    });
+    editor.BlockManager.add('ui-grid-3-block', {
+        label: 'UI Grid 3',
+        category: 'UI Grid',
+        content: {
+            type: 'ui-grid-3-component'
+        }
+    });
+    editor.BlockManager.add('ui-grid-4-block', {
+        label: 'UI Grid 4',
+        category: 'UI Grid',
+        content: {
+            type: 'ui-grid-4-component'
+        }
+    });
+    // text and lang
+    editor.BlockManager.add('lang-switcher-block', {
+        label: 'Language Switcher',
+        category: 'Util',
+        content: {
+            type: 'lang-switcher-component',
+            script: function () {
+                document.getElementById('lang-kz-button').addEventListener('click', e => {
+                    console.log('kazakh')
+                    document.querySelectorAll('.text-lang').forEach(elem => {
+
+                        if (!elem.getAttribute('data-grapes-lang-ru'))
+                            elem.setAttribute('data-grapes-lang-ru', elem.innerHTML);
+
+                        elem.innerHTML = elem.getAttribute('data-grapes-lang-kz');
+                    })
+                });
+
+                document.getElementById('lang-en-button').addEventListener('click', e => {
+                    document.querySelectorAll('.text-lang').forEach(elem => {
+
+                        if (!elem.getAttribute('data-grapes-lang-ru'))
+                            elem.setAttribute('data-grapes-lang-ru', elem.innerHTML);
+
+                        elem.innerHTML = elem.getAttribute('data-grapes-lang-en');
+                    })
+                });
+
+                document.getElementById('lang-ru-button').addEventListener('click', e => {
+                    document.querySelectorAll('.text-lang').forEach(elem => {
+
+                        if (!elem.getAttribute('data-grapes-lang-ru'))
+                            elem.setAttribute('data-grapes-lang-ru', elem.innerHTML);
+
+                        elem.innerHTML = elem.getAttribute('data-grapes-lang-ru');
+                    })
+                });
+            }
+        }
+    });
+    editor.BlockManager.add('ui-heading-white-block', {
+        label: 'Text Heading White',
+        category: 'Text',
+        content: {
+            type: 'ui-heading-white-component'
+        }
+    });
+    editor.BlockManager.add('ui-heading-black-block', {
+        label: 'Text Heading Black',
+        category: 'Text',
+        content: {
+            type: 'ui-heading-black-component'
+        }
+    });
+    editor.BlockManager.add('ui-paragraph-white-block', {
+        label: 'Text Paragraph White',
+        category: 'Text',
+        content: {
+            type: 'ui-paragraph-white-component'
+        }
+    });
+    editor.BlockManager.add('ui-paragraph-black-block', {
+        label: 'Text Paragraph Black',
+        category: 'Text',
+        content: {
+            type: 'ui-paragraph-black-component'
+        }
+    });
+    // card
+    editor.BlockManager.add('ui-card-column-block', {
+        label: 'Card Column',
+        category: 'Card',
+        content: {
+            type: 'ui-card-column-component'
+        }
+    });
+    // step
+    editor.BlockManager.add('ui-step-block', {
+        label: 'UI Step',
+        category: 'Card',
+        content: {
+            type: 'ui-step-component'
+        }
+    });
+    editor.BlockManager.add('ui-button-red-md-block', {
+        label: 'Button Red',
+        category: 'Buttons',
+        content: {
+            type: 'ui-button-red-md-component'
+        }
+    });
+    editor.BlockManager.add('ui-socials-block', {
+        label: 'Socials',
+        category: 'Util',
+        content: {
+            type: 'ui-socials-component'
+        }
+    });
+
     return editor;
 }
 

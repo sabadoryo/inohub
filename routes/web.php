@@ -70,7 +70,7 @@ Route::group([
     Route::post('programs/{id}/update-forms', 'ProgramsController@updateForms');
     Route::post('programs/{id}/update-forms-list', 'ProgramsController@updateFormsList');
     Route::post('programs/{id}/publish', 'ProgramsController@publish');
-
+    Route::post('programs/{id}/update-page', 'ProgramsController@updatePage');
 
     Route::get('users', 'UsersController@index');
     Route::get('users/get-list', 'UsersController@getList');
@@ -88,6 +88,9 @@ Route::group([
     Route::post('acl/add-role', 'ACLController@addRole');
 
 
+
+    Route::get('images', 'ImagesController@index');
+    Route::post('images', 'ImagesController@store');
 
     Route::get('events', 'EventsController@index');
     Route::get('events/get-list', 'EventsController@getList');
@@ -132,6 +135,8 @@ Route::group([
     Route::get('members/create', 'MembersController@create');
     Route::post('members', 'MembersController@store');
     Route::get('members/get-list', 'MembersController@getList');
+
+    Route::post('passports/{id}/save-changes', 'PassportsController@saveChanges');
 
 });
 

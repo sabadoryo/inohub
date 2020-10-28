@@ -11,9 +11,9 @@ angular
             dismiss: '&'
         }
     });
-    
+
 function controller($http) {
- 
+
 	let $ctrl = this;
 
 	$ctrl.title = null;
