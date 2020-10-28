@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        <a class="btn btn-primary" href="/control-panel/sm/solutions/create">Добавить компанию</a>
+        <a class="btn btn-primary" href="/control-panel/sm/solutions/create">Добавить решение</a>
     </div>
 
     <div class="card-body">
@@ -19,14 +19,18 @@
             <tbody>
             <tr ng-repeat="company in $ctrl.companies track by $index">
                 <td>{{company.id}}</td>
-                <td><img ng-src="{{company.icon}}" alt="..."></td>
+                <td><img width="40" height="40" ng-src="/{{company.icon}}" alt="..."></td>
                 <td>{{company.name}}</td>
-                <td>{{company.description | truncate}}</td>
+                <td>{{company.description | truncate : 15 : '...'}}</td>
                 <td><a ng-href="//{{company.site}}">{{company.site}}</a></td>
-                <td><a ng-href="//{{company.presentation_path}}">{{company.presentation_path}}</a></td>
+                <td><a ng-href="//{{company.presentation_path}}">{{company.name}}</a></td>
                 <td style="display: flex; border: none; padding: 10px 5px; text-align: center">
-                    <a ng-href="#"><span class="fas fa-edit" style="margin-right: 10px; color: dodgerblue"></span></a>
-                    <a ng-href="#"><span class="fas fa-times" style="color: red;"></span></a>
+                    <a ng-href="/control-panel/sm/solutions/{{company.id}}/edit"><span class="fas fa-edit" style="margin-right: 10px; color: dodgerblue"></span></a>
+                    <a href=""
+                       ng-click="$ctrl.removeCompany(company.id, company.name)"
+                       ng-disabled="$ctrl.loading">
+                        <span class="fas fa-times" style="color: red;"></span>
+                    </a>
                 </td>
             </tr>
             </tbody>

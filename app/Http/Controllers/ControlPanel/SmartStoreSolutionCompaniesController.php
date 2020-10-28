@@ -8,18 +8,19 @@ use Illuminate\Http\Request;
 
 class SmartStoreSolutionCompaniesController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $breadcrumb = [
             ['/control-panel', 'Главная'],
-            [null, 'Мероприятия']
+            [null, 'ИТ решении']
         ];
+
+        $bindings = ['message' => $request['success_message']];
 
         $component = 'smart-store-solution-companies';
 
-        $bindings = [];
 
-        $PAGE_TITLE = 'Smart Store Solutions';
+        $PAGE_TITLE = 'ИТ решения';
 
         $activePage = 'sm-solutions';
 
@@ -44,13 +45,13 @@ class SmartStoreSolutionCompaniesController extends Controller
     {
         $breadcrumb = [
             ['/control-panel', 'Главная'],
-            ['/sm-solutions', 'IT-решения'],
-            [null, 'Добавление ИТ компании']
+            ['/control-panel/sm/solutions', 'ИТ-решения'],
+            [null, 'Добавление ИТ решении']
         ];
 
 
         return view('control-panel.component', [
-            'PAGE_TITLE' => 'Добавление ИТ компании',
+            'PAGE_TITLE' => 'Добавление ИТ решении',
             'activePage' => 'sm-solutions',
             'breadcrumb' => $breadcrumb,
             'component' => 'smart-store-solution-companies-create',
@@ -68,17 +69,110 @@ class SmartStoreSolutionCompaniesController extends Controller
             'presentation' => 'required|file',
         ]);
 
-        $path = \Storage::disk('public')->put('sm-companies/images', $request->image);
-        dd($path);
+        try {
+            $imagePath = \Storage::disk('public')->put('sm-companies/images', $request->image);
+        } catch (\Exception $e) {
+            return response(['message' => 'Ошибка'], 400);
+        }
 
-//        SMSolutionCompany::create([
-//            'name' => $request['name'],
-//            'description' => $request['description'],
-//            'site' => $request['link'],
-//            'solutions' => $request['solutions'],
-//            'name' => $request['name'],
-//            'name' => $request['name'],
-//        ]);
+        try {
+            $presentationPath = \Storage::disk('public')
+                ->put('sm-companies/presentations', $request->presentation);
+        } catch (\Exception $e) {
+            return response(['message' => 'Ошибка'], 400);
+        }
+
+        SMSolutionCompany::create([
+            'name' => $request['name'],
+            'description' => $request['description'],
+            'site' => $request['link'],
+            'solutions' => $request['solutions'],
+            'icon' => $imagePath,
+            'presentation_path' => $presentationPath,
+        ]);
+
+        return ['message' => 'Решение успешно добавлено'];
+    }
+
+    public function edit(Request $request, $id)
+    {
+        $breadcrumb = [
+            ['/control-panel', 'Главная'],
+            ['/control-panel/sm/solutions', 'ИТ-решения'],
+            [null, 'Обновление ИТ решении']
+        ];
+
+        $company = SMSolutionCompany::findOrFail($id);
+
+        $bindings = [
+            'company' => $company
+        ];
+
+        return view('control-panel.component', [
+            'PAGE_TITLE' => 'Обновление решения',
+            'activePage' => 'sm-solutions',
+            'breadcrumb' => $breadcrumb,
+            'bindings' => $bindings,
+            'component' => 'smart-store-solution-companies-edit',
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string',
+            'description' => 'required|string',
+            'link' => 'required|string',
+            'solutions' => 'required|string',
+            'image' => 'nullable|file',
+            'imagePath' => 'nullable|string',
+            'presentation' => 'nullable|file',
+            'presentationPath' => 'nullable|string',
+        ]);
+
+        if ($request->image) {
+            try {
+                $imagePath = \Storage::disk('public')->put('sm-companies/images', $request->image);
+            } catch (\Exception $e) {
+                return response(['message' => 'Ошибка'], 400);
+            }
+        } else {
+            $imagePath = $request->imagePath;
+        }
+
+        if ($request->presentation) {
+            try {
+                $presentationPath = \Storage::disk('public')
+                    ->put('sm-companies/presentations', $request->presentation);
+            } catch (\Exception $e) {
+                return response(['message' => 'Ошибка'], 400);
+            }
+        } else {
+            $presentationPath = $request->presentationPath;
+        }
+
+        $company = SMSolutionCompany::findOrFail($id);
+
+        $company->update([
+            'name' => $request['name'],
+            'description' => $request['description'],
+            'site' => $request['link'],
+            'solutions' => $request['solutions'],
+            'icon' => $imagePath,
+            'presentation_path' => $presentationPath,
+        ]);
+
+        return ['message' => 'Решение успешно обновлена'];
+    }
+
+    public function remove($id)
+    {
+        $company = SMSolutionCompany::findOrFail($id);
+
+        $company->delete();
+
+        return [];
+
     }
 
 }

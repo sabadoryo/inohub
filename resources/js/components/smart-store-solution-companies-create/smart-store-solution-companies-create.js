@@ -17,39 +17,13 @@ function controller(Upload, notify) {
 	$ctrl.name = null;
 	$ctrl.description = null;
 	$ctrl.link = null;
-	$ctrl.solution = null;
+	$ctrl.solutions = null;
 	$ctrl.image = null;
 	$ctrl.presentation = null;
-	$ctrl.addedSolutions = [];
 
-	$ctrl.$onInit = function () {
-
-    };
-
-	$ctrl.addSolution = function () {
-	    $ctrl.addedSolutions.push(_.cloneDeep($ctrl.solution));
-	    $ctrl.solution = null;
-    };
-
-	$ctrl.removeSolution = function () {
-	    $ctrl.addedSolutions.pop();
-    };
+	$ctrl.$onInit = function () {};
 
 	$ctrl.submit = function () {
-
-	    let solutions = '';
-	    if (!$ctrl.addedSolutions.length) {
-	        notify({
-                message: 'Поле "список решении" обязательно для заполнения',
-                duration: 2000,
-                position: 'top',
-                classes: 'alert-danger'
-            });
-
-	        return;
-        } else {
-	        solutions = $ctrl.addedSolutions.join(';');
-        }
 
 	    if (!$ctrl.image) {
             notify({
@@ -66,7 +40,7 @@ function controller(Upload, notify) {
 	        name: $ctrl.name,
 	        description: $ctrl.description,
 	        link: $ctrl.link,
-	        solutions: solutions,
+	        solutions: $ctrl.solutions,
 	        image: $ctrl.image,
 	        presentation: $ctrl.presentation,
         };
@@ -79,14 +53,7 @@ function controller(Upload, notify) {
             })
             .then(
                 res => {
-                    notify({
-                        message: 'Добавлено',
-                        duration: 2000,
-                        position: 'top',
-                        classes: 'alert-success'
-                    });
-
-                    // window.location.href = '/control-panel/sm/solutions';
+                    window.location.href = `/control-panel/sm/solutions?success_message=${res.data.message}`;
                 },
                 err => {
                     notify({

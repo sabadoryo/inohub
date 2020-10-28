@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        <h5 class="modal-title">ИТ-решение</h5>
+        <h5 class="modal-title">Новая задача</h5>
     </div>
 
     <div class="card-body">
@@ -34,23 +34,38 @@
             </div>
 
             <div class="form-group">
-                <label>Описание:</label>
-                <textarea class="form-control" ng-model="$ctrl.description" required></textarea>
-            </div>
-
-            <div class="form-group">
                 <label>Сайт компании:</label>
                 <input class="form-control" ng-model="$ctrl.link">
             </div>
 
             <div class="form-group">
-                <label>Список решении:</label>
-                <textarea class="form-control" required ng-model="$ctrl.solutions"></textarea>
+                <label>Адрес компании:</label>
+                <input class="form-control" ng-model="$ctrl.address">
             </div>
 
             <div class="form-group">
-                <label>Презентация:</label>
-                <input class="form-control" type="file" required ng-model="$ctrl.presentation" ngf-select="">
+                <label>Виды выпускаемой продукции:</label>
+                <textarea class="form-control" ng-model="$ctrl.manufacturedProducts"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Полностью автоматизированные бизнес-процессы:</label>
+                <textarea class="form-control" ng-model="$ctrl.fullyBP"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Частично автоматизированные бизнес-процессы:</label>
+                <textarea class="form-control" ng-model="$ctrl.partlyBP"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Задачи:</label>
+                <textarea class="form-control" ng-model="$ctrl.actualTasks"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Системы, которые внедрены на предприятии:</label>
+                <textarea class="form-control" ng-model="$ctrl.embeddedTasks"></textarea>
             </div>
 
             <button type="submit" class="btn btn-primary d-flex ml-auto">Создать</button>
