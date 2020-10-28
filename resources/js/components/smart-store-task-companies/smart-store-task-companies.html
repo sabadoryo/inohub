@@ -1,0 +1,40 @@
+<div class="card">
+    <div class="card-header">
+        <a class="btn btn-primary" href="/control-panel/sm/tasks/create">Добавить компанию</a>
+    </div>
+
+    <div class="card-body">
+        <table class="table table-bordered table-striped table-sm">
+            <thead class="thead-light">
+            <tr>
+                <th>ID</th>
+                <th>Иконка</th>
+                <th>Название</th>
+                <th>Выпускаемые продукции</th>
+                <th>Задачи</th>
+                <th>Адрес</th>
+                <th>Сайт</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="company in $ctrl.companies track by $index">
+                <td>{{company.id}}</td>
+                <td><img width="40" height="40" ng-src="/{{company.icon}}" alt="..."></td>
+                <td>{{company.name}}</td>
+                <td>{{company.manufactured_products | truncate : 15 : '...'}}</td>
+                <td>{{company.actual_tasks | truncate : 15 : '...'}}</td>
+                <td><a ng-href="//{{company.site}}">{{company.site}}</a></td>
+                <td style="display: flex; border: none; padding: 10px 5px; text-align: center">
+                    <a ng-href="/control-panel/sm/tasks/{{company.id}}/edit"><span class="fas fa-edit" style="margin-right: 10px; color: dodgerblue"></span></a>
+                    <a href=""
+                       ng-click="$ctrl.removeCompany(company.id, company.name)"
+                       ng-disabled="$ctrl.loading">
+                        <span class="fas fa-times" style="color: red;"></span>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
