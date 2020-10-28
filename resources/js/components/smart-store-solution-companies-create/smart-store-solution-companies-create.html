@@ -15,7 +15,11 @@
             <div class="form-group">
                 <label>Логотип компании:</label>
                 <div>
-                    <img ng-show="$ctrl.image" ngf-thumbnail="$ctrl.image"
+                    <img ng-show="$ctrl.imageType !== 'string' && $ctrl.image" ngf-thumbnail="$ctrl.image"
+                         style="vertical-align: middle; margin-bottom: 10px; width:100px; height: 100px"
+                         alt="company icon"/>
+                    <img ng-show="$ctrl.imageType === 'string'"
+                         ng-src="/{{$ctrl.image}}"
                          style="vertical-align: middle; margin-bottom: 10px; width:100px; height: 100px"
                          alt="company icon"/>
                 </div>
@@ -24,6 +28,7 @@
                        ngf-select=""
                        ngf-model-invalid="$ctrl.invalidAvatar"
                        ng-model="$ctrl.image"
+                       ng-change="$ctrl.imageChanged()"
                        accept="image/*"
                        ngf-max-size="10MB">
 
@@ -50,7 +55,15 @@
 
             <div class="form-group">
                 <label>Презентация:</label>
-                <input class="form-control" type="file" required ng-model="$ctrl.presentation" ngf-select="">
+                <a ng-if="$ctrl.presentationType = 'string'" ng-href="{{$ctrl.presentation}}">
+                    Ваша презентация
+                </a>
+                <input class="form-control"
+                       type="file"
+                       ng-model="$ctrl.presentation"
+                       ng-change="$ctrl.presentationChanged()"
+                       ngf-select="">
+
             </div>
 
             <button type="submit" class="btn btn-primary d-flex ml-auto">Создать</button>
