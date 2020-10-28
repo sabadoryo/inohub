@@ -19,7 +19,7 @@ function controller($uibModal, Upload, notify) {
 	$ctrl.$onInit = function () {
 	    $ctrl.data = $ctrl.news.data;
 	    $ctrl.title = $ctrl.news.title;
-	    $ctrl.description = $ctrl.news.short_description;
+	    // $ctrl.description = $ctrl.news.short_description;
     };
 
     $ctrl.openToPublishModal = () => {
@@ -101,7 +101,7 @@ function controller($uibModal, Upload, notify) {
 	    let url = '/control-panel/news/' + $ctrl.news.id + '/update-main';
 	    let params = {
 	        title: $ctrl.title,
-            short_description: $ctrl.description,
+            // short_description: $ctrl.description,
             data: $ctrl.data,
         };
 

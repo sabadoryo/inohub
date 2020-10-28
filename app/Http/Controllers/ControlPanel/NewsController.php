@@ -55,12 +55,12 @@ class NewsController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'short_description' => 'required',
+//            'short_description' => 'required',
         ]);
         
         $news = News::create([
             'title' => $request->title,
-            'short_description' => $request->short_description,
+//            'short_description' => $request->short_description,
         ]);
         
         return ['id' => $news->id];
@@ -93,7 +93,7 @@ class NewsController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'short_description' => 'required',
+//            'short_description' => 'required',
             'data' => 'array',
             'data.*.type' => [
                 'required_without:data',
@@ -109,7 +109,7 @@ class NewsController extends Controller
         
         $news->update([
             'title' => $request->title,
-            'short_description' => $request->short_description,
+//            'short_description' => $request->short_description,
         ]);
     
         if ($request->data) {
