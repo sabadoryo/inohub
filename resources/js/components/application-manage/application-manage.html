@@ -170,8 +170,22 @@
     Принять и зарегестрировать участника
 </a>
 
+<a href=""
+   ng-show="$ctrl.application.entity_model == 'App\\Module' && $ctrl.application.entity.slug == 'smart-store-input-solution'"
+   ng-href="/control-panel/sm/solutions/create?application_id={{$ctrl.application.id}}"
+   class="btn btn-success">
+    Принять и добавить ИТ решение
+</a>
+
+<a href=""
+   ng-show="$ctrl.application.entity_model == 'App\\Module' && $ctrl.application.entity.slug == 'smart-store-input-task'"
+   ng-href="/control-panel/sm/tasks/create?application_id={{$ctrl.application.id}}"
+   class="btn btn-success">
+    Принять и добавить задачу
+</a>
+
 <br>
 
 <div>
-    <button type="button" class="btn btn-danger" ng-click="$ctrl.reject()">Отказать</button>
+    <button type="button" class="btn btn-primary mr-4" ng-click="">Закрыть заявку</button>
 </div>

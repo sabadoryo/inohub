@@ -124,8 +124,7 @@
 
                 <li class="nav-item has-treeview">
                     <a href=""
-                       class="nav-link {{$activePage === 'sm-solutions' || $activePage === 'sm-tasks' ? 'active' : ''}}"
-                       uib-dropdown-toggle>
+                       class="nav-link {{$activePage === 'sm-solutions' || $activePage === 'sm-tasks' ? 'active' : ''}}">
                         <i class="nav-icon fas fa-credit-card"></i>
                         <p>
                             Smart Store
@@ -140,7 +139,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="/control-panel/sm/tasks" class="nav-link {{$activePage === 'sm-tasks' ? 'active' : ''}}">
-                                Пром.компании
+                                Задачи
                             </a>
                         </li>
                     </ul>

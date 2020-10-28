@@ -53,11 +53,18 @@ function controller(Auth, $rootScope, Upload, $http) {
             });
         }
 
-        if ($ctrl.entityType === 'smart-store') {
+        if ($ctrl.entityType === 'smart-store-input-solution') {
             req = $http.get('/get-forms', {
                 params: {
-                    type: 'smart-store',
-                    form_type: 'solution',
+                    type: 'smart-store-input-solution',
+                }
+            });
+        }
+
+        if ($ctrl.entityType === 'smart-store-input-task') {
+            req = $http.get('/get-forms', {
+                params: {
+                    type: 'smart-store-input-task',
                 }
             });
         }

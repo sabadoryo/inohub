@@ -35,9 +35,15 @@ class ApplicationsController extends Controller
             $entityId = $request->entity_id;
         }
 
-        if ($request->entity_type === 'smart-store') {
+        if ($request->entity_type === 'smart-store-input-solution') {
             $entityModel = Module::class;
-            $module = Module::findBySlug('smart-store');
+            $module = Module::findBySlug('smart-store-input-solution');
+            $entityId = $module->id;
+        }
+
+        if ($request->entity_type === 'smart-store-input-task') {
+            $entityModel = Module::class;
+            $module = Module::findBySlug('smart-store-input-task');
             $entityId = $module->id;
         }
 

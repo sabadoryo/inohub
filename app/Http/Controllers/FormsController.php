@@ -21,8 +21,13 @@ class FormsController extends Controller
             $forms = $program->forms()->orderBy('order_number')->with('fields')->get();
         }
 
-        if ($request->type === 'smart-store') {
-            $module = Module::findBySlug('smart-store');
+        if ($request->type === 'smart-store-input-solution') {
+            $module = Module::findBySlug('smart-store-input-solution');
+            $forms = $module->forms()->orderBy('order_number')->with('fields')->get();
+        }
+
+        if ($request->type === 'smart-store-input-task') {
+            $module = Module::findBySlug('smart-store-input-task');
             $forms = $module->forms()->orderBy('order_number')->with('fields')->get();
         }
 

@@ -45,13 +45,32 @@ function controller($http, notify, $uibModal) {
             );
     }
 
-    $ctrl.openApplicationModal = function () {
+    $ctrl.openApplicationModalForSolution = function () {
 	    $uibModal
             .open({
                 component: 'applicationModal',
                 resolve: {
                     entityType: function () {
-                        return 'smart-store';
+                        return 'smart-store-input-solution';
+                    },
+                    entityId: function () {
+                        return null;
+                    }
+                }
+            })
+            .result
+            .then(function () {
+
+            });
+    };
+
+    $ctrl.openApplicationModalForTask = function () {
+        $uibModal
+            .open({
+                component: 'applicationModal',
+                resolve: {
+                    entityType: function () {
+                        return 'smart-store-input-task';
                     },
                     entityId: function () {
                         return null;
