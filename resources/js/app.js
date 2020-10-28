@@ -134,3 +134,7 @@ require('./components/smart-store-solution-companies-edit/smart-store-solution-c
 require('./components/smart-store-task-companies-create/smart-store-task-companies-create');
 require('./components/smart-store-task-companies-edit/smart-store-task-companies-edit');
 
+
+require('./components/vacancies-control/vacancies-control');
+require('./components/vacancy-create-modal/vacancy-create-modal');
+require('./components/vacancy-main-form/vacancy-main-form');
