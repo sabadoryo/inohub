@@ -11,11 +11,17 @@ class News extends Model
         'short_description',
         'status',
         'published_at',
+        'user_id',
     ];
     
     protected $dates = [
         'published_at',
     ];
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
     
     public function images()
     {
