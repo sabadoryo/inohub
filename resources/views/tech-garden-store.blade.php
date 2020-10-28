@@ -54,77 +54,301 @@
 
             <div class="tabs-inner__section smart-store">
 
-                <div class="smart-store__title">
-                    IT – Решения
+                <div class="smart-store__row">
+                    <div class="smart-store__title">
+                        IT – Решения
+                    </div>
+
+                    <a href="#" class="smart-store__link">Смотреть все</a>
                 </div>
 
-                <div class="smart-box">
+                <div class="swiper-container swiper-2-slides">
 
-                    <a href="#" class="smart-box__website-link">
-                        Перейти на сайт
-                    </a>
+                    <div class="swiper-wrapper">
 
-                    <div class="smart-box__body">
-                        <img src="/img/bimlab-icon.png" alt="" class="smart-box__logo">
+                        <div class="swiper-slide smart-box">
+                            <a href="#" class="smart-box__website-link">
+                                Перейти на сайт
+                            </a>
 
-                        <div class="smart-box__title">
-                            Центр «Лаборатория BIM+»
+                            <div class="smart-box__body">
+                                <img src="/img/bimlab-icon.png" alt="" class="smart-box__logo">
+
+                                <div class="smart-box__title">
+                                    Центр «Лаборатория BIM+»
+                                </div>
+
+                                <div class="smart-box__text">
+                                    Деятельность лаборатории направлена на решение задач по внедрению BIM-технологий на
+                                    этапе
+                                    эксплуатации строительных объектов в секторах гражданского и промышленного
+                                    строительства, а
+                                    также для автоматизации...
+                                </div>
+                            </div>
+
+                            <div class="smart-box__footer">
+                                <a href="#" class="smart-box__link-box">
+                                    <svg class="smart-box__icon" width="24" height="24">
+                                        <use href="/img/icons.svg#download"></use>
+                                    </svg>
+                                    Скачать презентацию
+                                </a>
+                            </div>
                         </div>
 
-                        <div class="smart-box__text">
-                            Деятельность лаборатории направлена на решение задач по внедрению BIM-технологий на этапе
-                            эксплуатации строительных объектов в секторах гражданского и промышленного строительства, а
-                            также для автоматизации...
+                        <div class="swiper-slide smart-box">
+                            <a href="#" class="smart-box__website-link">
+                                Перейти на сайт
+                            </a>
+
+                            <div class="smart-box__body">
+                                <img src="/img/bimlab-icon.png" alt="" class="smart-box__logo">
+
+                                <div class="smart-box__title">
+                                    Центр «Лаборатория BIM+»
+                                </div>
+
+                                <div class="smart-box__text">
+                                    Деятельность лаборатории направлена на решение задач по внедрению BIM-технологий на
+                                    этапе
+                                    эксплуатации строительных объектов в секторах гражданского и промышленного
+                                    строительства, а
+                                    также для автоматизации...
+                                </div>
+                            </div>
+
+                            <div class="smart-box__footer">
+                                <a href="#" class="smart-box__link-box">
+                                    <svg class="smart-box__icon" width="24" height="24">
+                                        <use href="/img/icons.svg#download"></use>
+                                    </svg>
+                                    Скачать презентацию
+                                </a>
+                            </div>
                         </div>
+
+                        <div class="swiper-slide smart-box">
+                            <a href="#" class="smart-box__website-link">
+                                Перейти на сайт
+                            </a>
+
+                            <div class="smart-box__body">
+                                <img src="/img/bimlab-icon.png" alt="" class="smart-box__logo">
+
+                                <div class="smart-box__title">
+                                    Центр «Лаборатория BIM+»
+                                </div>
+
+                                <div class="smart-box__text">
+                                    Деятельность лаборатории направлена на решение задач по внедрению BIM-технологий на
+                                    этапе
+                                    эксплуатации строительных объектов в секторах гражданского и промышленного
+                                    строительства, а
+                                    также для автоматизации...
+                                </div>
+                            </div>
+
+                            <div class="smart-box__footer">
+                                <a href="#" class="smart-box__link-box">
+                                    <svg class="smart-box__icon" width="24" height="24">
+                                        <use href="/img/icons.svg#download"></use>
+                                    </svg>
+                                    Скачать презентацию
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide smart-box">
+                            <a href="#" class="smart-box__website-link">
+                                Перейти на сайт
+                            </a>
+
+                            <div class="smart-box__body">
+                                <img src="/img/bimlab-icon.png" alt="" class="smart-box__logo">
+
+                                <div class="smart-box__title">
+                                    Центр «Лаборатория BIM+»
+                                </div>
+
+                                <div class="smart-box__text">
+                                    Деятельность лаборатории направлена на решение задач по внедрению BIM-технологий на
+                                    этапе
+                                    эксплуатации строительных объектов в секторах гражданского и промышленного
+                                    строительства, а
+                                    также для автоматизации...
+                                </div>
+                            </div>
+
+                            <div class="smart-box__footer">
+                                <a href="#" class="smart-box__link-box">
+                                    <svg class="smart-box__icon" width="24" height="24">
+                                        <use href="/img/icons.svg#download"></use>
+                                    </svg>
+                                    Скачать презентацию
+                                </a>
+                            </div>
+                        </div>
+
                     </div>
 
-                    <div class="smart-box__footer">
-                        <a href="#" class="smart-box__link-box">
-                            <svg class="smart-box__icon" width="24" height="24">
-                                <use href="/img/icons.svg#download"></use>
-                            </svg>
-                            Скачать презентацию
-                        </a>
+                    <!-- Add Arrows -->
+                    <div class="swiper-button-next smart-store__btn smart-store__btn--right">
+                        <svg width="13" height="13">
+                            <use xlink:href="/img/icons.svg#chevron-right"></use>
+                        </svg>
                     </div>
 
+                    <div class="swiper-button-prev smart-store__btn smart-store__btn--left">
+                        <svg width="13" height="13">
+                            <use xlink:href="/img/icons.svg#chevron-right"></use>
+                        </svg>
+                    </div>
 
                 </div>
-
-                <div class="smart-box">
-
-                    <a href="#" class="smart-box__website-link">
-                        silumin.kz
-                    </a>
-
-                    <div class="smart-box__body">
-                        <img src="/img/silumin-vostok.png" alt="" class="smart-box__logo">
-
-                        <div class="smart-box__title">
-                            Товарищество с ограниченной ответственностью «Силумин-Восток»
-                        </div>
-
-                        <div class="smart-box__text">
-                            Планируется внедрить в ближайшие пять лет: ERP
-                            <br>
-                            <br>
-                            Системы, которые внедрены на предприятии: информация уточняется
-                        </div>
-                    </div>
-
-                    <div class="smart-box__footer">
-                        <button class="smart-box__btn button button--grey button--w100">Посмтреть ТЗ</button>
-                        <button class="smart-box__btn button button--w100">Откликнуться</button>
-                    </div>
-
-
-                </div>
-
             </div>
 
+            <div class="tabs-inner__section smart-store">
+
+                <div class="smart-store__row">
+                    <div class="smart-store__title">
+                        Промышленные предприятия (задачи)
+                    </div>
+
+                    <a href="#" class="smart-store__link">Смотреть все</a>
+                </div>
+
+                <div class="swiper-container swiper-2-slides">
+
+                    <div class="swiper-wrapper">
+
+                        <div class="swiper-slide smart-box">
+                            <a href="#" class="smart-box__website-link">
+                                silumin.kz
+                            </a>
+
+                            <div class="smart-box__body">
+                                <img src="/img/silumin-vostok.png" alt="" class="smart-box__logo">
+
+                                <div class="smart-box__title">
+                                    Товарищество с ограниченной ответственностью «Силумин-Восток»
+                                </div>
+
+                                <div class="smart-box__text">
+                                    Планируется внедрить в ближайшие пять лет: ERP
+                                    <br>
+                                    <br>
+                                    Системы, которые внедрены на предприятии: информация уточняется
+                                </div>
+                            </div>
+
+                            <div class="smart-box__footer">
+                                <button class="smart-box__btn button button--grey button--w100">Посмтреть ТЗ</button>
+                                <button class="smart-box__btn button button--w100">Откликнуться</button>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide smart-box">
+                            <a href="#" class="smart-box__website-link">
+                                silumin.kz
+                            </a>
+
+                            <div class="smart-box__body">
+                                <img src="/img/silumin-vostok.png" alt="" class="smart-box__logo">
+
+                                <div class="smart-box__title">
+                                    Товарищество с ограниченной ответственностью «Силумин-Восток»
+                                </div>
+
+                                <div class="smart-box__text">
+                                    Планируется внедрить в ближайшие пять лет: ERP
+                                    <br>
+                                    <br>
+                                    Системы, которые внедрены на предприятии: информация уточняется
+                                </div>
+                            </div>
+
+                            <div class="smart-box__footer">
+                                <button class="smart-box__btn button button--grey button--w100">Посмтреть ТЗ</button>
+                                <button class="smart-box__btn button button--w100">Откликнуться</button>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide smart-box">
+                            <a href="#" class="smart-box__website-link">
+                                silumin.kz
+                            </a>
+
+                            <div class="smart-box__body">
+                                <img src="/img/silumin-vostok.png" alt="" class="smart-box__logo">
+
+                                <div class="smart-box__title">
+                                    Товарищество с ограниченной ответственностью «Силумин-Восток»
+                                </div>
+
+                                <div class="smart-box__text">
+                                    Планируется внедрить в ближайшие пять лет: ERP
+                                    <br>
+                                    <br>
+                                    Системы, которые внедрены на предприятии: информация уточняется
+                                </div>
+                            </div>
+
+                            <div class="smart-box__footer">
+                                <button class="smart-box__btn button button--grey button--w100">Посмтреть ТЗ</button>
+                                <button class="smart-box__btn button button--w100">Откликнуться</button>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide smart-box">
+                            <a href="#" class="smart-box__website-link">
+                                silumin.kz
+                            </a>
+
+                            <div class="smart-box__body">
+                                <img src="/img/silumin-vostok.png" alt="" class="smart-box__logo">
+
+                                <div class="smart-box__title">
+                                    Товарищество с ограниченной ответственностью «Силумин-Восток»
+                                </div>
+
+                                <div class="smart-box__text">
+                                    Планируется внедрить в ближайшие пять лет: ERP
+                                    <br>
+                                    <br>
+                                    Системы, которые внедрены на предприятии: информация уточняется
+                                </div>
+                            </div>
+
+                            <div class="smart-box__footer">
+                                <button class="smart-box__btn button button--grey button--w100">Посмтреть ТЗ</button>
+                                <button class="smart-box__btn button button--w100">Откликнуться</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Add Arrows -->
+                    <div class="swiper-button-next smart-store__btn smart-store__btn--right">
+                        <svg width="13" height="13">
+                            <use xlink:href="/img/icons.svg#chevron-right"></use>
+                        </svg>
+                    </div>
+
+                    <div class="swiper-button-prev smart-store__btn smart-store__btn--left">
+                        <svg width="13" height="13">
+                            <use xlink:href="/img/icons.svg#chevron-right"></use>
+                        </svg>
+                    </div>
+
+                </div>
+            </div>
 
         </div>
 
-
     </div>
+
+
+
 
 @endsection

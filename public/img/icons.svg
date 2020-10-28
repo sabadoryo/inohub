@@ -431,6 +431,10 @@
         <path d="M7 10L12 15L17 10H7Z" fill="#181515"/>
     </symbol>
 
+    <symbol id="toggle-white" viewBox="0 0 24 24" fill="none">
+        <path d="M7 10L12 15L17 10H7Z" fill="white"/>
+    </symbol>
+
     <symbol id="close-icon" viewBox="0 0 28 28" fill="none">
         <path
             d="M22.1668 7.4785L20.5218 5.8335L14.0002 12.3552L7.4785 5.8335L5.8335 7.4785L12.3552 14.0002L5.8335 20.5218L7.4785 22.1668L14.0002 15.6452L20.5218 22.1668L22.1668 20.5218L15.6452 14.0002L22.1668 7.4785Z"
