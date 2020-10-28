@@ -18,6 +18,8 @@ function controller($uibModal) {
     };
 
 	$ctrl.openApplicationModal = function () {
+	    console.log('test');
+
         $uibModal
             .open({
                 component: 'applicationModal',

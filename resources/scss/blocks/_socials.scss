@@ -1,0 +1,18 @@
+.socials {
+
+    text-align: center;
+    position: relative;
+    z-index: 2;
+
+    &__item {
+        img {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+        }
+
+        &:not(:last-child) {
+            margin-right: 30px;
+        }
+    }
+}

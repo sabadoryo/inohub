@@ -39,6 +39,7 @@
                              ng-repeat="option in field.options track by $index">
                             <input ng-model="field.value"
                                    class="form-check-input"
+                                   ng-click="$ctrl.radioOtherOptionSelected(field)"
                                    type="radio"
                                    name="field.id"
                                    id="{{field.id + $index + option.val}}"
@@ -52,38 +53,57 @@
 
                         <div class="form-check" ng-if="field.other_option">
                             <input
-                                   class="form-check-input"
-                                   type="radio"
-                                   ng-change="$ctrl.radioOtherOptionSelected(field)"
-                                   name="field.id"
-                                   id="{{field.id + 'other_option'}}"
-                                   value="'Свой вариант'">
+                                ng-model="field.value"
+                                class="form-check-input"
+                                type="radio"
+                                name="field.id"
+                                id="{{field.id + 'other_option'}}"
+                                value="Свой вариант">
                             <label class="form-check-label"
                                    for="{{field.id + 'other_option'}}">
                                 Свой вариант
                             </label>
                         </div>
 
-                        <div  ng-if="field.otherOptionSelected" class="mt-2">
-                            <input type="text" ng-model="field.otherOptionValue" class="form-control" placeholder="Свой вариант">
+                        <div ng-if="field.value === 'Свой вариант'" class="mt-2">
+                            <input type="text" ng-model="field.otherOptionValue" class="form-control"
+                                   placeholder="Свой вариант">
                         </div>
                     </div>
+                    <div ng-if="field.type == 'checkbox'">
+                        <div class="form-check"
+                             ng-repeat="option in field.options track by option.val + field.id">
 
-                    <div class="form-check"
-                         ng-if="field.type == 'checkbox'"
-                         ng-repeat="option in field.options track by option.val + field.id">
+                            <input ng-model="option.selected"
+                                   class="form-check-input"
+                                   type="checkbox"
+                                   value="{{option.val}}"
+                                   id="{{field.id + $index + option.val}}">
 
-                        <input ng-model="option.selected"
-                               class="form-check-input"
-                               type="checkbox"
-                               value="{{option.val}}"
-                               id="{{field.id + $index + option.val}}">
+                            <label class="form-check-label"
+                                   for="{{field.id + $index + option.val}}">
+                                {{option.val}}
+                            </label>
+                        </div>
 
-                        <label class="form-check-label"
-                               for="{{field.id + $index + option.val}}">
-                            {{option.val}}
-                        </label>
+                        <div class="form-check" ng-if="field.other_option">
+                            <input ng-model="field.other_option_selected"
+                                   class="form-check-input"
+                                   type="checkbox"
+                                   ng-click="$ctrl.checkboxOtherOptionSelected(field)"
+                                   value="Свой вариант"
+                                   id="{{field.id + 'other_option_checkbox'}}">
 
+                            <label class="form-check-label"
+                                   for="{{field.id + 'other_option_checkbox'}}">
+                                Свой вариант
+                            </label>
+                        </div>
+
+                        <div ng-if="field.other_option_selected" class="mt-2">
+                            <input type="text" ng-model="field.otherOptionValue" class="form-control"
+                                   placeholder="Свой вариант">
+                        </div>
                     </div>
 
                     <div class="" ng-if="field.type == 'select'">
@@ -104,6 +124,27 @@
                     </div>
 
                     <div ng-if="field.type == 'file'">
+                        <div ng-show="field.max_files_count === 1 && field.value" class="d-flex">
+                            <table class="table table-bordered table-striped table-sm">
+                                <thead class="thead-light">
+                                <tr>
+                                    <th>Название</th>
+                                    <th>Действие</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>{{field.value.name}}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger btn-sm"
+                                                ng-click="field.value = null">
+                                            Удалить
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                         <div ng-show="field.value.length > 0" class="mb-2">
                             <table class="table table-bordered table-striped table-sm">
                                 <thead class="thead-light">
@@ -126,7 +167,7 @@
                             </table>
                         </div>
                         <button type="button" class="form-control-file" ngf-select=""
-                                ng-init="field.value = []"
+                                ng-init="field.max_files_count === 1 ? field.value = null : field.value = []"
                                 ng-model="field.value"
                                 ngf-change="$ctrl.validateFile($files, $file, $newFiles, $duplicateFiles, $invalidFiles, $event,field)"
                                 ngf-multiple="{{field.max_files_count === 1 ? 'false' : 'true'}}"
@@ -144,7 +185,19 @@
 
         </div>
 
-
+        <div ng-if="$ctrl.curForm == 'finished'">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        Ваша заявка успешно отправлена.
+                    </div>
+                    <div class="card-subtitle">
+                        Для того чтобы отслеживать статус заявок, вы можете перейти по этой ссылке.
+                        <a href="/cabinet/applications">перейти.</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>

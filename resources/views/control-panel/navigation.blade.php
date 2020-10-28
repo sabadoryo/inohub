@@ -78,7 +78,7 @@
 
                 <li class="nav-item">
                     <a href="/control-panel/programs" class="nav-link {{$activePage == 'programs' ? 'active' : ''}}">
-                        <i class="nav-icon fas fa-users"></i>
+                        <i class="nav-icon fab fa-buromobelexperte"></i>
                         <p>Программы</p>
                     </a>
                 </li>

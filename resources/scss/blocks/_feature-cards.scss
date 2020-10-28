@@ -1,0 +1,17 @@
+.feature-cards {
+
+    &__title {
+        margin-bottom: 40px;
+    }
+
+    &__list {
+        display: flex;
+        align-items: flex-start;
+    }
+
+    &__card {
+        &:not(:last-child) {
+            margin-right: 24px;
+        }
+    }
+}

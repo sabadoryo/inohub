@@ -4,6 +4,7 @@ namespace App\Http\Controllers\ControlPanel;
 
 use App\Application;
 use App\Http\Controllers\Controller;
+use App\Module;
 use App\Organization;
 use App\Program;
 use Illuminate\Http\Request;
@@ -84,26 +85,34 @@ class ApplicationsController extends Controller
         return [];
     }
 
-    public function reply(Request $request, $id)
+    public function accept(Request $request, $id)
     {
         $app = Application::find($id);
 
-        if ($request->action == 'send-message') {
-            $app->actions()->create([
-                'user_id' => \Auth::user()->id,
-                'name' => 'send message',
-                'message' => $request->message
+        $entity = $app->entity;
+
+        if ($entity instanceof Program) {
+            $entity->members()->create([
+                'user_id' => $app->user_id,
+                'manager_id' => \Auth::user()->id,
+                'application_id' => $app->id
             ]);
         }
 
-        if ($request->action == 'to-remake') {
-            $app->status = 'to-remake';
-            $app->actions()->create([
-                'user_id' => \Auth::user()->id,
-                'name' => 'to-remake',
-            ]);
+        if ($entity instanceof Module) {
+            if ($entity->slug == 'astanahub_membership') {
+
+            }
         }
 
+        $app->status = 'accepted';
+        $app->save();
+
+        return [];
+    }
+
+    public function reject(Request $request, $id)
+    {
         if ($request->action == 'reject') {
             $app->status = 'rejected';
             $app->actions()->create([
@@ -112,20 +121,5 @@ class ApplicationsController extends Controller
             ]);
         }
 
-        if ($request->action == 'accept') {
-            $entity = $app->entity;
-            if ($entity instanceof Program) {
-                $entity->members()->create([
-                    'user_id' => $app->user_id,
-                    'manager_id' => \Auth::user()->id,
-                    'application_id' => $app->id
-                ]);
-            }
-            $app->status = 'accepted';
-        }
-
-        $app->save();
-
-        return [];
     }
 }

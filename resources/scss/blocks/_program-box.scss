@@ -1,0 +1,76 @@
+.program-box {
+
+    width: 304px;
+    height: 210px;
+    border-radius: 7px;
+    background-color: #ffffff;
+    padding: 25px 20px;
+    position: relative;
+
+    &--red {
+        background-color: #EB534C;
+    }
+
+    &--purple {
+        background-color: #6E60C9;
+        color: #ffffff;
+    }
+
+    &--green {
+        background-color: #55B893;
+    }
+
+    &--blue {
+        background-color: #48A8EE;
+    }
+
+    &--yellow {
+        background-color: #F2C54C;
+    }
+
+    &__circles {
+        width: 162px;
+        height: 162px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        position: absolute;
+        top: 24px;
+        right: 24px;
+
+        &:after {
+            content: '';
+            width: 116px;
+            height: 116px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            position: absolute;
+            top: 23px;
+            left: 23px;
+        }
+
+        &:before {
+            content: '';
+            width: 208px;
+            height: 208px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            position: absolute;
+            top: -25px;
+            left: -25px;
+        }
+    }
+
+    &__title {
+        position: relative;
+        z-index: 2;
+        @include text-style(2.4rem, 700, #181515);
+        line-height: 29.26px;
+    }
+
+    &__button {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        z-index: 2;
+    }
+}
