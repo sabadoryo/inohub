@@ -15,7 +15,11 @@
             <div class="form-group">
                 <label>Логотип компании:</label>
                 <div>
-                    <img ng-show="$ctrl.image" ngf-thumbnail="$ctrl.image"
+                    <img ng-show="$ctrl.imageType !== 'string' && $ctrl.image" ngf-thumbnail="$ctrl.image"
+                         style="vertical-align: middle; margin-bottom: 10px; width:100px; height: 100px"
+                         alt="company icon"/>
+                    <img ng-show="$ctrl.imageType === 'string'"
+                         ng-src="/{{$ctrl.image}}"
                          style="vertical-align: middle; margin-bottom: 10px; width:100px; height: 100px"
                          alt="company icon"/>
                 </div>
@@ -24,6 +28,7 @@
                        ngf-select=""
                        ngf-model-invalid="$ctrl.invalidAvatar"
                        ng-model="$ctrl.image"
+                       ng-change="$ctrl.imageChanged()"
                        accept="image/*"
                        ngf-max-size="10MB">
 

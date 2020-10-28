@@ -121,6 +121,10 @@ class ApplicationsController extends Controller
         if ($entity instanceof Module) {
             if ($entity->slug == 'astanahub_membership') {
 
+            } elseif ($entity->slug === 'smart-store-input-solution') {
+
+            } elseif ($entity->slug === 'smart-store-input-task') {
+
             }
         }
 

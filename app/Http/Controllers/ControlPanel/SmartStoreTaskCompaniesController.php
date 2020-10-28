@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\ControlPanel;
 
+use App\Application;
 use App\Http\Controllers\Controller;
 use App\SMTaskCompany;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SmartStoreTaskCompaniesController extends Controller
 {
@@ -48,10 +50,24 @@ class SmartStoreTaskCompaniesController extends Controller
             [null, 'Добавление задачи']
         ];
 
+        $bindings = [];
+
+        if ($request->application_id) {
+            $app = Application::with([
+                'forms',
+                'forms.form',
+                'forms.fields',
+                'forms.fields.formField',
+            ])->findOrFail($request->application_id);
+
+            $bindings['app'] = $app;
+        }
+
         return view('control-panel.component', [
             'PAGE_TITLE' => 'Добавление задачи',
             'activePage' => 'sm-tasks',
             'breadcrumb' => $breadcrumb,
+            'bindings' => $bindings,
             'component' => 'smart-store-task-companies-create',
         ]);
     }
@@ -67,13 +83,22 @@ class SmartStoreTaskCompaniesController extends Controller
             'address' => 'nullable|string',
             'actualTasks' => 'nullable|string',
             'embeddedTasks' => 'nullable|string',
-            'image' => 'required|file',
+            'image' => 'nullable|file',
+            'imagePath' => 'nullable|string',
         ]);
 
-        try {
-            $imagePath = \Storage::disk('public')->put('sm-companies/images', $request->image);
-        } catch (\Exception $e) {
-            return response(['message' => 'Ошибка'], 400);
+        if ($request['image']) {
+            try {
+                $imagePath = \Storage::disk('public')->put('sm-companies/images', $request['image']);
+            } catch (\Exception $e) {
+                return response(['message' => 'Ошибка'], 400);
+            }
+        } elseif ($request['imagePath']) {
+            $oldPath = $request['imagePath'];
+            \Storage::disk('public')->copy($oldPath, 'sm-companies/images/' . substr($oldPath, 18));
+            $imagePath = 'sm-companies/images/' . substr($oldPath, 18);
+        } else {
+            $imagePath = '';
         }
 
         SMTaskCompany::create([

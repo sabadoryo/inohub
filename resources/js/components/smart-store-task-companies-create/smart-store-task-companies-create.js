@@ -6,7 +6,7 @@ angular
         template: require('./smart-store-task-companies-create.html'),
         controller: ['Upload', 'notify', controller],
         bindings: {
-            //
+            app: '<'
         }
     });
 
@@ -24,7 +24,83 @@ function controller(Upload, notify) {
     $ctrl.address = null;
     $ctrl.image = null;
 
-    $ctrl.$onInit = function () {};
+    $ctrl.$onInit = function () {
+        if ($ctrl.app) {
+            setAppData();
+        }
+    };
+
+    function setAppData() {
+        let fields = [];
+
+        $ctrl.app.forms.forEach(form => {
+            form.fields.forEach(field => {
+                fields.push({
+                    label: field.form_field.label,
+                    value: field.value
+                });
+            });
+        });
+
+        let companyName = fields.find(v => v.label === 'Название компании');
+
+        if (companyName) {
+            $ctrl.name = companyName.value;
+        }
+
+        let image = fields.find(v => v.label === 'Логотип');
+
+        if (image) {
+            $ctrl.image = image.value[0];
+            $ctrl.imageType = 'string';
+        }
+
+        let address = fields.find(v => v.label === 'Адрес компании');
+
+        if (address) {
+            $ctrl.address = address.value;
+        }
+
+        let link = fields.find(v => v.label === 'Сайт компании');
+
+        if (link) {
+            $ctrl.link = link.value;
+        }
+
+        let manufacturedProducts = fields.find(v => v.label === 'Виды выпускаемой продукции');
+
+        if (manufacturedProducts) {
+            $ctrl.manufacturedProducts = manufacturedProducts.value;
+        }
+
+        let fullyBP = fields.find(v => v.label === 'Полностью автоматизированные бизнес-процессы');
+
+        if (fullyBP) {
+            $ctrl.fullyBP = fullyBP.value;
+        }
+
+        let partlyBP = fields.find(v => v.label === 'Частично автоматизированные бизнес-процессы');
+
+        if (partlyBP) {
+            $ctrl.partlyBP = partlyBP.value;
+        }
+
+        let actualTasks = fields.find(v => v.label === 'Задачи');
+
+        if (actualTasks) {
+            $ctrl.actualTasks = actualTasks.value;
+        }
+
+        let embeddedTasks = fields.find(v => v.label === 'Системы, которые внедрены на предприятии');
+
+        if (embeddedTasks) {
+            $ctrl.embeddedTasks = embeddedTasks.value;
+        }
+    }
+
+    $ctrl.imageChanged = function () {
+        $ctrl.imageType = 'file';
+    };
 
     $ctrl.submit = function () {
 
@@ -48,8 +124,13 @@ function controller(Upload, notify) {
             actualTasks: $ctrl.actualTasks,
             embeddedTasks: $ctrl.embeddedTasks,
             address: $ctrl.address,
-            image: $ctrl.image,
         };
+
+        if ($ctrl.imageType === 'string') {
+            params['imagePath'] = $ctrl.image;
+        } else {
+            params['image'] = $ctrl.image;
+        }
 
 
         Upload
