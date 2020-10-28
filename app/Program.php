@@ -17,6 +17,7 @@ class Program extends Model
         'end_date',
         'status',
         'color',
+        'published_at',
     ];
 
     protected $dates = [

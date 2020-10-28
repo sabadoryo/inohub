@@ -12,6 +12,7 @@ class Event extends Model
         'image_path',
         'start_date',
         'status',
+        'published_at',
     ];
     
     protected $dates = [
