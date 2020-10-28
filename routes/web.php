@@ -156,3 +156,7 @@ Route::get('profile-page-6', function () {
 Route::get('profile-page-7', function () {
     return view('profile-page-7');
 });
+
+Route::get('tech-garden-about', function () {
+    return view('tech-garden-about');
+});
