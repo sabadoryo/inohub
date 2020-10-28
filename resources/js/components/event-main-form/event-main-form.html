@@ -44,17 +44,15 @@
 
       <div class="form-group">
         <label>Изображение:</label>
-        <div>
-          <img ng-show="!$ctrl.image && $ctrl.event.photo_url" ng-src="{{$ctrl.event.photo_url}}" style="vertical-align: middle; width:100px;height: 100px"/>
-          <img ng-show="$ctrl.image" ngf-thumbnail="$ctrl.image" style="vertical-align: middle; width:100px;height: 100px"/>
+        <div class="mb-2">
+          <img ng-show="!$ctrl.image && $ctrl.event.photo_url" ng-src="{{$ctrl.event.photo_url}}" width="500"/>
+          <img ng-show="$ctrl.image" ngf-thumbnail="$ctrl.image" width="500"/>
         </div>
         <div>
           <a class="btn btn-light ml-2"
              ngf-select=""
-             ngf-model-invalid="$ctrl.invalidAvatar"
              ng-model="$ctrl.image"
-             accept="image/*"
-             ngf-max-size="10MB">
+             accept="image/*">
 
             <span ng-show="!$ctrl.image">Выбрать изображение</span>
             <span ng-show="$ctrl.image">Изменить изображение</span>
