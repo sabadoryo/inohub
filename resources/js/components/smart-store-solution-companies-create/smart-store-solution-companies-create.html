@@ -1,0 +1,63 @@
+<div class="card">
+    <div class="card-header">
+        <h5 class="modal-title">ИТ-решение</h5>
+    </div>
+
+    <div class="card-body">
+
+        <form ng-submit="$ctrl.submit()">
+
+            <div class="form-group">
+                <label>Название компании:</label>
+                <input type="text" class="form-control" ng-model="$ctrl.name" required>
+            </div>
+
+            <div class="form-group">
+                <label>Логотип компании:</label>
+                <div>
+                    <img ng-show="$ctrl.image" ngf-thumbnail="$ctrl.image"
+                         style="vertical-align: middle; margin-bottom: 10px; width:100px; height: 100px"
+                         alt="company icon"/>
+                </div>
+                <div>
+                    <a class="btn btn-light ml-2"
+                       ngf-select=""
+                       ngf-model-invalid="$ctrl.invalidAvatar"
+                       ng-model="$ctrl.image"
+                       accept="image/*"
+                       ngf-max-size="10MB">
+
+                        <span ng-show="!$ctrl.image">Выбрать изображение</span>
+                        <span ng-show="$ctrl.image">Изменить изображение</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Описание:</label>
+                <textarea class="form-control" ng-model="$ctrl.description" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Сайт компании:</label>
+                <input class="form-control" ng-model="$ctrl.link">
+            </div>
+
+            <div class="form-group">
+                <label>Список решении:</label>
+                <textarea class="form-control" required ng-model="$ctrl.solutions"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Презентация:</label>
+                <input class="form-control" type="file" required ng-model="$ctrl.presentation" ngf-select="">
+            </div>
+
+            <button type="submit" class="btn btn-primary d-flex ml-auto">Создать</button>
+        </form>
+    </div>
+    <div class="card-footer">
+
+
+    </div>
+</div>

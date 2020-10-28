@@ -1,0 +1,68 @@
+<div class="card">
+    <div class="card-header">
+        <h5 class="modal-title">ИТ-решение</h5>
+    </div>
+
+    <div class="card-body">
+
+        <form ng-submit="$ctrl.submit()">
+
+            <div class="form-group">
+                <label>Название компании:</label>
+                <input type="text" class="form-control" ng-model="$ctrl.name" required>
+            </div>
+
+            <div class="form-group">
+                <label>Описание:</label>
+                <textarea class="form-control" ng-model="$ctrl.description" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Сайт компании:</label>
+                <input class="form-control" ng-model="$ctrl.link">
+            </div>
+
+            <div class="form-group">
+                <label>Список решении:</label>
+                <textarea required class="form-control" ng-model="$ctrl.solutions"></textarea>
+            </div>
+
+            <div class="form-group" style="display: flex">
+                <div>
+                    <label>Изображение:</label>
+                    <div>
+                        <img ng-show="$ctrl.image && $ctrl.imageType === 'input'" ng-src="/{{$ctrl.image}}"
+                             style="vertical-align: middle; margin-bottom: 10px; width:100px; height: 100px"
+                             alt="company icon"/>
+                        <img ng-show="$ctrl.image && $ctrl.imageType === 'changed'" ngf-thumbnail="$ctrl.image"
+                             style="vertical-align: middle; margin-bottom: 10px; width:100px; height: 100px"
+                             alt="company icon"/>
+                    </div>
+                    <div>
+                        <a class="btn btn-light ml-2"
+                           ngf-select=""
+                           ngf-model-invalid="$ctrl.invalidAvatar"
+                           ng-model="$ctrl.image"
+                           ng-click="$ctrl.changeType()"
+                           accept="image/*"
+                           ngf-max-size="10MB">
+
+                            <span ng-show="!$ctrl.image">Выбрать изображение</span>
+                            <span ng-show="$ctrl.image">Изменить изображение</span>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <label>Презентация:</label>
+                    <p ng-show="$ctrl.presentation">{{$ctrl.presentation}}</p>
+                    <input class="form-control" type="file" ng-model="$ctrl.presentation" ngf-select="">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary d-flex ml-auto">Изменить</button>
+        </form>
+    </div>
+    <div class="card-footer">
+
+
+    </div>
+</div>
