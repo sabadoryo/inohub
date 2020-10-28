@@ -166,7 +166,8 @@ class CabinetController extends Controller
 
         $action = $app->actions()->create([
             'user_id' => \Auth::user()->id,
-            'name' => 'update',
+            'type' => 'action',
+            'name' => 'application_updated',
             'additional_data' => json_encode($changes),
         ]);
 
@@ -175,15 +176,27 @@ class CabinetController extends Controller
 
     public function sendMessage(Request $request, $id)
     {
+
         $app = Application::find($id);
+
+        $files = [];
+        if ($request->attachedFiles) {
+            foreach ($request->attachedFiles as $file) {
+                $path = \Storage::disk('public')->put('application_message_attached_files', $file);
+                array_push($files, ['name' => $file->getClientOriginalName(), 'path' => $path]);
+            }
+
+        }
 
         $app->actions()->create([
             'user_id' => \Auth::user()->id,
-            'name' => 'send message',
-            'message' => $request->message
+            'name' => 'application_user_message',
+            'message' => $request->message,
+            'type' => 'message',
+            'additional_data' => json_encode($files),
         ]);
 
-        return [];
+        return $files;
     }
 
     public function downloadFile($path)

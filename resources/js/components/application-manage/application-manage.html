@@ -3,7 +3,8 @@
 
         <div class="alert alert-success" ng-show="!$ctrl.application.manager">
             Новая заявка.
-            <button class="btn btn-primary" type="button" ng-click="$ctrl.takeForProcessing()">Взять в обработку</button>
+            <button class="btn btn-primary" type="button" ng-click="$ctrl.takeForProcessing()">Взять в обработку
+            </button>
         </div>
 
         <div>Отправитель: <b>{{$ctrl.application.user.full_name}}</b></div>
@@ -23,61 +24,114 @@
             </tr>
             <tr ng-repeat="field in appForm.fields track by $index">
                 <td>{{field.form_field.label}}</td>
-                <td>{{field.value}}</td>
+                <td>
+                    <span ng-if="field.form_field.type !== 'file'">{{field.value}}</span>
+                    <div ng-if="field.form_field.type === 'file'">
+                        <div ng-repeat="file in field.value">
+                            <a href="/cabinet/download-file/{{file.path}}">{{file.name}}</a>
+                        </div>
+                    </div>
+                </td>
             </tr>
             </tbody>
         </table>
     </div>
 </div>
 
-<div class="card direct-chat direct-chat-primary">
+<div class="card">
 
     <div class="card-header">
-        <h3 class="card-title">Чат</h3>
+        <h3 class="card-title">Действия</h3>
     </div>
 
     <div class="card-body">
 
-        <div class="direct-chat-messages">
+        <div class="row">
+            <div class="col-6">
+                <div class="card-header">Сообщения</div>
+                <div class="card-body" style="max-height: 500px; overflow-y: auto">
+                    <div class="card mb-2" ng-repeat="action in $ctrl.application.actions.message track by $index">
+                        <div class="card-header">
+                            {{action.user.full_name}}
+                            <span class="float-right">{{action.created_at | amDateFormat : 'DD.MM HH:mm'}}</span>
+                        </div>
+                        <div class="card-body">
+                            <div>
+                                <div class="card-text">
+                                    {{action.message}}
+                                </div>
 
-            <div class="direct-chat-msg">
-                <div class="direct-chat-infos clearfix">
-                    <span class="direct-chat-name float-left">Alexander Pierce</span>
-                    <span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span>
+                                <div class="card-comments" ng-if="action.additional_data.length">
+                                    <hr>
+                                    Прикрепленные файлы:
+                                    <div ng-repeat="file in action.additional_data track by $index"
+                                         class="d-flex align-items-center">
+                                        <a href="/cabinet/download-file/{{file.path}}"><small class="text-muted">{{file.name}}</small></a>
+                                    </div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <!-- /.direct-chat-img -->
-                <div class="direct-chat-text">
-                    Is this template really for free? That's unbelievable!
-                </div>
-                <!-- /.direct-chat-text -->
+
             </div>
-
-            <div class="direct-chat-msg right">
-                <div class="direct-chat-infos clearfix">
-                    <span class="direct-chat-name float-right">Sarah Bullock</span>
-                    <span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span>
+            <div class="col-6">
+                <div class="card-header">История</div>
+                <div class="card-body" style="max-height: 500px; overflow-y: auto">
+                    <div class="card mb-2" ng-repeat="action in $ctrl.application.actions.action track by $index">
+                        <div class="card-header">
+                            {{action.user.full_name}} -
+                            <span ng-if="action.name === 'application_updated'">редактировал заявку</span>
+                            <span ng-if="action.name === 'application_sent'">отправил завяку</span>
+                            <span class="float-right">{{action.created_at | amDateFormat : 'DD.MM HH:mm'}}</span>
+                        </div>
+                        <div class="card-body" ng-if="action.name == 'application_updated'">
+                            <div>
+                                <table class="table table-bordered table-striped table-sm">
+                                    <thead class="thead-light">
+                                    <tr>
+                                        <th>Измененное поле</th>
+                                        <th>Старое значение</th>
+                                        <th>Новое значение</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="data in action.additional_data track by $index">
+                                        <td>{{data.label}}</td>
+                                        <td>
+                                            <div ng-if="data.type === 'file'">
+                                                <div ng-repeat="(name,path) in data.old_data ">
+                                                    <a href="/cabinet/download-file/{{path}}">{{name}}</a>
+                                                </div>
+                                            </div>
+                                            <div ng-if="data.type !== 'file'">
+                                                <span ng-if="data.old_value_stringified">{{data.old_value_stringified}}</span>
+                                                <span ng-if="!data.old_value_stringified">{{data.old_value}}</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div ng-if="data.type === 'file'">
+                                                <div ng-repeat="(name,path) in data.new_data">
+                                                    <a href="/cabinet/download-file/{{path}}">{{name}}</a>
+                                                </div>
+                                            </div>
+                                            <div ng-if="data.type !== 'file'">
+                                                <span
+                                                    ng-if="data.new_value_stringified">{{data.new_value_stringified}}</span>
+                                                <span ng-if="!data.new_value_stringified">{{data.new_value}}</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <!-- /.direct-chat-infos -->
-                <!-- /.direct-chat-img -->
-                <div class="direct-chat-text">
-                    You better believe it!
-                </div>
-                <!-- /.direct-chat-text -->
             </div>
-
         </div>
 
-    </div>
-
-    <div class="card-footer">
-        <form action="#" method="post">
-            <div class="input-group">
-                <input type="text" name="message" placeholder="Type Message ..." class="form-control">
-                <span class="input-group-append">
-                      <button type="button" class="btn btn-primary">Send</button>
-                    </span>
-            </div>
-        </form>
     </div>
 
 </div>
