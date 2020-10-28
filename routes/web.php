@@ -9,18 +9,23 @@ Route::get('/', 'MainPageController@index');
 Route::get('get-news-list', 'MainPageController@getNewsList');
 Route::get('news/{id}', 'MainPageController@newsPage');
 
-Route::group(['prefix' => 'cabinet', 'middleware' => ['auth']], function () {
-    Route::get('', 'CabinetController@profile');
-    Route::get('applications', 'CabinetController@applications');
-    Route::get('download-file/{path}', 'CabinetController@downloadFile')->where('path',  '(.*)');
-
-    Route::get('project', 'CabinetController@project');
-    Route::post('update-roles', 'CabinetController@updateRoles');
-    Route::get('applications/{id}', 'CabinetController@application');
-    Route::post('applications/{id}/update-form', 'CabinetController@updateForm');
-    Route::post('applications/{id}/send-message', 'CabinetController@sendMessage');
-    Route::get('get-applications', 'CabinetController@getApplications');
+Route::group(['middleware' => ['auth']], function () {
+    Route::group(['prefix' => 'cabinet'], function () {
+        Route::get('', 'CabinetController@profile');
+        Route::get('applications', 'CabinetController@applications');
+        Route::get('download-file/{path}', 'CabinetController@downloadFile')->where('path',  '(.*)');
+        Route::get('project', 'CabinetController@project');
+        Route::post('update-roles', 'CabinetController@updateRoles');
+        Route::get('applications/{id}', 'CabinetController@application');
+        Route::post('applications/{id}/update-form', 'CabinetController@updateForm');
+        Route::post('applications/{id}/send-message', 'CabinetController@sendMessage');
+        Route::get('get-applications', 'CabinetController@getApplications');
+    });
+    Route::group(['prefix' => 'posts'], function () {
+        Route::get('create', 'PostsController@create');
+    });
 });
+
 
 Route::get('register-project', 'RegisterProjectController@form');
 Route::post('register-project', 'RegisterProjectController@store');
