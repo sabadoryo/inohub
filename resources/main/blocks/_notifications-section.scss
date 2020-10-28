@@ -1,0 +1,76 @@
+.notifications-section {
+
+    padding: 0 58px 0 46px;
+    background-color: #ffffff;
+    border-radius: 7px;
+
+    &__item {
+        padding: 15px 0;
+        display: flex;
+        align-items: center;
+        position: relative;
+
+        &--notify {
+            &:before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: -20px ;
+                transform: translateY(-50%);
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background-color: $elem-color;
+            }
+        }
+
+        &:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -26px;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
+            background-image: url("/img/icons/chevron-right-alt.svg");
+        }
+
+        & > * {
+            flex-shrink: 0;
+        }
+
+        border-top: 1px solid #E8E8E8;
+        border-bottom: 1px solid #E8E8E8;
+
+        &:first-child {
+            border-top: none;
+        }
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+
+    &__title {
+        @include text-style(1.6rem, 500, #181515);
+        width: 154px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &__text {
+        @include text-style(1.6rem, 400, #181515);
+        width: 627px;
+        padding: 0 34px 0 15px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    &__date {
+        @include text-style(1.4rem, 500, #a3a1a1);
+        width: 75px;
+        padding-right: 6px;
+        text-align: left;
+    }
+}

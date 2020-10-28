@@ -1,0 +1,88 @@
+.application-list {
+
+    padding: 0 64px 0 20px;
+    background-color: #ffffff;
+    border-radius: 7px;
+
+    &__items {
+
+    }
+
+    &__item {
+        display: flex;
+        align-items: center;
+        padding: 21px 0;
+        position: relative;
+
+        &:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -45px;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
+            background-image: url("/img/icons/chevron-right-alt.svg");
+        }
+
+        & > * {
+            flex-shrink: 0;
+        }
+
+        border-top: 1px solid #E8E8E8;
+        border-bottom: 1px solid #E8E8E8;
+
+        &:first-child {
+            border-top: none;
+        }
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+
+    &__type {
+        @include text-style(1.6rem, 400, #181515);
+        width: 120px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-right: 30px;
+    }
+
+    &__title {
+        @include text-style(1.8rem, 600, #181515);
+        width: 440px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-right: 44px;
+    }
+
+    &__status {
+        @include text-style(1.6rem, 500, #181515);
+        width: 155px;
+        text-align: right;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-right: 30px;
+
+        &--success {
+            color: #27AE60;
+        }
+
+        &--danger {
+            color: $elem-color;
+        }
+    }
+
+    &__date {
+        @include text-style(1.4rem, 500, #a3a1a1);
+        width: 60px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: right;
+    }
+}

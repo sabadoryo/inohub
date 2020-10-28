@@ -140,3 +140,19 @@ Route::get('profile-page-3', function () {
 Route::get('modal-full', function () {
     return view('modal-full');
 });
+
+Route::get('profile-page-4', function () {
+    return view('profile-page-4');
+});
+
+Route::get('profile-page-5', function () {
+    return view('profile-page-5');
+});
+
+Route::get('profile-page-6', function () {
+    return view('profile-page-6');
+});
+
+Route::get('profile-page-7', function () {
+    return view('profile-page-7');
+});

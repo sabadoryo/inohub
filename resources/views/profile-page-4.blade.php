@@ -73,11 +73,7 @@
                             <div class="application-block__heading">Личные данные</div>
 
                             <div class="application-block__link-box">
-                                <svg class="application-block__edit-icon" width="24" height="24">
-                                    <use href="/img/icons.svg#edit-colored"></use>
-                                </svg>
-
-                                <a href="#" class="application-block__link">Редактировать</a>
+                                <a href="#" class="application-block__link">Отменить</a>
                             </div>
                         </div>
 
@@ -86,42 +82,42 @@
                             <div class="application-block__input-box input-box">
                                 <label class="input-box__label">ФИО</label>
                                 <div class="input-box__container">
-                                    <input type="text" class="input-box__input" value="Олжас Аскаров Сапарулы" disabled>
+                                    <input type="text" class="input-box__input" value="Олжас Аскаров Сапарулы">
                                 </div>
                             </div>
 
                             <div class="application-block__input-box input-box">
                                 <label class="input-box__label">Телефон</label>
                                 <div class="input-box__container">
-                                    <input type="text" class="input-box__input" value="+7 777 838 99 90" disabled>
+                                    <input type="text" class="input-box__input" value="+7 777 838 99 90">
                                 </div>
                             </div>
 
                             <div class="application-block__input-box input-box">
                                 <label class="input-box__label">E-mail</label>
                                 <div class="input-box__container">
-                                    <input type="text" class="input-box__input" value="olzhas01@gmail.com" disabled>
+                                    <input type="text" class="input-box__input" value="olzhas01@gmail.com">
                                 </div>
                             </div>
 
                             <div class="application-block__input-box input-box">
                                 <label class="input-box__label">Аккаунт telegram</label>
                                 <div class="input-box__container">
-                                    <input type="text" class="input-box__input" value="olzhas01@gmail.com" disabled>
+                                    <input type="text" class="input-box__input" value="olzhas01@gmail.com">
                                 </div>
                             </div>
 
                             <div class="application-block__input-box input-box">
                                 <label class="input-box__label">Страна</label>
                                 <div class="input-box__container">
-                                    <input type="text" class="input-box__input" value="Казахстан" disabled>
+                                    <input type="text" class="input-box__input" value="Казахстан">
                                 </div>
                             </div>
 
                             <div class="application-block__input-box input-box">
                                 <label class="input-box__label">Город</label>
                                 <div class="input-box__container">
-                                    <input type="text" class="input-box__input" value="Астана" disabled>
+                                    <input type="text" class="input-box__input" value="Астана">
                                 </div>
                             </div>
 
@@ -129,16 +125,16 @@
                                 <label class="input-box__label">Владение языками</label>
 
                                 <div class="input-box__container">
-                                    <select class="input-box__input" disabled>
+                                    <select class="input-box__input">
                                         <option value="1">Казахский</option>
                                         <option value="1">Казахский</option>
                                         <option value="1">Казахский</option>
                                         <option value="1">Казахский</option>
                                     </select>
 
-{{--                                    <svg class="input-box__select-icon" width="24" height="24">--}}
-{{--                                        <use href="img/icons.svg#chevron-down"></use>--}}
-{{--                                    </svg>--}}
+                                    <svg class="input-box__select-icon" width="24" height="24">
+                                        <use href="img/icons.svg#chevron-down"></use>
+                                    </svg>
                                 </div>
                             </div>
 
@@ -157,43 +153,69 @@
                             <div class="application-block__input-box input-box">
                                 <label class="input-box__label">Название проекта</label>
                                 <div class="input-box__container">
-                                    <input type="text" class="input-box__input" value="Salakz" disabled>
+                                    <input type="text" class="input-box__input" value="Salakz">
                                 </div>
                             </div>
 
                             <div class="application-block__input-box input-box">
                                 <label class="input-box__label">Отрасль деятельности ИКТ-компании</label>
                                 <div class="input-box__container">
-                                    <input type="text" class="input-box__input" value="Информационные технологии"
-                                           disabled>
+                                    <select class="input-box__input">
+                                        <option value="1">Информационные технологии</option>
+                                        <option value="1">Информационные технологии</option>
+                                        <option value="1">Информационные технологии</option>
+                                        <option value="1">Информационные технологии</option>
+                                    </select>
+
+                                    <svg class="input-box__select-icon" width="24" height="24">
+                                        <use href="img/icons.svg#chevron-down"></use>
+                                    </svg>
                                 </div>
                             </div>
 
                             <div class="application-block__input-box input-box">
                                 <label class="input-box__label">Основатель проекта</label>
                                 <div class="input-box__container">
-                                    <input type="text" class="input-box__input" value="Олжас Аскаров" disabled>
+                                    <input type="text" class="input-box__input" value="Олжас Аскаров">
                                 </div>
                             </div>
 
                             <div class="application-block__input-box input-box">
                                 <label class="input-box__label">Год основания</label>
                                 <div class="input-box__container">
-                                    <input type="text" class="input-box__input" value="2018" disabled>
+                                    <input type="text" class="input-box__input" value="2018">
                                 </div>
                             </div>
 
                             <div class="application-block__input-box input-box">
                                 <label class="input-box__label">Стадия развития</label>
                                 <div class="input-box__container">
-                                    <input type="text" class="input-box__input" value="MCI" disabled>
+                                    <select class="input-box__input">
+                                        <option value="1">MCI</option>
+                                        <option value="1">MCI</option>
+                                        <option value="1">MCI</option>
+                                        <option value="1">MCI</option>
+                                    </select>
+
+                                    <svg class="input-box__select-icon" width="24" height="24">
+                                        <use href="img/icons.svg#chevron-down"></use>
+                                    </svg>
                                 </div>
                             </div>
 
                             <div class="application-block__input-box input-box">
                                 <label class="input-box__label">Сфера применения/технология</label>
                                 <div class="input-box__container">
-                                    <input type="text" class="input-box__input" value="AI" disabled>
+                                    <select class="input-box__input">
+                                        <option value="1">AI</option>
+                                        <option value="1">AI</option>
+                                        <option value="1">AI</option>
+                                        <option value="1">AI</option>
+                                    </select>
+
+                                    <svg class="input-box__select-icon" width="24" height="24">
+                                        <use href="img/icons.svg#chevron-down"></use>
+                                    </svg>
                                 </div>
                             </div>
 
@@ -212,16 +234,14 @@
                             <div class="application-block__input-box input-box">
                                 <label class="input-box__label">Какой стартовый капитал проекта?</label>
                                 <div class="input-box__container">
-                                    <input type="text" class="input-box__input" value="$ 10 000" disabled>
+                                    <input type="text" class="input-box__input" value="$ 10 000">
                                 </div>
                             </div>
 
                             <div class="application-block__input-box input-box input-box--span2">
                                 <label class="input-box__label">Краткое описание проекта. В чем заключается
                                     идея? </label>
-                                <textarea class="input-box__textarea"
-                                          disabled
-                                          placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."></textarea>
+                                <textarea class="input-box__textarea">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</textarea>
                             </div>
 
                             <div class="application-block__input-box input-box">
@@ -229,7 +249,7 @@
                                     MVP? </label>
                                 <div class="input-box__container">
                                     <input type="text" class="input-box__input" value="Lorem ipsum dolor sit amet"
-                                           disabled>
+                                    >
                                 </div>
                             </div>
 
@@ -255,7 +275,7 @@
                                 <label class="input-box__label">Какую проблему вы решаете?</label>
                                 <div class="input-box__container">
                                     <input type="text" class="input-box__input" value="Lorem ipsum dolor sit amet"
-                                           disabled>
+                                    >
                                 </div>
                             </div>
 
@@ -264,7 +284,7 @@
                                     каких условиях?</label>
                                 <div class="input-box__container">
                                     <input type="text" class="input-box__input" value="В размере 20.000.000 тенге"
-                                           disabled>
+                                    >
                                 </div>
                             </div>
 
@@ -273,6 +293,8 @@
                     </div>
 
                 </div>
+
+                <button class="application-section__btn button button--extra-lg">Изменить</button>
 
 
             </div>

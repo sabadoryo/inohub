@@ -6,6 +6,10 @@
     flex-direction: column;
     justify-content: space-between;
 
+    &--span2 {
+        grid-row: span 2;
+    }
+
     &--error {
         #{$e}__label {
             color: $elem-color;
