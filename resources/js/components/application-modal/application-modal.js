@@ -53,11 +53,19 @@ function controller(Auth, $rootScope, Upload, $http) {
             });
         }
 
+        if ($ctrl.entityType === 'smart-store') {
+            req = $http.get('/get-forms', {
+                params: {
+                    type: 'smart-store',
+                    form_type: 'solution',
+                }
+            });
+        }
+
         if (req) {
             req.then(
                 res => {
                     $ctrl.forms = res.data.forms;
-                    console.log($ctrl.forms);
                     $ctrl.forms.forEach(form => {
                         form.fields.forEach(field => {
                             field.value = null;
@@ -90,13 +98,7 @@ function controller(Auth, $rootScope, Upload, $http) {
     };
 
     $ctrl.isFileRequired = function (field) {
-        console.log(field);
-        if (field.is_required && (!field.value || field.value.length <= 0)) {
-            console.log('yes required');
-            return true;
-        } else {
-            return false;
-        }
+        return !!(field.is_required && (!field.value || field.value.length <= 0));
     };
 
     $ctrl.removeFile = function (field, index) {

@@ -21,6 +21,11 @@ class FormsController extends Controller
             $forms = $program->forms()->orderBy('order_number')->with('fields')->get();
         }
 
+        if ($request->type === 'smart-store') {
+            $module = Module::findBySlug('smart-store');
+            $forms = $module->forms()->orderBy('order_number')->with('fields')->get();
+        }
+
         foreach ($forms as $form) {
             foreach ($form->fields as $field) {
                 if ($field->type === 'radio' ||

@@ -1,0 +1,142 @@
+<div class="tabs__content tabs-inner">
+
+    <div class="tabs-inner__section about-simp">
+        <div class="about-simp__row">
+            <div class="about-simp__heading">
+                Smart Industry Management <br>
+                Platform
+            </div>
+
+            <div class="about-simp__info">
+                <div class="about-simp__text">
+                    Платформа-супермаркет отечественных IT-решений на которой собирается пул качественных
+                    IT-решений, а промышленные предприятия размещают свои реальные задачи.
+                </div>
+
+                <button class="about-simp__btn button button--lg" ng-click="$ctrl.openApplicationModal()">
+                    Подать заявку
+                </button>
+            </div>
+        </div>
+
+        <div class="about-simp__grey-text">SIMP</div>
+    </div>
+
+    <div class="tabs-inner__section smart-store">
+
+        <div class="smart-store__row">
+            <div class="smart-store__title">
+                IT – Решения
+            </div>
+
+            <a href="#" class="smart-store__link">Смотреть все</a>
+        </div>
+
+        <div class="swiper-container swiper-2-slides">
+
+            <div class="swiper-wrapper">
+
+                <div class="swiper-slide smart-box" ng-repeat="solution in $ctrl.solutions">
+                    <a ng-href="//{{solution.site}}" class="smart-box__website-link">
+                        Перейти на сайт
+                    </a>
+
+                    <div class="smart-box__body">
+                        <img src="/{{solution.icon}}" alt="" class="smart-box__logo">
+
+                        <div class="smart-box__title">
+                            {{solution.name}}
+                        </div>
+
+                        <div class="smart-box__text">
+                            {{solution.description}}
+                        </div>
+                    </div>
+
+                    <div class="smart-box__footer">
+                        <a href="{{solution.presentation_path}}" class="smart-box__link-box">
+                            <svg class="smart-box__icon" width="24" height="24">
+                                <use href="/img/icons.svg#download"></use>
+                            </svg>
+                            Скачать презентацию
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Add Arrows -->
+            <div class="swiper-button-next smart-store__btn smart-store__btn--right">
+                <svg width="13" height="13">
+                    <use xlink:href="/img/icons.svg#chevron-right"></use>
+                </svg>
+            </div>
+
+            <div class="swiper-button-prev smart-store__btn smart-store__btn--left">
+                <svg width="13" height="13">
+                    <use xlink:href="/img/icons.svg#chevron-right"></use>
+                </svg>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="tabs-inner__section smart-store">
+
+        <div class="smart-store__row">
+            <div class="smart-store__title">
+                Промышленные предприятия (задачи)
+            </div>
+
+            <a href="#" class="smart-store__link">Смотреть все</a>
+        </div>
+
+        <div class="swiper-container swiper-2-slides">
+
+            <div class="swiper-wrapper">
+
+                <div class="swiper-slide smart-box" ng-repeat="task in $ctrl.tasks">
+                    <a href="//{{task.site}}" class="smart-box__website-link">
+                        {{task.site}}
+                    </a>
+
+                    <div class="smart-box__body">
+                        <img src="/img/silumin-vostok.png" alt="" class="smart-box__logo">
+
+                        <div class="smart-box__title">
+                            {{ task.name }}
+                        </div>
+
+                        <div class="smart-box__text">
+                            Планируется внедрить в ближайшие пять лет: {{ task.actual_tasks | truncate : 25 : '...' }}
+                            <br>
+                            <br>
+                            Системы, которые внедрены на предприятии: {{ task.embedded_tasks | truncate : 25 : '...' }}
+                        </div>
+                    </div>
+
+                    <div class="smart-box__footer">
+                        <button class="smart-box__btn button button--grey button--w100">Посмтреть ТЗ</button>
+                        <button class="smart-box__btn button button--w100">Откликнуться</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Add Arrows -->
+            <div class="swiper-button-next smart-store__btn smart-store__btn--right">
+                <svg width="13" height="13">
+                    <use xlink:href="/img/icons.svg#chevron-right"></use>
+                </svg>
+            </div>
+
+            <div class="swiper-button-prev smart-store__btn smart-store__btn--left">
+                <svg width="13" height="13">
+                    <use xlink:href="/img/icons.svg#chevron-right"></use>
+                </svg>
+            </div>
+
+        </div>
+    </div>
+
+</div>

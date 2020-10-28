@@ -33,6 +33,15 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="/control-panel/applications" class="nav-link {{$activePage == 'applications' ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-copy"></i>
+                        <p>
+                            Заявки
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="/control-panel/programs" class="nav-link {{$activePage == 'programs' ? 'active' : ''}}">
                         <i class="nav-icon fab fa-buromobelexperte"></i>
                         <p>Программы</p>
@@ -115,8 +124,7 @@
 
                 <li class="nav-item has-treeview">
                     <a href=""
-                       class="nav-link"
-                       ng-class="{active: {{$activePage === 'sm-solutions' || $activePage === 'sm-tasks'}}}"
+                       class="nav-link {{$activePage === 'sm-solutions' || $activePage === 'sm-tasks' ? 'active' : ''}}"
                        uib-dropdown-toggle>
                         <i class="nav-icon fas fa-credit-card"></i>
                         <p>

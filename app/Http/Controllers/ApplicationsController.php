@@ -35,6 +35,12 @@ class ApplicationsController extends Controller
             $entityId = $request->entity_id;
         }
 
+        if ($request->entity_type === 'smart-store') {
+            $entityModel = Module::class;
+            $module = Module::findBySlug('smart-store');
+            $entityId = $module->id;
+        }
+
         $app = Application::create([
             'user_id' => \Auth::user()->id,
             'entity_model' => $entityModel,
