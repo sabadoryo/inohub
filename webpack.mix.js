@@ -24,6 +24,7 @@ mix.js('resources/js/app.js', 'public/js').extract([
     'overlayscrollbars/js/jquery.overlayScrollbars',
     '@cgross/angular-notify',
     'textangular',
+    'swiper'
 ]).sourceMaps();
 
 if (mix.inProduction()) {

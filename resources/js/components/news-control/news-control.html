@@ -29,22 +29,26 @@
   </a>
 </div>
 
-<table class="table table-bordered table-sm bg-white">
+<table class="table table-sm bg-white">
   <thead class="thead-light">
   <tr>
     <th>№</th>
     <th>Название</th>
     <th>Статус</th>
+    <th>Автор</th>
+    <th>Опубликовано</th>
     <th></th>
   </tr>
   </thead>
   <tr ng-repeat="val in $ctrl.news track by $index">
     <td>{{val.id}}</td>
-    <td>{{val.title}}</td>
+    <td>{{val.title | truncate : 60 : '...'}}</td>
     <td ng-switch="val.status">
       <div ng-switch-when="draft" class="text-danger">Черновик</div>
       <div ng-switch-when="published" class="text-success">Опубликован</div>
     </td>
+    <td></td>
+    <td></td>
     <td class="text-center">
       <a href=""
          ng-href="/control-panel/news/{{val.id}}/main"

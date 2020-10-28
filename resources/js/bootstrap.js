@@ -20,3 +20,16 @@ require('overlayscrollbars/js/jquery.overlayScrollbars');
 // });
 
 require('admin-lte/build/js/AdminLTE');
+
+import Swiper from 'swiper';
+
+var swiper = new Swiper('.swiper-container', {
+    slidesPerView: 4,
+    spaceBetween: 24,
+
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
+});
+

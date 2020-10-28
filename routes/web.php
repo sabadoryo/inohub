@@ -5,6 +5,8 @@ Route::post('register', 'Auth\RegisterController@register');
 Route::post('logout', 'Auth\LoginController@logout');
 
 Route::get('/', 'MainPageController@index');
+Route::get('get-news-list', 'MainPageController@getNewsList');
+Route::get('news/{id}', 'MainPageController@newsPage');
 
 Route::group(['prefix' => 'cabinet', 'middleware' => ['auth']], function () {
     Route::get('', 'CabinetController@profile');
@@ -55,15 +57,19 @@ Route::group([
     'middleware' => 'auth'
 ], function () {
 
-    Route::view('test', 'test', ['activePage' => 'test', 'breadcrumb' => []]);
-
     Route::get('/', 'ControlPanelController@index');
 
-    Route::get('organizations', 'OrganizationsController@index');
-    Route::get('organizations/create', 'OrganizationsController@create');
-    Route::post('organizations', 'OrganizationsController@store');
-    Route::get('organizations/{id}/edit', 'OrganizationsController@edit');
-    Route::put('organizations/{id}', 'OrganizationsController@update');
+    Route::get('programs', 'ProgramsController@index');
+    Route::get('programs/get-list', 'ProgramsController@getList');
+    Route::post('programs', 'ProgramsController@store');
+    Route::get('programs/{id}/main', 'ProgramsController@mainForm');
+    Route::get('programs/{id}/page', 'ProgramsController@pageForm');
+    Route::get('programs/{id}/forms', 'ProgramsController@forms');
+    Route::post('programs/{id}/update-main', 'ProgramsController@updateMain');
+    Route::post('programs/{id}/update-forms', 'ProgramsController@updateForms');
+    Route::post('programs/{id}/update-forms-list', 'ProgramsController@updateFormsList');
+    Route::post('programs/{id}/publish', 'ProgramsController@publish');
+
 
     Route::get('users', 'UsersController@index');
     Route::get('users/get-list', 'UsersController@getList');
@@ -80,16 +86,7 @@ Route::group([
     Route::post('acl/detach-permission-from-role', 'ACLController@detachPermissionFromRole');
     Route::post('acl/add-role', 'ACLController@addRole');
 
-    Route::get('programs', 'ProgramsController@index');
-    Route::get('programs/get-list', 'ProgramsController@getList');
-    Route::post('programs', 'ProgramsController@store');
-    Route::get('programs/{id}/main', 'ProgramsController@mainForm');
-    Route::get('programs/{id}/page', 'ProgramsController@pageForm');
-    Route::get('programs/{id}/forms', 'ProgramsController@forms');
-    Route::post('programs/{id}/update-main', 'ProgramsController@updateMain');
-    Route::post('programs/{id}/update-forms', 'ProgramsController@updateForms');
-    Route::post('programs/{id}/update-forms-list', 'ProgramsController@updateFormsList');
-    Route::post('programs/{id}/publish', 'ProgramsController@publish');
+
 
     Route::get('events', 'EventsController@index');
     Route::get('events/get-list', 'EventsController@getList');
@@ -136,6 +133,21 @@ Route::group([
     Route::get('members/get-list', 'MembersController@getList');
 
 });
+
+Route::group([
+    'prefix' => 'admin',
+    'namespace' => 'Admin',
+    'middleware' => 'auth'
+], function () {
+
+    Route::get('organizations', 'OrganizationsController@index');
+    Route::get('organizations/create', 'OrganizationsController@create');
+    Route::post('organizations', 'OrganizationsController@store');
+    Route::get('organizations/{id}/edit', 'OrganizationsController@edit');
+    Route::put('organizations/{id}', 'OrganizationsController@update');
+
+});
+
 
 Route::get('test-page', function () {
     return view('test-page');

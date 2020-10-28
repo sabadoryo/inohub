@@ -1,0 +1,7 @@
+<div ng-repeat="newsItem in $ctrl.news" style="font-size: 16px">
+    <div><a href="" ng-href="/news/{{newsItem.id}}">{{newsItem.title | truncate : 75 : '...'}}</a></div>
+    <div>{{newsItem.published_at | amDateFormat : 'DD.MM.YYYY HH:mm'}}</div>
+</div>
+<div ng-show="$ctrl.news.length < $ctrl.newsCount">
+    <a href="" ng-click="$ctrl.loadMore()" style="font-size: 16px">loadmore</a>
+</div>

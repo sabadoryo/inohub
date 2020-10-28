@@ -12,13 +12,13 @@ class FormsController extends Controller
     {
         $breadcrumb = [
             ['/control-panel', 'Главная'],
-            [null, 'Формы']
+            [null, 'Настройка форм']
         ];
 
         $bindings = [];
 
         return view('control-panel.component', [
-            'PAGE_TITLE' => 'Формы',
+            'PAGE_TITLE' => 'Настройка форм',
             'activePage' => 'forms',
             'breadcrumb' => $breadcrumb,
             'component' => 'forms-control',
