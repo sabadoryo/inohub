@@ -9,11 +9,11 @@ angular
             program: '<',
         }
     });
-    
+
 function controller($uibModal) {
- 
+
 	let $ctrl = this;
-	
+
 	$ctrl.$onInit = function () {
     };
 
@@ -23,6 +23,7 @@ function controller($uibModal) {
         $uibModal
             .open({
                 component: 'applicationModal',
+                backdrop : 'static',
                 resolve: {
                     entityType: () => {
                         return 'program';

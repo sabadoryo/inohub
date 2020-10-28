@@ -22,7 +22,7 @@
                         <div ng-show="!appForm.isEditing && field.form_field.type === 'file'">
                             <div class="d-flex flex-column">
                                 <div ng-repeat="file in field.value track by $index">
-                                    <a href="/cabinet/download-file/{{file}}">Отправленный файл</a>
+                                    <a href="/cabinet/download-file/{{file.path}}">{{file.name}}</a>
                                 </div>
                             </div>
                         </div>

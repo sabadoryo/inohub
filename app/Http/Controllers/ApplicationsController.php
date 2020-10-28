@@ -47,18 +47,22 @@ class ApplicationsController extends Controller
 
                 if ($field['type'] === 'file') {
                     $file_pathes = [];
+                    $file_names = [];
                     if (is_array($field['value'])) {
                         foreach ($field['value'] as $file) {
                             $path = \Storage::disk('public')->put('application_files', $file);
                             array_push($file_pathes, $path);
+                            array_push($file_names, $file->getClientOriginalName());
                         }
                     } else {
                         $path = \Storage::disk('public')->put('application_files', $field['value']);
                         array_push($file_pathes, $path);
+                        array_push($file_names, $field['value']->getClientOriginalName());
                     }
                     $appForm->fields()->create([
                         'form_field_id' => $field['id'],
                         'value' => json_encode($file_pathes),
+                        'file_name' => json_encode($file_names),
                     ]);
                 } else {
                     $appForm->fields()->create([
