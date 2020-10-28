@@ -46,6 +46,7 @@ class NewsController extends Controller
         }
         
         $result = $query->orderBy('id', 'desc')
+            ->with('user')
             ->paginate(10);
     
         return $result;
@@ -60,6 +61,7 @@ class NewsController extends Controller
         
         $news = News::create([
             'title' => $request->title,
+            'user_id' => \Auth::user()->id,
 //            'short_description' => $request->short_description,
         ]);
         

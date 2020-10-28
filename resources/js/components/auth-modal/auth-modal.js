@@ -56,11 +56,10 @@ function controller($http, $rootScope, Upload) {
             }
         } else if($ctrl.register.step === 3) {
             $ctrl.errorMessage = null;
-            console.log($ctrl.register.password)
 	        if ($ctrl.register.password && $ctrl.register.password.length > 5) {
 	            if ($ctrl.register.passwordConfirmation && $ctrl.register.password === $ctrl.register.passwordConfirmation) {
 	                $ctrl.nextStep = false;
-                } else {
+                } else if($ctrl.register.passwordConfirmation) {
                     $ctrl.nextStep = true;
                     $ctrl.errorMessage = 'Пароль должен одинаковым';
                 }

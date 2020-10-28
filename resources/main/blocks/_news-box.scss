@@ -40,7 +40,8 @@
 
     &__text {
         @include text-style(1.6rem, 500, #181515);
-        white-space: normal;
+        line-height: 19.5px;
+        width: 85%;
     }
 
 }
