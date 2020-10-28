@@ -109,14 +109,15 @@ function controller($uibModal, Upload, notify) {
             url: url,
             data: params,
         }).then((response) => {
+                $ctrl.loading = false;
                 window.Swal.fire({
                     icon: 'success',
                     title: 'Сохранено',
                     timer: 2000,
                     showConfirmButton: false,
                 });
-                $ctrl.loading = false;
             }, (error) => {
+                $ctrl.loading = false;
                 let checked = false;
                 let message = '';
                 angular.forEach(error.data.errors, (value, key) => {
@@ -130,7 +131,6 @@ function controller($uibModal, Upload, notify) {
                     duration: 2000,
                     classes: 'alert-danger',
                 });
-                $ctrl.loading = false;
             }
         );
     };
