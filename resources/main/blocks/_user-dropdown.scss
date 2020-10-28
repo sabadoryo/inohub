@@ -1,0 +1,39 @@
+.user-dropdown {
+    width: 222px !important;
+    background-color: #ffffff !important;
+    border-radius: 7px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12) !important;
+    border: none !important;
+    padding: 5px 0 !important;
+
+    &__item {
+        padding: 10px 15px;
+        display: flex;
+        align-items: center;
+
+        &--border {
+            border-bottom: 1px solid #E8E8E8;
+        }
+
+        &:hover {
+            background-color: #F3F3F3;
+        }
+    }
+
+    &__icon {
+        margin-right: 25px;
+    }
+
+    &__link:link,
+    &__link:visited {
+        @include text-style(1.6rem, 500, #181515);
+    }
+
+    &__link:hover {
+        text-decoration: none;
+    }
+
+    &__badge {
+        margin-left: 7px;
+    }
+}

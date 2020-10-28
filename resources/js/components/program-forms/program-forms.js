@@ -4,19 +4,45 @@ angular
     .module('app')
     .component('programForms', {
         template: require('./program-forms.html'),
-        controller: ['notify', '$http', controller],
+        controller: ['notify', '$http', '$uibModal', controller],
         bindings: {
             forms: '<',
             program: '<',
         }
     });
     
-function controller(notify, $http) {
+function controller(notify, $http, $uibModal) {
  
 	let $ctrl = this;
 
 	$ctrl.$onInit = function () {
 		$ctrl.programForms = $ctrl.program.forms;
+	};
+
+	$ctrl.openToPublishModal = () => {
+		$uibModal
+			.open({
+				component: 'programToPublishModal',
+				resolve: {
+					program: function () {
+						return $ctrl.program;
+					}
+				}
+			})
+			.result
+			.then(
+				res => {
+					window.Swal.fire({
+						icon: 'success',
+						title: 'Опубликовано',
+						timer: 2000,
+						showConfirmButton: false,
+					});
+				},
+				err => {
+
+				}
+			);
 	};
 
 	$ctrl.addForm = () => {
@@ -86,7 +112,7 @@ function controller(notify, $http) {
 		$http.post(url, params).then(() => {
 			window.Swal.fire({
 				icon: 'success',
-				title: 'Данные обнавлены',
+				title: 'Данные обновлены',
 				timer: 2000,
 				showConfirmButton: false,
 			});

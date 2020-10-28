@@ -4,14 +4,14 @@ angular
     .module('app')
     .component('programMainForm', {
         template: require('./program-main-form.html'),
-        controller: ['notify', 'moment', '$http', controller],
+        controller: ['notify', 'moment', '$http', '$uibModal', controller],
         bindings: {
             categories: '<',
             program: '<',
         }
     });
     
-function controller(notify, moment, $http) {
+function controller(notify, moment, $http, $uibModal) {
  
 	let $ctrl = this;
 
@@ -31,6 +31,32 @@ function controller(notify, moment, $http) {
             $ctrl.endDate = moment($ctrl.program.end_date).toDate();
             $ctrl.termDateStatus = true;
         }
+    };
+
+    $ctrl.openToPublishModal = () => {
+        $uibModal
+            .open({
+                component: 'programToPublishModal',
+                resolve: {
+                    program: function () {
+                        return $ctrl.program;
+                    }
+                }
+            })
+            .result
+            .then(
+                res => {
+                    window.Swal.fire({
+                        icon: 'success',
+                        title: 'Опубликовано',
+                        timer: 2000,
+                        showConfirmButton: false,
+                    });
+                },
+                err => {
+
+                }
+            );
     };
 
 	$ctrl.save = () => {
@@ -53,13 +79,13 @@ function controller(notify, moment, $http) {
 	    $http.post(url, params).then(() => {
             window.Swal.fire({
                 icon: 'success',
-                title: 'Данные обнавлены',
+                title: 'Данные обновлены',
                 timer: 2000,
                 showConfirmButton: false,
             });
         }, (error) => {
             notify({
-                message: error.data.errors['title'] ? error.data.errors['title'][0] : 'Не изветная ошибка!',
+                message: error.data.errors['title'] ? error.data.errors['title'][0] : 'Неизвестная ошибка!',
                 duration: 2000,
                 classes: 'alert-danger',
             });

@@ -19,6 +19,24 @@ class CabinetController extends Controller
         ]);
     }
 
+    public function applications()
+    {
+        return view('cabinet-component', [
+            'component' => 'cabinet-applications',
+            'activeTab' => '',
+        ]);
+    }
+
+    public function getApplications()
+    {
+        $applications = \Auth::user()
+            ->applications()
+            ->with('entity')
+            ->get();
+
+        return $applications;
+    }
+
     public function project()
     {
         $component = 'cabinet-project';
@@ -29,7 +47,7 @@ class CabinetController extends Controller
             'activeTab' => $activeTab,
         ]);
     }
-    
+
     public function updateRoles(Request $request)
     {
         $startup = Role::findByName('startup');
@@ -49,15 +67,7 @@ class CabinetController extends Controller
     }
 
 
-    public function applications()
-    {
-        $app = Application::first();
 
-        return view('cabinet-component', [
-            'component' => 'cabinet-applications',
-            'activeTab' => '',
-        ]);
-    }
 
     public function application($id)
     {
@@ -73,6 +83,25 @@ class CabinetController extends Controller
 
         ])->findOrFail($id);
 
+        foreach ($app->forms as $form) {
+            foreach ($form->fields as $field) {
+                $field->formField->options = json_decode($field->formField->options, true);
+
+                if ($field->formField->type === 'file') {
+                    $values = [];
+                    foreach ($field->value as $value) {
+                        array_push($values, ['name' => $value]);
+                    }
+                    $field->value = json_encode($values);
+                }
+                if ($field->formField->type === 'checkbox') {
+                    if (count($field->value) > 0) {
+                        $field->stringValue = implode(',', $field->value);
+                    }
+                }
+            }
+        }
+
         return view('cabinet-component', [
             'component' => 'application-status',
             'bindings' => [
@@ -82,15 +111,7 @@ class CabinetController extends Controller
         ]);
     }
 
-    public function getApplications()
-    {
-        $applications = \Auth::user()
-            ->applications()
-            ->with('entity')
-            ->get();
 
-        return $applications;
-    }
 
     public function updateForm(Request $request, $id)
     {
@@ -106,13 +127,36 @@ class CabinetController extends Controller
             foreach ($request->fields as $inputField) {
                 if ($field->id == $inputField['id'] &&
                     $field->value != $inputField['value']) {
-                    $changes[] = [
-                        'label' => $field->formField->label,
-                        'old_value' => $field->value,
-                        'new_value' => $inputField['value']
-                    ];
-                    $field->value = $inputField['value'];
-                    $field->save();
+                    if ($inputField['type'] === 'file') {
+                        $newFile_pathes = [];
+                        if ($inputField['value'] != 'null') {
+                            foreach ($inputField['value'] as $value) {
+                                if (!is_array($value)) {
+                                    $path = \Storage::disk('public')->put('application_files', $value);
+                                    array_push($newFile_pathes, $path);
+                                } else {
+                                    array_push($newFile_pathes, $value['name']);
+                                }
+                            }
+                        }
+                        $changes[] = [
+                            'label' => $field->formField->label,
+                            'old_value' => $field->value,
+                            'new_value' => $newFile_pathes,
+                            'type' => $field->formField->type,
+                        ];
+                        $field->value = json_encode($newFile_pathes);
+                        $field->save();
+                    } else {
+                        $changes[] = [
+                            'label' => $field->formField->label,
+                            'old_value' => $field->value,
+                            'new_value' => $inputField['value'],
+                            'type' => $field->formField->type,
+                        ];
+                        $field->value = json_encode($inputField['value']);
+                        $field->save();
+                    }
                 }
             }
         }

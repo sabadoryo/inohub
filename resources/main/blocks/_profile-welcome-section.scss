@@ -1,0 +1,84 @@
+.profile-welcome-section {
+    width: 960px;
+    height: 240px;
+    border-radius: 7px;
+    overflow: hidden;
+    background-color: #181515;
+
+    display: flex;
+    align-items: center;
+    padding: 0 40px;
+    position: relative;
+
+    &__img-box {
+        width: 152px;
+        height: 152px;
+        flex-shrink: 0;
+        position: relative;
+        margin-right: 40px;
+
+        &:after {
+            content: '+';
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: $elem-color;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            @include text-style(2.3rem, 600, #ffffff);
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+        }
+    }
+
+    &__img {
+        width: 152px;
+        height: 152px;
+        border-radius: 50%;
+    }
+
+    &__name {
+        @include text-style(3.6rem, 700, #ffffff);
+        line-height: 44px;
+        margin-bottom: 15px;
+    }
+
+    &__username {
+        @include text-style(1.8rem, 600, #ffffff);
+        line-height: 22px;
+    }
+
+    &__circles {
+        width: 174.22px;
+        height: 174.22px;
+        border-radius: 50%;
+        border: 1px solid rgba(#ffffff, .3);
+        position: absolute;
+        top: 32.89px;
+        right: -27.11px;
+
+        &:before {
+            content: '';
+            width: 224px;
+            height: 224px;
+            border-radius: 50%;
+            border: 1px solid rgba(#ffffff, .3);
+            position: absolute;
+            top: -24.89px;
+            left: -24.89px;
+        }
+
+        &:after {
+            content: '';
+            width: 124.44px;
+            height: 124.44px;
+            border-radius: 50%;
+            border: 1px solid rgba(#ffffff, .3);
+            position: absolute;
+            top: 24.89px;
+            left: 24.89px;
+        }
+    }
+}

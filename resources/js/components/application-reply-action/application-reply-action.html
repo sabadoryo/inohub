@@ -18,8 +18,6 @@
                           ng-model="$ctrl.message"
                           ng-required="$ctrl.action == 'send-message'"></textarea>
 
-                <small class="form-text text-muted" ng-show="$ctrl.action != 'send-message'">Обязательно для заполнения</small>
-
                 <small class="form-text text-muted" ng-show="$ctrl.action != 'send-message'">Необязательно для заполнения</small>
 
             </div>
@@ -30,7 +28,7 @@
 
         <button type="button" class="btn btn-secondary" ng-click="$ctrl.dismiss()">Отменить</button>
 
-        <button type="submit" class="btn btn-primary" ng-click="$ctrl.save()">Подтвердить</button>
+        <button type="submit" class="btn btn-primary" ng-click="$ctrl.submit()">Подтвердить</button>
 
     </div>
 

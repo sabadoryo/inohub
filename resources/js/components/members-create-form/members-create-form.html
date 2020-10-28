@@ -1,0 +1,148 @@
+<div class="card">
+    <div class="card-body">
+
+        <form ng-submit="$ctrl.submit()">
+
+            <div class="form-group">
+                <label>Название компании:</label>
+                <input type="text" class="form-control" ng-model="$ctrl.companyName" required>
+            </div>
+
+            <div class="form-group">
+                <label>Название проекта:</label>
+                <input type="text" class="form-control" ng-model="$ctrl.projectName" required>
+            </div>
+
+            <div class="form-group">
+                <label>Описание проекта:</label>
+                <textarea ng-model="$ctrl.projectDescription" class="form-control" rows="4" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Сфера деятельности:</label>
+                <div class="form-group form-check" ng-repeat="activity in $ctrl.activities track by $index">
+                    <input type="checkbox"
+                           ng-model="activity.isSelected"
+                           class="form-check-input"
+                           id="activity--{{$index}}">
+                    <label class="form-check-label" for="activity--{{$index}}"> {{activity.label}}</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Описание ожидаемого конечного результата:</label>
+                <textarea class="form-control" ng-model="$ctrl.expectedResult" rows="4" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Адрес:</label>
+                <input type="text" class="form-control" ng-model="$ctrl.address" required>
+            </div>
+
+            <div class="form-group">
+                <label>Заявление на участие в качестве участника технопарка:</label>
+                <div>
+                    <div ng-show="$ctrl.applicationFileUrl">
+
+                        <a href=""
+                           target="_blank"
+                           ng-href="/{{$ctrl.applicationFileUrl}}"
+                           class="mr-1">
+                            открыть файл
+                        </a>
+
+                        <a href=""
+                           class="text-danger"
+                           type="button"
+                           ng-click="$ctrl.delApplicationFile()">
+                            <i class="fa fa-remove"></i>
+                        </a>
+
+                    </div>
+                    <div ng-show="!$ctrl.applicationFileUrl">
+                        <span class="mr-2" ng-show="$ctrl.applicationFile">{{$ctrl.applicationFile.name}}</span>
+                        <button type="button"
+                                class="btn btn-outline-secondary btn-xs"
+                                ng-model="$ctrl.applicationFile"
+                                ngf-select="">
+                            {{$ctrl.applicationFile ? 'Изменить файл' : 'Выбрать файл'}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Справка о государственной регистрации:</label>
+                <div>
+                    <div ng-show="$ctrl.registerCertificateFileUrl">
+
+                        <a href=""
+                           target="_blank"
+                           ng-href="/{{$ctrl.registerCertificateFileUrl}}"
+                           class="mr-1">
+                            открыть файл
+                        </a>
+
+                        <a href=""
+                           class="text-danger"
+                           type="button"
+                           ng-click="$ctrl.delRegisterCertificateFile()">
+                            <i class="fa fa-remove"></i>
+                        </a>
+
+                    </div>
+                    <div ng-show="!$ctrl.registerCertificateFileUrl">
+                        <span class="mr-2" ng-show="$ctrl.registerCertificateFile">{{$ctrl.registerCertificateFile.name}}</span>
+                        <button type="button"
+                                class="btn btn-outline-secondary btn-xs"
+                                ng-model="$ctrl.registerCertificateFile"
+                                ngf-select="">
+                            {{$ctrl.registerCertificateFile ? 'Изменить файл' : 'Выбрать файл'}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Сведения об отсутствии (наличии) налоговой задолженности:</label>
+                <div>
+                    <div ng-show="$ctrl.absenceTaxFileUrl">
+
+                        <a href=""
+                           target="_blank"
+                           ng-href="/{{$ctrl.absenceTaxFileUrl}}"
+                           class="mr-1">
+                            открыть файл
+                        </a>
+
+                        <a href=""
+                           class="text-danger"
+                           type="button"
+                           ng-click="$ctrl.delAbsenceTaxFile()">
+                            <i class="fa fa-remove"></i>
+                        </a>
+
+                    </div>
+                    <div ng-show="!$ctrl.absenceTaxFileUrl">
+                        <span class="mr-2" ng-show="$ctrl.absenceTaxFile">{{$ctrl.absenceTaxFile.name}}</span>
+                        <button type="button"
+                                class="btn btn-outline-secondary btn-xs"
+                                ng-model="$ctrl.absenceTaxFile"
+                                ngf-select="">
+                            {{$ctrl.absenceTaxFile ? 'Изменить файл' : 'Выбрать файл'}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit"
+                    class="btn btn-primary"
+                    ng-disabled="$ctrl.loading">
+                Добавить
+            </button>
+
+        </form>
+
+
+    </div>
+</div>

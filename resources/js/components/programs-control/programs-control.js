@@ -16,7 +16,7 @@ function controller($http, $uibModal) {
 
 	$ctrl.page = 1;
     $ctrl.title = null;
-    $ctrl.status = null;
+    $ctrl.status = 'draft';
     $ctrl.category = null;
 
 	$ctrl.$onInit = function () {
@@ -37,6 +37,7 @@ function controller($http, $uibModal) {
     };
 
 	$ctrl.getList = () => {
+	    console.log($ctrl.status);
         $http
             .get('/control-panel/programs/get-list', {
                 params: {

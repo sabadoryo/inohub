@@ -1,0 +1,72 @@
+<div class="alert alert-light" ng-show="$ctrl.event.status == 'draft'">
+  Данное мероприятие находится в режиме черновика. Хотите <a href="" ng-click="$ctrl.openToPublishModal()" class="alert-link">опубликовать</a> программу?
+</div>
+<a href="" class="btn btn-primary btn-sm mb-3">
+  Посмотреть
+</a>
+<div class="card">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" href="" ng-href="/control-panel/events/{{$ctrl.event.id}}/main">
+          Основная информация</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="" ng-href="/control-panel/events/{{$ctrl.event.id}}/page">Страница</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="" ng-href="/control-panel/events/{{$ctrl.event.id}}/forms">Анкета</a>
+      </li>
+    </ul>
+  </div>
+  <form role="form" ng-submit="$ctrl.save()">
+    <div class="card-body">
+      <div class="row">
+        <div class="form-group col-6">
+          <label>Название:</label>
+          <input type="text" class="form-control" placeholder="Введите название" ng-model="$ctrl.name">
+        </div>
+
+        <div class="form-group col-6">
+          <label>Дата и время провидения:</label>
+          <div class="d-flex">
+            <input type="date" class="form-control col-8" ng-model="$ctrl.startDate">
+            <input type="time" class="form-control col-4" ng-model="$ctrl.startDateTime">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Краткое описание</label>
+        <textarea class="form-control" ng-model="$ctrl.description"></textarea>
+        <small id="emailHelp" class="form-text text-muted">Не больше 100 символов. Символы: {{$ctrl.description.length}} </small>
+      </div>
+
+      <div class="form-group">
+        <label>Изображение:</label>
+        <div>
+          <img ng-show="!$ctrl.image && $ctrl.event.photo_url" ng-src="{{$ctrl.event.photo_url}}" style="vertical-align: middle; width:100px;height: 100px"/>
+          <img ng-show="$ctrl.image" ngf-thumbnail="$ctrl.image" style="vertical-align: middle; width:100px;height: 100px"/>
+        </div>
+        <div>
+          <a class="btn btn-light ml-2"
+             ngf-select=""
+             ngf-model-invalid="$ctrl.invalidAvatar"
+             ng-model="$ctrl.image"
+             accept="image/*"
+             ngf-max-size="10MB">
+
+            <span ng-show="!$ctrl.image">Выбрать изображение</span>
+            <span ng-show="$ctrl.image">Изменить изображение</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-primary" type="submit">
+        Сохранить
+      </button>
+    </div>
+  </form>
+</div>

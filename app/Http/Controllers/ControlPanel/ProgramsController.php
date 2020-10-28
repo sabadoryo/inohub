@@ -5,6 +5,7 @@ namespace App\Http\Controllers\ControlPanel;
 use App\Form;
 use App\Program;
 use App\ProgramCategory;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -12,6 +13,11 @@ class ProgramsController extends Controller
 {
     public function index()
     {
+        $breadcrumb = [
+            ['/control-panel', 'Главная'],
+            [null, 'Программы']
+        ];
+        
         $categories = ProgramCategory::all();
 
         return view('control-panel.component', [
@@ -21,13 +27,19 @@ class ProgramsController extends Controller
             ],
             'PAGE_TITLE' => 'Программы',
             'activePage' => 'programs',
-            'breadcrumb' => [],
+            'breadcrumb' => $breadcrumb,
         ]);
     }
 
     public function getList(Request $request)
     {
         $query = Program::query();
+    
+        if ($request->status == 'draft') {
+            $query->where('status', $request->status);
+        } elseif ($request->status == 'published') {
+            $query->where('status', $request->status);
+        }
 
         if ($request->title) {
             $query->where(
@@ -51,7 +63,7 @@ class ProgramsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|string',
+            'title' => 'required|string|min:3|max:255',
             'category_id' => 'nullable|exists:program_categories,id',
         ]);
 
@@ -94,7 +106,8 @@ class ProgramsController extends Controller
     
         $breadcrumb = [
             ['/control-panel', 'Главная'],
-            [null, 'Программы']
+            ['/control-panel/programs', 'Программы'],
+            [null, $program->title],
         ];
     
         return view('control-panel.component', [
@@ -129,21 +142,6 @@ class ProgramsController extends Controller
             'PAGE_TITLE' => $program->title,
             'activePage' => 'programs',
             'breadcrumb' => $breadcrumb,
-        ]);
-    }
-
-    public function create()
-    {
-        $forms = Form::all();
-
-        return view('control-panel.component', [
-            'component' => 'programs-create-form',
-            'bindings' => [
-                'forms' => $forms,
-            ],
-            'PAGE_TITLE' => 'Добавить программу',
-            'activePage' => 'programs',
-            'breadcrumb' => []
         ]);
     }
     
@@ -196,5 +194,14 @@ class ProgramsController extends Controller
         
         return [];
     }
-
+    
+    public function publish($id, Request $request)
+    {
+        $program = Program::find($id);
+    
+        $program->update([
+            'status' => 'published',
+            'published_at' => Carbon::now(),
+        ]);
+    }
 }

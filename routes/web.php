@@ -8,9 +8,10 @@ Route::get('/', 'MainPageController@index');
 
 Route::group(['prefix' => 'cabinet', 'middleware' => ['auth']], function () {
     Route::get('', 'CabinetController@profile');
+    Route::get('applications', 'CabinetController@applications');
+
     Route::get('project', 'CabinetController@project');
     Route::post('update-roles', 'CabinetController@updateRoles');
-    Route::get('applications', 'CabinetController@applications');
     Route::get('applications/{id}', 'CabinetController@application');
     Route::post('applications/{id}/update-form', 'CabinetController@updateForm');
     Route::post('applications/{id}/send-message', 'CabinetController@sendMessage');
@@ -30,6 +31,8 @@ Route::group(['prefix' => 'astana-hub'], function () {
     Route::get('programs/{id}', 'AstanaHubController@program');
     Route::get('programs/{id}/get-forms', 'AstanaHubController@getProgramForms');
 });
+
+Route::get('get-forms', 'FormsController@getList');
 
 Route::post('applications', 'ApplicationsController@store');
 Route::post('applications/{id}/send-message', 'ApplicationsController@sendMessage');
@@ -74,20 +77,34 @@ Route::group([
     Route::post('programs/{id}/update-main', 'ProgramsController@updateMain');
     Route::post('programs/{id}/update-forms', 'ProgramsController@updateForms');
     Route::post('programs/{id}/update-forms-list', 'ProgramsController@updateFormsList');
+    Route::post('programs/{id}/publish', 'ProgramsController@publish');
 
     Route::get('images', 'ImagesController@index');
     Route::post('images', 'ImagesController@store');
 
     Route::get('events', 'EventsController@index');
     Route::get('events/get-list', 'EventsController@getList');
-    Route::get('events/create', 'EventsController@create');
     Route::post('events', 'EventsController@store');
+    Route::get('events/{id}/main', 'EventsController@mainForm');
+    Route::get('events/{id}/page', 'EventsController@pageForm');
+    Route::get('events/{id}/forms', 'EventsController@forms');
+    Route::post('events/{id}/update-main', 'EventsController@updateMain');
+    Route::post('events/{id}/update-forms', 'EventsController@updateForms');
+    Route::post('events/{id}/update-forms-list', 'EventsController@updateFormsList');
+    Route::post('events/{id}/publish', 'EventsController@publish');
+    
+    Route::get('news', 'NewsController@index');
+    Route::get('news/get-list', 'NewsController@getList');
+    Route::post('news', 'NewsController@store');
+    Route::get('news/{id}/main', 'NewsController@mainForm');
+    Route::post('news/{id}/update-main', 'NewsController@updateMain');
+    Route::post('news/{id}/publish', 'NewsController@publish');
 
     Route::get('applications', 'ApplicationsController@index');
     Route::get('applications/get-list', 'ApplicationsController@getList');
     Route::get('applications/{id}', 'ApplicationsController@show');
     Route::post('applications/{id}/take-for-processing', 'ApplicationsController@takeForProcessing');
-    Route::post('applications/{id}/reply', 'ApplicationsController@reply');
+    Route::post('applications/{id}/accept', 'ApplicationsController@accept');
 
     Route::get('events', 'EventsController@index');
     Route::get('events/get-list', 'EventsController@getList');
@@ -97,6 +114,17 @@ Route::group([
     Route::get('forms', 'FormsController@index');
     Route::get('forms/create', 'FormsController@create');
     Route::post('forms', 'FormsController@store');
+
+
+    Route::get('corp-innovations', 'CorpInnovationsController@index');
+    Route::get('corp-innovations/tasks/get-list', 'CorpInnovationsController@getTasksList');
+    Route::get('corp-innovations/tasks/{id}', 'CorpInnovationsController@task');
+
+    Route::get('members','MembersController@index');
+    Route::get('members/create', 'MembersController@create');
+    Route::post('members', 'MembersController@store');
+    Route::get('members/get-list', 'MembersController@getList');
+
 });
 
 Route::get('test-page', function () {
@@ -105,4 +133,20 @@ Route::get('test-page', function () {
 
 Route::get('modal-page', function () {
     return view('modal-page');
+});
+
+Route::get('profile-page', function () {
+    return view('profile-page');
+});
+
+Route::get('profile-page-2', function () {
+    return view('profile-page-2');
+});
+
+Route::get('profile-page-3', function () {
+    return view('profile-page-3');
+});
+
+Route::get('modal-full', function () {
+    return view('modal-full');
 });

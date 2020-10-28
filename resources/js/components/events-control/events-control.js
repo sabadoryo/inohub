@@ -6,17 +6,30 @@ angular
         template: require('./events-control.html'),
         controller: ['$uibModal','$http',controller],
         bindings: {
-            //
         }
     });
 
 function controller($uibModal, $http) {
 
     let $ctrl = this;
-    $ctrl.events = [];
-    $ctrl.loading = false;
+
+    $ctrl.page = 1;
+    $ctrl.name = null;
+    $ctrl.status = 'draft';
+    $ctrl.total = 0;
 
     $ctrl.$onInit = function () {
+        $ctrl.getList();
+    };
+
+    $ctrl.filter = () => {
+        $ctrl.page = 1;
+        $ctrl.getList();
+    };
+
+    $ctrl.reset = () => {
+        $ctrl.page = 1;
+        $ctrl.name = null;
         $ctrl.getList();
     };
 
@@ -24,32 +37,37 @@ function controller($uibModal, $http) {
       $ctrl.loading = true;
 
       $http
-          .get('/control-panel/events/get-list')
-          .then(result => {
-              $ctrl.events = result.data;
-              $ctrl.loading = false;
-          }, error => {
-              $ctrl.loading = false;
-              alert('ERROR!!!!:/');
+          .get('/control-panel/events/get-list', {
+              params: {
+                  page: $ctrl.page,
+                  name: $ctrl.name,
+                  status: $ctrl.status,
+              }
           })
-
-
+          .then(
+              response => {
+                  $ctrl.events = response.data.data;
+                  $ctrl.total = response.data.total;
+              },
+              error => {
+                  // todo handle error
+              }
+          )
     };
 
-    $ctrl.openCreateEventModal = function () {
+    $ctrl.openCreateModal = () => {
         $uibModal
             .open({
-                component: 'createEventModal'
+                component: 'eventCreateModal',
             })
             .result
             .then(
-                data => {
-                    $ctrl.events.push(data);
+                res => {
+
                 },
-                error => {
-                    console.log('failed');
+                err => {
+
                 }
             );
-
-    }
+    };
 }
