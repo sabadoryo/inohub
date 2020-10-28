@@ -1,248 +1,265 @@
 <a href="" ng-click="$ctrl.dismiss()" class="as-modal__close-btn">
-    <svg width="28" height="28">
-        <use href="/img/icons.svg#close-icon"></use>
-    </svg>
+  <svg width="28" height="28">
+    <use href="/img/icons.svg#close-icon"></use>
+  </svg>
 </a>
 
 <div ng-show="$ctrl.type == 'login'">
 
-    <div class="as-modal__heading">Войти</div>
+  <div class="as-modal__heading">Войти</div>
 
-    <form ng-submit="$ctrl.doLogin()" class="as-modal__form">
+  <form ng-submit="$ctrl.doLogin()" class="as-modal__form">
 
-        <div class="as-modal__input-box input-box">
-            <label class="input-box__label">E-mail:</label>
-            <input type="text"
-                   class="input-box__input"
-                   placeholder="your@mail.kz"
-                   ng-model="$ctrl.login.email"
-                   required>
-        </div>
-
-        <div class="as-modal__input-box input-box" ng-class="{'input-box--error': $ctrl.errorMessage}">
-            <label class="input-box__label">Пароль</label>
-            <div class="input-box__container">
-                <input type="password"
-                       class="input-box__input"
-                       placeholder="Введите пароль"
-                       required
-                       ng-model="$ctrl.login.password">
-                <a href="" class="input-box__pass-eye">
-                    <svg width="24" height="24">
-                        <use href="/img/icons.svg#pass-eye"></use>
-                    </svg>
-                </a>
-            </div>
-            <div class="input-box__error-text" ng-show="$ctrl.errorMessage">
-                {{$ctrl.errorMessage}}
-            </div>
-        </div>
-
-        <button class="as-modal__button button button--w100">Войти</button>
-
-    </form>
-
-    <div class="as-modal__section as-modal__section--centered">
-        <a href="" class="as-modal__link">Забыли пароль?</a>
+    <div class="as-modal__input-box input-box">
+      <label class="input-box__label">E-mail:</label>
+      <input type="text"
+             class="input-box__input"
+             placeholder="your@mail.kz"
+             ng-model="$ctrl.login.email"
+             required>
     </div>
 
-    <div class="as-modal__section">
-        <div class="as-modal__text">
-            У вас нету аккаунта?
-            <a href="" ng-click="$ctrl.changeType('register')" class="as-modal__link">
-                Зарегестрироваться
-            </a>
-        </div>
+    <div class="as-modal__input-box input-box" ng-class="{'input-box--error': $ctrl.errorMessage}">
+      <label class="input-box__label">Пароль</label>
+      <div class="input-box__container">
+        <input type="{{!$ctrl.showPassword ? 'password' : 'text'}}"
+               class="input-box__input"
+               placeholder="Введите пароль"
+               required
+               ng-model="$ctrl.login.password">
+        <a href="" class="input-box__pass-eye" ng-click="$ctrl.changeStatusPassword()">
+          <svg width="24" height="24">
+            <use href="/img/icons.svg#pass-eye"></use>
+          </svg>
+        </a>
+      </div>
+      <div class="input-box__error-text" ng-show="$ctrl.errorMessage">
+        {{ $ctrl.errorMessage }}
+      </div>
     </div>
 
-    <div class="as-modal__section as-modal__section--centered">
-        <div class="as-modal__border-side">
-            Или
-        </div>
-    </div>
+    <button class="as-modal__button button button--w100">Войти</button>
 
-    <div class="as-modal__btn-group">
-        <button class="as-modal__btn-item button-w-icon">
-            Войти с
-            <svg width="20" height="20">
-                <use href="/img/icons.svg#google-icon"></use>
-            </svg>
-        </button>
-        <button class="as-modal__btn-item button-w-icon button-w-icon--blue">
-            Войти с
-            <svg width="20" height="20">
-                <use href="/img/icons.svg#fb-icon"></use>
-            </svg>
-        </button>
+  </form>
+
+  <div class="as-modal__section as-modal__section--centered">
+    <a href="" class="as-modal__link">Забыли пароль?</a>
+  </div>
+
+  <div class="as-modal__section">
+    <div class="as-modal__text">
+      У вас нету аккаунта?
+      <a href="" ng-click="$ctrl.changeType('register')" class="as-modal__link">
+        Зарегистрироваться
+      </a>
     </div>
+  </div>
+
+  <div class="as-modal__section as-modal__section--centered">
+    <div class="as-modal__border-side">
+      Или
+    </div>
+  </div>
+
+  <div class="as-modal__btn-group">
+    <button class="as-modal__btn-item button-w-icon">
+      Войти с
+      <svg width="20" height="20">
+        <use href="/img/icons.svg#google-icon"></use>
+      </svg>
+    </button>
+    <button class="as-modal__btn-item button-w-icon button-w-icon--blue">
+      Войти с
+      <svg width="20" height="20">
+        <use href="/img/icons.svg#fb-icon"></use>
+      </svg>
+    </button>
+  </div>
 
 </div>
 
 <div ng-show="$ctrl.type == 'register'">
 
-    <div class="as-modal__heading" ng-show="$ctrl.register.step < 4">Регистрация</div>
+  <div class="as-modal__heading" ng-show="$ctrl.register.step < 4">Регистрация</div>
 
-    <div class="as-modal__heading" ng-show="$ctrl.register.step == 4">
-        Вы успешно зарегистрировались!
+  <div class="as-modal__heading" ng-show="$ctrl.register.step == 4">
+    Вы успешно зарегистрировались!
+  </div>
+
+  <form ng-submit="$ctrl.toStep(2)" ng-show="$ctrl.register.step == 1" class="as-modal__form">
+
+    <div class="as-modal__input-box input-box">
+      <label class="input-box__label">Фамилия:</label>
+      <input type="text"
+             class="input-box__input"
+             placeholder=""
+             ng-model="$ctrl.register.lastName"
+             ng-change="$ctrl.registerAddData()"
+             ng-model-options="{debounce: 300}"
+             required>
     </div>
 
-    <form ng-submit="$ctrl.toStep(2)" ng-show="$ctrl.register.step == 1" class="as-modal__form">
+    <div class="as-modal__input-box input-box">
+      <label class="input-box__label">Имя:</label>
+      <input type="text"
+             class="input-box__input"
+             placeholder=""
+             ng-model="$ctrl.register.firstName"
+             ng-change="$ctrl.registerAddData()"
+             ng-model-options="{debounce: 300}"
+             required>
+    </div>
 
-        <div class="as-modal__input-box input-box">
-            <label class="input-box__label">Фамилия:</label>
-            <input type="text"
-                   class="input-box__input"
-                   placeholder=""
-                   ng-model="$ctrl.register.lastName"
-                   required>
-        </div>
+    <div class="as-modal__input-box input-box" ng-class="{'input-box--error': $ctrl.errorMessage}">
+      <label class="input-box__label">Email:</label>
+      <input type="email"
+             class="input-box__input"
+             placeholder=""
+             ng-model="$ctrl.register.email"
+             ng-change="$ctrl.registerAddData()"
+             ng-model-options="{debounce: 300}"
+             required>
+      <div class="input-box__error-text" ng-show="$ctrl.errorMessage">
+        {{ $ctrl.errorMessage }}
+      </div>
+    </div>
 
-        <div class="as-modal__input-box input-box">
-            <label class="input-box__label">Имя:</label>
-            <input type="text"
-                   class="input-box__input"
-                   placeholder=""
-                   ng-model="$ctrl.register.firstName"
-                   required>
-        </div>
+    <button class="as-modal__button button button--w100" type="submit" ng-disabled="$ctrl.nextStep">Далее</button>
 
-        <div class="as-modal__input-box input-box">
-            <label class="input-box__label">Email:</label>
-            <input type="email"
-                   class="input-box__input"
-                   placeholder=""
-                   ng-model="$ctrl.register.email"
-                   required>
-        </div>
+  </form>
 
-        <button class="as-modal__button button button--w100" type="submit">Далее</button>
+  <form ng-submit="$ctrl.toStep(3)" ng-show="$ctrl.register.step == 2">
 
-    </form>
+    <img src="/img/avatar-placeholder.svg" alt="" class="as-modal__profile-photo">
 
-    <form ng-submit="$ctrl.toStep(3)" ng-show="$ctrl.register.step == 2">
+    <div class="as-modal__section as-modal__section--centered">
+      <a href="#" class="as-modal__link">Добавить фото профиля</a>
+    </div>
 
-        <img src="/img/avatar-placeholder.svg" alt="" class="as-modal__profile-photo">
+    <button class="as-modal__button button button--w100" type="submit">Далее</button>
 
-        <div class="as-modal__section as-modal__section--centered">
-            <a href="#" class="as-modal__link">Добавить фото профиля</a>
-        </div>
+    <button class="as-modal__button button button--grey button--w100" type="submit">
+      Пропустить
+    </button>
 
-        <button class="as-modal__button button button--w100" type="submit">Далее</button>
+    <!--        <div class="form-group">-->
 
-        <button class="as-modal__button button button--grey button--w100" type="submit">
-            Пропустить
-        </button>
+    <!--            <label>Аватар:</label>-->
 
-<!--        <div class="form-group">-->
+    <!--            <div class="d-flex px-0 justify-content-center ">-->
 
-<!--            <label>Аватар:</label>-->
+    <!--                <img ng-show="!$ctrl.register.avatar"-->
+    <!--                     style="vertical-align: middle; width:150px;height: 150px; border-radius: 50%"-->
+    <!--                     alt="user avatar"-->
+    <!--                     src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"/>-->
 
-<!--            <div class="d-flex px-0 justify-content-center ">-->
+    <!--                <img ng-show="$ctrl.register.avatar"-->
+    <!--                     ngf-thumbnail="$ctrl.register.avatar"-->
+    <!--                     style="vertical-align: middle; width:150px;height: 150px; border-radius: 50%"-->
+    <!--                     alt="user avatar"/>-->
 
-<!--                <img ng-show="!$ctrl.register.avatar"-->
-<!--                     style="vertical-align: middle; width:150px;height: 150px; border-radius: 50%"-->
-<!--                     alt="user avatar"-->
-<!--                     src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"/>-->
+    <!--            </div>-->
 
-<!--                <img ng-show="$ctrl.register.avatar"-->
-<!--                     ngf-thumbnail="$ctrl.register.avatar"-->
-<!--                     style="vertical-align: middle; width:150px;height: 150px; border-radius: 50%"-->
-<!--                     alt="user avatar"/>-->
+    <!--            <a class="btn btn-light mt-1 d-flex justify-content-center"-->
+    <!--               ngf-select=""-->
+    <!--               ngf-model-invalid="$ctrl.invalidAvatar"-->
+    <!--               ng-model="$ctrl.register.avatar"-->
+    <!--               accept="image/*"-->
+    <!--               ngf-max-size="10MB">-->
+    <!--                <span ng-show="!$ctrl.register.avatar">Выбрать аватар</span>-->
+    <!--                <span ng-show="$ctrl.register.avatar">Изменить аватар</span>-->
+    <!--            </a>-->
 
-<!--            </div>-->
+    <!--        </div>-->
 
-<!--            <a class="btn btn-light mt-1 d-flex justify-content-center"-->
-<!--               ngf-select=""-->
-<!--               ngf-model-invalid="$ctrl.invalidAvatar"-->
-<!--               ng-model="$ctrl.register.avatar"-->
-<!--               accept="image/*"-->
-<!--               ngf-max-size="10MB">-->
-<!--                <span ng-show="!$ctrl.register.avatar">Выбрать аватар</span>-->
-<!--                <span ng-show="$ctrl.register.avatar">Изменить аватар</span>-->
-<!--            </a>-->
+    <!--        <button type="button" ng-click="$ctrl.toStep(1)" class="btn btn-secondary">Назад</button>-->
 
-<!--        </div>-->
+    <!--        <button type="submit" class="btn btn-primary">-->
+    <!--            {{$ctrl.register.avatar ? 'Далее' : 'Пропустить'}}-->
+    <!--        </button>-->
 
-<!--        <button type="button" ng-click="$ctrl.toStep(1)" class="btn btn-secondary">Назад</button>-->
+  </form>
 
-<!--        <button type="submit" class="btn btn-primary">-->
-<!--            {{$ctrl.register.avatar ? 'Далее' : 'Пропустить'}}-->
-<!--        </button>-->
+  <form ng-submit="$ctrl.doRegister()" ng-show="$ctrl.register.step == 3" class="as-modal__form">
 
-    </form>
+    <div class="as-modal__input-box input-box">
 
-    <form ng-submit="$ctrl.doRegister()" ng-show="$ctrl.register.step == 3" class="as-modal__form">
+      <label class="input-box__label">Пароль</label>
 
-        <div class="as-modal__input-box input-box">
+      <div class="input-box__container" ng-class="{'input-box--error': $ctrl.errorMessage}">
 
-            <label class="input-box__label">Пароль</label>
+        <input type="{{!$ctrl.showPassword ? 'password' : 'text'}}"
+               class="input-box__input"
+               placeholder="Введите пароль"
+               ng-model="$ctrl.register.password"
+               ng-change="$ctrl.registerAddData()"
+               ng-model-options="{debounce: 300}">
 
-            <div class="input-box__container">
+        <a href="#" class="input-box__pass-eye" ng-click="$ctrl.changeStatusPassword()">
+          <svg width="24" height="24">
+            <use href="/img/icons.svg#pass-eye"></use>
+          </svg>
+        </a>
 
-                <input type="password"
-                       class="input-box__input"
-                       placeholder="Введите пароль"
-                       ng-model="$ctrl.register.password">
+      </div>
 
-                <a href="#" class="input-box__pass-eye">
-                    <svg width="24" height="24">
-                        <use href="/img/icons.svg#pass-eye"></use>
-                    </svg>
-                </a>
-
-            </div>
-
-        </div>
-
-        <div class="as-modal__input-box input-box">
-
-            <label class="input-box__label">Повторите пароль</label>
-
-            <div class="input-box__container">
-
-                <input type="password"
-                       class="input-box__input"
-                       placeholder="Повторите пароль"
-                       ng-model="$ctrl.register.passwordConfirmation">
-
-                <a href="#" class="input-box__pass-eye">
-                    <svg width="24" height="24">
-                        <use href="/img/icons.svg#pass-eye"></use>
-                    </svg>
-                </a>
-
-            </div>
-
-        </div>
-
-        <button type="submit" class="as-modal__button button button--w100">Завершить регистрацию</button>
-
-    </form>
-
-    <div ng-show="$ctrl.register.step == 4">
-
-        <h4>Поздравляем, вы успешно зарегистрированы!</h4>
-
-        <div class="as-modal__section">
-            <div class="as-modal__text">
-                Если Вы хотите чтобы о вашем проекте узнали наши пользователи
-                <a href="" class="as-modal__link">заполните анкету проекта</a>
-            </div>
-        </div>
-
-        <div class="as-modal__section">
-            <div class="as-modal__text">
-                Если Вы хотите найти проекты для инвестиции
-                <a href="" class="as-modal__link">заполните анкету инвестора</a>
-            </div>
-        </div>
+      <div class="input-box__error-text" ng-show="$ctrl.errorMessage">
+        {{ $ctrl.errorMessage }}
+      </div>
 
     </div>
 
-    <div class="as-modal__section" ng-show="$ctrl.register.step < 4">
-        <div class="as-modal__text">
-            У вас уже есть аккаунт?  <a href="" ng-click="$ctrl.changeType('login')" class="as-modal__link">Войти</a>
-        </div>
+    <div class="as-modal__input-box input-box">
+
+      <label class="input-box__label">Повторите пароль</label>
+
+      <div class="input-box__container">
+
+        <input type="{{!$ctrl.showPassword ? 'password' : 'text'}}"
+               class="input-box__input"
+               placeholder="Повторите пароль"
+               ng-model="$ctrl.register.passwordConfirmation"
+               ng-change="$ctrl.registerAddData()"
+               ng-model-options="{debounce: 300}">
+
+        <a href="#" class="input-box__pass-eye" ng-click="$ctrl.changeStatusPassword()">
+          <svg width="24" height="24">
+            <use href="/img/icons.svg#pass-eye"></use>
+          </svg>
+        </a>
+
+      </div>
+
     </div>
+
+    <button type="submit" class="as-modal__button button button--w100" ng-disabled="$ctrl.nextStep">Завершить регистрацию</button>
+
+  </form>
+
+  <div ng-show="$ctrl.register.step == 4">
+
+    <h4>Поздравляем, вы успешно зарегистрированы!</h4>
+
+    <div class="as-modal__section">
+      <div class="as-modal__text">
+        Если Вы хотите чтобы о вашем проекте узнали наши пользователи
+        <a href="" class="as-modal__link">заполните анкету проекта</a>
+      </div>
+    </div>
+
+    <div class="as-modal__section">
+      <div class="as-modal__text">
+        Если Вы хотите найти проекты для инвестиции
+        <a href="" class="as-modal__link">заполните анкету инвестора</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="as-modal__section" ng-show="$ctrl.register.step < 4">
+    <div class="as-modal__text">
+      У вас уже есть аккаунт? <a href="" ng-click="$ctrl.changeType('login')" class="as-modal__link">Войти</a>
+    </div>
+  </div>
 
 </div>

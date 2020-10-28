@@ -90,4 +90,15 @@ class RegisterController extends Controller
             ];
         }
     }
+    
+    public function checkMail(Request $request)
+    {
+        $item = User::where('email', $request->email)->first();
+        
+        if ($item) {
+            return response()->json(['message' => 'Такой E-mail уже существует!'], 422);
+        } else {
+            return [];
+        }
+    }
 }

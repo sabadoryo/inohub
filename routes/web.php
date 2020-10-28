@@ -2,6 +2,7 @@
 
 Route::post('login', 'Auth\LoginController@login');
 Route::post('register', 'Auth\RegisterController@register');
+Route::post('check-mail', 'Auth\RegisterController@checkMail');
 Route::post('logout', 'Auth\LoginController@logout');
 
 Route::get('/', 'MainPageController@index');
@@ -131,6 +132,22 @@ Route::group([
     Route::get('members/create', 'MembersController@create');
     Route::post('members', 'MembersController@store');
     Route::get('members/get-list', 'MembersController@getList');
+
+    Route::get('sm/solutions', 'SmartStoreSolutionCompaniesController@index');
+    Route::get('sm/solutions/get-companies-list', 'SmartStoreSolutionCompaniesController@getList');
+    Route::get('sm/solutions/create', 'SmartStoreSolutionCompaniesController@create');
+    Route::post('sm/solutions', 'SmartStoreSolutionCompaniesController@store');
+    Route::get('sm/solutions/{id}/edit', 'SmartStoreSolutionCompaniesController@edit');
+    Route::post('sm/solutions/{id}/update', 'SmartStoreSolutionCompaniesController@update');
+    Route::post('sm/solutions/{id}/remove', 'SmartStoreSolutionCompaniesController@remove');
+
+    Route::get('sm/tasks', 'SmartStoreTaskCompaniesController@index');
+    Route::get('sm/tasks/get-companies-list', 'SmartStoreTaskCompaniesController@getList');
+    Route::get('sm/tasks/create', 'SmartStoreTaskCompaniesController@create');
+    Route::post('sm/tasks', 'SmartStoreTaskCompaniesController@store');
+    Route::get('sm/tasks/{id}/edit', 'SmartStoreTaskCompaniesController@edit');
+    Route::post('sm/tasks/{id}/update', 'SmartStoreTaskCompaniesController@update');
+    Route::post('sm/tasks/{id}/remove', 'SmartStoreTaskCompaniesController@remove');
 
 });
 
