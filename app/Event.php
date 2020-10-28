@@ -15,7 +15,8 @@ class Event extends Model
     ];
     
     protected $dates = [
-      'start_date',
+        'start_date',
+        'published_at'
     ];
     
     protected $appends = [

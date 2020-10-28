@@ -15,6 +15,8 @@ function controller($uibModal, $http) {
 
     $ctrl.page = 1;
     $ctrl.name = null;
+    $ctrl.status = 'draft';
+    $ctrl.total = 0;
 
     $ctrl.$onInit = function () {
         $ctrl.getList();
@@ -39,6 +41,7 @@ function controller($uibModal, $http) {
               params: {
                   page: $ctrl.page,
                   name: $ctrl.name,
+                  status: $ctrl.status,
               }
           })
           .then(

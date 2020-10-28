@@ -33,6 +33,12 @@ class NewsController extends Controller
     {
         $query = News::query();
     
+        if ($request->status == 'draft') {
+            $query->where('status', $request->status);
+        } elseif ($request->status == 'published') {
+            $query->where('status', $request->status);
+        }
+    
         if ($request->name) {
             $query->where(
                 'title',
@@ -41,12 +47,6 @@ class NewsController extends Controller
             );
         }
         
-        if ($request->status == 'draft') {
-            $query->where('status', $request->status);
-        } elseif ($request->status == 'published') {
-            $query->where('status', $request->status);
-        }
-    
         $result = $query->orderBy('id', 'desc')
             ->paginate(10);
     
@@ -76,7 +76,7 @@ class NewsController extends Controller
         
         $breadcrumb = [
             ['/control-panel', 'Главная'],
-            ['/control-panel/events', 'Мероприятия'],
+            ['/control-panel/news', 'Новости'],
             [null, $news->title],
         ];
         
