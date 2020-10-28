@@ -63,6 +63,13 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="/control-panel/vacancies" class="nav-link {{$activePage == 'vacancies' ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-scroll"></i>
+                        <p>Вакансии</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="/control-panel/forms" class="nav-link {{$activePage == 'forms' ? 'active' : ''}}">
                         <i class="nav-icon fas fa-users"></i>
                         <p>Настройка форм</p>

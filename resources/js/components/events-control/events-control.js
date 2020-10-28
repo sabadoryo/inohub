@@ -4,7 +4,7 @@ angular
     .module('app')
     .component('eventsControl', {
         template: require('./events-control.html'),
-        controller: ['$uibModal','$http',controller],
+        controller: ['$uibModal', '$http', controller],
         bindings: {
         }
     });
