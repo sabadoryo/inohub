@@ -7,10 +7,10 @@
              ng-model="$ctrl.title">
     </div>
     <div class="col-3">
-      <select class="form-control" ng-value="$ctrl.status">
-        <option value="all">Все</option>
-        <option value="draft">Черновики</option>
-        <option value="published">Опубликовано</option>
+      <select ng-model="$ctrl.status" class="form-control">
+        <option value="">Все</option>
+        <option value="draft">Черновик</option>
+        <option value="published">Опубликован</option>
       </select>
     </div>
     <div class="col-auto">
@@ -41,7 +41,10 @@
   <tr ng-repeat="val in $ctrl.news track by $index">
     <td>{{val.id}}</td>
     <td>{{val.title}}</td>
-    <td>{{val.status}}</td>
+    <td ng-switch="val.status">
+      <div ng-switch-when="draft">Черновик</div>
+      <div ng-switch-when="published">Опубликован</div>
+    </td>
     <td class="text-center">
       <a href=""
          ng-href="/control-panel/news/{{val.id}}/main"

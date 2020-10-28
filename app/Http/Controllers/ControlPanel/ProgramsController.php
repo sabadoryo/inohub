@@ -5,6 +5,7 @@ namespace App\Http\Controllers\ControlPanel;
 use App\Form;
 use App\Program;
 use App\ProgramCategory;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -33,6 +34,12 @@ class ProgramsController extends Controller
     public function getList(Request $request)
     {
         $query = Program::query();
+    
+        if ($request->status == 'draft') {
+            $query->where('status', $request->status);
+        } elseif ($request->status == 'published') {
+            $query->where('status', $request->status);
+        }
 
         if ($request->title) {
             $query->where(
@@ -194,6 +201,7 @@ class ProgramsController extends Controller
     
         $program->update([
             'status' => 'published',
+            'published_at' => Carbon::now(),
         ]);
     }
 }
