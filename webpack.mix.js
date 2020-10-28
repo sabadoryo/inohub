@@ -23,7 +23,8 @@ mix.js('resources/js/app.js', 'public/js').extract([
     'sweetalert2',
     'moment',
     'overlayscrollbars/js/jquery.overlayScrollbars',
-    '@cgross/angular-notify'
+    '@cgross/angular-notify',
+    'textangular',
 ]).sourceMaps();
 
 if (mix.inProduction()) {

@@ -10,6 +10,7 @@ import angularScroll from "angular-scroll";
 import ngFileUpload from "ng-file-upload";
 import angularMoment from "angular-moment";
 import notify from "@cgross/angular-notify";
+import textAngular from "textangular";
 
 
 angular
@@ -22,8 +23,22 @@ angular
         angularScroll,
         ngFileUpload,
         angularMoment,
-        notify
+        notify,
+        textAngular
     ])
+    .config(['$provide', function ($provide) {
+        $provide.decorator('taOptions', ['taRegisterTool', '$uibModal', '$delegate', function (taRegisterTool, $uibModal, taOptions) {
+            taOptions.toolbar = [
+                ['h3'],
+                ['bold', 'italics', 'underline', 'ul', 'ol'],
+                ['justifyLeft', 'justifyCenter', 'justifyRight'],
+                ['insertLink'],
+            ];
+            taOptions.forceTextAngularSanitize = false;
+            return taOptions;
+        }]);
+
+    }])
     .config(['$httpProvider', function ($httpProvider) {
         $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
     }])
@@ -96,6 +111,11 @@ require('./components/event-forms/event-forms');
 require('./components/event-to-publish-modal/event-to-publish-modal');
 require('./components/program-to-publish-modal/program-to-publish-modal');
 require('./components/page-builder/page-builder');
+require('./components/news-control/news-control');
+require('./components/news-create-modal/news-create-modal');
+require('./components/news-main-form/news-main-form');
+require('./components/news-upload-image/news-upload-image');
 require('./components/corp-innovations/corp-innovations');
 require('./components/members-control/members-control');
 require('./components/members-create-form/members-create-form');
+require('./components/news-to-publish-modal/news-to-publish-modal');

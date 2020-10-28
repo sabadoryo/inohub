@@ -50,8 +50,6 @@ function controller($uibModal, $http) {
                   // todo handle error
               }
           )
-
-
     };
 
     $ctrl.openCreateModal = () => {
