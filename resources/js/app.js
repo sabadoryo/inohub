@@ -120,3 +120,6 @@ require('./components/corp-innovations/corp-innovations');
 require('./components/members-control/members-control');
 require('./components/members-create-form/members-create-form');
 require('./components/news-to-publish-modal/news-to-publish-modal');
+require('./components/tech-garden-about/tech-garden-about');
+require('./components/tech-garden-programs/tech-garden-programs');
+require('./components/tech-garden-corp-innovations/tech-garden-corp-innovations');

@@ -32,6 +32,17 @@ Route::group(['prefix' => 'astana-hub'], function () {
     Route::get('programs/{id}/get-forms', 'AstanaHubController@getProgramForms');
 });
 
+Route::group(['prefix' => 'tech-garden'], function () {
+    Route::get('about', 'TechGardenController@about');
+    Route::get('programs', 'TechGardenController@programs');
+    Route::get('corporate-innovations', 'TechGardenController@corporateInnovations');
+    Route::get('hub-space', 'TechGardenController@hubSpace');
+    Route::get('r-and-d', 'TechGardenController@randd');
+    Route::get('resources', 'TechGardenController@resources');
+    Route::get('programs/{id}', 'TechGardenController@program');
+    Route::get('programs/{id}/get-forms', 'TechGardenController@getProgramForms');
+});
+
 Route::get('get-forms', 'FormsController@getList');
 
 Route::post('applications', 'ApplicationsController@store');

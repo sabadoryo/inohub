@@ -165,7 +165,7 @@
                     Astana Hub
                 </a>
 
-                <a href="#" class="as-navbar__organization">
+                <a href="/tech-garden/about" class="as-navbar__organization">
                     <img src="/img/icons/tech-garden-icon-sm.png" alt="" class="as-navbar__organization-icon">
                     Tech Garden
                 </a>
