@@ -126,6 +126,8 @@ Route::group([
     Route::post('members', 'MembersController@store');
     Route::get('members/get-list', 'MembersController@getList');
 
+    Route::post('passports/{id}/save-changes', 'PassportsController@saveChanges');
+
 });
 
 Route::get('test-page', function () {

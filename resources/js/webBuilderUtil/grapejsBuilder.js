@@ -16,7 +16,21 @@ const buildConstructor = (elemId, options) => {
         width: 'auto',
         avoidInlineStyle: 1,
         // Disable the storage manager for the moment
-        storageManager: false,
+        storageManager: {
+            type: 'remote',
+            autosave: true,
+            stepsBeforeSave: 1,
+            storeHtml: 1,
+            storeCss: 1,
+            storeComponents: 0,
+            urlStore: `/control-panel/passports/${options.passport.id}/save-changes`,
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+            },
+            beforeSend(xhr, setting) {
+                console.log('sending html to server', xhr, setting)
+            }
+        },
         assetManager: {
             assets: [
                 '/img/program-poster.png'
