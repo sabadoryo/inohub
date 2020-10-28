@@ -214,7 +214,7 @@
                                 </div>
                             </div>
 
-                            <div class="application-block__input-box input-box">
+                            <div class="application-block__input-box input-box input-box--">
                                 <label class="input-box__label">Краткое описание проекта. В чем заключается идея? </label>
                                 <textarea class="input-box__textarea" placeholder="Проект был создан для..."></textarea>
                             </div>
