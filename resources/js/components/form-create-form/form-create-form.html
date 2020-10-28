@@ -76,16 +76,16 @@
 
             <div ng-if="field.type == 'radio' || field.type == 'checkbox' || field.type == 'select'">
 
-                <div ng-repeat="opt in field.options track by $index" class="mb-2">
+                <div ng-repeat="opt in field.options track by $index" class="mb-2 d-flex align-items-center">
 
-                    <input type="radio" ng-if="field.type == 'radio'" checked disabled style="display: inline-block">
+                    <input type="radio" ng-if="field.type == 'radio'" class="mr-2" checked disabled>
 
                     <input type="checkbox" ng-if="field.type == 'checkbox'" checked disabled
                            style="display: inline-block">
 
                     <input type="text"
                            class="form-control"
-                           style="display: inline-block; width: 400px"
+                           style=""
                            ng-model="opt.val"
                            required>
 

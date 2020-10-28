@@ -44,6 +44,7 @@ class FormField extends Model
         }
     }
 
+
     function isJson($string)
     {
         json_decode($string);

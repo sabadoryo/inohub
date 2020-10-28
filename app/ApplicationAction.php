@@ -10,7 +10,8 @@ class ApplicationAction extends Model
         'user_id',
         'name',
         'message',
-        'additional_data'
+        'additional_data',
+        'type',
     ];
 
     public function user()
@@ -27,7 +28,8 @@ class ApplicationAction extends Model
         }
     }
 
-    function isJson($string) {
+    function isJson($string)
+    {
         json_decode($string);
         return (json_last_error() == JSON_ERROR_NONE);
     }
