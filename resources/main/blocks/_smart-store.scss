@@ -1,0 +1,9 @@
+.smart-store {
+
+    &__title {
+        @include text-style(2rem, 700, #181515);
+        line-height: 24px;
+    }
+
+
+}

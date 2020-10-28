@@ -8,7 +8,7 @@
         <span class="brand-text font-weight-light">TechHub</span>
     </a>
 
-    <div class="sidebar">
+    <ul class="sidebar">
 
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
@@ -111,6 +111,31 @@
                             Услуги
                         </p>
                     </a>
+                </li>
+
+                <li class="nav-item has-treeview">
+                    <a href=""
+                       class="nav-link"
+                       ng-class="{active: {{$activePage === 'sm-solutions' || $activePage === 'sm-tasks'}}}"
+                       uib-dropdown-toggle>
+                        <i class="nav-icon fas fa-credit-card"></i>
+                        <p>
+                            Smart Store
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/control-panel/sm/solutions" class="nav-link {{$activePage === 'sm-solutions' ? 'active' : ''}}">
+                                ИТ-решения
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/control-panel/sm/tasks" class="nav-link {{$activePage === 'sm-tasks' ? 'active' : ''}}">
+                                Пром.компании
+                            </a>
+                        </li>
+                    </ul>
                 </li>
 
                 <li class="nav-item">

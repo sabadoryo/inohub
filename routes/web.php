@@ -99,7 +99,7 @@ Route::group([
     Route::post('events/{id}/update-forms', 'EventsController@updateForms');
     Route::post('events/{id}/update-forms-list', 'EventsController@updateFormsList');
     Route::post('events/{id}/publish', 'EventsController@publish');
-    
+
     Route::get('news', 'NewsController@index');
     Route::get('news/get-list', 'NewsController@getList');
     Route::post('news', 'NewsController@store');
@@ -132,6 +132,22 @@ Route::group([
     Route::get('members/create', 'MembersController@create');
     Route::post('members', 'MembersController@store');
     Route::get('members/get-list', 'MembersController@getList');
+
+    Route::get('sm/solutions', 'SmartStoreSolutionCompaniesController@index');
+    Route::get('sm/solutions/get-companies-list', 'SmartStoreSolutionCompaniesController@getList');
+    Route::get('sm/solutions/create', 'SmartStoreSolutionCompaniesController@create');
+    Route::post('sm/solutions', 'SmartStoreSolutionCompaniesController@store');
+    Route::get('sm/solutions/{id}/edit', 'SmartStoreSolutionCompaniesController@edit');
+    Route::post('sm/solutions/{id}/update', 'SmartStoreSolutionCompaniesController@update');
+    Route::post('sm/solutions/{id}/remove', 'SmartStoreSolutionCompaniesController@remove');
+
+    Route::get('sm/tasks', 'SmartStoreTaskCompaniesController@index');
+    Route::get('sm/tasks/get-companies-list', 'SmartStoreTaskCompaniesController@getList');
+    Route::get('sm/tasks/create', 'SmartStoreTaskCompaniesController@create');
+    Route::post('sm/tasks', 'SmartStoreTaskCompaniesController@store');
+    Route::get('sm/tasks/{id}/edit', 'SmartStoreTaskCompaniesController@edit');
+    Route::post('sm/tasks/{id}/update', 'SmartStoreTaskCompaniesController@update');
+    Route::post('sm/tasks/{id}/remove', 'SmartStoreTaskCompaniesController@remove');
 
 });
 
@@ -172,4 +188,36 @@ Route::get('profile-page-3', function () {
 
 Route::get('modal-full', function () {
     return view('modal-full');
+});
+
+Route::get('profile-page-4', function () {
+    return view('profile-page-4');
+});
+
+Route::get('profile-page-5', function () {
+    return view('profile-page-5');
+});
+
+Route::get('profile-page-6', function () {
+    return view('profile-page-6');
+});
+
+Route::get('profile-page-7', function () {
+    return view('profile-page-7');
+});
+
+Route::get('tech-garden-about', function () {
+    return view('tech-garden-about');
+});
+
+Route::get('tech-garden-programs', function () {
+    return view('tech-garden-programs');
+});
+
+Route::get('tech-garden-store', function () {
+    return view('tech-garden-store');
+});
+
+Route::get('tech-garden-resources', function () {
+    return view('tech-garden-resources');
 });
