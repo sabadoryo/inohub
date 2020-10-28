@@ -594,12 +594,13 @@ const buildConstructor = (elemId, options) => {
         extend: 'link',
         model: {
             defaults: {
-                tagName: 'div',
+                tagName: 'button',
                 attributes: {
                     'data-grapes-lang-kz' : '',
                     'data-grapes-lang-en' : '',
                     'data-grapes-lang-ru' : '',
-                    class: 'text-lang ui-button-red-md'
+                    class: 'text-lang ui-button-red-md',
+                    'onclick': `window.open('/')`
                 },
                 components: `Подать заявку`,
                 traits: [
