@@ -129,12 +129,9 @@ class ProgramsController extends Controller
             [null, $program->title],
         ];
         
-        $forms = Form::all();
-    
         return view('control-panel.component', [
             'component' => 'program-forms',
             'bindings' => [
-                'forms' => $forms,
                 'program' => $program,
             ],
             'PAGE_TITLE' => $program->title,

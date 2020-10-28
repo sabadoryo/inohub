@@ -13,6 +13,8 @@ angular
 function controller(notify, $http, $uibModal) {
  
 	let $ctrl = this;
+
+    $ctrl.loadingSave = false;
 	
 	$ctrl.$onInit = function () {
         $ctrl.eventForms = $ctrl.event.forms;
@@ -105,11 +107,13 @@ function controller(notify, $http, $uibModal) {
     }
 
     $ctrl.save = () => {
+        $ctrl.loadingSave = true;
         let url = '/control-panel/events/' + $ctrl.event.id + '/update-forms';
         let params = {
             forms: $ctrl.eventForms,
         }
         $http.post(url, params).then(() => {
+            $ctrl.loadingSave = false;
             window.Swal.fire({
                 icon: 'success',
                 title: 'Данные обновлены',
@@ -117,6 +121,7 @@ function controller(notify, $http, $uibModal) {
                 showConfirmButton: false,
             });
         }, (error) => {
+            $ctrl.loadingSave = false;
             notify({
                 message: 'Ошибка!',
                 duration: 2000,
