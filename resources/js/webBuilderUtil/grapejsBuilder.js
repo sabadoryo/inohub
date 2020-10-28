@@ -409,7 +409,7 @@ const buildConstructor = (elemId, options) => {
                 components: `
                     Astana hub heading program slim shady
                 `,
-                tagName: 'span',
+                tagName: 'p',
                 attributes: {
                     'data-grapes-lang-kz' : '',
                     'data-grapes-lang-en' : '',
@@ -442,7 +442,7 @@ const buildConstructor = (elemId, options) => {
                 components: `
                     Astana hub heading program slim shady
                 `,
-                tagName: 'span',
+                tagName: 'p',
                 attributes: {
                     'data-grapes-lang-kz' : '',
                     'data-grapes-lang-en' : '',
@@ -474,7 +474,7 @@ const buildConstructor = (elemId, options) => {
                 components: `
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. A eveniet explicabo vel! Alias delectus dolores esse ex ipsam iste laudantium natus placeat reiciendis sequi suscipit totam unde, vel vitae voluptatum
                 `,
-                tagName: 'span',
+                tagName: 'p',
                 attributes: {
                     'data-grapes-lang-kz' : '',
                     'data-grapes-lang-en' : '',
@@ -503,7 +503,7 @@ const buildConstructor = (elemId, options) => {
                 components: `
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. A eveniet explicabo vel! Alias delectus dolores esse ex ipsam iste laudantium natus placeat reiciendis sequi suscipit totam unde, vel vitae voluptatum
                 `,
-                tagName: 'span',
+                tagName: 'p',
                 attributes: {
                     'data-grapes-lang-kz' : '',
                     'data-grapes-lang-en' : '',
