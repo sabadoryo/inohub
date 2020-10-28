@@ -1,0 +1,43 @@
+<div class="modal-header">
+    <div>Детали изменений</div>
+</div>
+<div class="modal-body">
+    <div class="card">
+        <table class="table table-bordered table-striped table-sm">
+            <thead class="thead-light">
+            <tr>
+                <th>Измененное поле</th>
+                <th>Старое значение</th>
+                <th>Новое значение</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="data in $ctrl.resolve.action.additional_data track by $index">
+                <td>{{data.label}}</td>
+                <td>
+                    <div ng-if="data.type === 'file'">
+                        <div ng-repeat="file in data.old_value">
+                            <a href="/cabinet/download-file/{{file}}">Старый файл</a>
+                        </div>
+                    </div>
+                    <div ng-if="data.type !== 'file'">
+                        <span ng-if="data.old_value_stringified">{{data.old_value_stringified}}</span>
+                        <span ng-if="!data.old_value_stringified">{{data.old_value}}</span>
+                    </div>
+                </td>
+                <td>
+                    <div ng-if="data.type === 'file'">
+                        <div ng-repeat="file in data.new_value">
+                            <a href="/cabinet/download-file/{{file}}">Новый файл</a>
+                        </div>
+                    </div>
+                    <div ng-if="data.type !== 'file'">
+                        <span ng-if="data.new_value_stringified">{{data.new_value_stringified}}</span>
+                        <span ng-if="!data.new_value_stringified">{{data.new_value}}</span>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

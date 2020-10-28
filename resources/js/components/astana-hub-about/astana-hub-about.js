@@ -4,17 +4,38 @@ angular
     .module('app')
     .component('astanaHubAbout', {
         template: require('./astana-hub-about.html'),
-        controller: [controller],
+        controller: ['$uibModal', controller],
         bindings: {
             programs: '<'
         }
     });
     
-function controller() {
+function controller($uibModal) {
  
 	let $ctrl = this;
 
 	$ctrl.$onInit = function () {
         console.log($ctrl.programs);
     };
+
+	$ctrl.openApplicationModal = () => {
+        $uibModal
+            .open({
+                component: 'applicationModal',
+                resolve: {
+                    entityType: () => 'astanahub_membership',
+                    entityId: () => null,
+                }
+            })
+            .result
+            .then(
+                res => {
+
+                },
+                err => {
+
+                }
+            );
+    };
+
 }

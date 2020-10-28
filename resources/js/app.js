@@ -88,6 +88,7 @@ require('./components/astana-hub-resources/astana-hub-resources');
 require('./components/user-bar/user-bar');
 
 require('./components/auth-modal/auth-modal');
+require('./components/application-action-details-modal/application-action-details-modal');
 require('./components/event-create-modal/event-create-modal');
 require('./components/event-main-form/event-main-form');
 require('./components/event-page-form/event-page-form');
@@ -99,3 +100,6 @@ require('./components/news-control/news-control');
 require('./components/news-create-modal/news-create-modal');
 require('./components/news-main-form/news-main-form');
 require('./components/news-upload-image/news-upload-image');
+require('./components/corp-innovations/corp-innovations');
+require('./components/members-control/members-control');
+require('./components/members-create-form/members-create-form');

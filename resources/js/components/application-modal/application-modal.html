@@ -124,7 +124,7 @@
                     </div>
 
                     <div ng-if="field.type == 'file'">
-                        <div ng-show="field.value && field.value.length < 0" class="d-flex">
+                        <div ng-show="field.max_files_count === 1 && field.value" class="d-flex">
                             <table class="table table-bordered table-striped table-sm">
                                 <thead class="thead-light">
                                 <tr>
@@ -199,9 +199,6 @@
             </div>
         </div>
     </div>
-
-
-</div>
 
 </div>
 

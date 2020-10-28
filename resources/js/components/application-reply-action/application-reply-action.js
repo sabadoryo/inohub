@@ -23,19 +23,20 @@ function controller($http) {
         $ctrl.action = $ctrl.resolve.action;
     };
 
-	$ctrl.save = () => {
-        $http
-            .post(`/control-panel/applications/${$ctrl.app.id}/reply`, {
-                action: $ctrl.action,
-                message: $ctrl.message,
-            })
-            .then(
-                res => {
+	$ctrl.submit = () => {
+	    if ($ctrl.action == 'accept') {
+            $http
+                .post(`/control-panel/applications/${$ctrl.app.id}/accept`, {
+                    message: $ctrl.message,
+                })
+                .then(
+                    res => {
 
-                },
-                err => {
+                    },
+                    err => {
 
-                }
-            );
+                    }
+                );
+        }
     };
 }
