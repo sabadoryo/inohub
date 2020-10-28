@@ -4,15 +4,18 @@ angular
     .module('app')
     .component('applicationManage', {
         template: require('./application-manage.html'),
-        controller: ['$timeout', '$http', 'Auth', '$uibModal', controller],
+        controller: ['$timeout', '$http', 'Auth', '$uibModal', 'Upload', 'moment', controller],
         bindings: {
             application: '<',
         }
     });
 
-function controller($timeout, $http, Auth, $uibModal) {
+function controller($timeout, $http, Auth, $uibModal, Upload, moment) {
 
     let $ctrl = this;
+
+    $ctrl.message = '';
+    $ctrl.attachedFiles = [];
 
     $ctrl.$onInit = function () {
         // $ctrl.test = $ctrl.application;
@@ -71,6 +74,36 @@ function controller($timeout, $http, Auth, $uibModal) {
     };
 
     $ctrl.sendMessage = () => {
+
+        Upload
+            .upload({
+                url: `/cabinet/applications/${$ctrl.application.id}/send-message`,
+                data: {
+                    message: $ctrl.message,
+                    attachedFiles: $ctrl.attachedFiles,
+                }
+            })
+            .then(
+                res => {
+                    $ctrl.application.actions.message.unshift({
+                        id: res.data.action_id,
+                        user: Auth.user(),
+                        name: 'application_user_message',
+                        message: $ctrl.message,
+                        created_at: moment(),
+                        additional_data: res.data,
+                    });
+
+                    console.log(res);
+
+                    $ctrl.message = '';
+                    $ctrl.attachedFiles = [];
+                },
+                err => {
+
+                }
+            );
+
     };
 
     $ctrl.accept = () => {

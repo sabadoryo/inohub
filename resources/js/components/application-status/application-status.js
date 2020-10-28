@@ -22,27 +22,27 @@ function controller($http, Auth, moment, $uibModal, Upload) {
         console.log($ctrl.app);
     };
 
-    $ctrl.sendMessage = () => {
-        $http
-            .post(`/applications/${$ctrl.app.id}/send-message`, {
-                message: $ctrl.message
-            })
-            .then(
-                function (res) {
-                    $ctrl.app.messages.push({
-                        id: res.data.id,
-                        user: $ctrl.user,
-                        message: $ctrl.message,
-                        created_at: moment(),
-                    });
-
-                    $ctrl.message = null;
-                },
-                function () {
-
-                }
-            )
-    };
+    // $ctrl.sendMessage = () => {
+    //     $http
+    //         .post(`/applications/${$ctrl.app.id}/send-message`, {
+    //             message: $ctrl.message
+    //         })
+    //         .then(
+    //             function (res) {
+    //                 $ctrl.app.messages.push({
+    //                     id: res.data.id,
+    //                     user: $ctrl.user,
+    //                     message: $ctrl.message,
+    //                     created_at: moment(),
+    //                 });
+    //
+    //                 $ctrl.message = null;
+    //             },
+    //             function () {
+    //
+    //             }
+    //         )
+    // };
 
     $ctrl.toggleEditing = function (appForm) {
         appForm.isEditing = !appForm.isEditing;
