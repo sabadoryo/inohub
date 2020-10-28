@@ -1,0 +1,50 @@
+.search-dropdown {
+
+    background-color: #ffffff !important;
+    border-radius: 7px !important;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12) !important;
+    border: none !important;
+    padding: 0 !important;
+    z-index: 1000;
+
+    display: none;
+
+    &--show {
+        display: block;
+    }
+
+    &__item {
+        display: flex;
+        align-items: flex-start;
+        padding: 20px;
+
+        &:hover {
+            text-decoration: none;
+            background-color: #F3F3F3;
+        }
+    }
+
+    &__icon {
+        height: 24px;
+        width: 24px;
+        border-radius: 7px;
+        flex-shrink: 0;
+        margin-right: 10px;
+    }
+
+    &__info {
+
+    }
+
+    &__title {
+        @include text-style(1.8rem, 500, #181515);
+        line-height: 22px;
+        margin-bottom: 10px;
+    }
+
+    &__subtitle {
+        @include text-style(1.6rem, 400, #181515);
+        line-height: 19.5px;
+    }
+}

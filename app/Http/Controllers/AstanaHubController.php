@@ -81,10 +81,10 @@ class AstanaHubController extends Controller
             'program' => $program,
         ];
 
-        return view('main.component', [
+        return view('main.astana-hub', [
             'component' => $component,
             'bindings' => $bindings,
-            'act'
+            'activePage' => 'programs'
         ]);
     }
 

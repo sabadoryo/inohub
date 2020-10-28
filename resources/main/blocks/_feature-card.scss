@@ -13,6 +13,11 @@
     &__title {
         @include text-style(1.8rem, 700, #181515);
         line-height: 21.94px;
+
+        img {
+            width: 20px;
+            margin-left: 5px;
+        }
     }
 
     &__inner {

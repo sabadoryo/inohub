@@ -1,0 +1,44 @@
+.notify-dropdown {
+    position: absolute;
+    width: 436px !important;
+    background-color: #ffffff !important;
+    border-radius: 7px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12) !important;
+    border: none !important;
+    padding: 20px !important;
+
+    top: 43px !important;
+    right: 0 !important;
+    left: unset !important;
+    margin: 0 !important;
+
+    //display: flex;
+    align-items: flex-start;
+
+    display: none;
+
+    &--show {
+        display: flex;
+    }
+
+    &__icon {
+        flex-shrink: 0;
+        width: 24px;
+        height: 24px;
+        border-radius: 7px;
+        margin-right: 10px;
+    }
+
+    &__title {
+        @include text-style(1.8rem, 500, #181515);
+        line-height: 22px;
+        white-space: normal;
+        margin-bottom: 10px;
+    }
+
+    &__text {
+        @include text-style(1.6rem, 400, #181515);
+        line-height: 19.5px;
+        white-space: normal;
+    }
+}

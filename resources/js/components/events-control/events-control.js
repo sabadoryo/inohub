@@ -6,50 +6,71 @@ angular
         template: require('./events-control.html'),
         controller: ['$uibModal','$http',controller],
         bindings: {
-            //
         }
     });
 
 function controller($uibModal, $http) {
 
     let $ctrl = this;
-    $ctrl.events = [];
+
+    $ctrl.page = 1;
+    $ctrl.name = null;
+    $ctrl.status = null;
+    $ctrl.total = 0;
     $ctrl.loading = false;
 
     $ctrl.$onInit = function () {
         $ctrl.getList();
     };
 
-    $ctrl.getList = function() {
-      $ctrl.loading = true;
-
-      $http
-          .get('/control-panel/events/get-list')
-          .then(result => {
-              $ctrl.events = result.data;
-              $ctrl.loading = false;
-          }, error => {
-              $ctrl.loading = false;
-              alert('ERROR!!!!:/');
-          })
-
-
+    $ctrl.filter = () => {
+        $ctrl.page = 1;
+        $ctrl.getList();
     };
 
-    $ctrl.openCreateEventModal = function () {
+    $ctrl.reset = () => {
+        $ctrl.page = 1;
+        $ctrl.name = null;
+        $ctrl.status = null;
+        $ctrl.getList();
+    };
+
+    $ctrl.getList = function() {
+      $ctrl.loading = true;
+      $http
+          .get('/control-panel/events/get-list', {
+              params: {
+                  page: $ctrl.page,
+                  name: $ctrl.name,
+                  status: $ctrl.status,
+              }
+          })
+          .then(
+              response => {
+                  $ctrl.loading = false;
+                  $ctrl.events = response.data.data;
+                  $ctrl.total = response.data.total;
+              },
+              error => {
+                  $ctrl.loading = false;
+                  // todo handle error
+              }
+          )
+    };
+
+    $ctrl.openCreateModal = () => {
         $uibModal
             .open({
-                component: 'createEventModal'
+                component: 'eventCreateModal',
             })
             .result
             .then(
-                data => {
-                    $ctrl.events.push(data);
+                res => {
+
                 },
-                error => {
-                    console.log('failed');
+                err => {
+
                 }
             );
-
-    }
+    };
 }

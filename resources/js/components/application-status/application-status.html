@@ -17,7 +17,8 @@
                 <tr ng-repeat="field in appForm.fields track by $index">
                     <th>{{field.form_field.label}}</th>
                     <td>
-                        <div ng-show="!appForm.isEditing && field.form_field.type !== 'file'">{{field.value}}</div>
+                        <div ng-show="!appForm.isEditing && field.form_field.type !== 'file' && field.form_field.type !== 'checkbox' ">{{field.value}}</div>
+                        <div ng-show="!appForm.isEditing && field.form_field.type == 'checkbox'">{{field.stringValue}}</div>
                         <div ng-show="!appForm.isEditing && field.form_field.type === 'file'">
                             <div class="d-flex flex-column">
                                 <div ng-repeat="file in field.value track by $index">
@@ -138,7 +139,7 @@
                                         </thead>
                                         <tbody>
                                         <tr ng-repeat="file in field.value track by $index">
-                                            <td>{{file}}</td>
+                                            <td>{{file.name}}</td>
                                             <td>
                                                 <button type="button" class="btn btn-danger btn-sm"
                                                         ng-click="$ctrl.removeFile(field,$index)">
@@ -149,6 +150,15 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                <button type="button" class="form-control-file" ngf-select=""
+                                        ngf-keep="true"
+                                        ng-model="field.value"
+                                        ngf-change="$ctrl.validateFile($files, $file, $newFiles, $duplicateFiles, $invalidFiles, $event,field)"
+                                        ngf-multiple="{{field.form_field.max_files_count === 1 ? 'false' : 'true'}}"
+                                        accept="{{field.form_field.file_allows === 'specific' ? field.file_types : '*'}}"
+                                        ngf-max-size="10MB">
+                                    <span>выбрать файл</span>
+                                </button>
                             </div>
 
                         </div>
@@ -185,7 +195,7 @@
     <div class="card-body">
         <div ng-if="action.name == 'send message'">{{action.message}}</div>
         <div ng-if="action.name == 'update'">
-            <a href="" ng-click="$ctrl.openDetails()">детали</a>
+            <button class="btn btn-link" ng-click="$ctrl.openDetails(action)">детали</button>
         </div>
     </div>
 </div>

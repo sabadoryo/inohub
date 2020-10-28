@@ -78,16 +78,20 @@
 
                 <li class="nav-item">
                     <a href="/control-panel/programs" class="nav-link {{$activePage == 'programs' ? 'active' : ''}}">
-                        <i class="nav-icon fas fa-users"></i>
+                        <i class="nav-icon fab fa-buromobelexperte"></i>
                         <p>Программы</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="/control-panel/events" class="nav-link {{$activePage == 'events' ? 'active' : ''}}">
                         <i class="nav-icon fas fa-calendar"></i>
-                        <p>
-                            Мероприятия
-                        </p>
+                        <p>Мероприятия</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/control-panel/news" class="nav-link {{$activePage == 'news' ? 'active' : ''}}">
+                        <i class="nav-icon far fa-newspaper"></i>
+                        <p>Новости</p>
                     </a>
                 </li>
 

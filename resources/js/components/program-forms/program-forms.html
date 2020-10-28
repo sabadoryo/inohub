@@ -1,3 +1,9 @@
+<div class="alert alert-light" ng-show="$ctrl.program.status == 'draft'">
+  Данная программа находится в режиме черновика. Хотите <a href="" ng-click="$ctrl.openToPublishModal()" class="alert-link">опубликовать</a> программу?
+</div>
+<a href="" class="btn btn-primary btn-sm mb-3">
+  Посмотреть
+</a>
 <div class="card">
   <div class="card-header">
     <ul class="nav nav-tabs card-header-tabs">
@@ -8,7 +14,7 @@
         <a class="nav-link" href="" ng-href="/control-panel/programs/{{$ctrl.program.id}}/page">Страница</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link active" href="" ng-href="/control-panel/programs/{{$ctrl.program.id}}/forms">Формы</a>
+        <a class="nav-link active" href="" ng-href="/control-panel/programs/{{$ctrl.program.id}}/forms">Анкета</a>
       </li>
     </ul>
   </div>
@@ -44,7 +50,7 @@
     <p class="mb-0">Если не нашли нужную форму <a href="" ng-click="$ctrl.openFormCreate()">создайте</a> новую</p>
   </div>
   <div class="card-footer d-flex">
-    <button class="btn btn-primary mr-auto" type="button" ng-click="$ctrl.save()">
+    <button class="btn btn-primary mr-auto" type="button" ng-click="$ctrl.save()" ng-disabled="$ctrl.loadingSave">
       Сохранить
     </button>
   </div>

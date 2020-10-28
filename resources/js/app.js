@@ -10,6 +10,7 @@ import angularScroll from "angular-scroll";
 import ngFileUpload from "ng-file-upload";
 import angularMoment from "angular-moment";
 import notify from "@cgross/angular-notify";
+import textAngular from "textangular";
 
 
 angular
@@ -22,13 +23,28 @@ angular
         angularScroll,
         ngFileUpload,
         angularMoment,
-        notify
+        notify,
+        textAngular
     ])
+    .config(['$provide', function ($provide) {
+        $provide.decorator('taOptions', ['taRegisterTool', '$uibModal', '$delegate', function (taRegisterTool, $uibModal, taOptions) {
+            taOptions.toolbar = [
+                ['h3'],
+                ['bold', 'italics', 'underline', 'ul', 'ol'],
+                ['justifyLeft', 'justifyCenter', 'justifyRight'],
+                ['insertLink'],
+            ];
+            taOptions.forceTextAngularSanitize = false;
+            return taOptions;
+        }]);
+
+    }])
     .config(['$httpProvider', function ($httpProvider) {
         $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
     }])
     .run(['$templateCache', function ($templateCache) {
         $templateCache.put('b4-pagination', require('./templates/b4-pagination.html'));
+        $templateCache.put("custom-modal", "<div class=\"as-modal {{size ? 'as-modal--' + size : ''}}\" uib-modal-transclude></div>");
     }]);
 
 
@@ -60,10 +76,6 @@ require('./components/user-roles-modal/user-roles-modal');
 require('./components/admin-users-control/admin-users-control');
 
 require('./components/events-control/events-control');
-require('./components/create-event-modal/create-event-modal');
-
-require('./components/events-create/events-create');
-
 require('./components/cabinet-applications/cabinet-applications');
 require('./components/applications-control/applications-control');
 require('./components/application-manage/application-manage');
@@ -92,7 +104,25 @@ require('./components/astana-hub-resources/astana-hub-resources');
 require('./components/user-bar/user-bar');
 
 require('./components/auth-modal/auth-modal');
+require('./components/application-action-details-modal/application-action-details-modal');
+require('./components/event-create-modal/event-create-modal');
+require('./components/event-main-form/event-main-form');
+require('./components/event-page-form/event-page-form');
+require('./components/event-forms/event-forms');
+require('./components/event-to-publish-modal/event-to-publish-modal');
+require('./components/program-to-publish-modal/program-to-publish-modal');
 require('./components/page-builder/page-builder');
+require('./components/news-control/news-control');
+require('./components/news-create-modal/news-create-modal');
+require('./components/news-main-form/news-main-form');
+require('./components/news-upload-image/news-upload-image');
+require('./components/corp-innovations/corp-innovations');
+require('./components/members-control/members-control');
+require('./components/members-create-form/members-create-form');
+require('./components/news-to-publish-modal/news-to-publish-modal');
+require('./components/tech-garden-about/tech-garden-about');
+require('./components/tech-garden-programs/tech-garden-programs');
+require('./components/tech-garden-corp-innovations/tech-garden-corp-innovations');
 
 require('./components/smart-store-solution-companies/smart-store-solution-companies');
 require('./components/smart-store-task-companies/smart-store-task-companies');

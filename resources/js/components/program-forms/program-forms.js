@@ -4,19 +4,47 @@ angular
     .module('app')
     .component('programForms', {
         template: require('./program-forms.html'),
-        controller: ['notify', '$http', controller],
+        controller: ['notify', '$http', '$uibModal', controller],
         bindings: {
-            forms: '<',
             program: '<',
         }
     });
     
-function controller(notify, $http) {
+function controller(notify, $http, $uibModal) {
  
 	let $ctrl = this;
 
+	$ctrl.loadingSave = false;
+
 	$ctrl.$onInit = function () {
 		$ctrl.programForms = $ctrl.program.forms;
+		$ctrl.updateFormsList();
+	};
+
+	$ctrl.openToPublishModal = () => {
+		$uibModal
+			.open({
+				component: 'programToPublishModal',
+				resolve: {
+					program: function () {
+						return $ctrl.program;
+					}
+				}
+			})
+			.result
+			.then(
+				res => {
+					window.Swal.fire({
+						icon: 'success',
+						title: 'Опубликовано',
+						timer: 2000,
+						showConfirmButton: false,
+					});
+				},
+				err => {
+
+				}
+			);
 	};
 
 	$ctrl.addForm = () => {
@@ -79,18 +107,21 @@ function controller(notify, $http) {
 	}
 
 	$ctrl.save = () => {
+		$ctrl.loadingSave = true;
 		let url = '/control-panel/programs/' + $ctrl.program.id + '/update-forms';
 		let params = {
 			forms: $ctrl.programForms,
 		}
 		$http.post(url, params).then(() => {
+			$ctrl.loadingSave = false;
 			window.Swal.fire({
 				icon: 'success',
-				title: 'Данные обнавлены',
+				title: 'Данные обновлены',
 				timer: 2000,
 				showConfirmButton: false,
 			});
 		}, (error) => {
+			$ctrl.loadingSave = false;
 			notify({
 				message: 'Ошибка!',
 				duration: 2000,

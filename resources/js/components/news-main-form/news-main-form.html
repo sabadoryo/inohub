@@ -1,0 +1,77 @@
+<div class="alert alert-light" ng-show="$ctrl.news.status == 'draft'">
+  Данная новость находится в режиме черновика. Хотите <a href="" ng-click="$ctrl.openToPublishModal()" class="alert-link">опубликовать</a> программу?
+</div>
+<a href="" class="btn btn-primary btn-sm mb-3">
+  Посмотреть
+</a>
+<form ng-submit="$ctrl.save()">
+  <div class="card">
+    <div class="card-body">
+
+      <div class="form-group">
+        <label>Заголовок новости:</label>
+        <input type="text" class="form-control" placeholder="Введите заголовок" ng-model="$ctrl.title" required>
+      </div>
+
+      <div class="form-group">
+        <label>Краткое описание:</label>
+        <textarea class="form-control" placeholder="Введите описание" ng-model="$ctrl.description" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="text-lg">Контент:</label>
+
+        <div ng-if="!$ctrl.data.length" style="margin-bottom: 10px">Пустой контент</div>
+
+        <div ng-repeat="item in $ctrl.data track by $index" style="position: relative">
+
+          <div style="position: absolute; top: 0; right: 0;">
+
+            <button type="button"
+                    ng-click="$ctrl.upItem($index)"
+                    class="btn btn-xs btn-info">
+              <i class="fas fa-arrow-up"></i>
+            </button>
+            <button type="button"
+                    ng-click="$ctrl.downItem($index)"
+                    class="btn btn-xs btn-info">
+              <i class="fas fa-arrow-down"></i>
+            </button>
+            <button type="button"
+                    ng-click="$ctrl.removeDataItem($index)"
+                    class="btn btn-xs btn-danger">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </div>
+
+          <div ng-if="item.type == 'text'" class="form-group">
+            <label>Текст:</label>
+            <text-angular ta-resize-force-aspect-ratio="true" ng-model="item.content"></text-angular>
+          </div>
+
+          <div ng-if="item.type == 'image'" class="form-group">
+            <label> Изображение: </label>
+            <img class="d-block" ng-if="!item.id" ngf-thumbnail="item.image" width="500">
+            <img class="d-block" ng-if="item.id" ng-src="{{item.path}}" width="500">
+          </div>
+
+        </div>
+
+        <div uib-dropdown class="d-inline-block">
+          <button type="button" class="btn btn-default btn-sm" uib-dropdown-toggle>Добавить</button>
+          <div uib-dropdown-menu>
+            <a class="dropdown-item" href="" ng-click="$ctrl.addText()">Текст</a>
+            <a class="dropdown-item" href="" ng-click="$ctrl.selectImageModal()">Изображение</a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-primary" type="submit" ng-disabled="$ctrl.loading">
+        Сохранить
+      </button>
+    </div>
+  </div>
+</form>

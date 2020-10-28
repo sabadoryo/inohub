@@ -4,19 +4,20 @@ angular
     .module('app')
     .component('programMainForm', {
         template: require('./program-main-form.html'),
-        controller: ['notify', 'moment', '$http', controller],
+        controller: ['notify', 'moment', '$http', '$uibModal', controller],
         bindings: {
             categories: '<',
             program: '<',
         }
     });
     
-function controller(notify, moment, $http) {
+function controller(notify, moment, $http, $uibModal) {
  
 	let $ctrl = this;
 
     $ctrl.limitDateStatus = false;
     $ctrl.termDateStatus = false;
+    $ctrl.loading = false;
 
 	$ctrl.$onInit = function () {
 	    $ctrl.title = $ctrl.program.title;
@@ -33,7 +34,34 @@ function controller(notify, moment, $http) {
         }
     };
 
+    $ctrl.openToPublishModal = () => {
+        $uibModal
+            .open({
+                component: 'programToPublishModal',
+                resolve: {
+                    program: function () {
+                        return $ctrl.program;
+                    }
+                }
+            })
+            .result
+            .then(
+                res => {
+                    window.Swal.fire({
+                        icon: 'success',
+                        title: 'Опубликовано',
+                        timer: 2000,
+                        showConfirmButton: false,
+                    });
+                },
+                err => {
+
+                }
+            );
+    };
+
 	$ctrl.save = () => {
+        $ctrl.loading = true;
 	    let url = '/control-panel/programs/' + $ctrl.program.id + '/update-main';
 	    if (!$ctrl.limitDateStatus) {
 	        $ctrl.limitDate = null;
@@ -51,15 +79,17 @@ function controller(notify, moment, $http) {
             end_date: $ctrl.endDate ? moment($ctrl.endDate).format('YYYY-MM-DD') : null,
         };
 	    $http.post(url, params).then(() => {
+            $ctrl.loading = false;
             window.Swal.fire({
                 icon: 'success',
-                title: 'Данные обнавлены',
+                title: 'Данные обновлены',
                 timer: 2000,
                 showConfirmButton: false,
             });
         }, (error) => {
+            $ctrl.loading = false;
             notify({
-                message: error.data.errors['title'] ? error.data.errors['title'][0] : 'Не изветная ошибка!',
+                message: error.data.errors['title'] ? error.data.errors['title'][0] : 'Неизвестная ошибка!',
                 duration: 2000,
                 classes: 'alert-danger',
             });

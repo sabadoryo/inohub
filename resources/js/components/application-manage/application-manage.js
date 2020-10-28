@@ -32,20 +32,15 @@ function controller($http, Auth, $uibModal) {
             );
     };
 
+    $ctrl.sendMessage = () => {
+    };
+
 	$ctrl.accept = () => {
         openActionModal('accept');
     };
 
-	$ctrl.toRemake = () => {
-	    openActionModal('to-remake');
-    };
-
 	$ctrl.reject = () => {
         openActionModal('reject');
-    };
-
-    $ctrl.sendMessage = () => {
-        openActionModal('send-message');
     };
 
     function openActionModal(action) {
@@ -53,10 +48,8 @@ function controller($http, Auth, $uibModal) {
             .open({
                 component: 'applicationReplyAction',
                 resolve: {
-                    application: () => {return $ctrl.application},
-                    action: function () {
-                        return action;
-                    }
+                    application: () => $ctrl.application,
+                    action: () => action,
                 }
             })
             .result

@@ -17,12 +17,14 @@ class Program extends Model
         'end_date',
         'status',
         'color',
+        'published_at',
     ];
 
     protected $dates = [
         'limit_date',
         'start_date',
-        'end_date'
+        'end_date',
+        'published_at'
     ];
 
     public function category()

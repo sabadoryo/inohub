@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Application;
+use App\Module;
 use App\Program;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class ApplicationsController extends Controller
     {
         $request->validate([
             'entity_type' => 'required',
-            'entity_id' => 'required',
+            'entity_id' => 'nullable',
             'forms' => 'required|array',
             'forms.*.id' => 'required',
             'forms.*.fields' => 'required|array',
@@ -21,15 +22,23 @@ class ApplicationsController extends Controller
         ]);
 
         $entityModel = null;
+        $entityId = null;
+
+        if ($request->entity_type == 'astanahub_membership') {
+            $entityModel = Module::class;
+            $module = Module::findBySlug('astanahub_membership');
+            $entityId = $module->id;
+        }
 
         if ($request->entity_type == 'program') {
             $entityModel = Program::class;
+            $entityId = $request->entity_id;
         }
 
         $app = Application::create([
             'user_id' => \Auth::user()->id,
             'entity_model' => $entityModel,
-            'entity_id' => $request->entity_id,
+            'entity_id' => $entityId,
         ]);
 
         foreach ($request->forms as $form) {
@@ -38,8 +47,13 @@ class ApplicationsController extends Controller
 
                 if ($field['type'] === 'file') {
                     $file_pathes = [];
-                    foreach ($field['value'] as $file) {
-                        $path = \Storage::disk('public')->put('application_files', $file);
+                    if (is_array($field['value'])) {
+                        foreach ($field['value'] as $file) {
+                            $path = \Storage::disk('public')->put('application_files', $file);
+                            array_push($file_pathes, $path);
+                        }
+                    } else {
+                        $path = \Storage::disk('public')->put('application_files', $field['value']);
                         array_push($file_pathes, $path);
                     }
                     $appForm->fields()->create([

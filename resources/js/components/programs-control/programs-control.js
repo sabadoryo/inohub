@@ -18,6 +18,7 @@ function controller($http, $uibModal) {
     $ctrl.title = null;
     $ctrl.status = null;
     $ctrl.category = null;
+    $ctrl.loading = false;
 
 	$ctrl.$onInit = function () {
         $ctrl.getList();
@@ -37,6 +38,7 @@ function controller($http, $uibModal) {
     };
 
 	$ctrl.getList = () => {
+        $ctrl.loading = true;
         $http
             .get('/control-panel/programs/get-list', {
                 params: {
@@ -48,10 +50,12 @@ function controller($http, $uibModal) {
             })
             .then(
                 response => {
+                    $ctrl.loading = false;
                     $ctrl.programs = response.data.data;
                     $ctrl.total = response.data.total;
                 },
                 error => {
+                    $ctrl.loading = false;
                     // todo handle error
                 }
             )

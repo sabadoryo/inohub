@@ -1,0 +1,24 @@
+<div class="alert alert-light" ng-show="$ctrl.event.status == 'draft'">
+  Данное мероприятие находится в режиме черновика. Хотите <a href="" ng-click="$ctrl.openToPublishModal()" class="alert-link">опубликовать</a> программу?
+</div>
+<a href="" class="btn btn-primary btn-sm mb-3">
+  Посмотреть
+</a>
+<div class="card">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item">
+        <a class="nav-link" href="" ng-href="/control-panel/events/{{$ctrl.event.id}}/main">
+          Основная информация</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="" ng-href="/control-panel/events/{{$ctrl.event.id}}/page">Страница</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="" ng-href="/control-panel/events/{{$ctrl.event.id}}/forms">Анкета</a>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body">
+  </div>
+</div>

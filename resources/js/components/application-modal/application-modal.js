@@ -30,15 +30,34 @@ function controller(Auth, $rootScope, Upload, $http) {
         $ctrl.entityType = $ctrl.resolve.entityType;
         $ctrl.entityId = $ctrl.resolve.entityId;
         $ctrl.getForms();
-
     };
 
     $ctrl.getForms = function () {
-        $http
-            .get(`/astana-hub/programs/${$ctrl.entityId}/get-forms`)
-            .then(
+
+        let req = null;
+
+        if ($ctrl.entityType == 'astanahub_membership') {
+            req = $http.get('/get-forms', {
+                params: {
+                    type: 'astanahub_membership'
+                }
+            });
+        }
+
+        if ($ctrl.entityType == 'program') {
+            req = $http.get('/get-forms', {
+                params: {
+                    type: 'program',
+                    program_id: $ctrl.entityId,
+                }
+            });
+        }
+
+        if (req) {
+            req.then(
                 res => {
                     $ctrl.forms = res.data.forms;
+                    console.log($ctrl.forms);
                     $ctrl.forms.forEach(form => {
                         form.fields.forEach(field => {
                             field.value = null;
@@ -47,7 +66,8 @@ function controller(Auth, $rootScope, Upload, $http) {
                 },
                 err => {
                 }
-            )
+            );
+        }
     };
 
     $ctrl.openLoginModal = () => {
@@ -89,7 +109,6 @@ function controller(Auth, $rootScope, Upload, $http) {
                     }
                 }
             });
-            console.log(ch);
             if (ch === false) {
                 return;
             } else {
@@ -107,7 +126,6 @@ function controller(Auth, $rootScope, Upload, $http) {
 
                 if (field.type === 'checkbox') {
                     let value = [];
-                    console.log(field.otherOptionValue);
                     if (field.otherOptionValue) {
                         value.push(field.otherOptionValue);
                     }
@@ -145,7 +163,7 @@ function controller(Auth, $rootScope, Upload, $http) {
                 url: '/applications',
                 data: {
                     entity_type: $ctrl.entityType,
-                    entity_id: $ctrl.entityId,
+                    entity_id: $ctrl.entityId || undefined,
                     forms
                 }
             })
