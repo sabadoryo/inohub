@@ -13,7 +13,9 @@ angular
 function controller($http, Upload, moment, notify, $uibModal) {
  
 	let $ctrl = this;
-	
+
+	$ctrl.loading = false;
+
 	$ctrl.$onInit = function () {
         $ctrl.name = $ctrl.event.name;
         $ctrl.description = $ctrl.event.short_description ? $ctrl.event.short_description : "";
@@ -48,6 +50,7 @@ function controller($http, Upload, moment, notify, $uibModal) {
     };
 
 	$ctrl.save = () => {
+        $ctrl.loading = true;
         let url = '/control-panel/events/' + $ctrl.event.id + '/update-main';
         let params = {
             name: $ctrl.name,
@@ -60,6 +63,7 @@ function controller($http, Upload, moment, notify, $uibModal) {
             url: url,
             data: params,
         }).then(() => {
+            $ctrl.loading = false;
             window.Swal.fire({
                 icon: 'success',
                 title: 'Данные обновлены',
@@ -67,6 +71,7 @@ function controller($http, Upload, moment, notify, $uibModal) {
                 showConfirmButton: false,
             });
 	    }, (error) => {
+            $ctrl.loading = false;
             let checked = false;
             let message = '';
             angular.forEach(error.data.errors, function (value, key){

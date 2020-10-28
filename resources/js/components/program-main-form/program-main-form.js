@@ -17,6 +17,7 @@ function controller(notify, moment, $http, $uibModal) {
 
     $ctrl.limitDateStatus = false;
     $ctrl.termDateStatus = false;
+    $ctrl.loading = false;
 
 	$ctrl.$onInit = function () {
 	    $ctrl.title = $ctrl.program.title;
@@ -60,6 +61,7 @@ function controller(notify, moment, $http, $uibModal) {
     };
 
 	$ctrl.save = () => {
+        $ctrl.loading = true;
 	    let url = '/control-panel/programs/' + $ctrl.program.id + '/update-main';
 	    if (!$ctrl.limitDateStatus) {
 	        $ctrl.limitDate = null;
@@ -77,6 +79,7 @@ function controller(notify, moment, $http, $uibModal) {
             end_date: $ctrl.endDate ? moment($ctrl.endDate).format('YYYY-MM-DD') : null,
         };
 	    $http.post(url, params).then(() => {
+            $ctrl.loading = false;
             window.Swal.fire({
                 icon: 'success',
                 title: 'Данные обновлены',
@@ -84,6 +87,7 @@ function controller(notify, moment, $http, $uibModal) {
                 showConfirmButton: false,
             });
         }, (error) => {
+            $ctrl.loading = false;
             notify({
                 message: error.data.errors['title'] ? error.data.errors['title'][0] : 'Неизвестная ошибка!',
                 duration: 2000,

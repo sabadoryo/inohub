@@ -16,6 +16,6 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" ng-click="$ctrl.dismiss()">Отмена</button>
-    <button type="button" class="btn btn-primary" ng-click="$ctrl.save()">Опубликовать</button>
+    <button type="button" class="btn btn-primary" ng-click="$ctrl.save()" ng-disabled="$ctrl.loading">Опубликовать</button>
   </div>
 </form>

@@ -32,19 +32,17 @@ class EventsController extends Controller
     public function getList(Request $request)
     {
         $query = Event::query();
-    
-        if ($request->status == 'draft') {
-            $query->where('status', $request->status);
-        } elseif ($request->status == 'published') {
-            $query->where('status', $request->status);
-        }
-    
+        
         if ($request->name) {
             $query->where(
                 'name',
                 'like',
                 $request->name . '%'
             );
+        }
+    
+        if ($request->status) {
+            $query->where('status', $request->status);
         }
     
         $result = $query->orderBy('id', 'desc')

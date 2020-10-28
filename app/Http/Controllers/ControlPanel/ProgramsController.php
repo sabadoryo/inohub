@@ -46,6 +46,10 @@ class ProgramsController extends Controller
         if ($request->status) {
             $query->where('status', $request->status);
         }
+        
+        if ($request->category_id) {
+            $query->where('program_category_id', $request->category_id);
+        }
 
         $result = $query->with('category')
             ->orderBy('id', 'desc')
@@ -125,12 +129,9 @@ class ProgramsController extends Controller
             [null, $program->title],
         ];
         
-        $forms = Form::all();
-    
         return view('control-panel.component', [
             'component' => 'program-forms',
             'bindings' => [
-                'forms' => $forms,
                 'program' => $program,
             ],
             'PAGE_TITLE' => $program->title,
