@@ -1,4 +1,7 @@
 .feed {
+
+    $e: &;
+
     width: 550px;
 
     &__list {
@@ -16,7 +19,7 @@
     &__heading {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: flex-end;
         margin-bottom: 30px;
     }
 
@@ -42,10 +45,10 @@
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
         border: none;
         padding: 5px 0;
+    }
 
-        &--show {
-            display: block;
-        }
+    &.show &__btn-dropdown {
+        display: block;
     }
 
     &__dropdown-item {

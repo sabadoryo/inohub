@@ -5,13 +5,13 @@ angular
     .module('app')
     .component('astanaHubAbout', {
         template: require('./astana-hub-about.html'),
-        controller: ['$uibModal', controller],
+        controller: ['$uibModal', 'Auth', 'applicationWindow', controller],
         bindings: {
             programs: '<'
         }
     });
 
-function controller($uibModal) {
+function controller($uibModal, Auth, applicationWindow) {
 
 	let $ctrl = this;
 
@@ -33,23 +33,44 @@ function controller($uibModal) {
     }
 
 	$ctrl.openApplicationModal = () => {
-        $uibModal
-            .open({
-                component: 'applicationModal',
-                resolve: {
-                    entityType: () => 'astanahub_membership',
-                    entityId: () => null,
-                }
-            })
-            .result
-            .then(
-                res => {
+            if (!Auth.user()) {
+                Auth
+                    .openAuthModal({to: () => 'applicationWindow'})
+                    .result
+                    .then(
+                        res => {
+                            openAppWindow();
+                        }
+                    );
+            } else {
+                openAppWindow();
+            }
 
-                },
-                err => {
-
-                }
-            );
+            function openAppWindow() {
+                applicationWindow.open({
+                    resolve: {
+                        entityType: 'astanahub_membership',
+                        entityId: null,
+                    }
+                });
+            }
+        // $uibModal
+        //     .open({
+        //         component: 'applicationModal',
+        //         resolve: {
+        //             entityType: () => 'astanahub_membership',
+        //             entityId: () => null,
+        //         }
+        //     })
+        //     .result
+        //     .then(
+        //         res => {
+        //
+        //         },
+        //         err => {
+        //
+        //         }
+        //     );
     };
 
 }

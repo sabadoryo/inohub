@@ -6,7 +6,7 @@ angular
         template: require('./news-list.html'),
         controller: ['$http', controller],
         bindings: {
-            initNews: '<',
+            news: '<',
             newsCount: '<',
         }
     });
@@ -16,10 +16,7 @@ function controller($http) {
 	let $ctrl = this;
 
 	$ctrl.page = 1;
-
-	$ctrl.$onInit = function () {
-	    $ctrl.news = $ctrl.initNews;
-    };
+    $ctrl.display = true;
 
 	$ctrl.loadMore = () => {
 	    $ctrl.page++;

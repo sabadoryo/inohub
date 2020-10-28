@@ -1,9 +1,17 @@
 .news-box {
 
+    $e: &;
+
     width: 550px;
     padding: 20px;
     background-color: #ffffff;
     border-radius: 7px;
+
+    &--sm {
+        #{$e}__row {
+            margin-bottom: 0;
+        }
+    }
 
     &__row {
         display: flex;
@@ -17,6 +25,9 @@
     }
 
     &__list {
+        &--hide {
+            display: none;
+        }
         margin-bottom: 30px;
     }
 

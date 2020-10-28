@@ -7,6 +7,7 @@ Route::post('logout', 'Auth\LoginController@logout');
 
 Route::get('/', 'MainPageController@index');
 Route::get('get-news-list', 'MainPageController@getNewsList');
+Route::get('get-feeds-list', 'MainPageController@getFeedsList');
 Route::get('news/{id}', 'MainPageController@newsPage');
 
 Route::group(['prefix' => 'cabinet', 'middleware' => ['auth']], function () {

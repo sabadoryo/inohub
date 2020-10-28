@@ -8,6 +8,8 @@ angular
         bindings: {
             news: '<',
             newsCount: '<',
+            feedsCount: '<',
+            feeds: '<',
         }
     });
     

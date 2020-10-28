@@ -28,13 +28,14 @@ function controller(user, permissions, roles, $uibModal, $q, $rootScope) {
 
     $ctrl.hasRole = (role) => { return roles.indexOf(role) !== -1 };
 
-    $ctrl.openAuthModal = function () {
-        $uibModal.open({
+    $ctrl.openAuthModal = function (options) {
+        return $uibModal.open({
             component: 'authModal',
             windowTemplateUrl: 'custom-modal',
             backdropClass: 'auth-backdrop',
             windowClass: 'auth-modal-window',
-            size: 'sm'
+            size: 'sm',
+            resolve: options
         });
     };
 }

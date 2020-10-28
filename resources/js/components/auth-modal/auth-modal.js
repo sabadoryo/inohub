@@ -137,9 +137,12 @@ function controller($http, $rootScope, Upload) {
                 },
             }).then(
                 function (response) {
-                    $ctrl.register.step = 4;
-                    $rootScope.$emit('UserAuthenticated', response.data);
-                    // $ctrl.close();
+                    if ($ctrl.resolve.to == 'applicationWindow') {
+                        $ctrl.close();
+                    } else {
+                        $ctrl.register.step = 4;
+                        $rootScope.$emit('UserAuthenticated', response.data);
+                    }
                 },
                 function (error) {
 

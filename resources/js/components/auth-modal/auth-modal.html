@@ -14,7 +14,7 @@
       <label class="input-box__label">E-mail:</label>
       <input type="text"
              class="input-box__input"
-             placeholder="your@mail.kz"
+             placeholder=""
              ng-model="$ctrl.login.email"
              required>
     </div>
@@ -24,7 +24,7 @@
       <div class="input-box__container">
         <input type="{{!$ctrl.showPassword ? 'password' : 'text'}}"
                class="input-box__input"
-               placeholder="Введите пароль"
+               placeholder=""
                required
                ng-model="$ctrl.login.password">
         <a href="" class="input-box__pass-eye" ng-click="$ctrl.changeStatusPassword()">
@@ -205,7 +205,7 @@
 
         <input type="{{!$ctrl.showPassword ? 'password' : 'text'}}"
                class="input-box__input"
-               placeholder="Введите пароль"
+               placeholder=""
                ng-model="$ctrl.register.password"
                ng-change="$ctrl.registerAddData()"
                ng-model-options="{debounce: 300}">
@@ -232,7 +232,7 @@
 
         <input type="{{!$ctrl.showPassword ? 'password' : 'text'}}"
                class="input-box__input"
-               placeholder="Повторите пароль"
+               placeholder=""
                ng-model="$ctrl.register.passwordConfirmation"
                ng-change="$ctrl.registerAddData()"
                ng-model-options="{debounce: 300}">
