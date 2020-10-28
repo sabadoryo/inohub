@@ -17,17 +17,21 @@ function controller($http) {
 	let $ctrl = this;
 
     $ctrl.notifyUser = true;
+    $ctrl.loading = false;
+
     $ctrl.$onInit = function () {
         $ctrl.news = $ctrl.resolve.news;
     };
 
     $ctrl.save = () => {
+        $ctrl.loading = true;
         $ctrl.news.status = 'published';
         let url = '/control-panel/news/' + $ctrl.news.id + '/publish';
         let params = {
             notify_user: $ctrl.notifyUser,
         };
         $http.post(url, params).then(() => {
+            $ctrl.loading = false;
             $ctrl.close({$value: $ctrl.news});
         });
     };
