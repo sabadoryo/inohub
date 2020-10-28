@@ -1,16 +1,20 @@
 
 // parameter: elemId is an id of html element that will hold the grapejs instance
-const buildConstructor = elemId => {
+const buildConstructor = (elemId, options) => {
+
+    let idCounter = 0;
 
     let editor = grapesjs.init({
         // Indicate where to init the editor. You can also pass an HTMLElement
         container: '#' + elemId,
         // Get the content for the canvas directly from the element
         // As an alternative we could use: `components: '<h1>Hello World Component!</h1>'`,
-        fromElement: false,
+        // fromElement: true,
+        components: options.passport.content,
         // Size of the editor
         height: '800px',
         width: 'auto',
+        avoidInlineStyle: 1,
         // Disable the storage manager for the moment
         storageManager: false,
         assetManager: {
@@ -34,9 +38,13 @@ const buildConstructor = elemId => {
             styles: ['/css/style.css', '/css/ui-components.css']
         }
     });
-    editor.on('asset:upload:start', () => {
-        console.log('here is uploading')
+    editor.SelectorManager.getAll().each(selector => selector.set('private', 1));
 
+// All new selectors will be private
+    editor.on('selector:add', selector => selector.set('private', 1));
+    editor.on('component:add', model => {
+        // model.addСlass(` ${model.attributes.type + '-' + model.ccid}`);
+        console.log('model', model)
     });
     editor.addComponents(`
 <!--        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">-->
@@ -208,7 +216,7 @@ const buildConstructor = elemId => {
     editor.DomComponents.addType('ui-section-80vh-component', {
         model: {
             defaults: {
-                droppable: '.ui-container-h100, .ui-container-fix, img',
+                droppable: '.ui-container, .ui-container-fix, img',
                 draggable: 'main',
                 attributes: {
                     class: 'ui-section-80vh main-droppable'
@@ -220,7 +228,7 @@ const buildConstructor = elemId => {
     editor.DomComponents.addType('ui-section-component', {
         model: {
             defaults: {
-                droppable: '.ui-container-h100, .ui-container-fix, img',
+                droppable: '.ui-container, .ui-container-fix, img',
                 draggable: 'main',
                 attributes: {
                     class: 'ui-section main-droppable'
@@ -232,7 +240,7 @@ const buildConstructor = elemId => {
     editor.DomComponents.addType('ui-section-black-component', {
         model: {
             defaults: {
-                droppable: '.ui-container-h100, .ui-container-fix, img',
+                droppable: '.ui-container, .ui-container-fix, img',
                 draggable: 'main',
                 attributes: {
                     class: 'ui-section-black main-droppable'
@@ -241,13 +249,13 @@ const buildConstructor = elemId => {
             }
         }
     });
-    editor.DomComponents.addType('ui-container-h100-component', {
+    editor.DomComponents.addType('ui-container-component', {
         model: {
             defaults: {
                 droppable: '*',
                 draggable: 'section',
                 attributes: {
-                    class: 'ui-container-h100'
+                    class: 'ui-container'
                 }
             }
         }
@@ -335,7 +343,7 @@ const buildConstructor = elemId => {
         model: {
             defaults: {
                 tagName: 'div',
-                draggable: '.ui-container-h100, *',
+                draggable: '.ui-container, *',
                 attributes: {
                     class: 'ui-grid-2'
                 },
@@ -350,7 +358,7 @@ const buildConstructor = elemId => {
         model: {
             defaults: {
                 tagName: 'div',
-                draggable: '.ui-container-h100, *',
+                draggable: '.ui-container, *',
                 attributes: {
                     class: 'ui-grid-3'
                 },
@@ -366,7 +374,7 @@ const buildConstructor = elemId => {
         model: {
             defaults: {
                 tagName: 'div',
-                draggable: '.ui-container-h100, *',
+                draggable: '.ui-container, *',
                 attributes: {
                     class: 'ui-grid-4'
                 },
@@ -916,11 +924,11 @@ const buildConstructor = elemId => {
             type: 'ui-section-black-component'
         }
     });
-    editor.BlockManager.add('ui-container-h100-block', {
+    editor.BlockManager.add('ui-container-block', {
         label: 'UI Container h100',
         category: 'UI Container',
         content: {
-            type: 'ui-container-h100-component'
+            type: 'ui-container-component'
         }
     });
     editor.BlockManager.add('ui-container-fix-block', {
@@ -936,7 +944,7 @@ const buildConstructor = elemId => {
         content: {
             attributes: {
                 class: 'ui-bg-img',
-                'data-gjs-draggable': '.ui-container-h100, .ui-container-fix'
+                'data-gjs-draggable': '.ui-container, .ui-container-fix'
             },
             type: 'image'
         }

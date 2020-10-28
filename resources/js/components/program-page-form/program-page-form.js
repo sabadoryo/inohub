@@ -5,40 +5,47 @@ angular
     .module('app')
     .component('programPageForm', {
         template: require('./program-page-form.html'),
-        controller: ['$uibModal', controller],
+        controller: ['notify', '$http', '$uibModal', controller],
         bindings: {
             program: '<',
+            passport: '<'
         }
     });
 
-function controller($uibModal) {
+function controller(notify, $http, $uibModal) {
 
 	let $ctrl = this;
 
 	let editor;
 
+
+
 	$ctrl.$onInit = function () {
-        editor = buildConstructor('gjsProgramPassport');
+        $ctrl.programId = $ctrl.program.id;
+        editor = buildConstructor('gjsProgramPassport', {
+            program: $ctrl.program,
+            passport: $ctrl.passport
+        });
         console.log(editor);
     };
 
-	$ctrl.test = () => {
-        $ctrl.passportHtml = `
-                <html>
-                    <head>
-                        <link rel="stylesheet" href="/css/style.css">
-                    </head>
-                    <body>
-                        ${editor.getHtml()}
-                    </body>
-                </html>
-            `;
-        let iframe = document.getElementById('passportResult');
-        iframe.contentWindow.document.open('text/htmlreplace');
-        iframe.contentWindow.document.write($ctrl.passportHtml);
-        iframe.contentWindow.document.close();
-
-    };
+	// $ctrl.test = () => {
+    //     $ctrl.passportHtml = `
+    //             <html>
+    //                 <head>
+    //                     <link rel="stylesheet" href="/css/style.css">
+    //                 </head>
+    //                 <body>
+    //                     ${editor.getHtml()}
+    //                 </body>
+    //             </html>
+    //         `;
+    //     let iframe = document.getElementById('passportResult');
+    //     iframe.contentWindow.document.open('text/htmlreplace');
+    //     iframe.contentWindow.document.write($ctrl.passportHtml);
+    //     iframe.contentWindow.document.close();
+    //
+    // };
 
     $ctrl.openToPublishModal = () => {
         $uibModal
@@ -67,6 +74,8 @@ function controller($uibModal) {
     };
 
     $ctrl.save = () => {
+        $ctrl.rawHtml = editor.getHtml() + `<style>${editor.getCss()}</style>`;
+        console.log(editor.getCss())
         $ctrl.passportHtml = `
                 <html>
                     <head>
@@ -74,7 +83,7 @@ function controller($uibModal) {
                         <link rel="stylesheet" href="/css/ui-components.css">
                     </head>
                     <body>
-                        ${editor.getHtml()}
+                        ${$ctrl.rawHtml}
                     </body>
                 </html>
             `;
@@ -82,5 +91,25 @@ function controller($uibModal) {
         iframe.contentWindow.document.open('text/htmlreplace');
         iframe.contentWindow.document.write($ctrl.passportHtml);
         iframe.contentWindow.document.close();
+
+        $http
+            .post(`/control-panel/programs/${$ctrl.programId}/update-page`, {
+                content: $ctrl.rawHtml
+            })
+            .then(res => {
+                window.Swal.fire({
+                    icon: 'success',
+                    title: 'Данные обновлены',
+                    timer: 2000,
+                    showConfirmButton: false,
+                });
+            })
+            .catch(err => {
+                notify({
+                    message: 'Ошибка!',
+                    duration: 2000,
+                    classes: 'alert-danger',
+                });
+            })
     }
 }

@@ -75,6 +75,7 @@ Route::group([
     Route::get('programs/{id}/page', 'ProgramsController@pageForm');
     Route::get('programs/{id}/forms', 'ProgramsController@forms');
     Route::post('programs/{id}/update-main', 'ProgramsController@updateMain');
+    Route::post('programs/{id}/update-page', 'ProgramsController@updatePage');
     Route::post('programs/{id}/update-forms', 'ProgramsController@updateForms');
     Route::post('programs/{id}/update-forms-list', 'ProgramsController@updateFormsList');
     Route::post('programs/{id}/publish', 'ProgramsController@publish');
@@ -92,7 +93,7 @@ Route::group([
     Route::post('events/{id}/update-forms', 'EventsController@updateForms');
     Route::post('events/{id}/update-forms-list', 'EventsController@updateFormsList');
     Route::post('events/{id}/publish', 'EventsController@publish');
-    
+
     Route::get('news', 'NewsController@index');
     Route::get('news/get-list', 'NewsController@getList');
     Route::post('news', 'NewsController@store');
