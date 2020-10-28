@@ -103,6 +103,7 @@ function controller(notify, $http, $uibModal) {
                     timer: 2000,
                     showConfirmButton: false,
                 });
+                window.onbeforeunload = null; // Для того чтобы не выскакивало предупреждение о покидании страницы
             })
             .catch(err => {
                 notify({
