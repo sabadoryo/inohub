@@ -74,6 +74,7 @@
 @import "blocks/personal-data";
 @import "blocks/application-section";
 @import "blocks/application-block";
+@import "blocks/user-bar-container";
 @import "blocks/notifications-section";
 @import "blocks/section-filter";
 @import "blocks/application-list";
@@ -90,4 +91,33 @@ html, body {
 img {
     max-width: 100%;
     height: auto;
+}
+
+.modal--sm {
+    width: 386px !important;
+}
+
+.auth-modal-window {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1050;
+    display: none;
+    -webkit-overflow-scrolling: touch;
+    outline: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1040;
+    background-color: #000;
+    opacity: .4;
 }

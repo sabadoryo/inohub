@@ -12,8 +12,8 @@
     <link href="{{ asset('css/ui-components.css') }}" rel="stylesheet">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
-          integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+{{--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"--}}
+{{--          integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">--}}
 
     <style>
 
@@ -81,11 +81,12 @@
                 <use xlink:href="/img/icons.svg#toggle"></use>
             </svg>
 
-            <ui class="header__lang-dropdown lang-dropdown">
+            <ul class="header__lang-dropdown lang-dropdown">
                 <li class="lang-dropdown__item"><a href="#" class="lang-dropdown__link">Қазақша</a></li>
                 <li class="lang-dropdown__item"><a href="#" class="lang-dropdown__link">Русский</a></li>
                 <li class="lang-dropdown__item"><a href="#" class="lang-dropdown__link">English</a></li>
-            </ui>
+            </ul>
+
         </div>
 
 
@@ -164,7 +165,7 @@
                     Astana Hub
                 </a>
 
-                <a href="#" class="as-navbar__organization">
+                <a href="/tech-garden/about" class="as-navbar__organization">
                     <img src="/img/icons/tech-garden-icon-sm.png" alt="" class="as-navbar__organization-icon">
                     Tech Garden
                 </a>

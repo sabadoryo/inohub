@@ -1,0 +1,21 @@
+<div class="modal-header">
+  <!--  <h5 class="modal-title">Modal title</h5>-->
+  <button type="button" class="close" ng-click="$ctrl.dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form ng-submit="$ctrl.save()">
+  <div class="modal-body">
+    <p>Вы действительно хотите опубликовать новость?</p>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" ng-model="$ctrl.notifyUser">
+      <label class="form-check-label">
+        Сделать объявление?
+      </label>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" ng-click="$ctrl.dismiss()">Отмена</button>
+    <button type="button" class="btn btn-primary" ng-click="$ctrl.save()" ng-disabled="$ctrl.loading">Опубликовать</button>
+  </div>
+</form>

@@ -50,7 +50,7 @@
     <p class="mb-0">Если не нашли нужную форму <a href="" ng-click="$ctrl.openFormCreate()">создайте</a> новую</p>
   </div>
   <div class="card-footer d-flex">
-    <button class="btn btn-primary mr-auto" type="button" ng-click="$ctrl.save()">
+    <button class="btn btn-primary mr-auto" type="button" ng-click="$ctrl.save()" ng-disabled="$ctrl.loadingSave">
       Сохранить
     </button>
   </div>

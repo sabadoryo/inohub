@@ -1,83 +1,67 @@
-<div class="mb-3">
-    <a href="/control-panel/forms/create" class="btn btn-sm btn-primary">Добавить форму</a>
-</div>
-<div class="row">
-    <div class="col-6">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="mb-0">Анкета пользователя</h5>
-            </div>
-            <div class="card-body">
-                <div class="card-text mb-3">Форма для заполнения пользлователем информации о себе</div>
-                <ul class="list-group">
-                    <li class="list-group-item">Программа: Акселератор стартапов</li>
-                    <li class="list-group-item">Корпоративная информация</li>
-                </ul>
-            </div>
-            <div class="card-footer">
-                <a href="" class="btn btn-primary btn-sm">
-                    <i class="fa fa-edit"></i> Изменить
-                </a>
-                <a href="" class="btn btn-primary btn-sm">
-                    <i class="fa fa-copy"></i> Скопировать
-                </a>
-                <a href="" class="btn btn-danger btn-sm">
-                    <i class="fa fa-trash"></i> Удалить
-                </a>
-            </div>
+<form class="mb-3" ng-submit="$ctrl.filter()">
+
+    <div class="form-row">
+
+        <div class="col-3">
+            <input type="text"
+                   class="form-control"
+                   placeholder="неизвестно"
+                   ng-model="$ctrl.unknown">
         </div>
+
+        <div class="col-3">
+            <input type="text"
+                   class="form-control"
+                   placeholder="неизвестно"
+                   ng-model="$ctrl.unknown">
+        </div>
+
+        <div class="col-3">
+            <select ng-model="$ctrl.status" class="form-control">
+                <option value="">Выберите неизвестно что</option>
+            </select>
+        </div>
+
+        <div class="col-auto">
+
+            <button type="submit" class="btn btn-primary">Поиск</button>
+
+            <button type="button" class="btn btn-secondary" ng-click="$ctrl.reset()">Сбросить</button>
+
+        </div>
+
     </div>
-    <div class="col-6">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="mb-0">Анкета пользователя</h5>
-            </div>
-            <div class="card-body">
-                <div class="card-text mb-3">Форма для заполнения пользлователем информации о себе</div>
-                <ul class="list-group">
-                    <li class="list-group-item">Программа: Акселератор стартапов</li>
-                    <li class="list-group-item">Корпоративная информация</li>
-                    <li class="list-group-item">Корпоративная информация</li>
-                    <li class="list-group-item">Корпоративная информация</li>
-                    <li class="list-group-item">Корпоративная информация</li>
-                </ul>
-            </div>
-            <div class="card-footer">
-                <a href="" class="btn btn-primary btn-sm">
-                    <i class="fa fa-edit"></i> Изменить
-                </a>
-                <a href="" class="btn btn-primary btn-sm">
-                    <i class="fa fa-copy"></i> Скопировать
-                </a>
-                <a href="" class="btn btn-danger btn-sm">
-                    <i class="fa fa-trash"></i> Удалить
-                </a>
-            </div>
-        </div>
+
+</form>
+
+<div class="mb-3 clearfix row">
+    <div class="col-10">
+        Всего: <b>{{$ctrl.total}}</b> {{$ctrl.total | plural : ['программа', 'программы', 'программ']}}
     </div>
-    <div class="col-6">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="mb-0">Анкета пользователя</h5>
-            </div>
-            <div class="card-body">
-                <div class="card-text mb-3">Форма для заполнения пользлователем информации о себе</div>
-                <ul class="list-group">
-                    <li class="list-group-item">Программа: Акселератор стартапов</li>
-                    <li class="list-group-item">Корпоративная информация</li>
-                </ul>
-            </div>
-            <div class="card-footer">
-                <a href="" class="btn btn-primary btn-sm">
-                    <i class="fa fa-edit"></i> Изменить
-                </a>
-                <a href="" class="btn btn-primary btn-sm">
-                    <i class="fa fa-copy"></i> Скопировать
-                </a>
-                <a href="" class="btn btn-danger btn-sm">
-                    <i class="fa fa-trash"></i> Удалить
-                </a>
-            </div>
-        </div>
+    <div class="col-2 d-flex justify-content-end">
+        <a class="btn btn-primary" href="/control-panel/forms/create">Создать форму</a>
     </div>
 </div>
+
+<table class="table bg-white">
+    <thead class="thead-light">
+    <tr>
+        <th>ID</th>
+        <th>Название</th>
+        <th>Дата создания</th>
+    </tr>
+    </thead>
+    <tr ng-repeat="form in $ctrl.forms track by $index">
+        <td>{{form.id}}</td>
+        <td>{{form.title}}</td>
+        <td>{{form.created_at | date:'dd.MM.yyyy HH:mm'}}</td>
+    </tr>
+</table>
+
+<ul uib-pagination
+    total-items="$ctrl.total"
+    ng-model="$ctrl.page"
+    ng-change="$ctrl.getList()"
+    items-per-page="20"
+    template-url="b4-pagination">
+</ul>

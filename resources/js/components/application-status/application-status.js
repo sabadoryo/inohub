@@ -197,6 +197,7 @@ function controller($http, Auth, moment, $uibModal, Upload) {
         $uibModal
             .open({
                 component: 'applicationActionDetailsModal',
+                size: 'lg',
                 resolve: {
                     action: () => {
                         return action;

@@ -32,13 +32,17 @@ class EventsController extends Controller
     public function getList(Request $request)
     {
         $query = Event::query();
-    
+        
         if ($request->name) {
             $query->where(
                 'name',
                 'like',
                 $request->name . '%'
             );
+        }
+    
+        if ($request->status) {
+            $query->where('status', $request->status);
         }
     
         $result = $query->orderBy('id', 'desc')
@@ -199,6 +203,7 @@ class EventsController extends Controller
         
         $event->update([
             'status' => 'published',
+            'published_at' => Carbon::now(),
         ]);
     }
 }

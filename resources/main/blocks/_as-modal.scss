@@ -3,22 +3,8 @@
     background-color: #ffffff;
     border-radius: 7px;
     padding: 40px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1000;
-
-    //&:before {
-    //    content: '';
-    //    position: absolute;
-    //    top: 0;
-    //    left: 0;
-    //    width: 100vw;
-    //    height: 100vh;
-    //    z-index: 9;
-    //    background-color: rgba(24, 21, 21, 0.2);
-    //}
+    margin: 50px auto;
+    position: relative;
 
     &--sm {
         width: 386px;

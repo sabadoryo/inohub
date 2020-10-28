@@ -6,7 +6,6 @@ angular
         template: require('./program-forms.html'),
         controller: ['notify', '$http', '$uibModal', controller],
         bindings: {
-            forms: '<',
             program: '<',
         }
     });
@@ -15,8 +14,11 @@ function controller(notify, $http, $uibModal) {
  
 	let $ctrl = this;
 
+	$ctrl.loadingSave = false;
+
 	$ctrl.$onInit = function () {
 		$ctrl.programForms = $ctrl.program.forms;
+		$ctrl.updateFormsList();
 	};
 
 	$ctrl.openToPublishModal = () => {
@@ -105,11 +107,13 @@ function controller(notify, $http, $uibModal) {
 	}
 
 	$ctrl.save = () => {
+		$ctrl.loadingSave = true;
 		let url = '/control-panel/programs/' + $ctrl.program.id + '/update-forms';
 		let params = {
 			forms: $ctrl.programForms,
 		}
 		$http.post(url, params).then(() => {
+			$ctrl.loadingSave = false;
 			window.Swal.fire({
 				icon: 'success',
 				title: 'Данные обновлены',
@@ -117,6 +121,7 @@ function controller(notify, $http, $uibModal) {
 				showConfirmButton: false,
 			});
 		}, (error) => {
+			$ctrl.loadingSave = false;
 			notify({
 				message: 'Ошибка!',
 				duration: 2000,

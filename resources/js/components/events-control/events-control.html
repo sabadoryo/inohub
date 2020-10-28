@@ -6,8 +6,15 @@
              placeholder="Название"
              ng-model="$ctrl.name">
     </div>
+    <div class="col-3">
+      <select ng-model="$ctrl.status" class="form-control">
+        <option value="">Выберите статус</option>
+        <option value="draft">Черновик</option>
+        <option value="published">Опубликован</option>
+      </select>
+    </div>
     <div class="col-auto">
-      <button type="submit" class="btn btn-primary">Поиск</button>
+      <button type="submit" class="btn btn-primary" ng-disabled="$ctrl.loading">Поиск</button>
       <button type="button" class="btn btn-secondary" ng-click="$ctrl.reset()">Сбросить</button>
     </div>
   </div>
@@ -22,12 +29,13 @@
   </a>
 </div>
 
-<table class="table table-bordered table-sm bg-white">
+<table class="table table-sm bg-white">
   <thead class="thead-light">
   <tr>
     <th>№</th>
     <th>Название</th>
     <th>Дата и время провидения</th>
+    <th>Статус</th>
     <th></th>
   </tr>
   </thead>
@@ -35,6 +43,10 @@
     <td>{{event.id}}</td>
     <td>{{event.name}}</td>
     <td>{{event.start_date | date:'dd.MM.yyyy HH:mm'}}</td>
+    <td ng-switch="event.status">
+      <div ng-switch-when="draft" class="text-danger">Черновик</div>
+      <div ng-switch-when="published" class="text-success">Опубликован</div>
+    </td>
     <td class="text-center">
       <a href=""
          ng-href="/control-panel/events/{{event.id}}/main"
@@ -49,6 +61,6 @@
     total-items="$ctrl.total"
     ng-model="$ctrl.page"
     ng-change="$ctrl.getList()"
-    items-per-page="$ctrl.perPage"
+    items-per-page="10"
     template-url="b4-pagination">
 </ul>

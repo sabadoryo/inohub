@@ -9,6 +9,7 @@ Route::get('/', 'MainPageController@index');
 Route::group(['prefix' => 'cabinet', 'middleware' => ['auth']], function () {
     Route::get('', 'CabinetController@profile');
     Route::get('applications', 'CabinetController@applications');
+    Route::get('download-file/{path}', 'CabinetController@downloadFile')->where('path',  '(.*)');
 
     Route::get('project', 'CabinetController@project');
     Route::post('update-roles', 'CabinetController@updateRoles');
@@ -30,6 +31,17 @@ Route::group(['prefix' => 'astana-hub'], function () {
     Route::get('resources', 'AstanaHubController@resources');
     Route::get('programs/{id}', 'AstanaHubController@program');
     Route::get('programs/{id}/get-forms', 'AstanaHubController@getProgramForms');
+});
+
+Route::group(['prefix' => 'tech-garden'], function () {
+    Route::get('about', 'TechGardenController@about');
+    Route::get('programs', 'TechGardenController@programs');
+    Route::get('corporate-innovations', 'TechGardenController@corporateInnovations');
+    Route::get('hub-space', 'TechGardenController@hubSpace');
+    Route::get('r-and-d', 'TechGardenController@randd');
+    Route::get('resources', 'TechGardenController@resources');
+    Route::get('programs/{id}', 'TechGardenController@program');
+    Route::get('programs/{id}/get-forms', 'TechGardenController@getProgramForms');
 });
 
 Route::get('get-forms', 'FormsController@getList');
@@ -89,6 +101,13 @@ Route::group([
     Route::post('events/{id}/update-forms', 'EventsController@updateForms');
     Route::post('events/{id}/update-forms-list', 'EventsController@updateFormsList');
     Route::post('events/{id}/publish', 'EventsController@publish');
+    
+    Route::get('news', 'NewsController@index');
+    Route::get('news/get-list', 'NewsController@getList');
+    Route::post('news', 'NewsController@store');
+    Route::get('news/{id}/main', 'NewsController@mainForm');
+    Route::post('news/{id}/update-main', 'NewsController@updateMain');
+    Route::post('news/{id}/publish', 'NewsController@publish');
 
     Route::get('applications', 'ApplicationsController@index');
     Route::get('applications/get-list', 'ApplicationsController@getList');
@@ -102,6 +121,7 @@ Route::group([
     Route::post('events', 'EventsController@store');
 
     Route::get('forms', 'FormsController@index');
+    Route::get('forms/get-list', 'FormsController@getList');
     Route::get('forms/create', 'FormsController@create');
     Route::post('forms', 'FormsController@store');
 

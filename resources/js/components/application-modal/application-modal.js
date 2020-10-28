@@ -76,45 +76,50 @@ function controller(Auth, $rootScope, Upload, $http) {
 
     $ctrl.selectOtherOptionSelected = function (field) {
         field.otherOptionSelected = field.value.val === 'Свой вариант';
-        console.log(field);
     };
 
     $ctrl.checkboxOtherOptionSelected = function (field) {
         field.other_option_selected = true;
-        console.log(field);
     };
 
     $ctrl.validateFile = function (files, file, newFiles, duplicateFiles, invalidFiles, event, field) {
-        console.log(field.value);
         if (files.length > field.max_files_count) {
             alert('Выбрано сликшмо много файлов, максимальное количество:' + field.max_files_count);
             field.value = [];
         }
     };
 
+    $ctrl.isFileRequired = function (field) {
+        console.log(field);
+        if (field.is_required && (!field.value || field.value.length <= 0)) {
+            console.log('yes required');
+            return true;
+        } else {
+            return false;
+        }
+    };
+
     $ctrl.removeFile = function (field, index) {
-        console.log(field, index);
         field.value.splice(index, 1);
     };
 
     $ctrl.submit = function (ind) {
 
         let ch = true;
-        if (ind != $ctrl.forms.length - 1) {
-            $ctrl.forms[ind].fields.forEach(field => {
-                if (field.type === 'file') {
-                    if (field.value.length === 0) {
-                        alert('Поле c загрузкой файла - является обязательным, пожалуйста предоставьте его.');
-                        ch = false;
-                    }
+        $ctrl.forms[ind].fields.forEach(field => {
+            if (field.type === 'file') {
+                if ($ctrl.isFileRequired(field)) {
+                    alert('Поле с загрузукой файла является обязательным пожалуйста предоставьте его');
+                    ch = false;
                 }
-            });
-            if (ch === false) {
-                return;
-            } else {
-                $ctrl.curForm += 1;
-                return;
             }
+        });
+        if (ind != $ctrl.forms.length - 1 && ch === true) {
+            $ctrl.curForm += 1;
+            return;
+        }
+        if (ch === false) {
+            return;
         }
 
         let forms = [];
@@ -156,7 +161,6 @@ function controller(Auth, $rootScope, Upload, $http) {
 
             forms.push({id: form.id, fields});
         });
-        console.log(forms);
         Upload
 
             .upload({
