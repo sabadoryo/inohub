@@ -33,9 +33,16 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="/control-panel/organizations" class="nav-link {{$activePage == 'organizations' ? 'active' : ''}}">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>Организации</p>
+                    <a href="/control-panel/programs" class="nav-link {{$activePage == 'programs' ? 'active' : ''}}">
+                        <i class="nav-icon fab fa-buromobelexperte"></i>
+                        <p>Программы</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/control-panel/forms" class="nav-link {{$activePage == 'forms' ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>Настройка форм</p>
                     </a>
                 </li>
 
@@ -45,6 +52,8 @@
                         <p>Пользователи</p>
                     </a>
                 </li>
+
+
 
                 <li class="nav-item">
                     <a href="/control-panel/admin-users" class="nav-link {{$activePage == 'admin-users' ? 'active' : ''}}">
@@ -76,18 +85,14 @@
                     </li>
                 @endcan
 
-                <li class="nav-item">
-                    <a href="/control-panel/programs" class="nav-link {{$activePage == 'programs' ? 'active' : ''}}">
-                        <i class="nav-icon fab fa-buromobelexperte"></i>
-                        <p>Программы</p>
-                    </a>
-                </li>
+
                 <li class="nav-item">
                     <a href="/control-panel/events" class="nav-link {{$activePage == 'events' ? 'active' : ''}}">
                         <i class="nav-icon fas fa-calendar"></i>
                         <p>Мероприятия</p>
                     </a>
                 </li>
+
                 <li class="nav-item">
                     <a href="/control-panel/news" class="nav-link {{$activePage == 'news' ? 'active' : ''}}">
                         <i class="nav-icon far fa-newspaper"></i>
