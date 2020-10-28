@@ -2,6 +2,7 @@
 
 Route::post('login', 'Auth\LoginController@login');
 Route::post('register', 'Auth\RegisterController@register');
+Route::post('check-mail', 'Auth\RegisterController@checkMail');
 Route::post('logout', 'Auth\LoginController@logout');
 
 Route::get('/', 'MainPageController@index');
