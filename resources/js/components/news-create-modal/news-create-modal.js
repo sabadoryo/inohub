@@ -17,7 +17,7 @@ function controller($http) {
 	let $ctrl = this;
 
 	$ctrl.title = null;
-	$ctrl.description = null;
+	// $ctrl.description = null;
 	$ctrl.loading = false;
 
 	$ctrl.$onInit = function () {
@@ -28,7 +28,7 @@ function controller($http) {
 	    $http
             .post('/control-panel/news', {
                 title: $ctrl.title,
-                short_description: $ctrl.description,
+                // short_description: $ctrl.description,
             })
             .then(
                 res => {

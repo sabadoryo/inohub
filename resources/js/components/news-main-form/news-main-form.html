@@ -1,9 +1,7 @@
 <div class="alert alert-light" ng-show="$ctrl.news.status == 'draft'">
   Данная новость находится в режиме черновика. Хотите <a href="" ng-click="$ctrl.openToPublishModal()" class="alert-link">опубликовать</a> программу?
 </div>
-<a href="" class="btn btn-primary btn-sm mb-3">
-  Посмотреть
-</a>
+
 <form ng-submit="$ctrl.save()">
   <div class="card">
     <div class="card-body">
@@ -13,10 +11,10 @@
         <input type="text" class="form-control" placeholder="Введите заголовок" ng-model="$ctrl.title" required>
       </div>
 
-      <div class="form-group">
-        <label>Краткое описание:</label>
-        <textarea class="form-control" placeholder="Введите описание" ng-model="$ctrl.description" required></textarea>
-      </div>
+<!--      <div class="form-group">-->
+<!--        <label>Краткое описание:</label>-->
+<!--        <textarea class="form-control" placeholder="Введите описание" ng-model="$ctrl.description" required></textarea>-->
+<!--      </div>-->
 
       <div class="form-group">
         <label class="text-lg">Контент:</label>

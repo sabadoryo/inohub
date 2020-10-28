@@ -4,13 +4,13 @@ angular
     .module('app')
     .component('newsMainForm', {
         template: require('./news-main-form.html'),
-        controller: ['$uibModal', 'Upload', 'notify', controller],
+        controller: ['$uibModal', 'Upload', 'notify', '$http', controller],
         bindings: {
             news: '<',
         }
     });
     
-function controller($uibModal, Upload, notify) {
+function controller($uibModal, Upload, notify, $http) {
  
 	let $ctrl = this;
 
@@ -19,33 +19,31 @@ function controller($uibModal, Upload, notify) {
 	$ctrl.$onInit = function () {
 	    $ctrl.data = $ctrl.news.data;
 	    $ctrl.title = $ctrl.news.title;
-	    $ctrl.description = $ctrl.news.short_description;
+	    // $ctrl.description = $ctrl.news.short_description;
     };
 
     $ctrl.openToPublishModal = () => {
-        $uibModal
-            .open({
-                component: 'newsToPublishModal',
-                resolve: {
-                    news: function () {
-                        return $ctrl.news;
-                    }
-                }
-            })
-            .result
-            .then(
-                res => {
-                    window.Swal.fire({
-                        icon: 'success',
-                        title: 'Опубликовано',
-                        timer: 2000,
-                        showConfirmButton: false,
-                    });
-                },
-                err => {
-
-                }
-            );
+        Swal.fire({
+            title: 'Вы уверены?',
+            text: "Данная публикация сразу же появиться в ленте у пользователей",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Да',
+            cancelButtonText: 'Отмена'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $http
+                    .post(`/control-panel/news/${$ctrl.news.id}/publish`)
+                    .then(
+                        function () {
+                            Swal.fire('Успешно опубликована', '', 'success');
+                            $ctrl.news.status = 'published';
+                        }
+                    );
+            }
+        })
     };
 
     $ctrl.addText = () => {
@@ -101,7 +99,7 @@ function controller($uibModal, Upload, notify) {
 	    let url = '/control-panel/news/' + $ctrl.news.id + '/update-main';
 	    let params = {
 	        title: $ctrl.title,
-            short_description: $ctrl.description,
+            // short_description: $ctrl.description,
             data: $ctrl.data,
         };
 

@@ -20,19 +20,29 @@
 
                 <div class="form-group" ng-repeat="field in form.fields track by field.id">
 
-                    <label>{{field.label}}:</label>
+                    <div class="d-flex justify-content-between">
+                        <label>{{field.label}}:</label>
+                        <div ng-if="field.type === 'file' && field.example_files" class="d-flex flex-column">
+                            Примеры:
+                            <div ng-repeat="exFile in field.example_files">
+                                <a href="/cabinet/download-file/{{exFile.path}}">{{exFile.name}}</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="field.type === 'text'">
+                        <input type="text"
+                               class="form-control"
+                               ng-model="field.value"
+                               ng-required="field.is_required">
+                        <small class="form-text text-muted">{{field.prompt}}</small>
+                    </div>
 
-                    <input type="text"
-                           ng-if="field.type == 'text'"
-                           class="form-control"
-                           ng-model="field.value"
-                           ng-required="field.is_required">
-
+                    <div ng-if="field.type == 'textarea'">
                     <textarea class="form-control"
-                              ng-if="field.type == 'textarea'"
                               ng-model="field.value"
                               ng-required="field.is_required"></textarea>
-
+                        <small class="form-text text-muted">{{field.prompt}}</small>
+                    </div>
 
                     <div ng-if="field.type == 'radio'">
                         <div class="form-check"
@@ -69,6 +79,7 @@
                             <input type="text" ng-model="field.otherOptionValue" class="form-control"
                                    placeholder="Свой вариант">
                         </div>
+                        <small class="form-text text-muted">{{field.prompt}}</small>
                     </div>
                     <div ng-if="field.type == 'checkbox'">
                         <div class="form-check"
@@ -104,6 +115,7 @@
                             <input type="text" ng-model="field.otherOptionValue" class="form-control"
                                    placeholder="Свой вариант">
                         </div>
+                        <small class="form-text text-muted">{{field.prompt}}</small>
                     </div>
 
                     <div class="" ng-if="field.type == 'select'">
@@ -121,6 +133,7 @@
                                    class="form-control"
                                    placeholder="Свой вариант...">
                         </div>
+                        <small class="form-text text-muted">{{field.prompt}}</small>
                     </div>
 
                     <div ng-if="field.type == 'file'">
@@ -175,6 +188,7 @@
                                 ngf-max-size="10MB">
                             <span>выбрать файл</span>
                         </button>
+                        <small class="form-text text-muted">{{field.prompt}}</small>
                     </div>
 
                 </div>

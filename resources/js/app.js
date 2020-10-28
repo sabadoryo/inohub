@@ -123,6 +123,7 @@ require('./components/news-to-publish-modal/news-to-publish-modal');
 require('./components/tech-garden-about/tech-garden-about');
 require('./components/tech-garden-programs/tech-garden-programs');
 require('./components/tech-garden-corp-innovations/tech-garden-corp-innovations');
+require('./components/news-list/news-list');
 
 require('./components/smart-store-solution-companies/smart-store-solution-companies');
 require('./components/smart-store-task-companies/smart-store-task-companies');

@@ -47,7 +47,8 @@
                     <div class="application-section__title">Regional Incubation</div>
 
                     <div class="application-section__details">
-                        <div class="application-section__status application-section__status--success">Статус: <span>Подтвердили</span> </div>
+                        <div class="application-section__status application-section__status--success">Статус: <span>Подтвердили</span>
+                        </div>
                         <div class="application-section__date">
                             <svg class="application-section__date-icon" width="16" height="18">
                                 <use href="/img/icons.svg#calendar-grey"></use>
@@ -135,9 +136,9 @@
                                         <option value="1">Казахский</option>
                                     </select>
 
-                                    <svg class="input-box__select-icon" width="24" height="24">
-                                        <use href="img/icons.svg#chevron-down"></use>
-                                    </svg>
+{{--                                    <svg class="input-box__select-icon" width="24" height="24">--}}
+{{--                                        <use href="img/icons.svg#chevron-down"></use>--}}
+{{--                                    </svg>--}}
                                 </div>
                             </div>
 
@@ -163,7 +164,8 @@
                             <div class="application-block__input-box input-box">
                                 <label class="input-box__label">Отрасль деятельности ИКТ-компании</label>
                                 <div class="input-box__container">
-                                    <input type="text" class="input-box__input" value="Информационные технологии" disabled>
+                                    <input type="text" class="input-box__input" value="Информационные технологии"
+                                           disabled>
                                 </div>
                             </div>
 
@@ -214,43 +216,55 @@
                                 </div>
                             </div>
 
-                            <div class="application-block__input-box input-box input-box--">
-                                <label class="input-box__label">Краткое описание проекта. В чем заключается идея? </label>
-                                <textarea class="input-box__textarea" placeholder="Проект был создан для..."></textarea>
+                            <div class="application-block__input-box input-box input-box--span2">
+                                <label class="input-box__label">Краткое описание проекта. В чем заключается
+                                    идея? </label>
+                                <textarea class="input-box__textarea"
+                                          disabled
+                                          placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."></textarea>
                             </div>
 
                             <div class="application-block__input-box input-box">
-                                <label class="input-box__label">Отрасль деятельности ИКТ-компании</label>
+                                <label class="input-box__label">Какие воркшопы могут быть полезны в создании Вашего
+                                    MVP? </label>
                                 <div class="input-box__container">
-                                    <input type="text" class="input-box__input" value="Информационные технологии" disabled>
+                                    <input type="text" class="input-box__input" value="Lorem ipsum dolor sit amet"
+                                           disabled>
+                                </div>
+                            </div>
+
+                            <div class="modal-full__input-box input-box">
+                                <label class="input-box__label">Привлекали ли вы инвестиции?</label>
+
+                                <div class="input-box__radio-group">
+                                    <label class="input-box__radio-box custom-radio-box">
+                                        <input type="radio" name="investment" class="custom-radio-box__radio">
+                                        <span class="custom-radio-box__checkmark"></span>
+                                        Да
+                                    </label>
+
+                                    <label class="input-box__radio-box custom-radio-box">
+                                        <input type="radio" name="investment" class="custom-radio-box__radio">
+                                        <span class="custom-radio-box__checkmark"></span>
+                                        Нет
+                                    </label>
                                 </div>
                             </div>
 
                             <div class="application-block__input-box input-box">
-                                <label class="input-box__label">Основатель проекта</label>
+                                <label class="input-box__label">Какую проблему вы решаете?</label>
                                 <div class="input-box__container">
-                                    <input type="text" class="input-box__input" value="Олжас Аскаров" disabled>
+                                    <input type="text" class="input-box__input" value="Lorem ipsum dolor sit amet"
+                                           disabled>
                                 </div>
                             </div>
 
                             <div class="application-block__input-box input-box">
-                                <label class="input-box__label">Год основания</label>
+                                <label class="input-box__label">Если привлекали инвестиции, то в каком размере и на
+                                    каких условиях?</label>
                                 <div class="input-box__container">
-                                    <input type="text" class="input-box__input" value="2018" disabled>
-                                </div>
-                            </div>
-
-                            <div class="application-block__input-box input-box">
-                                <label class="input-box__label">Стадия развития</label>
-                                <div class="input-box__container">
-                                    <input type="text" class="input-box__input" value="MCI" disabled>
-                                </div>
-                            </div>
-
-                            <div class="application-block__input-box input-box">
-                                <label class="input-box__label">Сфера применения/технология</label>
-                                <div class="input-box__container">
-                                    <input type="text" class="input-box__input" value="AI" disabled>
+                                    <input type="text" class="input-box__input" value="В размере 20.000.000 тенге"
+                                           disabled>
                                 </div>
                             </div>
 
@@ -259,7 +273,6 @@
                     </div>
 
                 </div>
-
 
 
             </div>

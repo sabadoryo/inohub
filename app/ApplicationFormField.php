@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ApplicationFormField extends Model
 {
-    protected $fillable = ['form_field_id', 'value', 'type'];
+    protected $fillable = ['form_field_id', 'value', 'type', 'file_name'];
 
     public function formField()
     {
@@ -22,7 +22,18 @@ class ApplicationFormField extends Model
         }
     }
 
-    function isJson($string) {
+
+    public function getFileNameAttribute($value)
+    {
+        if ($this->isJson($value)) {
+            return json_decode($value);
+        } else {
+            return $value;
+        }
+    }
+
+    function isJson($string)
+    {
         json_decode($string);
         return (json_last_error() == JSON_ERROR_NONE);
     }
