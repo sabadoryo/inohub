@@ -1,0 +1,13 @@
+.ui-socials {
+
+    display: inline-flex;
+    align-items: center;
+
+    &__item {
+        height: 28px;
+        width: 28px;
+        &:not(:last-child) {
+            margin-right: 30px;
+        }
+    }
+}

@@ -5,36 +5,75 @@
     Войти
 </button>
 
-<div ng-show="$ctrl.user" uib-dropdown="" uib-dropdown-toggle="">
+<div ng-show="$ctrl.user" uib-dropdown="" uib-dropdown-toggle="" class="user-bar">
 
-    <div style="background: white; border-radius: 50%; width: 50px; height: 50px; overflow: hidden; display: inline-block; vertical-align: middle">
+    <div class="user-bar__img-box user-bar__img-box--notify">
         <img src=""
+             class="user-bar__img"
              ng-if="$ctrl.user.avatar_url"
              ng-src="{{$ctrl.user.avatar_url}}"
              alt="">
         <div ng-show="!$ctrl.user.avatar_url"
-             style="font-size: 25px; padding-top: 6px; padding-left: 6px; color: blue">
-            {{$ctrl.user.initials}}
+             class="user-bar__initials">
+            {{ $ctrl.user.initials }}
         </div>
     </div>
 
-    <div style="display: inline-block; color: #ffffff; vertical-align: middle; font-size: 14px;">
-        {{$ctrl.user.full_name}}
+    <div class="user-bar__name">
+        {{ $ctrl.user.full_name }}
     </div>
 
-    <ul uib-dropdown-menu="" style="font-size: 14px">
-        <li class="">
-            <a href="/cabinet">Кабинет</a>
+    <svg class="user-bar__toggle" width="10" height="5">
+        <use xlink:href="/img/icons.svg#toggle"></use>
+    </svg>
+
+    <ul uib-dropdown-menu="" class="user-bar__dropdown user-dropdown">
+        <li class="user-dropdown__item">
+            <svg class="user-dropdown__icon" width="24" height="24">
+                <use href="/img/icons.svg#profile-icon"></use>
+            </svg>
+            <a href="/cabinet" class="user-dropdown__link">Кабинет</a>
         </li>
-        <li class="">
-            <a href="/cabinet/applications">Заявки</a>
+
+        <li class="user-dropdown__item">
+            <svg class="user-dropdown__icon" width="24" height="24">
+                <use href="/img/icons.svg#file"></use>
+            </svg>
+            <a href="/cabinet/applications" class="user-dropdown__link">Заявки</a>
         </li>
-        <li class="">
-            <a href="/cabinet/notifications">Уведомления</a>
+
+        <li class="user-dropdown__item user-dropdown__item--border">
+            <svg class="user-dropdown__icon" width="24" height="24">
+                <use href="/img/icons.svg#bell"></use>
+            </svg>
+            <a href="/cabinet/notifications" class="user-dropdown__link">Уведомления</a>
+            <div class="user-dropdown__badge as-badge">
+                12
+            </div>
         </li>
-        <li>
-            <a href="" ng-click="$ctrl.logout()">Выйты</a>
+
+        <li class="user-dropdown__item">
+            <svg class="user-dropdown__icon" width="24" height="24">
+                <use href="/img/icons.svg#exit"></use>
+            </svg>
+            <a href="" ng-click="$ctrl.logout()" class="user-dropdown__link">Выйты</a>
         </li>
     </ul>
+
+    <div class="notify-dropdown">
+        <svg class="notify-dropdown__icon" width="24" height="24">
+            <use href="/img/icons.svg#bell-red-bg"></use>
+        </svg>
+
+        <div class="notify-dropdown__info">
+            <div class="notify-dropdown__title">
+                Новое уведомление
+            </div>
+
+            <div class="notify-dropdown__text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit
+            </div>
+        </div>
+    </div>
 
 </div>

@@ -1,8 +1,10 @@
-.header {
+.ui-header-1 {
 
-    padding: 16px 40px;
+    height: 80px;
     width: 100%;
     background-color: #181515;
+    display: flex;
+    align-items: center;
 
     position: fixed;
     top: 0;
@@ -40,7 +42,6 @@
         display: flex;
         align-items: center;
         cursor: pointer;
-        position: relative;
 
         @include text-style(1.6rem, 500, #ffffff);
         margin-right: 47px;
@@ -64,13 +65,5 @@
     &__search-box {
         margin-right: auto;
         margin-left: auto;
-    }
-
-    &__lang-dropdown {
-        position: absolute;
-        top: 43px !important;
-        right: 0 !important;
-        left: unset !important;
-        margin: 0 !important;
     }
 }

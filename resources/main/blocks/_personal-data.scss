@@ -1,0 +1,55 @@
+.personal-data {
+
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 7px;
+
+    &__row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 30px;
+    }
+
+    &__title {
+        @include text-style(2rem, 700, #181515);
+        line-height: 24px;
+    }
+
+    &__link-box {
+        display: flex;
+        align-items: center;
+    }
+
+    &__edit-icon {
+        margin-right: 7px;
+    }
+
+    &__link:link,
+    &__link:visited {
+        @include text-style(1.4rem, 500, $elem-color);
+        line-height: 17px;
+    }
+
+    &__input-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 24px;
+    }
+
+    &__section {
+        &:not(:last-child) {
+            margin-bottom: 24px;
+        }
+
+        &--bordered {
+            padding-bottom: 24px;
+            border-bottom: 1px solid #E8E8E8;
+        }
+    }
+
+    &__button {
+        display: block;
+        margin-left: auto;
+    }
+}

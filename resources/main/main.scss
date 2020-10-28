@@ -17,7 +17,7 @@
 @import "blocks/header";
 @import "blocks/button";
 @import "blocks/main";
-@import "blocks/navbar";
+@import "blocks/as-navbar";
 @import "blocks/content";
 @import "blocks/events";
 @import "blocks/event-card";
@@ -61,13 +61,26 @@
 @import "blocks/modal-full";
 @import "blocks/input-box";
 @import "blocks/custom-radio-box";
+@import "blocks/as-modal-box";
+@import "blocks/as-modal";
+@import "blocks/user-bar";
+@import "blocks/user-dropdown";
+@import "blocks/as-badge";
+@import "blocks/lang-dropdown";
+@import "blocks/search-dropdown";
+@import "blocks/notify-dropdown";
+@import "blocks/profile-welcome-section";
+@import "blocks/personal-data";
+@import "blocks/application-section";
+@import "blocks/application-block";
 
 html, body {
-  font-size: 62.5%;
-  font-family: $base-font;
+    font-size: 62.5%;
+    font-family: $base-font !important;
+    background-color: #fafafa;
 }
 
 img {
-  max-width: 100%;
-  height: auto;
+    max-width: 100%;
+    height: auto;
 }

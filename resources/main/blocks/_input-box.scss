@@ -1,8 +1,21 @@
 .input-box {
 
+    $e: &;
+
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    &--error {
+        #{$e}__label {
+            color: $elem-color;
+        }
+
+        #{$e}__input {
+            color: $elem-color;
+            margin-bottom: 5px;
+        }
+    }
 
     &__label {
         display: block;
@@ -18,7 +31,7 @@
         border-radius: 7px;
 
         @include text-style(1.6rem, 400, #181515);
-        padding: 0 20px;
+        padding: 0 50px 0 20px;
 
         -webkit-appearance: none;
     }
@@ -34,10 +47,6 @@
         padding: 13px 20px;
 
         resize: none;
-    }
-
-    &__select {
-        position: relative;
     }
 
     &__select-icon {
@@ -56,5 +65,28 @@
         &:not(:last-child) {
             margin-right: 24px;
         }
+    }
+
+    &__pass-eye {
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        transform: translateY(-50%);
+    }
+
+    &__error-text {
+        @include text-style(1.2rem, 400, $elem-color);
+        line-height: 14.6px;
+    }
+
+    &__container {
+        position: relative;
+    }
+
+    &__edit {
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        transform: translateY(-50%);
     }
 }
