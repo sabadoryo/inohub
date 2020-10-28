@@ -1,0 +1,39 @@
+.application-block {
+
+    &__row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 28px;
+    }
+
+    &__heading {
+        @include text-style(1.6rem, 700, #181515);
+        line-height: 19.5px;
+    }
+
+    &__link-box {
+        display: flex;
+        align-items: center;
+    }
+
+    &__edit-icon {
+        margin-right: 7px;
+    }
+
+    &__link:link,
+    &__link:visited {
+        @include text-style(1.4rem, 500, $elem-color);
+        line-height: 17px;
+    }
+
+    &__input-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 24px;
+    }
+
+    &__input-box {
+
+    }
+}

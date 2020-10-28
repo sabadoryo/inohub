@@ -15,6 +15,10 @@
         pointer-events: none;
     }
 
+    &--sm {
+        padding: 12px 15px;
+    }
+
     &--lg {
         padding: 12px 45px;
     }
@@ -65,5 +69,40 @@
 
     svg {
         margin-left: 15px;
+    }
+}
+
+.button-back {
+
+    $e: &;
+
+    padding: 8px 15px;
+    background-color: #ffffff;
+    border-radius: 7px;
+
+    display: flex;
+    align-items: center;
+
+    @include text-style(1.6rem, 500, $elem-color);
+
+    &:focus {
+        outline: none !important;
+    }
+
+    &__icon {
+        margin-right: 10px;
+        flex-shrink: 0;
+    }
+
+    &--grey {
+        font-size: 1.4rem;
+        background-color: #FAFAFA;
+        color: #181515;
+    }
+
+    &--rotate {
+        #{$e}__icon {
+            transform: rotate(180deg);
+        }
     }
 }

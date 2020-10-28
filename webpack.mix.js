@@ -7,7 +7,8 @@ mix.sass('resources/main/ui-components.scss', 'public/css');
 
 mix.copy('node_modules/admin-lte/dist/css/adminlte.min.css', 'public/css');
 mix.copy('node_modules/grapesjs/dist/css/grapes.min.css', 'public/css');
-mix.copy('resources/img', 'public/img', false);
+// mix.copy('resources/img', 'public/img', false);
+
 
 mix.js('resources/js/app.js', 'public/js').extract([
     'lodash',
@@ -24,7 +25,8 @@ mix.js('resources/js/app.js', 'public/js').extract([
     'sweetalert2',
     'moment',
     'overlayscrollbars/js/jquery.overlayScrollbars',
-    '@cgross/angular-notify'
+    '@cgross/angular-notify',
+    'textangular',
 ]).sourceMaps();
 
 if (mix.inProduction()) {

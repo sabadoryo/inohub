@@ -33,6 +33,12 @@ class EventsController extends Controller
     {
         $query = Event::query();
     
+        if ($request->status == 'draft') {
+            $query->where('status', $request->status);
+        } elseif ($request->status == 'published') {
+            $query->where('status', $request->status);
+        }
+    
         if ($request->name) {
             $query->where(
                 'name',
@@ -199,6 +205,7 @@ class EventsController extends Controller
         
         $event->update([
             'status' => 'published',
+            'published_at' => Carbon::now(),
         ]);
     }
 }

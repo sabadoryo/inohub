@@ -89,6 +89,13 @@ Route::group([
     Route::post('events/{id}/update-forms', 'EventsController@updateForms');
     Route::post('events/{id}/update-forms-list', 'EventsController@updateFormsList');
     Route::post('events/{id}/publish', 'EventsController@publish');
+    
+    Route::get('news', 'NewsController@index');
+    Route::get('news/get-list', 'NewsController@getList');
+    Route::post('news', 'NewsController@store');
+    Route::get('news/{id}/main', 'NewsController@mainForm');
+    Route::post('news/{id}/update-main', 'NewsController@updateMain');
+    Route::post('news/{id}/publish', 'NewsController@publish');
 
     Route::get('applications', 'ApplicationsController@index');
     Route::get('applications/get-list', 'ApplicationsController@getList');
@@ -135,4 +142,8 @@ Route::get('profile-page-2', function () {
 
 Route::get('profile-page-3', function () {
     return view('profile-page-3');
+});
+
+Route::get('modal-full', function () {
+    return view('modal-full');
 });

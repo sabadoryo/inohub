@@ -1,22 +1,11 @@
 <form class="mb-3" ng-submit="$ctrl.filter()">
-
   <div class="form-row">
-
     <div class="col-3">
       <input type="text"
              class="form-control"
              placeholder="Название"
              ng-model="$ctrl.title">
     </div>
-
-    <div class="col-3">
-      <select ng-model="$ctrl.category"
-              ng-options="c as c.title for c in $ctrl.categories"
-              class="form-control">
-        <option value="">Выберите категорию</option>
-      </select>
-    </div>
-
     <div class="col-3">
       <select ng-model="$ctrl.status" class="form-control">
         <option value="">Все</option>
@@ -24,25 +13,19 @@
         <option value="published">Опубликован</option>
       </select>
     </div>
-
     <div class="col-auto">
-
-      <button type="submit" class="btn btn-primary">Поиск</button>
-
+      <button type="submit" class="btn btn-primary" ng-disabled="$ctrl.loading">Поиск</button>
       <button type="button" class="btn btn-secondary" ng-click="$ctrl.reset()">Сбросить</button>
-
     </div>
-
   </div>
-
 </form>
 
 <div class="mb-3 clearfix">
   <div class="float-left">
-    Всего: <b>{{ $ctrl.total }}</b> {{ $ctrl.total | plural : ['программа', 'программы', 'программ'] }}
+    Всего: <b>{{$ctrl.total}}</b> {{$ctrl.total | plural : ['новость', 'новости']}}
   </div>
   <a href="" ng-click="$ctrl.openCreateModal()" class="btn btn-primary float-right">
-    Добавить программу
+    Добавить новость
   </a>
 </div>
 
@@ -51,22 +34,20 @@
   <tr>
     <th>№</th>
     <th>Название</th>
-    <th>Категория</th>
     <th>Статус</th>
     <th></th>
   </tr>
   </thead>
-  <tr ng-repeat="program in $ctrl.programs track by $index">
-    <td>{{ program.id }}</td>
-    <td>{{ program.title }}</td>
-    <td>{{ program.category.title }}</td>
-    <td ng-switch="program.status">
+  <tr ng-repeat="val in $ctrl.news track by $index">
+    <td>{{val.id}}</td>
+    <td>{{val.title}}</td>
+    <td ng-switch="val.status">
       <div ng-switch-when="draft">Черновик</div>
       <div ng-switch-when="published">Опубликован</div>
     </td>
     <td class="text-center">
       <a href=""
-         ng-href="/control-panel/programs/{{program.id}}/main"
+         ng-href="/control-panel/news/{{val.id}}/main"
          class="btn btn-primary btn-xs">
         <i class="fa fa-pen"></i>
       </a>
