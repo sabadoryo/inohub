@@ -174,9 +174,39 @@
                     Наша команда
                 </h2>
 
-                <div class="swiper-container">
+                <div class="swiper-container swiper-4-slides">
 
                     <div class="swiper-wrapper">
+
+                        <div class="swiper-slide team-card">
+                            <img src="/img/team-member.png" alt="" class="team-card__img">
+                            <h5 class="team-card__name">Самал Турсунова</h5>
+                            <h5 class="team-card__job">Руководитель</h5>
+                        </div>
+
+                        <div class="swiper-slide team-card">
+                            <img src="/img/team-member.png" alt="" class="team-card__img">
+                            <h5 class="team-card__name">Самал Турсунова</h5>
+                            <h5 class="team-card__job">Руководитель</h5>
+                        </div>
+
+                        <div class="swiper-slide team-card">
+                            <img src="/img/team-member.png" alt="" class="team-card__img">
+                            <h5 class="team-card__name">Самал Турсунова</h5>
+                            <h5 class="team-card__job">Руководитель</h5>
+                        </div>
+
+                        <div class="swiper-slide team-card">
+                            <img src="/img/team-member.png" alt="" class="team-card__img">
+                            <h5 class="team-card__name">Самал Турсунова</h5>
+                            <h5 class="team-card__job">Руководитель</h5>
+                        </div>
+
+                        <div class="swiper-slide team-card">
+                            <img src="/img/team-member.png" alt="" class="team-card__img">
+                            <h5 class="team-card__name">Самал Турсунова</h5>
+                            <h5 class="team-card__job">Руководитель</h5>
+                        </div>
 
                         <div class="swiper-slide team-card">
                             <img src="/img/team-member.png" alt="" class="team-card__img">

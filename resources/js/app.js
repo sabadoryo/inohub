@@ -133,3 +133,4 @@ require('./components/smart-store-solution-companies-create/smart-store-solution
 require('./components/smart-store-solution-companies-edit/smart-store-solution-companies-edit');
 require('./components/smart-store-task-companies-create/smart-store-task-companies-create');
 require('./components/smart-store-task-companies-edit/smart-store-task-companies-edit');
+

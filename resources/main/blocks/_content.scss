@@ -9,4 +9,21 @@
     &__tabs {
 
     }
+
+    &__row {
+        display: flex;
+        justify-content: space-between;
+
+        & > * {
+            flex-shrink: 0;
+        }
+    }
+
+    &__right {
+        width: 304px;
+    }
+
+    &__left {
+        margin-left: 80px;
+    }
 }
