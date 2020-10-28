@@ -14,34 +14,35 @@ function controller($http, Auth, moment, $uibModal, Upload) {
 
     let $ctrl = this;
 
-    $ctrl.message = null;
+    $ctrl.message = '';
+    $ctrl.attachedFiles = [];
 
     $ctrl.$onInit = function () {
         $ctrl.user = Auth.user();
         console.log($ctrl.app);
     };
 
-    $ctrl.sendMessage = () => {
-        $http
-            .post(`/applications/${$ctrl.app.id}/send-message`, {
-                message: $ctrl.message
-            })
-            .then(
-                function (res) {
-                    $ctrl.app.messages.push({
-                        id: res.data.id,
-                        user: $ctrl.user,
-                        message: $ctrl.message,
-                        created_at: moment(),
-                    });
-
-                    $ctrl.message = null;
-                },
-                function () {
-
-                }
-            )
-    };
+    // $ctrl.sendMessage = () => {
+    //     $http
+    //         .post(`/applications/${$ctrl.app.id}/send-message`, {
+    //             message: $ctrl.message
+    //         })
+    //         .then(
+    //             function (res) {
+    //                 $ctrl.app.messages.push({
+    //                     id: res.data.id,
+    //                     user: $ctrl.user,
+    //                     message: $ctrl.message,
+    //                     created_at: moment(),
+    //                 });
+    //
+    //                 $ctrl.message = null;
+    //             },
+    //             function () {
+    //
+    //             }
+    //         )
+    // };
 
     $ctrl.toggleEditing = function (appForm) {
         appForm.isEditing = !appForm.isEditing;
@@ -91,6 +92,7 @@ function controller($http, Auth, moment, $uibModal, Upload) {
     };
 
     $ctrl.updateForm = function (appForm) {
+        console.log(appForm);
 
         let fields = [];
 
@@ -98,13 +100,13 @@ function controller($http, Auth, moment, $uibModal, Upload) {
             if (field.form_field.type === 'radio') {
                 fields.push({
                     id: field.id,
-                    value: field.editValueOtherOption ? field.editValueOtherOption : field.value,
+                    value: field.value === 'Свой вариант' ? field.editValueOtherOption : field.value,
                     type: field.form_field.type,
                 });
             } else if (field.form_field.type === 'select') {
                 fields.push({
                     id: field.id,
-                    value: field.editValueOtherOption ? field.editValueOtherOption : field.editValue.val,
+                    value: field.editValue.val === 'Свой вариант' ? field.editValueOtherOption : field.editValue.val,
                     type: field.form_field.type,
                 });
             } else if (field.form_field.type === 'checkbox') {
@@ -152,7 +154,7 @@ function controller($http, Auth, moment, $uibModal, Upload) {
                     $ctrl.app.actions.unshift({
                         id: res.data.action_id,
                         user: Auth.user(),
-                        name: 'update',
+                        name: 'application_updated',
                         additional_data: res.data.changes,
                         created_at: moment(),
                     });
@@ -165,21 +167,29 @@ function controller($http, Auth, moment, $uibModal, Upload) {
 
     $ctrl.sendMessage = () => {
 
-        $http
-            .post(`/cabinet/applications/${$ctrl.app.id}/send-message`, {
-                message: $ctrl.message
+        Upload
+            .upload({
+                url: `/cabinet/applications/${$ctrl.app.id}/send-message`,
+                data: {
+                    message: $ctrl.message,
+                    attachedFiles: $ctrl.attachedFiles,
+                }
             })
             .then(
                 res => {
                     $ctrl.app.actions.unshift({
                         id: res.data.action_id,
                         user: Auth.user(),
-                        name: 'send message',
+                        name: 'application_user_message',
                         message: $ctrl.message,
                         created_at: moment(),
+                        additional_data: res.data,
                     });
 
-                    $ctrl.message = null;
+                    console.log(res);
+
+                    $ctrl.message = '';
+                    $ctrl.attachedFiles = [];
                 },
                 err => {
 
@@ -213,5 +223,9 @@ function controller($http, Auth, moment, $uibModal, Upload) {
 
                 }
             );
+    }
+
+    $ctrl.removeAttachedFile = function (index) {
+        $ctrl.attachedFiles.splice(index, 1);
     }
 }

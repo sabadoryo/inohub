@@ -75,7 +75,8 @@ class ApplicationsController extends Controller
 
         $app->actions()->create([
             'user_id' => \Auth::user()->id,
-            'name' => 'sent'
+            'name' => 'application_sent',
+            'type' => 'action',
         ]);
 
         return [];
