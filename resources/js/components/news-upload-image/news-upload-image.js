@@ -17,6 +17,14 @@ function controller() {
 	let $ctrl = this;
 	
 	$ctrl.$onInit = function () {
-        //
+        $ctrl.croppedImage = null;
+        $ctrl.image = null;
+        $ctrl.invalidImg = null;
+
+        $ctrl.save = function () {
+            $ctrl.close({
+                $value: $ctrl.image
+            });
+        };
     };
 }
