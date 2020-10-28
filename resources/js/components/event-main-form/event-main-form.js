@@ -24,29 +24,27 @@ function controller($http, Upload, moment, notify, $uibModal) {
     };
 
 	$ctrl.openToPublishModal = () => {
-        $uibModal
-            .open({
-                component: 'eventToPublishModal',
-                resolve: {
-                    event: function () {
-                        return $ctrl.event;
-                    }
-                }
-            })
-            .result
-            .then(
-                res => {
-                    window.Swal.fire({
-                        icon: 'success',
-                        title: 'Опубликовано',
-                        timer: 2000,
-                        showConfirmButton: false,
-                    });
-                },
-                err => {
-
-                }
-            );
+        Swal.fire({
+            title: 'Вы уверены?',
+            text: "Данная мероприятие сразу же появиться в ленте у пользователей",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Да',
+            cancelButtonText: 'Отмена'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $http
+                    .post(`/control-panel/events/${$ctrl.event.id}/publish`)
+                    .then(
+                        function () {
+                            Swal.fire('Успешно опубликована', '', 'success');
+                            $ctrl.event.status = 'published';
+                        }
+                    );
+            }
+        })
     };
 
 	$ctrl.save = () => {
