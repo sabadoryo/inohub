@@ -151,7 +151,7 @@ const buildConstructor = elemId => {
 
     // containers
     editor.DomComponents.addType('ui-main-component', {
-        extends: 'text',
+        extend: 'text',
         model: {
             defaults: {
                 tagName: 'main',
@@ -193,8 +193,8 @@ const buildConstructor = elemId => {
                                 </svg>
                             </div>
 
-                            <button class="ui-header-1__login-btn button button--lg">
-                                Подать заявку
+                            <button data-gjs-type="ui-button-red-md-component" class="ui-header-1__login-btn button button--lg">
+
                             </button>
                         </div>
                     </div>
@@ -208,7 +208,7 @@ const buildConstructor = elemId => {
     editor.DomComponents.addType('ui-section-80vh-component', {
         model: {
             defaults: {
-                droppable: '.ui-container, img',
+                droppable: '.ui-container-h100, .ui-container-fix, img',
                 draggable: 'main',
                 attributes: {
                     class: 'ui-section-80vh main-droppable'
@@ -217,13 +217,48 @@ const buildConstructor = elemId => {
             }
         }
     });
-    editor.DomComponents.addType('ui-container-component', {
+    editor.DomComponents.addType('ui-section-component', {
+        model: {
+            defaults: {
+                droppable: '.ui-container-h100, .ui-container-fix, img',
+                draggable: 'main',
+                attributes: {
+                    class: 'ui-section main-droppable'
+                },
+                tagName: 'section',
+            }
+        }
+    });
+    editor.DomComponents.addType('ui-section-black-component', {
+        model: {
+            defaults: {
+                droppable: '.ui-container-h100, .ui-container-fix, img',
+                draggable: 'main',
+                attributes: {
+                    class: 'ui-section-black main-droppable'
+                },
+                tagName: 'section',
+            }
+        }
+    });
+    editor.DomComponents.addType('ui-container-h100-component', {
         model: {
             defaults: {
                 droppable: '*',
                 draggable: 'section',
                 attributes: {
-                    class: 'ui-container'
+                    class: 'ui-container-h100'
+                }
+            }
+        }
+    });
+    editor.DomComponents.addType('ui-container-fix-component', {
+        model: {
+            defaults: {
+                droppable: '*',
+                draggable: 'section',
+                attributes: {
+                    class: 'ui-container-fix'
                 }
             }
         }
@@ -300,7 +335,7 @@ const buildConstructor = elemId => {
         model: {
             defaults: {
                 tagName: 'div',
-                draggable: '.ui-container',
+                draggable: '.ui-container-h100, *',
                 attributes: {
                     class: 'ui-grid-2'
                 },
@@ -315,7 +350,7 @@ const buildConstructor = elemId => {
         model: {
             defaults: {
                 tagName: 'div',
-                draggable: '.ui-container',
+                draggable: '.ui-container-h100, *',
                 attributes: {
                     class: 'ui-grid-3'
                 },
@@ -331,7 +366,7 @@ const buildConstructor = elemId => {
         model: {
             defaults: {
                 tagName: 'div',
-                draggable: '.ui-container',
+                draggable: '.ui-container-h100, *',
                 attributes: {
                     class: 'ui-grid-4'
                 },
@@ -363,7 +398,6 @@ const buildConstructor = elemId => {
         extend: 'text',
         model: {
             defaults: {
-                type: 'textnode',
                 components: `
                     Astana hub heading program slim shady
                 `,
@@ -502,80 +536,120 @@ const buildConstructor = elemId => {
         }
     })
 
+    // cards
+    editor.DomComponents.addType('ui-card-column-component', {
+        model: {
+            defaults: {
+                tagName: 'div',
+                attributes: {
+                    class: 'ui-card-column'
+                },
+                components: `
+                    <img data-gjs-type="image" src="/img/icons/lamp.svg" alt="" class="ui-card-column__icon">
+
+                    <div class="ui-card-column__title">
+                        С конкурентоспособной идеей
+                    </div>
+
+                    <div class="ui-card-column__subtitle">
+                        В стартап-индустрии мы называем это "MCI" - максимально конкурентоспособная идея, надобность
+                        которой уже прощупана среди целевых клиентов. Идея должна быть осуществимой и иметь
+                        потенциал на развитие.
+                    </div>
+                `
+            }
+        }
+    });
+
+    // steps
+    editor.DomComponents.addType('ui-step-component', {
+        model: {
+            defaults: {
+                tagName: 'div',
+                attributes: {
+                    class: 'ui-step'
+                },
+                components: `
+                    <div class="ui-step__number">
+                        01
+                    </div>
+                    <div class="ui-step__text">
+                        Сформулируй идею
+                    </div>
+                `
+            }
+        }
+    });
+
+    // buttons
+    editor.DomComponents.addType('ui-button-red-md-component', {
+        extend: 'link',
+        model: {
+            defaults: {
+                tagName: 'div',
+                attributes: {
+                    'data-grapes-lang-kz' : '',
+                    'data-grapes-lang-en' : '',
+                    'data-grapes-lang-ru' : '',
+                    class: 'text-lang ui-button-red-md'
+                },
+                components: `Подать заявку`,
+                traits: [
+                    // Strings are automatically converted to text types
+                    // 'name', // Same as: { type: 'text', name: 'name' }
+                    {
+                        type: 'text',
+                        name: 'data-grapes-lang-kz',
+                        label: 'Lang KZ'
+                    },
+                    {
+                        type: 'text',
+                        name: 'data-grapes-lang-en',
+                        label: 'Lang EN'
+                    }
+                ],
+            }
+        }
+    });
+
+    // socials
+    editor.DomComponents.addType('ui-socials-component', {
+        model: {
+            defaults: {
+                tagName: 'div',
+                attributes: {
+                    class: 'ui-socials'
+                },
+                components: `
+                    <a href="#" class="ui-socials__item">
+                        <img src="/img/icons/fb-icon.png" alt="">
+                    </a>
+
+                    <a href="#" class="ui-socials__item">
+                        <img src="/img/icons/linkeddn-icon.png" alt="">
+                    </a>
+
+                    <a href="#" class="ui-socials__item">
+                        <img src="/img/icons/inst-icon.png" alt="">
+                    </a>
+
+                    <a href="#" class="ui-socials__item">
+                        <img src="/img/icons/tg-icon.png" alt="">
+                    </a>
+
+                    <a href="#" class="ui-socials__item">
+                        <img src="/img/icons/youtube-icon.png" alt="">
+                    </a>
+                `
+            }
+        }
+    });
 
     // editor.CssComposer.setRule('.submit-button', {
     //
     // });
 
     // BLOCKS
-    // texts and lang
-    editor.BlockManager.add('lang-switcher-block', {
-        label: 'Language Switcher',
-        category: 'Util',
-        content: {
-            type: 'lang-switcher-component',
-            script: function () {
-                document.getElementById('lang-kz-button').addEventListener('click', e => {
-                    console.log('kazakh')
-                    document.querySelectorAll('.text-lang').forEach(elem => {
-
-                        if (!elem.getAttribute('data-grapes-lang-ru'))
-                            elem.setAttribute('data-grapes-lang-ru', elem.innerHTML);
-
-                        elem.innerHTML = elem.getAttribute('data-grapes-lang-kz');
-                    })
-                });
-
-                document.getElementById('lang-en-button').addEventListener('click', e => {
-                    document.querySelectorAll('.text-lang').forEach(elem => {
-
-                        if (!elem.getAttribute('data-grapes-lang-ru'))
-                            elem.setAttribute('data-grapes-lang-ru', elem.innerHTML);
-
-                        elem.innerHTML = elem.getAttribute('data-grapes-lang-en');
-                    })
-                });
-
-                document.getElementById('lang-ru-button').addEventListener('click', e => {
-                    document.querySelectorAll('.text-lang').forEach(elem => {
-
-                        if (!elem.getAttribute('data-grapes-lang-ru'))
-                            elem.setAttribute('data-grapes-lang-ru', elem.innerHTML);
-
-                        elem.innerHTML = elem.getAttribute('data-grapes-lang-ru');
-                    })
-                });
-            }
-        }
-    });
-    editor.BlockManager.add('ui-heading-white-block', {
-        label: 'Text Heading White',
-        category: 'Text',
-        content: {
-            type: 'ui-heading-white-component'
-        }
-    });
-    editor.BlockManager.add('ui-heading-black-block', {
-        label: 'Text Heading Black',
-        category: 'Text',
-        content: {
-            type: 'ui-heading-black-component'
-        }
-    });
-    editor.BlockManager.add('ui-paragraph-white-block', {
-        label: 'Text Paragraph White',
-        category: 'Text',
-        content: {
-            type: 'ui-paragraph-white-component'
-        }
-    });
-    editor.BlockManager.add('ui-paragraph-black-block', {
-        label: 'Text Paragraph Black',
-        category: 'Text',
-        content: {
-            type: 'ui-paragraph-black-component'
-        }
-    });
 
     //TEST
     editor.BlockManager.add('ui-main-container-block', {
@@ -828,11 +902,32 @@ const buildConstructor = elemId => {
             type: 'ui-section-80vh-component'
         }
     });
-    editor.BlockManager.add('ui-container-block', {
-        label: 'UI Container',
+    editor.BlockManager.add('ui-section-block', {
+        label: 'UI Section',
+        category: 'UI Section',
+        content: {
+            type: 'ui-section-component'
+        }
+    });
+    editor.BlockManager.add('ui-section-black-block', {
+        label: 'UI Section Black',
+        category: 'UI Section',
+        content: {
+            type: 'ui-section-black-component'
+        }
+    });
+    editor.BlockManager.add('ui-container-h100-block', {
+        label: 'UI Container h100',
         category: 'UI Container',
         content: {
-            type: 'ui-container-component'
+            type: 'ui-container-h100-component'
+        }
+    });
+    editor.BlockManager.add('ui-container-fix-block', {
+        label: 'UI Container Fix',
+        category: 'UI Container',
+        content: {
+            type: 'ui-container-fix-component'
         }
     });
     editor.BlockManager.add('ui-bg-img-block', {
@@ -840,7 +935,8 @@ const buildConstructor = elemId => {
         category: 'UI Image',
         content: {
             attributes: {
-                class: 'ui-bg-img'
+                class: 'ui-bg-img',
+                'data-gjs-draggable': '.ui-container-h100, .ui-container-fix'
             },
             type: 'image'
         }
@@ -913,6 +1009,104 @@ const buildConstructor = elemId => {
         category: 'UI Grid',
         content: {
             type: 'ui-grid-4-component'
+        }
+    });
+    // text and lang
+    editor.BlockManager.add('lang-switcher-block', {
+        label: 'Language Switcher',
+        category: 'Util',
+        content: {
+            type: 'lang-switcher-component',
+            script: function () {
+                document.getElementById('lang-kz-button').addEventListener('click', e => {
+                    console.log('kazakh')
+                    document.querySelectorAll('.text-lang').forEach(elem => {
+
+                        if (!elem.getAttribute('data-grapes-lang-ru'))
+                            elem.setAttribute('data-grapes-lang-ru', elem.innerHTML);
+
+                        elem.innerHTML = elem.getAttribute('data-grapes-lang-kz');
+                    })
+                });
+
+                document.getElementById('lang-en-button').addEventListener('click', e => {
+                    document.querySelectorAll('.text-lang').forEach(elem => {
+
+                        if (!elem.getAttribute('data-grapes-lang-ru'))
+                            elem.setAttribute('data-grapes-lang-ru', elem.innerHTML);
+
+                        elem.innerHTML = elem.getAttribute('data-grapes-lang-en');
+                    })
+                });
+
+                document.getElementById('lang-ru-button').addEventListener('click', e => {
+                    document.querySelectorAll('.text-lang').forEach(elem => {
+
+                        if (!elem.getAttribute('data-grapes-lang-ru'))
+                            elem.setAttribute('data-grapes-lang-ru', elem.innerHTML);
+
+                        elem.innerHTML = elem.getAttribute('data-grapes-lang-ru');
+                    })
+                });
+            }
+        }
+    });
+    editor.BlockManager.add('ui-heading-white-block', {
+        label: 'Text Heading White',
+        category: 'Text',
+        content: {
+            type: 'ui-heading-white-component'
+        }
+    });
+    editor.BlockManager.add('ui-heading-black-block', {
+        label: 'Text Heading Black',
+        category: 'Text',
+        content: {
+            type: 'ui-heading-black-component'
+        }
+    });
+    editor.BlockManager.add('ui-paragraph-white-block', {
+        label: 'Text Paragraph White',
+        category: 'Text',
+        content: {
+            type: 'ui-paragraph-white-component'
+        }
+    });
+    editor.BlockManager.add('ui-paragraph-black-block', {
+        label: 'Text Paragraph Black',
+        category: 'Text',
+        content: {
+            type: 'ui-paragraph-black-component'
+        }
+    });
+    // card
+    editor.BlockManager.add('ui-card-column-block', {
+        label: 'Card Column',
+        category: 'Card',
+        content: {
+            type: 'ui-card-column-component'
+        }
+    });
+    // step
+    editor.BlockManager.add('ui-step-block', {
+        label: 'UI Step',
+        category: 'Card',
+        content: {
+            type: 'ui-step-component'
+        }
+    });
+    editor.BlockManager.add('ui-button-red-md-block', {
+        label: 'Button Red',
+        category: 'Buttons',
+        content: {
+            type: 'ui-button-red-md-component'
+        }
+    });
+    editor.BlockManager.add('ui-socials-block', {
+        label: 'Socials',
+        category: 'Util',
+        content: {
+            type: 'ui-socials-component'
         }
     });
 

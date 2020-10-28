@@ -1,3 +1,6 @@
+.ui-grid-2, .ui-grid-3, .ui-grid-4 {
+    align-self: normal;
+}
 .ui-grid-2 {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

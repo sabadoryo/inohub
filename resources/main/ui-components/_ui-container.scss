@@ -4,9 +4,18 @@
     margin-right: auto;
 }
 
-.ui-container {
+.ui-container-h100 {
     width: 1200px;
     height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    z-index: 2;
+}
+
+.ui-container-fix {
+    width: 1200px;
+    min-height: 100px;
     margin-left: auto;
     margin-right: auto;
     position: relative;

@@ -10,9 +10,9 @@ angular
             program: '<',
         }
     });
-    
+
 function controller() {
- 
+
 	let $ctrl = this;
 
 	let editor;
@@ -38,4 +38,22 @@ function controller() {
         iframe.contentWindow.document.write($ctrl.passportHtml);
         iframe.contentWindow.document.close();
     };
+
+    $ctrl.save = () => {
+        $ctrl.passportHtml = `
+                <html>
+                    <head>
+                        <link rel="stylesheet" href="/css/style.css">
+                        <link rel="stylesheet" href="/css/ui-components.css">
+                    </head>
+                    <body>
+                        ${editor.getHtml()}
+                    </body>
+                </html>
+            `;
+        let iframe = document.getElementById('passportResult');
+        iframe.contentWindow.document.open('text/htmlreplace');
+        iframe.contentWindow.document.write($ctrl.passportHtml);
+        iframe.contentWindow.document.close();
+    }
 }

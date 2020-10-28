@@ -21,7 +21,7 @@ mix.js('resources/js/app.js', 'public/js').extract([
     'angular-filter',
     'angular-scroll',
     'ng-file-upload',
-    'sweetalert2',
+    'sweetalert2',we
     'moment',
     'overlayscrollbars/js/jquery.overlayScrollbars',
     '@cgross/angular-notify'
