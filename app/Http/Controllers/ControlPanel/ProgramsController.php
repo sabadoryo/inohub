@@ -34,12 +34,6 @@ class ProgramsController extends Controller
     public function getList(Request $request)
     {
         $query = Program::query();
-    
-        if ($request->status == 'draft') {
-            $query->where('status', $request->status);
-        } elseif ($request->status == 'published') {
-            $query->where('status', $request->status);
-        }
 
         if ($request->title) {
             $query->where(

@@ -16,7 +16,7 @@ function controller($http, $uibModal) {
 
 	$ctrl.page = 1;
     $ctrl.title = null;
-    $ctrl.status = 'draft';
+    $ctrl.status = null;
     $ctrl.category = null;
 
 	$ctrl.$onInit = function () {
