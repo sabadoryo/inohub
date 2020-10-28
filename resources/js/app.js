@@ -44,7 +44,7 @@ angular
     }])
     .run(['$templateCache', function ($templateCache) {
         $templateCache.put('b4-pagination', require('./templates/b4-pagination.html'));
-        $templateCache.put("custom-modal", "<div class='modal-dialog'><div uib-modal-transclude></div></div>");
+        $templateCache.put("custom-modal", "<div class=\"as-modal {{size ? 'as-modal--' + size : ''}}\" uib-modal-transclude></div>");
     }]);
 
 

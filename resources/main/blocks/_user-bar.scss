@@ -1,5 +1,5 @@
 .user-bar {
-
+    position: relative;
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -42,12 +42,5 @@
 
     &__toggle {
 
-    }
-
-    &__dropdown {
-        top: 43px !important;
-        right: 0 !important;
-        left: unset !important;
-        margin: 0 !important;
     }
 }

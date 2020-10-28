@@ -32,6 +32,9 @@ function controller(user, permissions, roles, $uibModal, $q, $rootScope) {
         $uibModal.open({
             component: 'authModal',
             windowTemplateUrl: 'custom-modal',
+            backdropClass: 'auth-backdrop',
+            windowClass: 'auth-modal-window',
+            size: 'sm'
         });
     };
 }

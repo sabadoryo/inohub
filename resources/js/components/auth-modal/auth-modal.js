@@ -77,7 +77,7 @@ function controller($http, $rootScope, Upload) {
                 function (response) {
                     $ctrl.register.step = 4;
                     $rootScope.$emit('UserAuthenticated', response.data);
-                    $ctrl.close();
+                    // $ctrl.close();
                 },
                 function (error) {
 

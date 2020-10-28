@@ -74,7 +74,7 @@
             <button class="as-modal__button button button--w100">Войти</button>
 
             <button class="as-modal__button button button--grey button--w100">
-                <Пропустить></Пропустить>
+                Пропустить
             </button>
 
         </form>
