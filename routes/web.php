@@ -25,7 +25,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('create', 'PostsController@create');
         Route::post('', 'PostsController@store');
     });
-    
+
     Route::get('register-project', 'RegisterProjectController@form');
     Route::post('register-project', 'RegisterProjectController@store');
 });
@@ -137,7 +137,7 @@ Route::group([
     Route::get('posts', 'PostsController@index');
     Route::get('posts/get-list', 'PostsController@getList');
     Route::post('posts/{id}/update-status', 'PostsController@updateStatus');
-    
+
     Route::get('projects', 'ProjectsController@index');
     Route::get('projects/get-list', 'ProjectsController@getList');
     Route::post('projects/{id}/update-status', 'ProjectsController@updateStatus');
@@ -293,4 +293,20 @@ Route::get('tech-garden-lab-1', function () {
 
 Route::get('tech-garden-lab-2', function () {
     return view('tech-garden-lab-2');
+});
+
+Route::get('regional-page', function () {
+    return view('regional-page');
+});
+
+Route::get('vacation-list', function () {
+    return view('vacation-list');
+});
+
+Route::get('vacation-page', function () {
+    return view('vacation-page');
+});
+
+Route::get('cett-grants', function () {
+    return view('cett-grants');
 });

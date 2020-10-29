@@ -1,0 +1,18 @@
+.event-announcement {
+
+    padding: 25px 30px;
+    background-color: #181515;
+    border-radius: 7px;
+
+    display: flex;
+    align-items: center;
+
+    &__icon {
+        margin-right: 25px;
+    }
+
+    &__text {
+        @include text-style(1.8rem, 600, #ffffff);
+        line-height: 22px;
+    }
+}
