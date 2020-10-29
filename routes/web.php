@@ -10,6 +10,8 @@ Route::get('get-news-list', 'MainPageController@getNewsList');
 Route::get('get-feeds-list', 'MainPageController@getFeedsList');
 Route::get('news/{id}', 'MainPageController@newsPage');
 
+Route::get('select-language/{lang}', 'SelectLanguageController@selectLanguage');
+
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'cabinet', 'middleware' => ['auth']], function () {
         Route::get('', 'CabinetController@profile');
@@ -126,7 +128,7 @@ Route::group([
     Route::get('vacancies/{id}/main', 'VacanciesController@mainForm');
     Route::post('vacancies/{id}/update-main', 'VacanciesController@updateMain');
     Route::post('vacancies/{id}/publish', 'VacanciesController@publish');
-    
+
     Route::get('posts', 'PostsController@index');
     Route::get('posts/get-list', 'PostsController@getList');
     Route::post('posts/{id}/update-status', 'PostsController@updateStatus');

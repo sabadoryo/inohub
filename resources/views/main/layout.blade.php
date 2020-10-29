@@ -68,12 +68,14 @@
 
                         <div class="search-dropdown__subtitle">
                             “Ключевые правила ЭФФЕКТИВНЫХ ПРОДАЖ 2020”
+
                         </div>
                     </div>
                 </a>
             </div>
 
         </div>
+
 
         <div uib-dropdown="" class="header__lang-container">
 
@@ -83,11 +85,10 @@
                     <use xlink:href="/img/icons.svg#toggle"></use>
                 </svg>
             </div>
-
             <ul class="header__lang-dropdown lang-dropdown" uib-dropdown-menu="">
-                <li class="lang-dropdown__item"><a href="#" class="lang-dropdown__link">Қазақша</a></li>
-                <li class="lang-dropdown__item"><a href="#" class="lang-dropdown__link">Русский</a></li>
-                <li class="lang-dropdown__item"><a href="#" class="lang-dropdown__link">English</a></li>
+                <li class="lang-dropdown__item"><a href="/select-language/kk" class="lang-dropdown__link">Қазақша</a></li>
+                <li class="lang-dropdown__item"><a href="/select-language/ru"  class="lang-dropdown__link">Русский</a></li>
+                <li class="lang-dropdown__item"><a href="/select-language/en"  class="lang-dropdown__link">English</a></li>
             </ul>
 
         </div>
@@ -197,6 +198,8 @@
         .constant('AUTH_USER', {!! \Auth::user() !!})
         .constant('AUTH_ROLES', {!! $AUTH_ROLES !!})
         .constant('AUTH_PERMISSIONS', {!! $AUTH_PERMISSIONS !!})
+        .constant('Language', '{{\App::getLocale()}}')
+        .constant('Dictionary', {!! json_encode($dictionary) !!})
 </script>
 
 </body>
