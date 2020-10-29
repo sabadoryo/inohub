@@ -24,7 +24,11 @@ class AstanaHubController extends Controller
 
     public function programs()
     {
-        $bindings = [];
+        $programs = Program::all();
+
+        $bindings = [
+            'programs' => $programs
+        ];
 
         return view('main.astana-hub', [
             'component' => 'astana-hub-programs',

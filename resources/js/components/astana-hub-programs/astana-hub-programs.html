@@ -5,77 +5,10 @@
 
         <div class="programs__list">
 
-            <div class="programs__card program-box program-box--red">
+            <div ng-repeat="program in $ctrl.programList" class="programs__card program-box {{program.color && 'program-box--'+program.color}}">
                 <div class="program-box__circles"></div>
-                <div class="program-box__title">Рейтинг <br>
-                    стартапов
+                <div class="program-box__title">{{program.title}}
                 </div>
-                <button class="program-box__button button button--white">Подробнее</button>
-            </div>
-
-            <div class="programs__card program-box program-box--purple">
-                <div class="program-box__circles"></div>
-                <div class="program-box__title">Региональное <br>
-                    развитие
-                </div>
-                <button class="program-box__button button button--white">Подробнее</button>
-            </div>
-
-            <div class="programs__card program-box program-box--green">
-                <div class="program-box__circles"></div>
-                <div class="program-box__title">Региональные <br>
-                    агенты
-                </div>
-                <button class="program-box__button button button--white">Подробнее</button>
-            </div>
-
-            <div class="programs__card program-box program-box--blue">
-                <div class="program-box__circles"></div>
-                <div class="program-box__title">Incubation <br>
-                    program
-                </div>
-                <button class="program-box__button button button--white">Подробнее</button>
-            </div>
-
-            <div class="programs__card program-box program-box--yellow">
-                <div class="program-box__circles"></div>
-                <div class="program-box__title">Онлайн <br>
-                    наставник
-                </div>
-                <button class="program-box__button button button--white">Подробнее</button>
-            </div>
-
-            <div class="programs__card program-box program-box--beige">
-                <div class="program-box__circles"></div>
-                <div class="program-box__title">Корпоративные <br>
-                    инновации
-                </div>
-                <button class="program-box__button button button--white">Подробнее</button>
-            </div>
-
-            <div class="programs__card program-box program-box--grey-purple">
-                <div class="program-box__circles"></div>
-                <div class="program-box__title">Roadshow</div>
-                <button class="program-box__button button button--white">Подробнее</button>
-            </div>
-
-            <div class="programs__card program-box program-box--dark-red">
-                <div class="program-box__circles"></div>
-                <div class="program-box__title">Школа <br>
-                    инвестора
-                </div>
-                <button class="program-box__button button button--white">Подробнее</button>
-            </div>
-
-            <div class="programs__card program-box">
-                <div class="program-box__circles"></div>
-                <div class="program-box__title">Invest Day</div>
-                <button class="program-box__button button button--white">Подробнее</button>
-            </div>
-
-            <div class="programs__card program-box">
-                <div class="program-box__circles"></div>
-                <div class="program-box__title">Accelerator 9.0</div>
                 <button class="program-box__button button button--white">Подробнее</button>
             </div>
 

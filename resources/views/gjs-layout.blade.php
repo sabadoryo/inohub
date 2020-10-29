@@ -56,7 +56,8 @@
 
             </div>
 
-            <div uib-dropdown="" class="header__lang-container">
+{{--            <div uib-dropdown="" class="header__lang-container" onclick="console.log(document.getElementsByClassName('lang-dropdown'))">--}}
+            <div uib-dropdown="" class="header__lang-container" onclick="document.getElementsByClassName('lang-dropdown')[0].toggleClass('lang-dropdown--show')">
 
                 <div class="header__lang-switcher" uib-dropdown-toggle="">
                     <div class="header__language">Ru</div>
@@ -66,9 +67,27 @@
                 </div>
 
                 <ul class="header__lang-dropdown lang-dropdown" uib-dropdown-menu="">
-                    <li class="lang-dropdown__item"><a href="#" class="lang-dropdown__link">Қазақша</a></li>
-                    <li class="lang-dropdown__item"><a href="#" class="lang-dropdown__link">Русский</a></li>
-                    <li class="lang-dropdown__item"><a href="#" class="lang-dropdown__link">English</a></li>
+                    <li class="lang-dropdown__item" onclick="document.querySelectorAll('.text-lang').forEach(elem => {
+
+                        if (!elem.getAttribute('data-grapes-lang-ru'))
+                            elem.setAttribute('data-grapes-lang-ru', elem.innerHTML);
+
+                        elem.innerHTML = elem.getAttribute('data-grapes-lang-kz');
+                    })"><a href="#" class="lang-dropdown__link">Қазақша</a></li>
+                    <li class="lang-dropdown__item" onclick="document.querySelectorAll('.text-lang').forEach(elem => {
+
+                        if (!elem.getAttribute('data-grapes-lang-ru'))
+                            elem.setAttribute('data-grapes-lang-ru', elem.innerHTML);
+
+                        elem.innerHTML = elem.getAttribute('data-grapes-lang-ru');
+                    })"><a href="#" class="lang-dropdown__link">Русский</a></li>
+                    <li class="lang-dropdown__item" onclick="document.querySelectorAll('.text-lang').forEach(elem => {
+
+                        if (!elem.getAttribute('data-grapes-lang-ru'))
+                            elem.setAttribute('data-grapes-lang-ru', elem.innerHTML);
+
+                        elem.innerHTML = elem.getAttribute('data-grapes-lang-en');
+                    })"><a href="#" class="lang-dropdown__link">English</a></li>
                 </ul>
 
             </div>

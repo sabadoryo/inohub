@@ -79,6 +79,9 @@ require('./auth');
 require('./plural');
 require('./controllers/mainController');
 require('./applicationWindow');
+require('./filters/translate');
+
+require('./services/trans');
 
 require('./components/organizations-control/organizations-control');
 require('./components/organization-create-form/organization-create-form');
@@ -173,6 +176,7 @@ require('./components/post-create/post-create');
 require('./components/posts-control/posts-control');
 require('./components/post-check-modal/post-check-modal');
 require('./components/projects-controller/projects-controller');
+
 require('./components/corp-tasks/corp-tasks');
 require('./components/corp-tasks-create/corp-tasks-create');
 require('./components/corp-tasks-edit/corp-tasks-edit');
