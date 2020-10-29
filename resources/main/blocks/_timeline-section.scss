@@ -1,0 +1,13 @@
+.timeline-section {
+    &__container {
+        @extend %container;
+    }
+
+    &__title {
+        margin-bottom: 60px;
+    }
+
+    &__timeline {
+
+    }
+}
