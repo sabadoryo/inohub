@@ -8,27 +8,23 @@ use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 
-class AdminUsersController extends Controller
+class AdminUsersController extends ControlPanelController
 {
-    public function index(Request $request)
+    public function index()
     {
         $breadcrumb = [
             ['/control-panel', 'Главная'],
-            [null, 'Персонал сайта']
+            [null, 'Сотрудники']
         ];
         
-        $organizations = Organization::all();
-        
-        $roles = Role::all();
+        $roles = $this->organization->roles;
         
         $bindings = [
-            'organizations' => $organizations,
             'roles' => $roles,
-            'role_id' => $request->role_id,
         ];
         
         return view('control-panel.component', [
-            'PAGE_TITLE' => 'Персонал сайта',
+            'PAGE_TITLE' => 'Сотрудники',
             'activePage' => 'admin-users',
             'breadcrumb' => $breadcrumb,
             'component' => 'admin-users-control',
@@ -38,25 +34,12 @@ class AdminUsersController extends Controller
     
     public function getList(Request $request)
     {
-        $query = User::query()->where('is_admin', 0);
-        
+        $query = $this->organization->users();
+
         if ($request->search) {
-            $s = $request->search;
-            
-            $query->where(function ($q) use ($s) {
-                $q->where(
-                    \DB::raw('CONCAT_WS(" ", last_name, first_name)'),
-                    'like',
-                    '%' . $s .'%'
-                )->orWhere('email', $s)
-                    ->orWhere('phone', $s);
-            });
+            $query->search($request->search);
         }
-        
-        if ($request->organization_id) {
-            $query->where('organization_id', $request->organization_id);
-        }
-        
+
         if ($request->role_id) {
             $query->whereHas('roles', function ($q) use ($request) {
                 $q->where('id', $request->role_id);
@@ -65,12 +48,25 @@ class AdminUsersController extends Controller
         
         if ($request->status == 'inactive') {
             $query->where('is_active', false);
-        } else {
+        }
+
+        if ($request->status == 'active') {
             $query->where('is_active', true);
         }
         
-        $result = $query->with(['roles', 'organization'])->withCount('roles')->paginate($request->per_page ?: 30);
+        $result = $query->with(['roles'])->paginate(10);
         
         return $result;
+    }
+    
+    public function updateRoles(Request $request, $id)
+    {
+        $user = User::find($id);
+        $user->update([
+            'is_active' => $request->is_active,
+        ]);
+        $user->syncRoles($request->roles_id);
+        
+        return ['roles' => $user->roles, 'is_active' => $user->is_active];
     }
 }

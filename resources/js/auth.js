@@ -38,4 +38,52 @@ function controller(user, permissions, roles, $uibModal, $q, $rootScope) {
             resolve: options
         });
     };
+
+    this.can = function (ability) {
+        return checkPermission(ability);
+    };
+
+    this.hasRole = function (role) {
+        return checkRole(role);
+    };
+
+    this.canMultiple = function (arr) {
+        for (let i = 0; i < arr.length; i++) {
+            if (checkPermission(arr[i])) {
+                return true;
+            }
+        }
+        return false;
+    };
+
+    this.canMultipleAll = function (arr) {
+        for (let i = 0; i < arr.length; i++) {
+            if (!checkPermission(arr[i])) {
+                return false;
+            }
+        }
+        return true;
+    };
+
+    function checkPermission(ability) {
+        if (Array.isArray(permissions)) {
+            for (let i = 0; i < permissions.length; i++) {
+                if (permissions[i] == ability) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    function checkRole(role) {
+        if (Array.isArray(roles)) {
+            for (let i = 0; i < roles.length; i++) {
+                if (roles[i] == role) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }

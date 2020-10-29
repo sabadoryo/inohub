@@ -10,7 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class ProgramsController extends Controller
+class ProgramsController extends ControlPanelController
 {
     public function index()
     {
@@ -19,13 +19,9 @@ class ProgramsController extends Controller
             [null, 'Программы']
         ];
         
-        $categories = ProgramCategory::all();
-
         return view('control-panel.component', [
             'component' => 'programs-control',
-            'bindings' => [
-                'categories' => $categories,
-            ],
+            'bindings' => [],
             'PAGE_TITLE' => 'Программы',
             'activePage' => 'programs',
             'breadcrumb' => $breadcrumb,
@@ -49,11 +45,7 @@ class ProgramsController extends Controller
             $query->where('status', $request->status);
         }
 
-        if ($request->category_id) {
-            $query->where('program_category_id', $request->category_id);
-        }
-
-        $result = $query->with('category')
+        $result = $query->with('user')
             ->orderBy('id', 'desc')
             ->paginate(10);
 

@@ -54,9 +54,17 @@
 
             <div class="tabs-inner__section smart-store">
 
-                <div class="smart-store__row">
-                    <div class="smart-store__title">
-                        IT – Решения
+                <div class="smart-store__row smart-store__row--mb-18">
+                    <div class="smart-store__left">
+                        <div class="smart-store__title">
+                            IT – Решения
+                        </div>
+                        <button class="smart-store__application-btn button button--xs button--icon-right">
+                            <svg width="20" height="20">
+                                <use href="/img/icons.svg#plus-white"></use>
+                            </svg>
+                            Разместить задачу
+                        </button>
                     </div>
 
                     <a href="#" class="smart-store__link">Смотреть все</a>
@@ -210,10 +218,20 @@
 
             <div class="tabs-inner__section smart-store">
 
-                <div class="smart-store__row">
-                    <div class="smart-store__title">
-                        Промышленные предприятия (задачи)
+                <div class="smart-store__row smart-store__row--mb-18">
+
+                    <div class="smart-store__left">
+                        <div class="smart-store__title">
+                            Промышленные предприятия (задачи)
+                        </div>
+                        <button class="smart-store__application-btn button button--xs button--icon-right">
+                            <svg width="20" height="20">
+                                <use href="/img/icons.svg#plus-white"></use>
+                            </svg>
+                            Разместить задачу
+                        </button>
                     </div>
+
 
                     <a href="#" class="smart-store__link">Смотреть все</a>
                 </div>

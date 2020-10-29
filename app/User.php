@@ -68,9 +68,20 @@ class User extends Authenticatable
         return $this->belongsTo(Organization::class);
     }
 
-
     public function applications()
     {
         return $this->hasMany(Application::class);
+    }
+
+    public function scopeSearch($q, $search)
+    {
+        $q->where(function ($q) use ($search) {
+            $q->where(
+                \DB::raw('CONCAT_WS(" ", last_name, first_name)'),
+                'like',
+                '%' . $search .'%'
+            )->orWhere('email', $search)
+                ->orWhere('phone', $search);
+        });
     }
 }

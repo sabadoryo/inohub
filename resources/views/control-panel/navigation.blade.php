@@ -8,7 +8,7 @@
         <span class="brand-text font-weight-light">TechHub</span>
     </a>
 
-    <ul class="sidebar">
+    <div class="sidebar">
 
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
@@ -26,9 +26,37 @@
                 <li class="nav-item">
                     <a href="/control-panel" class="nav-link {{$activePage == 'control-panel' ? 'active' : ''}}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>
-                            Главная
-                        </p>
+                        <p>Главная</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/control-panel/acl" class="nav-link {{$activePage == 'acl' ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>Настройка ролей</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/control-panel/admin-users" class="nav-link {{$activePage == 'admin-users' ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-users-cog"></i>
+                        <p>Сотрудники</p>
+                    </a>
+                </li>
+
+                @if($currentOrganization->hasModule('astanahub_members'))
+                    <li class="nav-item">
+                        <a href="/control-panel/members" class="nav-link {{$activePage == 'members' ? 'active' : ''}}">
+                            <i class="nav-icon fas fa-copy"></i>
+                            <p>Участники AstanaHub</p>
+                        </a>
+                    </li>
+                @endif
+
+                <li class="nav-item">
+                    <a href="/control-panel/programs" class="nav-link {{$activePage == 'programs' ? 'active' : ''}}">
+                        <i class="nav-icon fab fa-buromobelexperte"></i>
+                        <p>Программы</p>
                     </a>
                 </li>
 
@@ -41,12 +69,6 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a href="/control-panel/programs" class="nav-link {{$activePage == 'programs' ? 'active' : ''}}">
-                        <i class="nav-icon fab fa-buromobelexperte"></i>
-                        <p>Программы</p>
-                    </a>
-                </li>
 
                 <li class="nav-item">
                     <a href="/control-panel/news" class="nav-link {{$activePage == 'news' ? 'active' : ''}}">
@@ -99,12 +121,7 @@
 
 
 
-                <li class="nav-item">
-                    <a href="/control-panel/admin-users" class="nav-link {{$activePage == 'admin-users' ? 'active' : ''}}">
-                        <i class="nav-icon fas fa-users-cog"></i>
-                        <p>Персонал сайта</p>
-                    </a>
-                </li>
+
 
                 <li class="nav-item">
                     <a href="/control-panel/roles" class="nav-link {{$activePage == 'roles' ? 'active' : ''}}">
@@ -113,40 +130,24 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a href="/control-panel/acl" class="nav-link {{$activePage == 'acl' ? 'active' : ''}}">
-                        <i class="nav-icon fas fa-users"></i>
-                        <p>ACL</p>
-                    </a>
-                </li>
 
-                <li class="nav-item has-treeview">
-                    <a href=""
-                       class="nav-link {{$activePage === 'sm-solutions' || $activePage === 'sm-tasks' ? 'active' : ''}}">
-                        <i class="nav-icon fas fa-credit-card"></i>
+
+                @can('applications.show')
+                    <li class="nav-item">
+                        <a href="/control-panel/applications" class="nav-link {{$activePage == 'applications' ? 'active' : ''}}">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>Заявки</p>
+                        </a>
+                    </li>
+                @endcan
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon far fa-plus-square"></i>
                         <p>
-                            Smart Store
-                            <i class="right fas fa-angle-left"></i>
+                            Услуги
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/control-panel/sm/solutions" class="nav-link {{$activePage === 'sm-solutions' ? 'active' : ''}}">
-                                <i class="far fa-circle"></i>
-                                <p>
-                                    ИТ-решения
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/control-panel/sm/tasks" class="nav-link {{$activePage === 'sm-tasks' ? 'active' : ''}}">
-                                <i class="far fa-circle"></i>
-                                <p>
-                                    Задачи
-                                </p>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
 
                 <li class="nav-item has-treeview">
