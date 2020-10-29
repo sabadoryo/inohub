@@ -23,14 +23,6 @@ function controller($http, notify) {
     };
 
 	$ctrl.save = function () {
-	    if (!$ctrl.label) {
-            notify({
-                message: 'Введите название',
-                duration: 2000,
-                classes: 'alert-danger',
-            });
-            return;
-        }
 	    let url = '/control-panel/acl/add-role';
 	    let params = {
 	        label: $ctrl.label,
@@ -44,9 +36,9 @@ function controller($http, notify) {
             });
             $ctrl.close({$value: response.data.role});
         }, function (error) {
-	        if (error.data.errors.name.length) {
+	        if (error.data.errors.label.length) {
                 notify({
-                    message: error.data.errors.name[0],
+                    message: error.data.errors.label[0],
                     duration: 2000,
                     classes: 'alert-danger',
                 });

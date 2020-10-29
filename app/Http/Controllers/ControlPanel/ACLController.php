@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Permission;
 use App\Role;
 use Illuminate\Support\Facades\Auth;
+use Psy\Util\Str;
 
 class ACLController extends ControlPanelController
 {
@@ -41,18 +42,25 @@ class ACLController extends ControlPanelController
     public function addRole(Request $request)
     {
         $request->validate([
-            'label' => 'required|unique:roles|min:3|max:255',
+            'label' => 'required|min:3|max:255',
         ], [
             'label.required' => 'Введите название',
-            'label.unique' => 'Название роли должно быть уникальным',
             'label.min' => 'Название роли должно быть больше :min символов',
             'label.max' => 'Название роли должно быть меньше :max символов',
         ]);
         
+        $organization_id = \Auth::user()->organization_id;
+        $name = \Str::slug($request->label, '_') . "_" . $organization_id;
+        
+        $item = Role::where('name', $name)->first();
+        if ($item) {
+            return response()->json(['errors' => ['label' => [0 => 'Такое имя уже существует']], 'message' => 'The given data was invalid.'], 422);
+        }
+        
         $role = Role::create([
             'label' => $request->label,
-            'name' => \Str::slug($request->label, '_'),
-            'organization_id' => \Auth::user()->organization_id,
+            'name' => $name,
+            'organization_id' => $organization_id,
             'type' => 'organization',
         ]);
 
