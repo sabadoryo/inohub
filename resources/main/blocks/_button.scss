@@ -55,6 +55,16 @@
             margin-left: 7px;
         }
     }
+
+    &--icon-right {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+            margin-right: 7px;
+        }
+    }
 }
 
 .button-w-icon {
@@ -130,5 +140,10 @@
         #{$e}__icon {
             transform: rotate(180deg);
         }
+    }
+
+    &--transparent {
+        background-color: transparent;
+        color: #ffffff;
     }
 }

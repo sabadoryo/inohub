@@ -75,20 +75,22 @@
 
         </div>
 
-        <div class="header__lang-switcher">
-            <div class="header__language">Ru</div>
-            <svg class="header__lang-toggle" width="10" height="5">
-                <use xlink:href="/img/icons.svg#toggle"></use>
-            </svg>
+        <div uib-dropdown="" class="header__lang-container">
 
-            <ul class="header__lang-dropdown lang-dropdown">
+            <div class="header__lang-switcher" uib-dropdown-toggle="">
+                <div class="header__language">Ru</div>
+                <svg class="header__lang-toggle" width="10" height="5">
+                    <use xlink:href="/img/icons.svg#toggle"></use>
+                </svg>
+            </div>
+
+            <ul class="header__lang-dropdown lang-dropdown" uib-dropdown-menu="">
                 <li class="lang-dropdown__item"><a href="#" class="lang-dropdown__link">Қазақша</a></li>
                 <li class="lang-dropdown__item"><a href="#" class="lang-dropdown__link">Русский</a></li>
                 <li class="lang-dropdown__item"><a href="#" class="lang-dropdown__link">English</a></li>
             </ul>
 
         </div>
-
 
         <user-bar></user-bar>
 
@@ -102,63 +104,51 @@
 
         <nav class="main__as-navbar as-navbar">
 
-            <a href="/" class="as-navbar__item as-navbar__item--active">
-                <svg class="as-navbar__icon" width="20" height="17">
-                    <use xlink:href="/img/icons.svg#house"></use>
-                </svg>
-                Лента
-            </a>
+            <div class="as-navbar__section">
+                <a href="/" class="as-navbar__item as-navbar__item--active">
+                    <svg class="as-navbar__icon" width="20" height="17">
+                        <use xlink:href="/img/icons.svg#house"></use>
+                    </svg>
+                    Лента
+                </a>
 
-            <a href="/events" class="as-navbar__item">
-                <svg class="as-navbar__icon" width="20" height="17">
-                    <use xlink:href="/img/icons.svg#calendar"></use>
-                </svg>
-                Мероприятия
-            </a>
+                <a href="/events" class="as-navbar__item">
+                    <svg class="as-navbar__icon" width="20" height="17">
+                        <use xlink:href="/img/icons.svg#calendar"></use>
+                    </svg>
+                    Мероприятия
+                </a>
 
-            <!--            <a href="#" class="as-navbar__item">-->
-            <!--                <svg class="as-navbar__icon" width="20" height="17">-->
-            <!--                    <use xlink:href="/img/icons.svg#blog"></use>-->
-            <!--                </svg>-->
-            <!--                Блог-->
-            <!--            </a>-->
+                <a href="" class="as-navbar__item">
+                    <svg class="as-navbar__icon" width="20" height="17">
+                        <use xlink:href="/img/icons.svg#rocket"></use>
+                    </svg>
+                    Компании
+                </a>
 
-            <!--            <a href="#" class="as-navbar__item">-->
-            <!--                <svg class="as-navbar__icon" width="20" height="17">-->
-            <!--                    <use xlink:href="/img/icons.svg#news"></use>-->
-            <!--                </svg>-->
-            <!--                Новости-->
-            <!--            </a>-->
+                <a href="" class="as-navbar__item">
+                    <svg class="as-navbar__icon" width="20" height="17">
+                        <use xlink:href="/img/icons.svg#handshake"></use>
+                    </svg>
+                    Инвесторы
+                </a>
 
-            <a href="" class="as-navbar__item">
-                <svg class="as-navbar__icon" width="20" height="17">
-                    <use xlink:href="/img/icons.svg#rocket"></use>
-                </svg>
-                Компании
-            </a>
+                <a href="" class="as-navbar__item">
+                    <svg class="as-navbar__icon" width="20" height="17">
+                        <use xlink:href="/img/icons.svg#jobs"></use>
+                    </svg>
+                    Вакансии
+                </a>
 
-            <a href="" class="as-navbar__item">
-                <svg class="as-navbar__icon" width="20" height="17">
-                    <use xlink:href="/img/icons.svg#handshake"></use>
-                </svg>
-                Инвесторы
-            </a>
+                <a href="#" class="as-navbar__item">
+                    <svg class="as-navbar__icon" width="20" height="17">
+                        <use xlink:href="/img/icons.svg#purchases"></use>
+                    </svg>
+                    Закупки
+                </a>
+            </div>
 
-            <a href="" class="as-navbar__item">
-                <svg class="as-navbar__icon" width="20" height="17">
-                    <use xlink:href="/img/icons.svg#jobs"></use>
-                </svg>
-                Вакансии
-            </a>
-
-            <a href="#" class="as-navbar__item">
-                <svg class="as-navbar__icon" width="20" height="17">
-                    <use xlink:href="/img/icons.svg#purchases"></use>
-                </svg>
-                Закупки
-            </a>
-
-            <div class="as-navbar__organization-section">
+            <div class="as-navbar__section">
 
                 <a href="/astana-hub/about" class="as-navbar__organization">
                     <img src="/img/icons/astana-hub-icon-sm.png" alt="" class="as-navbar__organization-icon">
@@ -175,6 +165,12 @@
                     ЦИТТ
                 </a>
 
+            </div>
+
+            <div class="as-navbar__section">
+                <a href="#" class="as-navbar__link">FAQ</a>
+                <a href="#" class="as-navbar__link">Обратная связь</a>
+                <a href="#" class="as-navbar__link">СМИ</a>
             </div>
 
         </nav>
