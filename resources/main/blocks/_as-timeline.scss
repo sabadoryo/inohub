@@ -1,8 +1,82 @@
 .as-timeline {
 
+    $e: &;
+
     &__block {
         position: relative;
+        width: 372px;
 
+        &:nth-child(odd) {
+
+            border-right: 4px solid $elem-color;
+            padding-right: 45px;
+            padding-bottom: 60px;
+
+            &:after {
+                content: '';
+                width: 14px;
+                height: 14px;
+                border-radius: 50%;
+                background-color: $elem-color;
+                position: absolute;
+                top: 0;
+                right: -9px;
+            }
+        }
+
+        &:nth-child(even) {
+            margin-left: auto;
+            border-left: 4px solid $elem-color;
+            padding-left: 45px;
+            padding-bottom: 60px;
+
+            #{$e}__block-number {
+                right: unset;
+                left: calc(100% + 20px);
+            }
+
+            &:before {
+                content: '';
+                width: 14px;
+                height: 14px;
+                border-radius: 50%;
+                background-color: $elem-color;
+                position: absolute;
+                top: 0;
+                left: -9px;
+            }
+        }
+
+        &:last-child {
+            border: none;
+
+            &:after {
+                right: -5px;
+            }
+
+            &:before {
+                left: -5px;
+            }
+        }
+    }
+
+    &__block-number {
+        position: absolute;
+        top: 0;
+        right: calc(100% + 20px);
+        @include text-style(9.6rem, 700, #f3f3f3);
+        line-height: 117px;
+    }
+
+    &__block-title {
+        @include text-style(1.8rem, 600, #181515);
+        line-height: 22px;
+        margin-bottom: 10px;
+    }
+
+    &__block-subtitle {
+        @include text-style(1.6rem, 400, #181515);
+        line-height: 22px;
     }
 
 }

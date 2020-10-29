@@ -11,8 +11,8 @@
     <!-- Styles -->
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
-          integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    {{--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"--}}
+    {{--          integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">--}}
 
     <style>
 
@@ -56,7 +56,7 @@
             <div class="modal-full__list">
 
                 <div class="modal-full__input-box input-box">
-                    <label class="input-box__label">ФИО</label>
+                    <label class="input-box__label">ФИО<span class="input-box__required">*</span></label>
                     <div class="input-box__container">
                         <input type="text" class="input-box__input" placeholder="Жалгас Конаев Аскарулы">
                     </div>
@@ -123,18 +123,75 @@
                     <label class="input-box__label">Привлекали ли вы инвестиции?</label>
 
                     <div class="input-box__radio-group">
-                        <label class="input-box__radio-box custom-radio-box">
-                            <input type="radio" name="investment" class="custom-radio-box__radio">
+                        <label class="input-box__radio-item custom-radio-box">
+                            <input type="checkbox" name="investment" class="custom-radio-box__radio">
                             <span class="custom-radio-box__checkmark"></span>
                             Да
                         </label>
 
-                        <label class="input-box__radio-box custom-radio-box">
-                            <input type="radio" name="investment" class="custom-radio-box__radio">
+                        <label class="input-box__radio-item custom-radio-box">
+                            <input type="checkbox" name="investment" class="custom-radio-box__radio">
                             <span class="custom-radio-box__checkmark"></span>
                             Нет
                         </label>
                     </div>
+                </div>
+
+                <div class="modal-full__input-box input-box">
+                    <label class="input-box__label">Привлекали ли вы инвестиции?</label>
+
+                    <div class="input-box__radio-group">
+                        <label class="input-box__radio-item real-custom-radio-box">
+                            <input type="radio" name="investment" class="real-custom-radio-box__radio">
+                            <span class="real-custom-radio-box__checkmark"></span>
+                            Да
+                        </label>
+
+                        <label class="input-box__radio-item real-custom-radio-box">
+                            <input type="radio" name="investment" class="real-custom-radio-box__radio">
+                            <span class="real-custom-radio-box__checkmark"></span>
+                            Нет
+                        </label>
+                    </div>
+                </div>
+
+                <div class="modal-full__input-box input-box">
+                    <label class="input-box__label">Логотип</label>
+
+                    <div class="input-box__container">
+
+                        <div class="input-box__files-box">
+                            <a href="#" class="input-box__sample-link">
+                                <svg width="20" height="20">
+                                    <use href="/img/icons.svg#download"></use>
+                                </svg>
+                                Скачать пример
+                            </a>
+
+                            <div class="input-box__file">
+                                logo.png
+                                <a href="#" class="input-box__file-delete">
+                                    <svg width="24" height="24">
+                                        <use href="/img/icons.svg#close-icon"></use>
+                                    </svg>
+                                </a>
+                            </div>
+
+                            <div class="input-box__file">
+                                logo.png
+                                <a href="#" class="input-box__file-delete">
+                                    <svg width="24" height="24">
+                                        <use href="/img/icons.svg#close-icon"></use>
+                                    </svg>
+                                </a>
+                            </div>
+
+                        </div>
+
+                        <button class="input-box__btn button button--xs">Загрузить файл</button>
+
+                    </div>
+
                 </div>
 
             </div>

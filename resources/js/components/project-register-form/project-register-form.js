@@ -4,56 +4,42 @@ angular
     .module('app')
     .component('projectRegisterForm', {
         template: require('./project-register-form.html'),
-        controller: ['$http', controller],
+        controller: ['$http', 'Upload', controller],
         bindings: {
             //
         }
     });
     
-function controller($http) {
+function controller($http, Upload) {
  
 	let $ctrl = this;
-
-	$ctrl.step = 1;
-
-	$ctrl.name = null;
-	$ctrl.shortDescription =  null;
-	$ctrl.stage = null;
-	$ctrl.anotherStage = null;
-	$ctrl.link = null;
-
-	$ctrl.bin = null;
-	$ctrl.legalName = null;
-	$ctrl.ceo = null;
-
-
 
 	$ctrl.$onInit = function () {
     };
 
-	$ctrl.toStep = step => {
-	    $ctrl.step = step;
-    };
+	$ctrl.submit = () => {
+	    let url = '/register-project';
+	    let params = {
+	        title: $ctrl.title,
+            link: $ctrl.link,
+            image: $ctrl.image,
+            company_name: $ctrl.companyName,
+            description: $ctrl.description,
+        };
+        Upload.upload({
+            url: url,
+            data: params,
+        }).then((res) => {
+            window.Swal.fire({
+                icon: 'success',
+                title: 'Отправлено на проверку',
+                timer: 2000,
+                showConfirmButton: false,
+            }).then(() => {
+                window.location = '/';
+            });
+        }, (error) => {
 
-	$ctrl.submit = function () {
-		$http
-			.post('/register-project', {
-				name: $ctrl.name,
-				short_description: $ctrl.shortDescription,
-				stage: $ctrl.stage,
-				another_stage: $ctrl.anotherStage,
-				link: $ctrl.link,
-				bin: $ctrl.bin,
-				legal_name: $ctrl.legalName,
-				ceo: $ctrl.ceo,
-			})
-			.then(
-				function (response) {
-
-				},
-				function () {
-
-				}
-			);
-	};
+        })
+    }
 }
