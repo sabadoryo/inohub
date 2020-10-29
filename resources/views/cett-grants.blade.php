@@ -46,6 +46,7 @@
                         <div class="grant-card__title">Предоставление инновационных грантов на</div>
                         <div class="grant-card__heading">
                             Технологическое развитие отраслей
+
                         </div>
                         <button class="grant-card__btn button button--w100">Подать заявку</button>
                     </div>
