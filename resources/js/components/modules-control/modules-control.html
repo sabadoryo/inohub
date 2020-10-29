@@ -1,0 +1,51 @@
+<div class="row">
+
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header d-flex align-content-center">
+                <h5 class="text-muted mb-0 mr-auto">Организации</h5>
+            </div>
+            <div class="list-group list-group-flush">
+                <a href=""
+                   ng-repeat="org in $ctrl.organizations track by $index"
+                   class="list-group-item list-group-item-action"
+                   ng-class="{active: $ctrl.selectedOrg == org}"
+                   ng-click="$ctrl.selectOrg(org)">
+                    {{org.name}}
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header d-flex align-content-center">
+                <h5 class="text-muted mb-0 mr-auto">Модули</h5>
+                <input required
+                       type="text"
+                       ng-model="$ctrl.search"
+                       class="form-control form-control-sm w-25"
+                       placeholder="Введите название прав">
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item"
+                    ng-repeat="module in $ctrl.modules | filter : {name: $ctrl.search} : strict track by $index">
+                    {{ module.name }}
+                    <div class="custom-control custom-switch float-right">
+                        <input type="checkbox"
+                               ng-model="module.isSelected"
+                               ng-change="$ctrl.moduleChanged(module)"
+                               class="custom-control-input"
+                               id="permission_{{module.id}}">
+                        <label class="custom-control-label"
+                               for="permission_{{module.id}}"
+                               style="font-weight: normal">
+                            {{module.isSelected ? 'Включен' : 'Выключен'}}
+                        </label>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>

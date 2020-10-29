@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddUserIdInPostsTable extends Migration
+class AddModelIdInPermissions extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class AddUserIdInPostsTable extends Migration
      */
     public function up()
     {
-        Schema::table('posts', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id')->after('id');
-            $table->foreign('user_id')
+        Schema::table('permissions', function (Blueprint $table) {
+            $table->unsignedBigInteger('module_id')->after('id');
+            $table->foreign('module_id')
                 ->references('id')
-                ->on('users')
+                ->on('modules')
                 ->onDelete('cascade');
         });
     }
@@ -29,9 +29,8 @@ class AddUserIdInPostsTable extends Migration
      */
     public function down()
     {
-        Schema::table('posts', function (Blueprint $table) {
-            $table->dropForeign(['user_id']);
-            $table->dropColumn('user_id');
+        Schema::table('permissions', function (Blueprint $table) {
+            $table->dropForeign(['module_id']);
         });
     }
 }

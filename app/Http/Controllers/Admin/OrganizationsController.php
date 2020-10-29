@@ -23,7 +23,7 @@ class OrganizationsController extends Controller
             'organizations' => $organizations
         ];
 
-        return view('control-panel.component', [
+        return view('admin.component', [
             'PAGE_TITLE' => 'Организации',
             'activePage' => 'organizations',
             'breadcrumb' => $breadcrumb,
