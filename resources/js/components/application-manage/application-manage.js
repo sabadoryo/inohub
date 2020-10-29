@@ -4,13 +4,13 @@ angular
     .module('app')
     .component('applicationManage', {
         template: require('./application-manage.html'),
-        controller: ['$timeout', '$http', 'Auth', '$uibModal', 'Upload', 'moment', controller],
+        controller: ['$timeout', '$http', 'Auth', '$uibModal', 'Upload', 'moment', '$location','$anchorScroll' ,controller],
         bindings: {
             application: '<',
         }
     });
 
-function controller($timeout, $http, Auth, $uibModal, Upload, moment) {
+function controller($timeout, $http, Auth, $uibModal, Upload, moment, $location, $anchorScroll) {
 
     let $ctrl = this;
 
@@ -86,10 +86,13 @@ function controller($timeout, $http, Auth, $uibModal, Upload, moment) {
             })
             .then(
                 res => {
-                    $ctrl.application.actions.message.unshift({
+                    if (!$ctrl.application.actions.message) {
+                        $ctrl.application.actions.message = [];
+                    }
+                    $ctrl.application.actions.message.push({
                         id: res.data.action_id,
                         user: Auth.user(),
-                        name: 'application_user_message',
+                        name: 'application_admin_message',
                         message: $ctrl.message,
                         created_at: moment(),
                         additional_data: res.data,
@@ -136,3 +139,4 @@ function controller($timeout, $http, Auth, $uibModal, Upload, moment) {
     }
 
 }
+

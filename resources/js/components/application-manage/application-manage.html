@@ -50,7 +50,9 @@
             <div class="col-6">
                 <div class="card-header">Сообщения</div>
                 <div class="card-body" style="max-height: 500px; overflow-y: auto">
-                    <div class="card mb-2" ng-repeat="action in $ctrl.application.actions.message track by $index">
+                    <div class="card mb-2"
+                         ng-repeat="action in $ctrl.application.actions.message track by $index"
+                         id="message-{{ ::$index }}" scroll-to-last="message-{{ ::$index }}">
                         <div class="card-header">
                             {{action.user.full_name}}
                             <span class="float-right">{{action.created_at | amDateFormat : 'DD.MM HH:mm'}}</span>
@@ -68,7 +70,6 @@
                                          class="d-flex align-items-center">
                                         <a href="/cabinet/download-file/{{file.path}}"><small class="text-muted">{{file.name}}</small></a>
                                     </div>
-                                    <div></div>
                                 </div>
                             </div>
                         </div>

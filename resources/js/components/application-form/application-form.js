@@ -105,7 +105,11 @@ function controller(Auth, $rootScope, Upload, $http, $scope) {
 
     $ctrl.validateFile = function (files, file, newFiles, duplicateFiles, invalidFiles, event, field) {
         if (files.length > field.max_files_count) {
-            alert('Выбрано сликшмо много файлов, максимальное количество:' + field.max_files_count);
+            Swal.fire(
+                `Вы выбрали слишком много файлов, максимальное количество для этого поля - ${field.max_files_count}`,
+                '',
+                'error'
+            );
             field.value = [];
         }
     };
@@ -130,7 +134,11 @@ function controller(Auth, $rootScope, Upload, $http, $scope) {
         $ctrl.forms[ind].fields.forEach(field => {
             if (field.type === 'file') {
                 if ($ctrl.isFileRequired(field)) {
-                    alert('Поле с загрузукой файла является обязательным пожалуйста предоставьте его');
+                    Swal.fire(
+                        `Поле ${field.label} является обязательным`,
+                        'Пожалуйста загрузите необходимые файлы',
+                        'error'
+                    );
                     ch = false;
                 }
             }

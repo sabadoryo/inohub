@@ -72,7 +72,7 @@ class FormsController extends Controller
                 if ($field['type'] === 'file') {
                     $exampleFilesPath = [];
                     $exampleFilesName = [];
-                    if (count($field['exampleFiles'])) {
+                    if (isset($field['exampleFiles'])) {
                         foreach ($field['exampleFiles'] as $exampleFile) {
                             $path = \Storage::disk('public')->put('application_example_files', $exampleFile);
                             array_push($exampleFilesPath, $path);

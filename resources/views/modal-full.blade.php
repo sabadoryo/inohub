@@ -177,14 +177,6 @@
                                 </a>
                             </div>
 
-                            <div class="input-box__file">
-                                logo.png
-                                <a href="#" class="input-box__file-delete">
-                                    <svg width="24" height="24">
-                                        <use href="/img/icons.svg#close-icon"></use>
-                                    </svg>
-                                </a>
-                            </div>
 
                         </div>
 

@@ -61,7 +61,7 @@ class ApplicationsController extends Controller
             ['/control-panel/applications', 'Заявки'],
             [null, $title]
         ];
-        $application->actions = $application->actions()->with('user')->orderBy('created_at', 'desc')->get()->groupBy('type');
+        $application->actions = $application->actions()->with('user')->orderBy('created_at', 'asc')->get()->groupBy('type');
 
         foreach ($application->forms as $form) {
             foreach ($form->fields as $field) {
