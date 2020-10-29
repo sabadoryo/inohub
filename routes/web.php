@@ -321,3 +321,19 @@ Route::get('tech-garden-lab-1', function () {
 Route::get('tech-garden-lab-2', function () {
     return view('tech-garden-lab-2');
 });
+
+Route::get('regional-page', function () {
+    return view('regional-page');
+});
+
+Route::get('vacation-list', function () {
+    return view('vacation-list');
+});
+
+Route::get('vacation-page', function () {
+    return view('vacation-page');
+});
+
+Route::get('cett-grants', function () {
+    return view('cett-grants');
+});

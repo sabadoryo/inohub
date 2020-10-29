@@ -5,7 +5,7 @@
     <div class="content__welcome-section event-welcome-section">
 
         <div class="event-welcome-section__img-box">
-            <img src="/img/event-poster-test.jpg" alt="" class="event-welcome-section__img">
+            <img src="/img/kek.jpg" alt="" class="event-welcome-section__img">
         </div>
 
         <img src="/img/astana-hub-tag-125x33.png" alt="" class="event-welcome-section__tag">
@@ -39,7 +39,9 @@
                     “Разбери свой стартап с профессионалами” с Маратом Толибаевым!
                 </div>
 
-                <img src="/img/events-1.png" alt="" class="event-card__img">
+                <div class="event-card__img-box">
+                    <img src="/img/lol.jpg" alt="" class="event-card__img">
+                </div>
 
                 <img src="/img/astana-hub-tag.png" alt="" class="event-card__tag">
 
@@ -57,7 +59,9 @@
 
                 <div class="event-card__title">Цифровые технологии для нефтегазового сектора</div>
 
-                <img src="/img/events-2.png" alt="" class="event-card__img">
+                <div class="event-card__img-box">
+                    <img src="/img/lol.jpg" alt="" class="event-card__img">
+                </div>
 
                 <img src="/img/tech-garden-tag.png" alt="" class="event-card__tag">
 
@@ -79,7 +83,9 @@
                     Вебинар на тему: “Как делают бренды из IT проектов?" с Дианой Барлубаевой
                 </div>
 
-                <img src="/img/events-3.png" alt="" class="event-card__img">
+                <div class="event-card__img-box">
+                    <img src="/img/lol.jpg" alt="" class="event-card__img">
+                </div>
 
                 <img src="/img/astana-hub-tag.png" alt="" class="event-card__tag">
 
@@ -107,7 +113,9 @@
 
                 <div class="event-card__title">Вебинар на тему «Система управления рисками</div>
 
-                <img src="/img/events-4.png" alt="" class="event-card__img">
+                <div class="event-card__img-box">
+                    <img src="/img/lol.jpg" alt="" class="event-card__img">
+                </div>
 
                 <img src="/img/tech-garden-tag.png" alt="" class="event-card__tag">
 
@@ -129,7 +137,9 @@
                     “Психология провала — почему не стоит бояться совершать ошибки?”
                 </div>
 
-                <img src="/img/events-5.png" alt="" class="event-card__img">
+                <div class="event-card__img-box">
+                    <img src="/img/lol.jpg" alt="" class="event-card__img">
+                </div>
 
                 <img src="/img/tech-garden-tag.png" alt="" class="event-card__tag">
 
@@ -147,7 +157,9 @@
 
                 <div class="event-card__title">Эффективное производство 4.0</div>
 
-                <img src="/img/events-3.png" alt="" class="event-card__img">
+                <div class="event-card__img-box">
+                    <img src="/img/lol.jpg" alt="" class="event-card__img">
+                </div>
 
                 <img src="/img/tech-garden-tag.png" alt="" class="event-card__tag">
 
@@ -181,7 +193,9 @@
                         “Разбери свой стартап с профессионалами” с Маратом Толибаевым!
                     </div>
 
-                    <img src="/img/events-1.png" alt="" class="event-card__img">
+                    <div class="event-card__img-box">
+                        <img src="/img/lol.jpg" alt="" class="event-card__img">
+                    </div>
 
                     <img src="/img/astana-hub-tag.png" alt="" class="event-card__tag">
 
@@ -199,7 +213,9 @@
 
                     <div class="event-card__title">Цифровые технологии для нефтегазового сектора</div>
 
-                    <img src="/img/events-2.png" alt="" class="event-card__img">
+                    <div class="event-card__img-box">
+                        <img src="/img/lol.jpg" alt="" class="event-card__img">
+                    </div>
 
                     <img src="/img/tech-garden-tag.png" alt="" class="event-card__tag">
 
@@ -221,7 +237,9 @@
                         Вебинар на тему: “Как делают бренды из IT проектов?" с Дианой Барлубаевой
                     </div>
 
-                    <img src="/img/events-3.png" alt="" class="event-card__img">
+                    <div class="event-card__img-box">
+                        <img src="/img/lol.jpg" alt="" class="event-card__img">
+                    </div>
 
                     <img src="/img/astana-hub-tag.png" alt="" class="event-card__tag">
 
@@ -239,7 +257,9 @@
 
                     <div class="event-card__title">Вебинар на тему «Система управления рисками</div>
 
-                    <img src="/img/events-4.png" alt="" class="event-card__img">
+                    <div class="event-card__img-box">
+                        <img src="/img/lol.jpg" alt="" class="event-card__img">
+                    </div>
 
                     <img src="/img/tech-garden-tag.png" alt="" class="event-card__tag">
 
@@ -261,7 +281,9 @@
                         “Психология провала — почему не стоит бояться совершать ошибки?”
                     </div>
 
-                    <img src="/img/events-5.png" alt="" class="event-card__img">
+                    <div class="event-card__img-box">
+                        <img src="/img/lol.jpg" alt="" class="event-card__img">
+                    </div>
 
                     <img src="/img/tech-garden-tag.png" alt="" class="event-card__tag">
 
@@ -279,7 +301,9 @@
 
                     <div class="event-card__title">Эффективное производство 4.0</div>
 
-                    <img src="/img/events-3.png" alt="" class="event-card__img">
+                    <div class="event-card__img-box">
+                        <img src="/img/lol.jpg" alt="" class="event-card__img">
+                    </div>
 
                     <img src="/img/tech-garden-tag.png" alt="" class="event-card__tag">
 
