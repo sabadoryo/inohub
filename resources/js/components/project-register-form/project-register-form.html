@@ -1,63 +1,48 @@
-<form ng-submit="$ctrl.toStep(2)" ng-show="$ctrl.step == 1">
+<div class="card">
+  <div class="card-header">
+    Регистрация проекта
+  </div>
+  <form ng-submit="$ctrl.submit()">
+    <div class="card-body row">
+      <div class="col-6">
+        <div class="form-group">
+          <label>Название проекта:</label>
+          <input class="form-control" ng-model="$ctrl.title" required>
+        </div>
+        <div class="form-group">
+          <label>Ссылка на сайт:</label>
+          <input class="form-control" ng-model="$ctrl.link" required>
+        </div>
+        <div class="form-group">
+          <label>Логотип:</label>
+          <div class="mb-2">
+            <img ng-show="$ctrl.image" ngf-thumbnail="$ctrl.image" width="100"/>
+          </div>
+          <div>
+            <a class="btn btn-light"
+               ngf-select=""
+               ng-model="$ctrl.image"
+               accept="image/*">
 
-    <div class="form-group">
-        <label>Название компании:</label>
-        <input type="text" class="form-control" ng-model="$ctrl.name" required>
+              <span ng-show="!$ctrl.image">Выбрать изображение</span>
+              <span ng-show="$ctrl.image">Изменить изображение</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-group">
+          <label>Название компаний:</label>
+          <input class="form-control" ng-model="$ctrl.companyName" required>
+        </div>
+        <div class="form-group">
+          <label>Краткое описание:</label>
+          <textarea class="form-control" ng-model="$ctrl.description" required></textarea>
+        </div>
+      </div>
     </div>
-
-    <div class="form-group">
-        <label>Короткое описание вашего продукта</label>
-        <textarea class="form-control" ng-model="$ctrl.shortDescription" required></textarea>
-        <small class="form-text text-muted">До 100 слов</small>
+    <div class="card-footer">
+      <button class="btn btn-primary" type="submit">Зарегистрировать</button>
     </div>
-
-    <div class="form-group">
-        <label>Стадия развития компании:</label>
-        <select class="form-control" ng-model="$ctrl.stage" required>
-            <option value="">Не выбрано</option>
-            <option value="idea">Идея</option>
-            <option value="has-sales">Есть продажи</option>
-            <option value="to-global">Выход на зарубежные рынки</option>
-            <option value="other">Другое</option>
-        </select>
-        <input type="text"
-               ng-if="$ctrl.stage == 'other'"
-               class="form-control mt-2"
-               ng-model="$ctrl.anotherStage"
-               placeholder="Введите свой ответ"
-               required>
-    </div>
-
-    <div class="form-group">
-        <label>Ссылка:</label>
-        <input type="text" class="form-control" ng-model="$ctrl.link">
-    </div>
-
-    <button type="submit" class="btn btn-primary">Следующий шаг</button>
-
-</form>
-
-<form ng-submit="$ctrl.toStep(3)" ng-show="$ctrl.step == 2">
-
-    <div class="form-group">
-        <label>Юридическое название компании:</label>
-        <input type="text" class="form-control" ng-model="$ctrl.legalName" required>
-    </div>
-
-    <div class="form-group">
-        <label>БИН/ИИН:</label>
-        <input type="text" class="form-control" ng-model="$ctrl.bin" required>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Следующий шаг</button>
-
-</form>
-
-<form ng-submit="$ctrl.submit()" ng-show="$ctrl.step == 3">
-
-    <div class="form-group">
-        <label>Основатель:</label>
-        <input type="text" class="form-control" ng-model="$ctrl.ceo" required>
-    </div>
-
-</form>
+  </form>
+</div>
