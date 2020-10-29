@@ -168,8 +168,8 @@
                                 Скачать пример
                             </a>
 
-                            <div class="input-box__file">
-                                logo.png
+                            <div class="input-box__file-box">
+                                <a class="input-box__file" href="">logo.png</a>
                                 <a href="#" class="input-box__file-delete">
                                     <svg width="24" height="24">
                                         <use href="/img/icons.svg#close-icon"></use>
