@@ -53,7 +53,7 @@ class ControlPanelController extends Controller
     {
         $days = 31;
 
-        $members = TestModel::all();
+        $members = Member::all();
 
         $today = Carbon::today();
 
