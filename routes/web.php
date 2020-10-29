@@ -126,7 +126,7 @@ Route::group([
     Route::get('vacancies/{id}/main', 'VacanciesController@mainForm');
     Route::post('vacancies/{id}/update-main', 'VacanciesController@updateMain');
     Route::post('vacancies/{id}/publish', 'VacanciesController@publish');
-    
+
     Route::get('posts', 'PostsController@index');
     Route::get('posts/get-list', 'PostsController@getList');
     Route::post('posts/{id}/update-status', 'PostsController@updateStatus');
@@ -174,6 +174,22 @@ Route::group([
     Route::get('sm/tasks/{id}/edit', 'SmartStoreTaskCompaniesController@edit');
     Route::post('sm/tasks/{id}/update', 'SmartStoreTaskCompaniesController@update');
     Route::post('sm/tasks/{id}/remove', 'SmartStoreTaskCompaniesController@remove');
+
+    Route::get('corp-tasks', 'CorporateInnovationTasksController@index');
+    Route::get('corp-tasks/get-list', 'CorporateInnovationTasksController@getList');
+    Route::get('corp-tasks/create', 'CorporateInnovationTasksController@create');
+    Route::post('corp-tasks', 'CorporateInnovationTasksController@store');
+    Route::get('corp-tasks/{id}/edit', 'CorporateInnovationTasksController@edit');
+    Route::post('corp-tasks/{id}/update', 'CorporateInnovationTasksController@update');
+    Route::post('corp-tasks/{id}/remove', 'CorporateInnovationTasksController@remove');
+
+    Route::get('corp-task-solutions', 'CorporateInnovationTaskSolutionsController@index');
+    Route::get('corp-task-solutions/get-list', 'CorporateInnovationTaskSolutionsController@getList');
+    Route::get('corp-task-solutions/create', 'CorporateInnovationTaskSolutionsController@create');
+    Route::post('corp-task-solutions', 'CorporateInnovationTaskSolutionsController@store');
+    Route::get('corp-task-solutions/{id}/edit', 'CorporateInnovationTaskSolutionsController@edit');
+    Route::post('corp-task-solutions/{id}/update', 'CorporateInnovationTaskSolutionsController@update');
+    Route::post('corp-task-solutions/{id}/remove', 'CorporateInnovationTaskSolutionsController@remove');
 
 });
 

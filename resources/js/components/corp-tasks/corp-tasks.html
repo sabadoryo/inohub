@@ -1,0 +1,41 @@
+<div class="card">
+    <div class="card-header">
+        <a class="btn btn-primary" href="/control-panel/corp-tasks/create">Добавить задачу</a>
+    </div>
+
+    <div class="card-body">
+        <table class="table table-bordered table-striped table-sm">
+            <thead class="thead-light">
+            <tr>
+                <th>ID</th>
+                <th>Изображение</th>
+                <th>Название компании</th>
+                <th>Название задания</th>
+                <th>Описание задания</th>
+                <th>Статус</th>
+                <th>Конец приема заявок</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="task in $ctrl.tasks track by $index">
+                <td>{{task.id}}</td>
+                <td><img width="40" height="40" ng-src="/{{task.image}}" alt="..."></td>
+                <td>{{task.company_name}}</td>
+                <td>{{task.title}}</td>
+                <td>{{task.description | truncate : 25 : '...'}}</td>
+                <td>{{task.status}}</td>
+                <td>{{task.deadline | amDateFormat : 'DD-MM-YYYY'}}</td>
+                <td style="display: flex; border: none; padding: 10px 5px; text-align: center">
+                    <a ng-href="/control-panel/corp-tasks/{{task.id}}/edit"><span class="fas fa-edit" style="margin-right: 10px; color: dodgerblue"></span></a>
+                    <a href=""
+                       ng-click="$ctrl.removeTask(task.id, task.title)"
+                       ng-disabled="$ctrl.loading">
+                        <span class="fas fa-times" style="color: red;"></span>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

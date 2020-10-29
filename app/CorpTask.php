@@ -9,7 +9,10 @@ class CorpTask extends Model
     protected $fillable = [
         'company_name',
         'title',
+        'description',
+        'image',
         'status',
+        'deadline'
     ];
 
     protected $dates = [
@@ -18,7 +21,7 @@ class CorpTask extends Model
 
     public function solutions()
     {
-        return $this->hasMany(CorpTaskSolution::class);
+        return $this->hasMany(CorpTaskSolution::class, 'task_id');
     }
 
 

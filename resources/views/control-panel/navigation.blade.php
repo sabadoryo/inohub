@@ -113,29 +113,6 @@
                     </a>
                 </li>
 
-                @can('applications.show')
-                    <li class="nav-item">
-                        <a href="/control-panel/applications" class="nav-link {{$activePage == 'applications' ? 'active' : ''}}">
-                            <i class="nav-icon fas fa-users"></i>
-                            <p>Заявки</p>
-                        </a>
-                    </li>
-                @endcan
-
-
-
-
-
-
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon far fa-plus-square"></i>
-                        <p>
-                            Услуги
-                        </p>
-                    </a>
-                </li>
-
                 <li class="nav-item has-treeview">
                     <a href=""
                        class="nav-link {{$activePage === 'sm-solutions' || $activePage === 'sm-tasks' ? 'active' : ''}}">
@@ -163,6 +140,58 @@
                             </a>
                         </li>
                     </ul>
+                </li>
+
+                <li class="nav-item has-treeview">
+                    <a href=""
+                       class="nav-link {{$activePage === 'corp-task-solutions' || $activePage === 'corp-tasks' ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-credit-card"></i>
+                        <p>
+                            Корп.инновации
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/control-panel/corp-task-solutions" class="nav-link {{$activePage === 'corp-task-solutions' ? 'active' : ''}}">
+                                <i class="far fa-circle"></i>
+                                <p>
+                                    Решения
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/control-panel/corp-tasks" class="nav-link {{$activePage === 'corp-tasks' ? 'active' : ''}}">
+                                <i class="far fa-circle"></i>
+                                <p>
+                                    Задачи
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+            @can('applications.show')
+                    <li class="nav-item">
+                        <a href="/control-panel/applications" class="nav-link {{$activePage == 'applications' ? 'active' : ''}}">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>Заявки</p>
+                        </a>
+                    </li>
+                @endcan
+
+
+
+
+
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon far fa-plus-square"></i>
+                        <p>
+                            Услуги
+                        </p>
+                    </a>
                 </li>
 
                 <li class="nav-item">
