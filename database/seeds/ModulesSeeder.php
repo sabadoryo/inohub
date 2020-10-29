@@ -13,7 +13,7 @@ class ModulesSeeder extends Seeder
     {
         $arr = [
             ['Новости', 'news'],
-            ['Меропрятия', 'events'],
+            ['Мероприятия', 'events'],
             ['Вакансии', 'vacancies'],
             ['Программы', 'programs'],
             ['Участники AstanaHub', 'astanahub_members'],

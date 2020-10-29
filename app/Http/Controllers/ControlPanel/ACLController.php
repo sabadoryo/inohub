@@ -42,16 +42,19 @@ class ACLController extends ControlPanelController
     public function addRole(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique:roles|min:3|max:255',
+            'label' => 'required|unique:roles|min:3|max:255',
         ], [
-            'name.required' => 'Введите название',
-            'name.unique' => 'Название роли должно быть уникальным',
-            'name.min' => 'Название роли должно быть больше :min символов',
-            'name.max' => 'Название роли должно быть меньше :max символов',
+            'label.required' => 'Введите название',
+            'label.unique' => 'Название роли должно быть уникальным',
+            'label.min' => 'Название роли должно быть больше :min символов',
+            'label.max' => 'Название роли должно быть меньше :max символов',
         ]);
         
         $role = Role::create([
-            'name' => $request->name,
+            'label' => $request->label,
+            'name' => \Str::slug($request->label, '_'),
+            'organization_id' => \Auth::user()->organization_id,
+            'type' => \Auth::user()->organization_id ? 'organization' : 'admin',
         ]);
         $role->users_count = 0;
         $role->permissions = [];

@@ -16,14 +16,14 @@ function controller($http, notify) {
  
 	let $ctrl = this;
 
-	$ctrl.name = null;
+	$ctrl.label = null;
 
 	$ctrl.$onInit = function () {
 
     };
 
 	$ctrl.save = function () {
-	    if (!$ctrl.name) {
+	    if (!$ctrl.label) {
             notify({
                 message: 'Введите название',
                 duration: 2000,
@@ -33,7 +33,7 @@ function controller($http, notify) {
         }
 	    let url = '/control-panel/acl/add-role';
 	    let params = {
-	        name: $ctrl.name,
+	        label: $ctrl.label,
         }
 	    $http.post(url, params).then(function (response){
             notify({
