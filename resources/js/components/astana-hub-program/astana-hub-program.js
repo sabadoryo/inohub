@@ -4,44 +4,30 @@ angular
     .module('app')
     .component('astanaHubProgram', {
         template: require('./astana-hub-program.html'),
-        controller: ['$uibModal', controller],
+        controller: ['$uibModal', 'applicationWindow', controller],
         bindings: {
             program: '<',
         }
     });
 
-function controller($uibModal) {
+function controller($uibModal, applicationWindow) {
 
-	let $ctrl = this;
+    let $ctrl = this;
 
-	$ctrl.$onInit = function () {
+    $ctrl.$onInit = function () {
     };
 
-	$ctrl.openApplicationModal = function () {
-	    console.log('test');
-
-        $uibModal
-            .open({
-                component: 'applicationModal',
-                backdrop : 'static',
+    $ctrl.openApplicationModal = function () {
+        console.log('test');
+        openAppWindow();
+        function openAppWindow() {
+            applicationWindow.open({
                 resolve: {
-                    entityType: () => {
-                        return 'program';
-                    },
-                    entityId: () => {
-                        return $ctrl.program.id;
-                    }
+                    entityType: 'program',
+                    entityId: $ctrl.program.id,
                 }
-            })
-            .result
-            .then(
-                function (result) {
-
-                },
-                function () {
-
-                }
-            );
+            });
+        }
     };
 
 }

@@ -81,6 +81,7 @@ function controller($timeout, $http, Auth, $uibModal, Upload, moment) {
                 data: {
                     message: $ctrl.message,
                     attachedFiles: $ctrl.attachedFiles,
+                    messageFrom: 'admin',
                 }
             })
             .then(

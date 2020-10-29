@@ -1,236 +1,336 @@
-<h4>Данные:</h4>
+<div class="tabs-content tabs-inner">
 
-<div class="card mb-3" ng-repeat="appForm in $ctrl.app.forms track by $index">
-    <form ng-submit="$ctrl.updateForm(appForm)">
+    <button class="tabs-inner__button-back button-back">
+        <svg class="button-back__icon" width="24" height="24">
+            <use href="/img/icons.svg#chevron-left"></use>
+        </svg>
+        Назад
+    </button>
 
-        <div class="card-header">
-            {{appForm.form.title}}
-            <a href=""
-               ng-click="$ctrl.toggleEditing(appForm)"
-               class="float-right btn btn-primary btn-sm">
-                {{appForm.isEditing ? 'отменить' : 'изменить'}}
-            </a>
+    <div class="tabs-inner__section application-section">
+
+        <div class="application-section__header">
+            <div class="application-section__type">Программа</div>
+            <div class="application-section__title">Regional Incubation</div>
+
+            <div class="application-section__details">
+                <div class="application-section__status application-section__status--success">Статус:
+                    <span>Подтвердили</span>
+                </div>
+                <div class="application-section__date">
+                    <svg class="application-section__date-icon" width="16" height="18">
+                        <use href="/img/icons.svg#calendar-grey"></use>
+                    </svg>
+                    23.10.2020
+                </div>
+            </div>
+
+            <button class="application-section__toggle-btn button-back button-back--grey">
+                <svg class="button-back__icon" width="18" height="18">
+                    <use href="/img/icons.svg#toggle-2"></use>
+                </svg>
+                Скрыть
+            </button>
         </div>
+        <div class="application-section__body">
 
-        <div class="card-body">
-            <table class="table table-sm table-bordered mb-0">
-                <tr ng-repeat="field in appForm.fields track by $index">
-                    <th>{{field.form_field.label}}</th>
-                    <td>
-                        <div
-                            ng-show="!appForm.isEditing && field.form_field.type !== 'file' && field.form_field.type !== 'checkbox' ">
-                            {{field.value}}
-                        </div>
-                        <div ng-show="!appForm.isEditing && field.form_field.type == 'checkbox'">{{field.stringValue}}
-                        </div>
-                        <div ng-show="!appForm.isEditing && field.form_field.type === 'file'">
-                            <div class="d-flex flex-column">
-                                <div ng-repeat="file in field.value track by $index">
-                                    <a href="/cabinet/download-file/{{file.path}}">{{file.name}}</a>
+            <div class="application-section__block application-block"
+                 ng-repeat="appForm in $ctrl.app.forms track by $index">
+
+                <div class="application-block__row">
+                    <div class="application-block__heading">{{appForm.form.title}}</div>
+
+                    <div class="application-block__link-box" ng-if="!appForm.isEditing">
+                        <svg class="application-block__edit-icon" width="24" height="24">
+                            <use href="/img/icons.svg#edit-colored"></use>
+                        </svg>
+
+                        <a href="" ng-click="$ctrl.enableEditing(appForm)"
+                           class="application-block__link">Редактировать</a>
+                    </div>
+
+                    <div class="application-block__link-box" ng-if="appForm.isEditing">
+                        <a href="" ng-click="$ctrl.disableEditing(appForm)" class="application-block__link">Отменить</a>
+                    </div>
+                </div>
+                <form ng-submit="$ctrl.updateForm(appForm)">
+                    <div class="application-block__input-list">
+                        <div ng-repeat="field in appForm.fields track by $index"
+                             ng-class="field.form_field.type === 'textarea' ? 'input-box--span2' : '' ">
+
+                            <div class="application-block__input-box input-box"
+                                 ng-if="field.form_field.type === 'text'">
+                                <label class="input-box__label">{{field.form_field.label}}</label>
+                                <div class="input-box__container">
+                                    <input type="text" class="input-box__input" ng-model="field.value"
+                                           ng-disabled="!appForm.isEditing">
                                 </div>
                             </div>
-                        </div>
-                        <div ng-show="appForm.isEditing">
-                            <input type="text"
-                                   ng-if="field.form_field.type == 'text'"
-                                   class="form-control"
-                                   ng-model="field.editValue"
-                                   ng-required="field.form_field.is_required">
 
-                            <textarea ng-if="field.form_field.type == 'textarea'"
-                                      class="form-control"
-                                      rows="3"
-                                      ng-model="field.editValue" required></textarea>
+                            <div class="application-block__input-box input-box"
+                                 ng-if="field.form_field.type === 'textarea'">
+                                <label class="input-box__label">{{field.form_field.label}} </label>
+                                <textarea class="input-box__textarea"
+                                          ng-disabled="!appForm.isEditing"
+                                          ng-model="field.value"
+                                >
+                                </textarea>
+                            </div>
 
-                            <div ng-if="field.form_field.type == 'select'">
-                                <select class="custom-select mr-sm-2"
-                                        ng-init="field.form_field.other_option ? field.form_field.options.push({'val' : 'Свой вариант'}) : ''"
-                                        ng-model="field.editValue"
-                                        ng-change="$ctrl.selectFieldChanged(field)"
-                                        ng-options="c as c.val for c in field.form_field.options"
-                                        ng-required="field.form_field.is_required">
-                                </select>
-                                <div ng-if="field.editValue.val === 'Свой вариант'" class="mt-2">
+                            <div class="application-block__input-box input-box"
+                                 ng-if="field.form_field.type === 'select'">
+                                <label class="input-box__label">{{field.form_field.label}}</label>
+
+                                <div class="input-box__container">
+                                    <select class="input-box__input"
+                                            ng-model="field.value"
+                                            ng-options="c as c.val for c in field.form_field.options"
+                                            ng-required="field.form_field.is_required"
+                                            ng-disabled="!appForm.isEditing">
+                                    </select>
+
+                                    <svg ng-if="appForm.isEditing" class="input-box__select-icon" width="24"
+                                         height="24">
+                                        <use href="/img/icons.svg#chevron-down"></use>
+                                    </svg>
+                                </div>
+                                <div ng-if="field.value.val === 'Свой вариант'" class="input-box__container">
                                     <input type="text"
-                                           ng-model="field.editValueOtherOption"
-                                           class="form-control"
+                                           ng-model="field.otherOptionValue"
+                                           class="input-box__input"
                                            placeholder="Свой вариант...">
                                 </div>
                             </div>
 
-                            <div ng-if="field.form_field.type == 'radio'">
-                                <div class="form-check"
-                                     ng-repeat="option in field.form_field.options track by $index">
-                                    <input ng-model="field.value"
-                                           class="form-check-input"
-                                           type="radio"
-                                           name="field.id"
-                                           id="{{field.id + $index + option.val}}"
-                                           value="{{option.val}}"
-                                           ng-required="field.is_required">
-                                    <label class="form-check-label"
-                                           for="{{field.id + $index + option.val}}">
+                            <div class="modal-full__input-box input-box" ng-if="field.form_field.type === 'radio'">
+                                <label class="input-box__label">{{field.form_field.label}}</label>
+
+                                <div class="input-box__radio-group">
+                                    <label class="input-box__radio-item real-custom-radio-box"
+                                           ng-repeat="option in field.form_field.options track by $index">
+                                        <input type="radio"
+                                               ng-model="field.value"
+                                               ng-value="option.val"
+                                               name="field.id"
+                                               ng-disabled="!appForm.isEditing"
+                                               class="real-custom-radio-box__radio">
+                                        <span class="real-custom-radio-box__checkmark"></span>
                                         {{option.val}}
                                     </label>
                                 </div>
-
-                                <div class="form-check" ng-if="field.form_field.other_option">
-                                    <input
-                                        ng-model="field.value"
-                                        class="form-check-input"
-                                        type="radio"
-                                        name="field.id"
-                                        id="{{field.id + 'other_option'}}"
-                                        value="Свой вариант">
-                                    <label class="form-check-label"
-                                           for="{{field.id + 'other_option'}}">
-                                        Свой вариант
-                                    </label>
-                                </div>
-
-                                <div ng-if="field.value === 'Свой вариант'" class="mt-2">
-                                    <input type="text" ng-model="field.editValueOtherOption" class="form-control"
-                                           placeholder="Свой вариант">
+                                <div ng-if="field.value === 'Свой вариант'" class="input-box__container">
+                                    <input type="text"
+                                           ng-model="field.otherOptionValue"
+                                           class="input-box__input"
+                                           placeholder="Свой вариант...">
                                 </div>
                             </div>
 
-                            <div ng-if="field.form_field.type == 'checkbox'">
-                                <div class="form-check"
-                                     ng-repeat="option in field.form_field.options track by option.val + field.id">
+                            <div class="modal-full__input-box input-box" ng-if="field.form_field.type === 'checkbox'">
+                                <label class="input-box__label">{{field.form_field.label}}</label>
 
-                                    <input ng-model="option.isSelected"
-                                           class="form-check-input"
-                                           type="checkbox"
-                                           ng-checked="option.isSelected"
-                                           value="{{option.val}}"
-                                           id="{{field.id + $index + option.val}}">
-
-                                    <label class="form-check-label"
-                                           for="{{field.id + $index + option.val}}">
+                                <div class="input-box__radio-group">
+                                    <label class="input-box__radio-item custom-radio-box"
+                                           ng-repeat="option in field.form_field.options track by option.val + field.id">
+                                        <input type="checkbox"
+                                               ng-model="field.value[option.val]"
+                                               name="field.id"
+                                               class="custom-radio-box__radio"
+                                               ng-disabled="!appForm.isEditing">
+                                        <span class="custom-radio-box__checkmark"></span>
                                         {{option.val}}
                                     </label>
                                 </div>
-
-                                <div class="form-check" ng-if="field.form_field.other_option">
-                                    <input ng-model="field.other_option_selected"
-                                           class="form-check-input"
-                                           type="checkbox"
-                                           ng-click="$ctrl.checkboxOtherOptionSelected(field)"
-                                           value="Свой вариант"
-                                           ng-checked="field.other_option_selected"
-                                           id="{{field.id + 'other_option_checkbox'}}">
-
-                                    <label class="form-check-label"
-                                           for="{{field.id + 'other_option_checkbox'}}">
-                                        Свой вариант
-                                    </label>
-                                </div>
-
-                                <div ng-if="field.other_option_selected" class="mt-2">
-                                    <input type="text" ng-model="field.editValueOtherOption" class="form-control"
-                                           placeholder="Свой вариант">
+                                <div ng-if="field.value['Свой вариант']" class="input-box__container">
+                                    <input type="text"
+                                           ng-model="field.otherOptionValue"
+                                           class="input-box__input"
+                                           placeholder="Свой вариант...">
                                 </div>
                             </div>
 
-                            <div ng-if="field.form_field.type == 'file'">
-                                <div ng-if="field.value.length > 0">
-                                    <table class="table table-bordered table-striped table-sm">
-                                        <thead class="thead-light">
-                                        <tr>
-                                            <th>Название</th>
-                                            <th>Действие</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr ng-repeat="file in field.value track by $index">
-                                            <td>{{file.name}}</td>
-                                            <td>
-                                                <button type="button" class="btn btn-danger btn-sm"
-                                                        ng-click="$ctrl.removeFile(field,$index)">
-                                                    Удалить
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <button type="button" class="form-control-file" ngf-select=""
-                                        ngf-keep="true"
-                                        ng-model="field.value"
-                                        ngf-change="$ctrl.validateFile($files, $file, $newFiles, $duplicateFiles, $invalidFiles, $event,field)"
-                                        ngf-multiple="{{field.form_field.max_files_count === 1 ? 'false' : 'true'}}"
-                                        accept="{{field.form_field.file_allows === 'specific' ? field.file_types : '*'}}"
-                                        ngf-max-size="10MB">
-                                    <span>выбрать файл</span>
-                                </button>
-                            </div>
+                            <div class="modal-full__input-box input-box" ng-if="field.form_field.type === 'file'">
+                                <label class="input-box__label">{{field.form_field.label}}</label>
 
+                                <div class="input-box__container">
+
+                                    <div class="input-box__files-box text-truncate">
+                                        <a class="input-box__sample-link"
+                                           ng-if="field.form_field.example_files"
+                                           ng-repeat="file in field.form_field.example_files"
+                                           href="/cabinet/download-file/{{file.path}}">
+                                            <svg width="20" height="20">
+                                                <use href="/img/icons.svg#download"></use>
+                                            </svg>
+                                            Скачать пример
+                                        </a>
+
+                                        <div class="input-box__file-box"
+                                             ng-if="field.value.length > 0"
+                                             ng-repeat="file in field.value">
+                                            <a class="input-box__file" href="/cabinet/download-file/{{file.path}}">{{file.name}}</a>
+                                            <a href="" ng-click="$ctrl.removeFile(field,$index)"
+                                               class="input-box__file-delete">
+                                                <svg width="24" height="24">
+                                                    <use href="/img/icons.svg#close-icon"></use>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <button type="button"
+                                            ng-if="appForm.isEditing"
+                                            class="input-box__btn button button--xs"
+                                            ngf-select=""
+                                            ngf-keep="true"
+                                            ng-model="field.value"
+                                            ngf-change="$ctrl.validateFile($files, $file, $newFiles, $duplicateFiles,$invalidFiles, $event,field)"
+                                            ngf-multiple="{{field.form_field.max_files_count === 1 ? 'false' : 'true'}}"
+                                            accept="{{field.form_field.file_allows === 'specific' ? field.file_types : '*'}}"
+                                            ngf-max-size="10MB">
+                                        <span>Загрузить файл</span>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                    </td>
-                </tr>
-            </table>
-
-            <div ng-show="appForm.isEditing" class="mt-2">
-                <button type="submit" class="btn btn-primary btn-sm">Обновить</button>
+                    </div>
+                    <button type="submit"
+                            class="application-section__btn button button--extra-lg"
+                            ng-if="appForm.isEditing">
+                        Сохранить
+                    </button>
+                </form>
             </div>
-
-        </div>
-    </form>
-</div>
-
-<hr>
-
-<h4>Действия:</h4>
-
-<form ng-submit="$ctrl.sendMessage()" class="mb-3">
-    <div class="form-group">
-        <label>Сообщение</label>
-        <textarea class="form-control" ng-model="$ctrl.message" rows="3"></textarea>
-    </div>
-    <div class="d-flex flex-column">
-        <div ng-repeat="file in $ctrl.attachedFiles track by $index" class="d-flex align-items-center">
-            <small class="text-muted">{{file.name}}</small>
-            <a class="btn btn-link text-decoration-none" ng-click="$ctrl.removeAttachedFile($index)"> &times;</a>
         </div>
     </div>
-    <div class="d-flex">
-        <button type="submit" class="btn btn-primary"
-                ng-disabled="$ctrl.message === '' && $ctrl.attachedFiles.length === 0">Отправить
-        </button>
-        <button type="button" class="btn btn-link" ngf-select=""
-                ngf-keep="true"
-                ng-model="$ctrl.attachedFiles"
-                ngf-multiple="true">
-            <span>Прикрепить файлы</span>
-        </button>
-    </div>
-</form>
+    <div class="tabs-inner__section chat-section">
 
+        <div class="chat-section__messages">
 
-<div class="card mb-2" ng-repeat="action in $ctrl.app.actions track by $index">
-    <div class="card-header">
-        User: {{action.user.full_name}}. Action: {{action.name}}.
-        <span class="float-right">{{action.created_at | amDateFormat : 'DD.MM HH:mm'}}</span>
-    </div>
-    <div class="card-body">
-        <div ng-if="action.name == 'application_user_message'">
-            <div class="card-text">
-                {{action.message}}
-            </div>
-            <hr>
-            <div class="card-comments" ng-if="action.additional_data.length">
-                Прикрепленные файлы:
-                <div ng-repeat="file in action.additional_data track by $index" class="d-flex align-items-center">
-                    <a href="/cabinet/download-file/{{file.path}}"><small class="text-muted">{{file.name}}</small></a>
+            <div ng-repeat="message in $ctrl.app.actions.message"
+                 ng-class="message.name === 'application_user_message' ? 'message-block--mine' : ''"
+                 class="chat-section__block message-block">
+
+                <div class="message-block__content">
+
+                    <div class="message-block__name">{{message.user.full_name}}</div>
+
+                    <div class="message-block__text message-block__text--bordered">
+                        {{message.message}}
+                    </div>
+
+                    <div class="message-block__row">
+                        <div>
+                            <a class="message-block__file"
+                               ng-if="message.additional_data.length"
+                               ng-repeat="file in message.additional_data track by $index"
+                               href="/cabinet/download-file/{{file.path}}">
+                                <svg width="45" height="45">
+                                    <use href="/img/icons.svg#pdf-icon"></use>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="message-block__date">{{message.created_at | amDateFormat : 'ddd. DD MMMM -HH:mm'}}
+                        </div>
+                    </div>
+
                 </div>
-                <div></div>
+
+                <img src="/img/user-avatar.png" alt="" class="message-block__person-img">
+
             </div>
+
         </div>
-        <div ng-if="action.name == 'application_updated'">
-            <button class="btn btn-link" ng-click="$ctrl.openDetails(action)">детали</button>
-        </div>
-        <div ng-if="action.name == 'application_sent'">
-            Анкета была отправлена.
-        </div>
+        <form ng-submit="$ctrl.sendMessage()" class="mb-3">
+            <div class="chat-section__message-area">
+
+                <textarea ng-model="$ctrl.message" class="chat-section__message-input"></textarea>
+
+
+                <a href=""
+                   class="chat-section__link-box"
+                   ngf-select=""
+                   ngf-keep="true"
+                   ng-model="$ctrl.attachedFiles"
+                   ngf-multiple="true">
+                    <svg class="chat-section__link-icon" width="24" height="24">
+                        <use href="/img/icons.svg#paper-clip"></use>
+                    </svg>
+                    Прикрепить файл
+                </a>
+
+            </div>
+            <div class="input-box__files-box">
+
+                <div class="input-box__file-box" ng-repeat="file in $ctrl.attachedFiles track by $index">
+                    <a class="input-box__file" href="">{{file.name}}</a>
+                    <a href="" ng-click="$ctrl.removeAttachedFile($index)" class="input-box__file-delete">
+                        <svg width="24" height="24">
+                            <use href="/img/icons.svg#close-icon"></use>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <button type="submit" class="chat-section__btn button button--extra-lg">Отправить</button>
+        </form>
     </div>
 </div>
+
+
+<!--<hr>-->
+
+<!--<h4>Действия:</h4>-->
+
+<!--<form ng-submit="$ctrl.sendMessage()" class="mb-3">-->
+<!--    <div class="form-group">-->
+<!--        <label>Сообщение</label>-->
+<!--        <textarea class="form-control" ng-model="$ctrl.message" rows="3"></textarea>-->
+<!--    </div>-->
+<!--    <div class="d-flex flex-column">-->
+<!--        <div ng-repeat="file in $ctrl.attachedFiles track by $index" class="d-flex align-items-center">-->
+<!--            <small class="text-muted">{{file.name}}</small>-->
+<!--            <a class="btn btn-link text-decoration-none" ng-click="$ctrl.removeAttachedFile($index)"> &times;</a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="d-flex">-->
+<!--        <button type="submit" class="btn btn-primary"-->
+<!--                ng-disabled="$ctrl.message === '' && $ctrl.attachedFiles.length === 0">Отправить-->
+<!--        </button>-->
+<!--        <button type="button" class="btn btn-link" ngf-select=""-->
+<!--                ngf-keep="true"-->
+<!--                ng-model="$ctrl.attachedFiles"-->
+<!--                ngf-multiple="true">-->
+<!--            <span>Прикрепить файлы</span>-->
+<!--        </button>-->
+<!--    </div>-->
+<!--</form>-->
+
+
+<!--<div class="card mb-2" ng-repeat="action in $ctrl.app.actions track by $index">-->
+<!--    <div class="card-header">-->
+<!--        User: {{action.user.full_name}}. Action: {{action.name}}.-->
+<!--        <span class="float-right">{{action.created_at | amDateFormat : 'DD.MM HH:mm'}}</span>-->
+<!--    </div>-->
+<!--    <div class="card-body">-->
+<!--        <div ng-if="action.name == 'application_user_message'">-->
+<!--            <div class="card-text">-->
+<!--                {{action.message}}-->
+<!--            </div>-->
+<!--            <hr>-->
+<!--            <div class="card-comments" ng-if="action.additional_data.length">-->
+<!--                Прикрепленные файлы:-->
+<!--                <div ng-repeat="file in action.additional_data track by $index" class="d-flex align-items-center">-->
+<!--                    <a href="/cabinet/download-file/{{file.path}}"><small class="text-muted">{{file.name}}</small></a>-->
+<!--                </div>-->
+<!--                <div></div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div ng-if="action.name == 'application_updated'">-->
+<!--            <button class="btn btn-link" ng-click="$ctrl.openDetails(action)">детали</button>-->
+<!--        </div>-->
+<!--        <div ng-if="action.name == 'application_sent'">-->
+<!--            Анкета была отправлена.-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
