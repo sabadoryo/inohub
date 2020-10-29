@@ -25,14 +25,22 @@
                 </div>
             </div>
 
-            <button class="application-section__toggle-btn button-back button-back--grey">
+            <button ng-if="$ctrl.formsVisible" class="application-section__toggle-btn button-back button-back--grey" ng-click="$ctrl.toggleForms()">
                 <svg class="button-back__icon" width="18" height="18">
                     <use href="/img/icons.svg#toggle-2"></use>
                 </svg>
                 Скрыть
             </button>
+
+            <button ng-if="!$ctrl.formsVisible" class="application-section__toggle-btn button-back button-back--grey button-back--rotate" ng-click="$ctrl.toggleForms()">
+                <svg class="button-back__icon" width="18" height="18">
+                    <use href="/img/icons.svg#toggle-2"></use>
+                </svg>
+                Показать
+            </button>
         </div>
-        <div class="application-section__body">
+
+        <div class="application-section__body" ng-if="$ctrl.formsVisible">
 
             <div class="application-section__block application-block"
                  ng-repeat="appForm in $ctrl.app.forms track by $index">

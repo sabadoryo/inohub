@@ -14,6 +14,8 @@ function controller($http, Auth, moment, $uibModal, Upload, $timeout) {
 
     let $ctrl = this;
 
+    $ctrl.formsVisible = true;
+
     $ctrl.message = '';
     $ctrl.attachedFiles = [];
 
@@ -243,5 +245,9 @@ function controller($http, Auth, moment, $uibModal, Upload, $timeout) {
 
     $ctrl.removeAttachedFile = function (index) {
         $ctrl.attachedFiles.splice(index, 1);
+    }
+
+    $ctrl.toggleForms = function () {
+        $ctrl.formsVisible = !$ctrl.formsVisible;
     }
 }
