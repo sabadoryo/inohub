@@ -1,0 +1,30 @@
+.benefit-section {
+
+    &__container {
+        @extend %container;
+    }
+
+    &__row {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+
+    &__heading {
+        @include text-style(2.4rem, 700, #181515);
+        line-height: 29px;
+    }
+
+    &__list {
+
+    }
+
+    &__item {
+        @include text-style(1.6rem, 600, #181515);
+        line-height: 19.5px;
+
+        &:not(:last-child) {
+            margin-bottom: 30px;
+        }
+    }
+}
