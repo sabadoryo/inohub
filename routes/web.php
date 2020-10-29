@@ -97,7 +97,7 @@ Route::group([
 
     Route::get('admin-users', 'AdminUsersController@index');
     Route::get('admin-users/get-list', 'AdminUsersController@getList');
-    Route::post('admin-users/{id}/change-active', 'AdminUsersController@changeActive');
+    Route::post('admin-users/{id}/update-roles', 'AdminUsersController@updateRoles');
 
     Route::get('roles', 'RolesController@index');
 

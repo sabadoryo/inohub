@@ -4,18 +4,17 @@ angular
     .module('app')
     .component('adminUsersControl', {
         template: require('./admin-users-control.html'),
-        controller: ['$http', '$uibModal', controller],
+        controller: ['$http', '$uibModal', 'notify', controller],
         bindings: {
             roles: '<',
         }
     });
     
-function controller($http, $uibModal) {
+function controller($http, $uibModal, notify) {
 
     let $ctrl = this;
 
     $ctrl.page = 1;
-    $ctrl.perPage = 10;
 
     $ctrl.$onInit = function () {
         $ctrl.getList();
@@ -36,11 +35,10 @@ function controller($http, $uibModal) {
 
     $ctrl.getList = () => {
         $http
-            .get('/control-panel/users/get-list', {
+            .get('/control-panel/admin-users/get-list', {
                 params: {
                     page: $ctrl.page,
                     status: $ctrl.status,
-                    per_page: $ctrl.perPage,
                     search: $ctrl.search,
                     role_id: $ctrl.roleId,
                 }
@@ -55,5 +53,29 @@ function controller($http, $uibModal) {
                     // todo handle error
                 }
             )
+    };
+
+    $ctrl.openUserEditModal = (index) => {
+    $uibModal
+        .open({
+            component: 'userEditModal',
+            resolve: {
+                user: function () {
+                    return $ctrl.users[index];
+                },
+                roles: function () {
+                    return $ctrl.roles;
+                }
+            }
+        }).result
+        .then((res) => {
+            $ctrl.users[index].roles = res.roles;
+            $ctrl.users[index].is_active = res.is_active;
+            notify({
+                message: 'Успешно обновлено',
+                duration: 2000,
+                classes: 'alert-success'
+            });
+        })
     };
 }

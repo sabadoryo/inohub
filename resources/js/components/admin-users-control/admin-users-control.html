@@ -11,7 +11,7 @@
         <div class="col-3">
             <select class="form-control"
                     ng-model="$ctrl.roleId"
-                    ng-options="role.id as role.name for role in $ctrl.roles">
+                    ng-options="role.id as role.label for role in $ctrl.roles">
                 <option value="">Роль</option>
             </select>
         </div>
@@ -58,9 +58,9 @@
             <span class="text-danger" ng-show="!user.is_active">Неактивный</span>
         </td>
         <td class="text-center">
-            <a href="" ng-href="/control-panel/{{user.id}}/edit" class="btn btn-primary btn-xs">
+            <button ng-click="$ctrl.openUserEditModal($index)" class="btn btn-primary btn-sm">
                 <i class="fa fa-edit"></i>
-            </a>
+            </button>
         </td>
     </tr>
     </tbody>
