@@ -19,6 +19,32 @@ class Organization extends Model
         'city_name'
     ];
 
+    public function modules()
+    {
+        return $this->belongsToMany(Module::class);
+    }
+    
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
+
+    public function roles()
+    {
+        return $this->hasMany(Role::class);
+    }
+
+    public function hasModule($moduleSlug)
+    {
+        foreach ($this->modules as $module) {
+            if ($module->slug == $moduleSlug) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public function getLogoUrlAttribute()
     {
         return \Storage::disk('public')->url($this->logo_path);

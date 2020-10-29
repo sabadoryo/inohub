@@ -1,0 +1,41 @@
+.black-fluid {
+
+    padding: 40px;
+    background-color: #181515;
+    border-radius: 7px;
+    position: relative;
+
+    &__circles {
+        position: absolute;
+        top: 25.11px;
+        left: 37.11px;
+    }
+
+    &__row {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        position: relative;
+        z-index: 2;
+    }
+
+    &__title {
+        @include text-style(2rem, 700, #ffffff);
+    }
+
+    &__info {
+        width: 504px;
+        position: relative;
+        z-index: 2;
+    }
+
+    &__text {
+        @include text-style(1.6rem, 400, #ffffff);
+        line-height: 19.5px;
+        margin-bottom: 20px;
+    }
+
+    &__btn {
+
+    }
+}

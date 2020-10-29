@@ -1,0 +1,45 @@
+.vacation-box {
+
+    width: 632px;
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 7px;
+    flex-shrink: 0;
+
+    &__row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 7px;
+    }
+
+    &__company {
+        @include text-style(1.4rem, 400, #181515);
+    }
+
+    &__salary {
+        @include text-style(1.6rem, 500, #181515);
+    }
+
+    &__section {
+        &:not(:last-child) {
+            margin-bottom: 30px;
+        }
+    }
+
+    &__heading {
+        @include text-style(1.8rem, 700, #181515);
+        line-height: 22px;
+    }
+
+    &__text {
+        @include text-style(1.6rem, 400, #181515);
+        line-height: 19.5px;
+    }
+
+    &__title {
+        @include text-style(1.6rem, 600, #181515);
+        line-height: 19.5px;
+        margin-bottom: 10px;
+    }
+}

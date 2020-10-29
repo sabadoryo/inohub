@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Member;
 use Illuminate\Http\Request;
 
-class MembersController extends Controller
+class MembersController extends ControlPanelController
 {
     public function index()
     {

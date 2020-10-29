@@ -11,17 +11,24 @@
 
         <div class="application-section__header">
             <div class="application-section__type">Программа</div>
-            <div class="application-section__title">Regional Incubation</div>
+            <div class="application-section__title">{{$ctrl.app.entity.name}}</div>
 
             <div class="application-section__details">
-                <div class="application-section__status application-section__status--success">Статус:
+                <div ng-if="$ctrl.app.status === 'decline'" class="application-section__status application-section__status--success">Статус:
                     <span>Подтвердили</span>
                 </div>
+                <div ng-if="$ctrl.app.status === 'success'" class="application-section__status application-section__status--error">Статус:
+                    <span>Подтвердили</span>
+                </div>
+                <div ng-if="$ctrl.app.status === 'process'" class="application-section__status">Статус:
+                    <span>На рассмотрении</span>
+                </div>
+
                 <div class="application-section__date">
                     <svg class="application-section__date-icon" width="16" height="18">
                         <use href="/img/icons.svg#calendar-grey"></use>
                     </svg>
-                    23.10.2020
+                    {{$ctrl.app.created_at | amDateFormat : 'DD.MM.YYYY'}}
                 </div>
             </div>
 
@@ -166,7 +173,7 @@
                                         <a class="input-box__sample-link"
                                            ng-if="field.form_field.example_files"
                                            ng-repeat="file in field.form_field.example_files"
-                                           href="/cabinet/download-file/{{file.path}}">
+                                           href="/cabinet/download-file/{{file.path}}/{{file.name}}">
                                             <svg width="20" height="20">
                                                 <use href="/img/icons.svg#download"></use>
                                             </svg>
@@ -176,8 +183,10 @@
                                         <div class="input-box__file-box"
                                              ng-if="field.value.length > 0"
                                              ng-repeat="file in field.value">
-                                            <a class="input-box__file" href="/cabinet/download-file/{{file.path}}">{{file.name}}</a>
-                                            <a href="" ng-click="$ctrl.removeFile(field,$index)"
+                                            <a class="input-box__file" href="/cabinet/download-file/{{file.path}}/{{file.name}}">{{file.name}}</a>
+                                            <a href=""
+                                               ng-show="appForm.isEditing"
+                                               ng-click="$ctrl.removeFile(field,$index)"
                                                class="input-box__file-delete">
                                                 <svg width="24" height="24">
                                                     <use href="/img/icons.svg#close-icon"></use>
@@ -217,8 +226,9 @@
 
             <div ng-repeat="message in $ctrl.app.actions.message"
                  ng-class="message.name === 'application_user_message' ? 'message-block--mine' : ''"
-                 class="chat-section__block message-block">
-
+                 class="chat-section__block message-block"
+                 id="message-{{ ::$index }}" scroll-to-last="message-{{ ::$index }}">
+                <img src="/img/user-avatar.png" ng-show="message.name === 'application_admin_message'" alt="" class="message-block__person-img">
                 <div class="message-block__content">
 
                     <div class="message-block__name">{{message.user.full_name}}</div>
@@ -232,7 +242,7 @@
                             <a class="message-block__file"
                                ng-if="message.additional_data.length"
                                ng-repeat="file in message.additional_data track by $index"
-                               href="/cabinet/download-file/{{file.path}}">
+                               href="/cabinet/download-file/{{file.path}}/{{file.name}}">
                                 <svg width="45" height="45">
                                     <use href="/img/icons.svg#pdf-icon"></use>
                                 </svg>
@@ -244,7 +254,7 @@
 
                 </div>
 
-                <img src="/img/user-avatar.png" alt="" class="message-block__person-img">
+                <img src="/img/user-avatar.png" ng-show="message.name === 'application_user_message'" alt="" class="message-block__person-img">
 
             </div>
 
@@ -284,61 +294,3 @@
         </form>
     </div>
 </div>
-
-
-<!--<hr>-->
-
-<!--<h4>Действия:</h4>-->
-
-<!--<form ng-submit="$ctrl.sendMessage()" class="mb-3">-->
-<!--    <div class="form-group">-->
-<!--        <label>Сообщение</label>-->
-<!--        <textarea class="form-control" ng-model="$ctrl.message" rows="3"></textarea>-->
-<!--    </div>-->
-<!--    <div class="d-flex flex-column">-->
-<!--        <div ng-repeat="file in $ctrl.attachedFiles track by $index" class="d-flex align-items-center">-->
-<!--            <small class="text-muted">{{file.name}}</small>-->
-<!--            <a class="btn btn-link text-decoration-none" ng-click="$ctrl.removeAttachedFile($index)"> &times;</a>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <div class="d-flex">-->
-<!--        <button type="submit" class="btn btn-primary"-->
-<!--                ng-disabled="$ctrl.message === '' && $ctrl.attachedFiles.length === 0">Отправить-->
-<!--        </button>-->
-<!--        <button type="button" class="btn btn-link" ngf-select=""-->
-<!--                ngf-keep="true"-->
-<!--                ng-model="$ctrl.attachedFiles"-->
-<!--                ngf-multiple="true">-->
-<!--            <span>Прикрепить файлы</span>-->
-<!--        </button>-->
-<!--    </div>-->
-<!--</form>-->
-
-
-<!--<div class="card mb-2" ng-repeat="action in $ctrl.app.actions track by $index">-->
-<!--    <div class="card-header">-->
-<!--        User: {{action.user.full_name}}. Action: {{action.name}}.-->
-<!--        <span class="float-right">{{action.created_at | amDateFormat : 'DD.MM HH:mm'}}</span>-->
-<!--    </div>-->
-<!--    <div class="card-body">-->
-<!--        <div ng-if="action.name == 'application_user_message'">-->
-<!--            <div class="card-text">-->
-<!--                {{action.message}}-->
-<!--            </div>-->
-<!--            <hr>-->
-<!--            <div class="card-comments" ng-if="action.additional_data.length">-->
-<!--                Прикрепленные файлы:-->
-<!--                <div ng-repeat="file in action.additional_data track by $index" class="d-flex align-items-center">-->
-<!--                    <a href="/cabinet/download-file/{{file.path}}"><small class="text-muted">{{file.name}}</small></a>-->
-<!--                </div>-->
-<!--                <div></div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div ng-if="action.name == 'application_updated'">-->
-<!--            <button class="btn btn-link" ng-click="$ctrl.openDetails(action)">детали</button>-->
-<!--        </div>-->
-<!--        <div ng-if="action.name == 'application_sent'">-->
-<!--            Анкета была отправлена.-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->

@@ -1,0 +1,52 @@
+<div class="modal-header">
+    <h5 class="modal-title">{{ $ctrl.user.full_name }}</h5>
+    <button type="button" class="close" ng-click="$ctrl.dismiss()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<form ng-submit="$ctrl.submit()">
+    <div class="modal-body">
+
+        <ul class="list-group mb-3">
+            <li class="list-group-item"
+                ng-repeat="role in $ctrl.roles track by $index">
+
+                {{ role.label }}
+
+                <div class="custom-control custom-switch float-right">
+                    <input type="checkbox"
+                           ng-model="role.isSelected"
+                           class="custom-control-input"
+                           id="role_{{role.id}}">
+                    <label class="custom-control-label"
+                           for="role_{{role.id}}"
+                           style="font-weight: normal">
+                        {{role.isSelected ? 'Включен' : 'Выключен'}}
+                    </label>
+                </div>
+
+            </li>
+        </ul>
+
+        <div>
+            Статус пользователя:
+
+            <div class="custom-control custom-switch float-right">
+                <input type="checkbox"
+                       ng-model="$ctrl.isActive"
+                       class="custom-control-input"
+                       id="user">
+                <label class="custom-control-label"
+                       for="user"
+                       style="font-weight: normal">
+                    {{$ctrl.isActive ? 'Активен' : 'Неактивен'}}
+                </label>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" ng-click="$ctrl.dismiss()">Отмена</button>
+        <button type="submit" class="btn btn-primary">Обновить</button>
+    </div>
+</form>

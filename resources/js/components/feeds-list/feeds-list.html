@@ -23,6 +23,16 @@
 
     <div class="feed__list">
 
+        <div class="feed__event-announcement event-announcement">
+            <svg class="event-announcement__icon" width="60" height="60">
+                <use href="/img/icons.svg#announcement"></use>
+            </svg>
+
+            <div class="event-announcement__text">
+                Astana hub объявил о новой программе
+            </div>
+        </div>
+
         <div ng-repeat="feed in $ctrl.feeds track by $index">
 
             <div ng-if="feed.entity_model == 'App\\Post'" class="feed__blog blog-box">

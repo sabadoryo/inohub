@@ -72,7 +72,29 @@ angular
                 });
             }
         };
-    });
+    }).directive('scrollToLast', ['$location', '$anchorScroll', '$timeout', function ($location, $anchorScroll, $timeout) {
+
+    function linkFn(scope, element, attrs) {
+        $timeout(function () {
+            let kekw = 10;
+            angular.element(function () {
+                kekw = true;
+                console.log('lol');
+            });
+            if (kekw === 5) {
+                $location.hash(attrs.scrollToLast);
+                $anchorScroll();
+            }
+        });
+    }
+
+    return {
+        restrict: 'AE',
+        scope: {},
+        link: linkFn
+    };
+
+}]);
 
 
 require('./auth');
@@ -88,8 +110,6 @@ require('./components/organization-create-form/organization-create-form');
 require('./components/organization-form/organization-form');
 require('./components/control-panel/control-panel');
 // require('./components/programs-form/programs-create-form');
-
-
 
 
 require('./components/application-modal/application-modal');
@@ -186,3 +206,5 @@ require('./components/corp-task-solutions-edit/corp-task-solutions-edit');
 
 require('./components/hub-space-tenants/hub-space-tenants');
 require('./components/hub-space-tenants-create/hub-space-tenants-create');
+require('./components/modules-control/modules-control');
+require('./components/user-edit-modal/user-edit-modal');

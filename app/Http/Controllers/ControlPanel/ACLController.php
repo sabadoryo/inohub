@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\ControlPanel;
 
 use App\Http\Controllers\Controller;
+use App\Module;
 use Illuminate\Http\Request;
 use App\Permission;
 use App\Role;
 use Illuminate\Support\Facades\Auth;
+use Psy\Util\Str;
 
-class ACLController extends Controller
+class ACLController extends ControlPanelController
 {
     public function index()
     {
@@ -17,9 +19,21 @@ class ACLController extends Controller
             [null, 'ACL']
         ];
         
-        $roles = Role::with('permissions')->withCount('users')->get();
+        $roles = Role::where('organization_id', $this->organization->id)
+            ->with('permissions')
+            ->get();
         
-        $permissions = Permission::all();
+        $modules = $this->organization->modules()
+            ->with('permissions')
+            ->get();
+
+        $defaultModules = Module::where('is_default', true)
+            ->with('permissions')
+            ->get();
+
+        foreach ($defaultModules as $module) {
+            $modules->push($module);
+        }
 
         return view('control-panel.component', [
             'PAGE_TITLE' => 'Access control list',
@@ -28,7 +42,7 @@ class ACLController extends Controller
             'component' => 'acl-control',
             'bindings' => [
                 'roles' => $roles,
-                'permissions' => $permissions
+                'modules' => $modules
             ]
         ]);
     }
@@ -36,19 +50,28 @@ class ACLController extends Controller
     public function addRole(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique:roles|min:3|max:255',
+            'label' => 'required|min:3|max:255',
         ], [
-            'name.required' => 'Введите название',
-            'name.unique' => 'Название роли должно быть уникальным',
-            'name.min' => 'Название роли должно быть больше :min символов',
-            'name.max' => 'Название роли должно быть меньше :max символов',
+            'label.required' => 'Введите название',
+            'label.min' => 'Название роли должно быть больше :min символов',
+            'label.max' => 'Название роли должно быть меньше :max символов',
         ]);
         
+        $organization_id = \Auth::user()->organization_id;
+        $name = \Str::slug($request->label, '_') . "_" . $organization_id;
+        
+        $item = Role::where('name', $name)->first();
+        if ($item) {
+            return response()->json(['errors' => ['label' => [0 => 'Такое имя уже существует']], 'message' => 'The given data was invalid.'], 422);
+        }
+        
         $role = Role::create([
-            'name' => $request->name,
+            'label' => $request->label,
+            'name' => $name,
+            'organization_id' => $organization_id,
+            'type' => 'organization',
         ]);
-        $role->users_count = 0;
-        $role->permissions = [];
+
         return ['role' => $role];
     }
 

@@ -41,6 +41,11 @@
                 color: #27AE60;
             }
         }
+        &--decline {
+            span {
+                color: $elem-color;
+            }
+        }
     }
 
     &__date {
