@@ -1,0 +1,41 @@
+<div class="card">
+    <div class="card-header">
+        <a class="btn btn-primary" href="/control-panel/corp-task-solutions/create">Добавить решение</a>
+    </div>
+
+    <div class="card-body">
+        <table class="table table-bordered table-striped table-sm">
+            <thead class="thead-light">
+            <tr>
+                <th>ID</th>
+                <th>Название компании</th>
+                <th>Сайт компании</th>
+                <th>Название задания</th>
+                <th>Описание решения</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="solution in $ctrl.solutions track by $index">
+                <td>{{solution.id}}</td>
+                <td>{{solution.company_name}}</td>
+                <td><a ng-href="{{solution.company_site}}">{{solution.company_site}}</a></td>
+                <td>
+                    <a ng-href="/control-panel/corp-tasks/{{solution.task.id}}/edit">{{solution.task.title}}</a>
+                </td>
+                <td>{{solution.description | truncate : 25 : '...'}}</td>
+                <td style="display: flex; border: none; padding: 10px 5px; text-align: center">
+                    <a ng-href="/control-panel/corp-task-solutions/{{solution.id}}/edit">
+                        <span class="fas fa-edit" style="margin-right: 10px; color: dodgerblue"></span>
+                    </a>
+                    <a href=""
+                       ng-click="$ctrl.removeSolution(solution.id, solution.task.title)"
+                       ng-disabled="$ctrl.loading">
+                        <span class="fas fa-times" style="color: red;"></span>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

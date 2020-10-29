@@ -38,4 +38,10 @@
     &__button-back {
         margin-bottom: 20px;
     }
+
+    &__events {
+        &:not(:last-child) {
+            margin-bottom: 50px;
+        }
+    }
 }

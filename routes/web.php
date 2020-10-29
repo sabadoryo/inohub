@@ -10,6 +10,8 @@ Route::get('get-news-list', 'MainPageController@getNewsList');
 Route::get('get-feeds-list', 'MainPageController@getFeedsList');
 Route::get('news/{id}', 'MainPageController@newsPage');
 
+Route::get('select-language/{lang}', 'SelectLanguageController@selectLanguage');
+
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'cabinet', 'middleware' => ['auth']], function () {
         Route::get('', 'CabinetController@profile');
@@ -25,7 +27,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('create', 'PostsController@create');
         Route::post('', 'PostsController@store');
     });
-    
+
     Route::get('register-project', 'RegisterProjectController@form');
     Route::post('register-project', 'RegisterProjectController@store');
 });
@@ -35,6 +37,7 @@ Route::group(['prefix' => 'astana-hub'], function () {
     Route::get('programs', 'AstanaHubController@programs');
     Route::get('programs/{id}', 'AstanaHubController@getProgram');
     Route::get('corporate-innovations', 'AstanaHubController@corporateInnovations');
+    Route::get('corporate-innovations/get-list', 'AstanaHubController@getCorpTasksList');
     Route::get('hub-space', 'AstanaHubController@hubSpace');
     Route::get('r-and-d', 'AstanaHubController@randd');
     Route::get('resources', 'AstanaHubController@resources');
@@ -78,6 +81,9 @@ Route::group([
 ], function () {
 
     Route::get('/', 'ControlPanelController@index');
+    Route::get('/get-applications-list', 'ControlPanelController@getApplicationsList');
+    Route::get('/get-chart-members-list', 'ControlPanelController@getChartMembersList');
+    Route::get('/get-users-list', 'ControlPanelController@getUsersList');
 
     Route::get('programs', 'ProgramsController@index');
     Route::get('programs/get-list', 'ProgramsController@getList');
@@ -137,7 +143,7 @@ Route::group([
     Route::get('posts', 'PostsController@index');
     Route::get('posts/get-list', 'PostsController@getList');
     Route::post('posts/{id}/update-status', 'PostsController@updateStatus');
-    
+
     Route::get('projects', 'ProjectsController@index');
     Route::get('projects/get-list', 'ProjectsController@getList');
     Route::post('projects/{id}/update-status', 'ProjectsController@updateStatus');
@@ -185,6 +191,22 @@ Route::group([
     Route::get('sm/tasks/{id}/edit', 'SmartStoreTaskCompaniesController@edit');
     Route::post('sm/tasks/{id}/update', 'SmartStoreTaskCompaniesController@update');
     Route::post('sm/tasks/{id}/remove', 'SmartStoreTaskCompaniesController@remove');
+
+    Route::get('corp-tasks', 'CorporateInnovationTasksController@index');
+    Route::get('corp-tasks/get-list', 'CorporateInnovationTasksController@getList');
+    Route::get('corp-tasks/create', 'CorporateInnovationTasksController@create');
+    Route::post('corp-tasks', 'CorporateInnovationTasksController@store');
+    Route::get('corp-tasks/{id}/edit', 'CorporateInnovationTasksController@edit');
+    Route::post('corp-tasks/{id}/update', 'CorporateInnovationTasksController@update');
+    Route::post('corp-tasks/{id}/remove', 'CorporateInnovationTasksController@remove');
+
+    Route::get('corp-task-solutions', 'CorporateInnovationTaskSolutionsController@index');
+    Route::get('corp-task-solutions/get-list', 'CorporateInnovationTaskSolutionsController@getList');
+    Route::get('corp-task-solutions/create', 'CorporateInnovationTaskSolutionsController@create');
+    Route::post('corp-task-solutions', 'CorporateInnovationTaskSolutionsController@store');
+    Route::get('corp-task-solutions/{id}/edit', 'CorporateInnovationTaskSolutionsController@edit');
+    Route::post('corp-task-solutions/{id}/update', 'CorporateInnovationTaskSolutionsController@update');
+    Route::post('corp-task-solutions/{id}/remove', 'CorporateInnovationTaskSolutionsController@remove');
 
 });
 
@@ -269,4 +291,28 @@ Route::get('news-page', function () {
 
 Route::get('register-techpark', function () {
     return view('register-techpark');
+});
+
+Route::get('startup-page', function () {
+    return view('startup-page');
+});
+
+Route::get('investors-page', function () {
+    return view('investors-page');
+});
+
+Route::get('event-page', function () {
+    return view('event-page');
+});
+
+Route::get('tech-garden-store-2', function () {
+    return view('tech-garden-store-2');
+});
+
+Route::get('tech-garden-lab-1', function () {
+    return view('tech-garden-lab-1');
+});
+
+Route::get('tech-garden-lab-2', function () {
+    return view('tech-garden-lab-2');
 });

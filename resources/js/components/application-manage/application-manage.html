@@ -184,6 +184,20 @@
     Принять и добавить задачу
 </a>
 
+<a href=""
+   ng-show="$ctrl.application.entity_model == 'App\\Module' && $ctrl.application.entity.slug == 'corp-task'"
+   ng-href="/control-panel/corp-tasks/create?application_id={{$ctrl.application.id}}"
+   class="btn btn-success">
+    Принять и добавить задачу
+</a>
+
+<a href=""
+   ng-show="$ctrl.application.entity_model == 'App\\CorpTask' && $ctrl.application.entity.slug == 'corp-task-solutions'"
+   ng-href="/control-panel/corp-task-solutions/create?application_id={{$ctrl.application.id}}"
+   class="btn btn-success">
+    Принять и добавить решение
+</a>
+
 <br>
 
 <div>

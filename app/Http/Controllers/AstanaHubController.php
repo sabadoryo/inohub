@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CorpTask;
 use App\Passport;
 use App\Program;
 use Illuminate\Http\Request;
@@ -23,7 +24,11 @@ class AstanaHubController extends Controller
 
     public function programs()
     {
-        $bindings = [];
+        $programs = Program::all();
+
+        $bindings = [
+            'programs' => $programs
+        ];
 
         return view('main.astana-hub', [
             'component' => 'astana-hub-programs',
@@ -41,6 +46,13 @@ class AstanaHubController extends Controller
             'bindings' => $bindings,
             'activePage' => 'corp-innovations',
         ]);
+    }
+
+    public function getCorpTasksList()
+    {
+        $tasks = CorpTask::all();
+
+        return ['tasks' => $tasks];
     }
 
     public function hubSpace()

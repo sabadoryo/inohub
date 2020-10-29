@@ -1,0 +1,17 @@
+.fluid-block {
+
+    padding: 40px;
+    background-color: #57A695;
+    border-radius: 7px;
+
+    &__title {
+        @include text-style(2rem, 700, #ffffff);
+        line-height: 24px;
+        margin-bottom: 20px;
+    }
+
+    &__subtitle {
+        @include text-style(1.6rem, 400, #ffffff);
+        line-height: 19.5px;
+    }
+}

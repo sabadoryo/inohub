@@ -1,4 +1,6 @@
 .advantages {
+    $e: &;
+
     padding: 40px 130px;
     background-color: #ffffff;
     border-radius: 7px;
@@ -22,6 +24,14 @@
         grid-template-columns: repeat(2, 1fr);
         justify-content: space-between;
         grid-gap: 15px;
+
+        &--black-line {
+            #{$e}__item {
+                &:before {
+                    background-color: #181515;
+                }
+            }
+        }
     }
 
     &__item {

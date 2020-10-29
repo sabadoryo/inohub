@@ -6,6 +6,7 @@ window.$ = window.jQuery = require('jquery');
 
 window.grapesjs = require('grapesjs');
 
+require('chart.js');
 require('bootstrap');
 require('overlayscrollbars/js/jquery.overlayScrollbars');
 // import Echo from 'laravel-echo';s
@@ -46,8 +47,15 @@ $( document ).ready(function() {
         },
     });
 
+    var swiper3 = new Swiper('.swiper-3-slides', {
+        slidesPerView: 3,
+        spaceBetween: 24,
 
-
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
 });
 // var swiper = new Swiper('.swiper-container', {
 //     slidesPerView: 2,

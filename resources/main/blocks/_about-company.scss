@@ -37,6 +37,7 @@
 
         th {
             @include text-style(1.8rem, 700, #181515);
+            width: 200px;
         }
 
         td {
@@ -58,6 +59,7 @@
         th {
             @include text-style(1.6rem, 400, #181515);
             padding: 0 0 10px 0;
+            width: auto;
         }
 
         td {
