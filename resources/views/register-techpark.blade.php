@@ -258,8 +258,83 @@
                         Регистрация будет проходить онлайн на сайте технопарка.
                     </div>
 
-                    <div class="as-timeline__block__subtitle">
+                    <div class="as-timeline__block-subtitle">
                         Необходимо заполнить электронное заявление и обязательно прикрепить все запрашиваемые документы.
+                    </div>
+                </div>
+
+                <div class="as-timeline__block">
+                    <div class="as-timeline__block-number">
+                        02
+                    </div>
+
+                    <div class="as-timeline__block-title">
+                        Ожидать результаты первичной обработки документов
+                    </div>
+
+                    <div class="as-timeline__block-subtitle">
+                        На этом этапе технопарк будет проверять наличие всех документов и информации. Если какой-то из
+                        документов не будет соответствовать требованиям, технопарк не примет вашу анкету и вернет
+                        документы на доработку.
+                    </div>
+                </div>
+
+                <div class="as-timeline__block">
+                    <div class="as-timeline__block-number">
+                        03
+                    </div>
+
+                    <div class="as-timeline__block-title">
+                        Ожидать решения комиссии
+                    </div>
+
+                    <div class="as-timeline__block-subtitle">
+                        В течение 10 рабочих дней вам на почту придет письмо с решением комиссии. Вы получите письмо при
+                        любом раскладе, будь то положительное или отрицательное решение комиссии.
+                    </div>
+                </div>
+
+                <div class="as-timeline__block">
+                    <div class="as-timeline__block-number">
+                        04
+                    </div>
+
+                    <div class="as-timeline__block-title">
+                        Подтверждение
+                    </div>
+
+                    <div class="as-timeline__block-subtitle">
+                        Если вы прошли два этапа отбора комиссии, вы получите свидетельство участника технопарка Astana
+                        Hub. Это бумажный документ, который будет подтверждать вашу регистрацию.
+                    </div>
+                </div>
+
+                <div class="as-timeline__block">
+                    <div class="as-timeline__block-number">
+                        05
+                    </div>
+
+                    <div class="as-timeline__block-title">
+                        Договор
+                    </div>
+
+                    <div class="as-timeline__block-subtitle">
+                        Заключить Договор с Astana Hub, где будут прописаны условия деятельности участника технопарка.
+                    </div>
+                </div>
+
+                <div class="as-timeline__block">
+                    <div class="as-timeline__block-number">
+                        06
+                    </div>
+
+                    <div class="as-timeline__block-title">
+                        Результат
+                    </div>
+
+                    <div class="as-timeline__block-subtitle">
+                        После всех этапов вас включат в Перечень участников Astana Hub, после чего логотип и описание
+                        вашего проекта будут опубликованы на сайте технопарка.
                     </div>
                 </div>
 
