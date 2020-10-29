@@ -3,7 +3,7 @@ import angular from "angular";
 angular
     .module('app')
     .component('cabinetApplicationStatus', {
-        template: require('./cabnet-application-status.html'),
+        template: require('./cabinet-application-status.html'),
         controller: ['$http', 'Auth', 'moment', '$uibModal', 'Upload', controller],
         bindings: {
             app: '<'
