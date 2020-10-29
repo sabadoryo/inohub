@@ -8,7 +8,7 @@
         <span class="brand-text font-weight-light">TechHub</span>
     </a>
 
-    <ul class="sidebar">
+    <div class="sidebar">
 
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
@@ -32,6 +32,23 @@
                     </a>
                 </li>
 
+                @if($currentOrganization->hasModule('astanahub_members'))
+                    <li class="nav-item">
+                        <a href="/control-panel/members" class="nav-link {{$activePage == 'members' ? 'active' : ''}}">
+                            <i class="nav-icon fas fa-copy"></i>
+                            <p>Участники</p>
+                        </a>
+                    </li>
+                @endif
+
+                <li class="nav-item">
+                    <a href="/control-panel/programs" class="nav-link {{$activePage == 'programs' ? 'active' : ''}}">
+                        <i class="nav-icon fab fa-buromobelexperte"></i>
+                        <p>Программы</p>
+                    </a>
+                </li>
+
+
                 <li class="nav-item">
                     <a href="/control-panel/applications" class="nav-link {{$activePage == 'applications' ? 'active' : ''}}">
                         <i class="nav-icon fas fa-copy"></i>
@@ -41,12 +58,6 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a href="/control-panel/programs" class="nav-link {{$activePage == 'programs' ? 'active' : ''}}">
-                        <i class="nav-icon fab fa-buromobelexperte"></i>
-                        <p>Программы</p>
-                    </a>
-                </li>
 
                 <li class="nav-item">
                     <a href="/control-panel/news" class="nav-link {{$activePage == 'news' ? 'active' : ''}}">
@@ -128,11 +139,6 @@
                         </a>
                     </li>
                 @endcan
-
-
-
-
-
 
                 <li class="nav-item">
                     <a href="#" class="nav-link">

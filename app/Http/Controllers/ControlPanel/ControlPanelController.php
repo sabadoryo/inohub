@@ -7,6 +7,22 @@ use Illuminate\Http\Request;
 
 class ControlPanelController extends Controller
 {
+    protected $organization;
+
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            $this->organization = \Auth::user()
+                ->organization()
+                ->with('modules')
+                ->first();
+
+            view()->share('currentOrganization', $this->organization);
+
+            return $next($request);
+        });
+    }
+
     public function index()
     {
         return view('control-panel.component', [

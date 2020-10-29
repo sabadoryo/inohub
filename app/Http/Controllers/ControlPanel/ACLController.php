@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\ControlPanel;
 
 use App\Http\Controllers\Controller;
+use App\Module;
 use Illuminate\Http\Request;
 use App\Permission;
 use App\Role;
 use Illuminate\Support\Facades\Auth;
 
-class ACLController extends Controller
+class ACLController extends ControlPanelController
 {
     public function index()
     {
@@ -17,9 +18,14 @@ class ACLController extends Controller
             [null, 'ACL']
         ];
         
-        $roles = Role::with('permissions')->withCount('users')->get();
+        $roles = Role::where('organization_id', $this->organization->id)
+            ->with('permissions')
+            ->withCount('users')
+            ->get();
         
-        $permissions = Permission::all();
+        $modules = $this->organization->modules()
+            ->with('permissions')
+            ->get();
 
         return view('control-panel.component', [
             'PAGE_TITLE' => 'Access control list',
@@ -28,7 +34,7 @@ class ACLController extends Controller
             'component' => 'acl-control',
             'bindings' => [
                 'roles' => $roles,
-                'permissions' => $permissions
+                'modules' => $modules
             ]
         ]);
     }

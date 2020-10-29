@@ -74,7 +74,7 @@ Route::post('applications/{id}/send-message', 'ApplicationsController@sendMessag
 Route::group([
     'prefix' => 'control-panel',
     'namespace' => 'ControlPanel',
-    'middleware' => 'auth'
+    'middleware' => ['auth', 'controlPanelAuth']
 ], function () {
 
     Route::get('/', 'ControlPanelController@index');
@@ -193,6 +193,10 @@ Route::group([
     'namespace' => 'Admin',
     'middleware' => 'auth'
 ], function () {
+
+    Route::get('modules', 'ModulesController@index');
+    Route::post('modules/attach-module-to-org', 'ModulesController@attachModuleToOrg');
+    Route::post('modules/detach-module-from-org', 'ModulesController@detachModuleFromOrg');
 
     Route::get('organizations', 'OrganizationsController@index');
     Route::get('organizations/create', 'OrganizationsController@create');

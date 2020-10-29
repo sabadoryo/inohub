@@ -7,7 +7,7 @@ angular
         controller: ['$timeout', '$http', 'notify', '$uibModal', controller],
         bindings: {
             roles: '<',
-            permissions: '<',
+            modules: '<',
         }
     });
     
