@@ -1,27 +1,52 @@
-<table class="table table-bordered table-striped">
-    <thead class="thead-light">
-    <tr>
-        <th>№</th>
-        <th>Тип</th>
-        <th>Название</th>
-        <th>Статус</th>
-        <th>Дата</th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr ng-repeat="app in $ctrl.applications track by $index">
-        <td>{{app.id}}</td>
-        <td>{{app.entity_model}}</td>
-        <td ng-switch="app.entity_model">
-            <div ng-switch-when="App\Program">{{app.entity.title}}</div>
-            <div ng-switch-when="App\Module">{{app.entity.name}}</div>
-        </td>
-        <td>{{app.status}}</td>
-        <td>{{app.created_at | amDateFormat : 'DD.MM HH:mm'}}</td>
-        <td class="text-center">
-            <a href="" ng-href="/cabinet/applications/{{app.id}}">открыть</a>
-        </td>
-    </tr>
-    </tbody>
-</table>
+<div class="tabs-inner__section-filter section-filter">
+
+    <div class="section-filter__title">6 заявок</div>
+
+    <div class="section-filter__btn-group">
+        <button class="section-filter__btn button-back button-back--icon-right button-back--rotate button-back--white">
+            Все
+            <svg class="button-back__icon" width="18" height="18">
+                <use href="/img/icons.svg#toggle-2"></use>
+            </svg>
+        </button>
+
+        <button class="section-filter__btn button-back button-back--icon-right button-back--rotate button-back--white">
+            Статус
+            <svg class="button-back__icon" width="18" height="18">
+                <use href="/img/icons.svg#toggle-2"></use>
+            </svg>
+        </button>
+    </div>
+
+</div>
+
+<div class="tabs-inner__section application-list">
+
+    <div class="application-list__items">
+
+        <a href=""
+           class="application-list__item"
+           ng-href="/cabinet/applications/{{app.id}}"
+           ng-repeat="app in $ctrl.applications track by $index">
+
+            <div class="application-list__type">
+                Мероприятие
+            </div>
+
+            <div class="application-list__title">
+                Speaker Night
+            </div>
+
+            <div class="application-list__status">
+                На рассмотрении
+            </div>
+
+            <div class="application-list__date">
+                23 Окт.
+            </div>
+
+        </a>
+
+    </div>
+
+</div>

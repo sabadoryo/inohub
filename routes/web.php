@@ -11,16 +11,15 @@ Route::get('get-feeds-list', 'MainPageController@getFeedsList');
 Route::get('news/{id}', 'MainPageController@newsPage');
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::group(['prefix' => 'cabinet'], function () {
+    Route::group(['prefix' => 'cabinet', 'middleware' => ['auth']], function () {
         Route::get('', 'CabinetController@profile');
         Route::get('applications', 'CabinetController@applications');
-        Route::get('download-file/{path}', 'CabinetController@downloadFile')->where('path',  '(.*)');
-        Route::get('project', 'CabinetController@project');
-        Route::post('update-roles', 'CabinetController@updateRoles');
         Route::get('applications/{id}', 'CabinetController@application');
+        Route::get('notifications', 'CabinetController@notifications');
         Route::post('applications/{id}/update-form', 'CabinetController@updateForm');
         Route::post('applications/{id}/send-message', 'CabinetController@sendMessage');
         Route::get('get-applications', 'CabinetController@getApplications');
+        Route::get('download-file/{path}', 'CabinetController@downloadFile')->where('path',  '(.*)');
     });
     Route::group(['prefix' => 'posts'], function () {
         Route::get('create', 'PostsController@create');
@@ -100,8 +99,6 @@ Route::group([
     Route::post('acl/detach-permission-from-role', 'ACLController@detachPermissionFromRole');
     Route::post('acl/add-role', 'ACLController@addRole');
 
-
-
     Route::get('images', 'ImagesController@index');
     Route::post('images', 'ImagesController@store');
 
@@ -129,6 +126,10 @@ Route::group([
     Route::get('vacancies/{id}/main', 'VacanciesController@mainForm');
     Route::post('vacancies/{id}/update-main', 'VacanciesController@updateMain');
     Route::post('vacancies/{id}/publish', 'VacanciesController@publish');
+    
+    Route::get('posts', 'PostsController@index');
+    Route::get('posts/get-list', 'PostsController@getList');
+    Route::post('posts/{id}/update-status', 'PostsController@updateStatus');
 
     Route::get('applications', 'ApplicationsController@index');
     Route::get('applications/get-list', 'ApplicationsController@getList');

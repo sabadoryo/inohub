@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     protected $fillable = [
+        'user_id',
         'title',
         'content',
         'image_path',
@@ -27,5 +28,10 @@ class Post extends Model
         return $this->image_path ? \Storage::disk('public')->url(
             $this->image_path
         ) : null;
+    }
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
