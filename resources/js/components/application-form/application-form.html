@@ -1,0 +1,243 @@
+<a href="" class="modal-full__close" ng-click="$ctrl.dismiss()">
+    <svg width="28" height="28"><use href="/img/icons.svg#close-icon"></use></svg>
+</a>
+
+<div ng-repeat="form in $ctrl.forms track by $index" class="modal-full__step">
+
+    <div class="modal-full__row">
+
+        <div class="modal-full__heading"
+             ng-class="{'modal-full__heading--active': $ctrl.curForm == $index}">
+            {{$index + 1}}. {{form.title}}
+        </div>
+
+        <a href="" class="modal-full__autocomplete" ng-show="$ctrl.curForm == $index">
+            Автозаполнить данные
+            <svg class="modal-full__warning-icon" width="24" height="24">
+                <use href="/img/icons.svg#warning-icon"></use>
+            </svg>
+        </a>
+
+    </div>
+
+    <form ng-submit="$ctrl.submit($index)" ng-show="$ctrl.curForm === $index">
+
+        <div class="modal-full__list">
+
+            <div ng-repeat="field in form.fields track by field.id" class="input-box">
+
+                <label class="input-box__label">{{field.label}}</label>
+
+                <div ng-if="field.type === 'text'" class="input-box__container">
+                    <input type="text"
+                           class="input-box__input"
+                           ng-model="field.value"
+                           ng-required="field.is_required">
+                </div>
+
+                <div ng-if="field.type == 'textarea'" class="input-box__container">
+                    <textarea class="input-box__textarea"
+                              ng-model="field.value"
+                              ng-required="field.is_required"></textarea>
+                </div>
+
+                <div ng-if="field.type == 'select'" class="input-box__container">
+
+                    <select class="input-box__input"
+                            ng-init="field.other_option ? field.options.push({'val' : 'Свой вариант'}) : ''"
+                            ng-model="field.value"
+                            ng-change="$ctrl.selectOtherOptionSelected(field)"
+                            ng-options="c as c.val for c in field.options"
+                            ng-required="field.is_required">
+                        <option value="">Не выбрано</option>
+                    </select>
+
+                    <svg class="input-box__select-icon" width="24" height="24">
+                        <use href="/img/icons.svg#chevron-down"></use>
+                    </svg>
+
+                    <div ng-if="field.otherOptionSelected" class="input-box__container">
+                        <input type="text"
+                               ng-model="field.otherOptionValue"
+                               class="input-box__input"
+                               placeholder="Свой вариант...">
+                    </div>
+
+                </div>
+
+                <div ng-if="field.type == 'radio'">
+
+                    <div ng-repeat="option in field.options track by $index" class="input-box__radio-item">
+
+                        <label class="custom-radio-box">
+
+                            <input type="radio"
+                                   ng-model="field.value"
+                                   ng-click="$ctrl.radioOtherOptionSelected(field)"
+                                   class="custom-radio-box__radio"
+                                   name="field.id"
+                                   id="{{field.id + $index + option.val}}"
+                                   value="{{option.val}}"
+                                   ng-required="field.is_required">
+
+                            <span class="custom-radio-box__checkmark"></span>
+
+                            {{option.val}}
+
+                        </label>
+
+                    </div>
+
+                    <div ng-if="field.other_option" class="input-box__radio-item">
+
+                        <label class="input-box__radio-box custom-radio-box">
+
+                            <input type="radio"
+                                   ng-model="field.value"
+                                   class="custom-radio-box__radio"
+                                   name="field.id"
+                                   id="{{field.id + 'other_option'}}"
+                                   value="Свой вариант">
+
+                            Свой вариант
+
+                        </label>
+
+                    </div>
+
+                    <div ng-if="field.value === 'Свой вариант'" class="input-box__container">
+                        <input type="text"
+                               ng-model="field.otherOptionValue"
+                               class="input-box__input"
+                               placeholder="Свой вариант">
+                    </div>
+
+                </div>
+
+                <div ng-if="field.type == 'checkbox'">
+
+                    <div ng-repeat="option in field.options track by $index" class="input-box__radio-item">
+
+                        <label class="custom-radio-box">
+
+                            <input type="checkbox"
+                                   ng-model="option.selected"
+                                   class="custom-radio-box__radio"
+                                   value="{{option.val}}">
+
+                            <span class="custom-radio-box__checkmark"></span>
+
+                            {{option.val}}
+
+                        </label>
+
+                    </div>
+
+                    <div class="input-box__radio-item" ng-if="field.other_option">
+
+                        <label class="custom-radio-box">
+
+                            <input type="checkbox"
+                                   ng-model="field.other_option_selected"
+                                   ng-click="$ctrl.checkboxOtherOptionSelected(field)"
+                                   class="custom-radio-box__radio"
+                                   value="Свой вариант">
+
+                            <span class="custom-radio-box__checkmark"></span>
+
+                            Свой вариант
+
+                        </label>
+
+                    </div>
+
+                    <div ng-if="field.other_option_selected" class="input-box__container">
+                        <input type="text"
+                               ng-model="field.otherOptionValue"
+                               class="input-box__input"
+                               placeholder="Свой вариант...">
+                    </div>
+
+                </div>
+
+                <div ng-if="field.type == 'file'" class="modal-full__input-box">
+
+                    <div style="margin-bottom: 10px">
+                        <button type="button"
+                                ngf-select=""
+                                ng-init="field.max_files_count === 1 ? field.value = null : field.value = []"
+                                ng-model="field.value"
+                                ngf-change="$ctrl.validateFile($files, $file, $newFiles, $duplicateFiles, $invalidFiles, $event,field)"
+                                ngf-multiple="{{field.max_files_count === 1 ? 'false' : 'true'}}"
+                                accept="{{field.file_allows === 'specific' ? field.file_types : '*'}}"
+                                ngf-max-size="10MB">
+                            <span>выбрать файл</span>
+                        </button>
+                    </div>
+
+                    <div ng-show="field.max_files_count === 1 && field.value">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Название</th>
+                                <th>Действие</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>{{field.value.name}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-danger btn-sm" ng-click="field.value = null">
+                                        Удалить
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div ng-show="field.value.length > 0">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Название</th>
+                                <th>Действие</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="file in field.value track by $index">
+                                <td>{{file.name}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-danger btn-sm"
+                                            ng-click="$ctrl.removeFile(field,$index)">
+                                        Удалить
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div ng-if="field.example_files">
+                        Примеры:
+                        <div ng-repeat="exFile in field.example_files">
+                            <a href="/cabinet/download-file/{{exFile.path}}">{{exFile.name}}</a>
+                        </div>
+                    </div>
+
+                </div>
+
+<!--                <small class="form-text text-muted">{{field.prompt}}</small>-->
+
+            </div>
+
+        </div>
+
+        <button class="modal-full__button button button--extra-lg" type="submit">
+            {{$last ? 'Отправить' : 'Далее'}}
+        </button>
+
+    </form>
+
+</div>
+

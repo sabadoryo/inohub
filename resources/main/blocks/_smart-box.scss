@@ -1,0 +1,61 @@
+.smart-box {
+
+    width: 468px;
+    height: 318px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 7px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &__website-link {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        @include text-style(1.6rem, 400, $elem-color);
+        line-height: 19.5px;
+        text-decoration: underline;
+    }
+
+    &__logo {
+        max-height: 60px;
+        margin-bottom: 25px;
+    }
+
+    &__title {
+        @include text-style(1.8rem, 700, #181515);
+        line-height: 22px;
+        max-height: 44px;
+        overflow: hidden;
+        margin-bottom: 15px;
+    }
+
+    &__text {
+        @include text-style(1.6rem, 400, #181515);
+        line-height: 19.5px;
+        max-height: 100px;
+        overflow: hidden;
+    }
+
+    &__link-box {
+        display: flex;
+        align-items: center;
+        @include text-style(1.6rem, 400, $elem-color);
+    }
+
+    &__icon {
+        margin-right: 7px;
+    }
+
+    &__btn {
+        &:not(:last-child) {
+            margin-right: 24px;
+        }
+    }
+
+    &__footer {
+        display: flex;
+    }
+}

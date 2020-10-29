@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\ControlPanel;
 
 use App\Event;
+use App\Feed;
 use App\Form;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use PHPUnit\Runner\BeforeFirstTestHook;
 
 class EventsController extends Controller
 {
@@ -32,19 +34,17 @@ class EventsController extends Controller
     public function getList(Request $request)
     {
         $query = Event::query();
-    
-        if ($request->status == 'draft') {
-            $query->where('status', $request->status);
-        } elseif ($request->status == 'published') {
-            $query->where('status', $request->status);
-        }
-    
+        
         if ($request->name) {
             $query->where(
                 'name',
                 'like',
                 $request->name . '%'
             );
+        }
+    
+        if ($request->status) {
+            $query->where('status', $request->status);
         }
     
         $result = $query->orderBy('id', 'desc')
@@ -207,5 +207,11 @@ class EventsController extends Controller
             'status' => 'published',
             'published_at' => Carbon::now(),
         ]);
+
+        Feed::create([
+            'entity_model' => Event::class,
+            'entity_id' => $id
+        ]);
+
     }
 }

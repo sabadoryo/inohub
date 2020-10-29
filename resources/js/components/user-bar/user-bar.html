@@ -5,29 +5,33 @@
     Войти
 </button>
 
-<div ng-show="$ctrl.user" uib-dropdown="" uib-dropdown-toggle="" class="user-bar">
+<div ng-show="$ctrl.user" uib-dropdown="" class="user-bar-container">
 
-    <div class="user-bar__img-box user-bar__img-box--notify">
-        <img src=""
-             class="user-bar__img"
-             ng-if="$ctrl.user.avatar_url"
-             ng-src="{{$ctrl.user.avatar_url}}"
-             alt="">
-        <div ng-show="!$ctrl.user.avatar_url"
-             class="user-bar__initials">
-            {{ $ctrl.user.initials }}
+    <div uib-dropdown-toggle="" class="user-bar user-bar-container__toggle">
+
+        <div class="user-bar__img-box user-bar__img-box--notify">
+            <img src=""
+                 class="user-bar__img"
+                 ng-if="$ctrl.user.avatar_url"
+                 ng-src="{{$ctrl.user.avatar_url}}"
+                 alt="">
+            <div ng-show="!$ctrl.user.avatar_url"
+                 class="user-bar__initials">
+                {{ $ctrl.user.initials }}
+            </div>
         </div>
+
+        <div class="user-bar__name">
+            {{ $ctrl.user.full_name }}
+        </div>
+
+        <svg class="user-bar__toggle" width="10" height="5">
+            <use xlink:href="/img/icons.svg#toggle"></use>
+        </svg>
+
     </div>
 
-    <div class="user-bar__name">
-        {{ $ctrl.user.full_name }}
-    </div>
-
-    <svg class="user-bar__toggle" width="10" height="5">
-        <use xlink:href="/img/icons.svg#toggle"></use>
-    </svg>
-
-    <ul uib-dropdown-menu="" class="user-bar__dropdown user-dropdown">
+    <ul uib-dropdown-menu="" class="user-bar-container__dropdown user-dropdown">
         <li class="user-dropdown__item">
             <svg class="user-dropdown__icon" width="24" height="24">
                 <use href="/img/icons.svg#profile-icon"></use>
@@ -56,7 +60,7 @@
             <svg class="user-dropdown__icon" width="24" height="24">
                 <use href="/img/icons.svg#exit"></use>
             </svg>
-            <a href="" ng-click="$ctrl.logout()" class="user-dropdown__link">Выйты</a>
+            <a href="" class="user-dropdown__link" ng-click="$ctrl.logout()">Выйты</a>
         </li>
     </ul>
 
@@ -77,3 +81,5 @@
     </div>
 
 </div>
+
+

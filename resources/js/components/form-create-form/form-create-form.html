@@ -9,11 +9,12 @@
                 <small class="form-text text-muted">Обязательное поле</small>
             </div>
 
-            <div class="form-group">
-                <label>Описание:</label>
-                <textarea class="form-control" rows="3" ng-model="$ctrl.description" required></textarea>
-                <small class="form-text text-muted">Обязательное поле. Опишите для чего и как будет использоваться данная форма</small>
-            </div>
+<!--            <div class="form-group">-->
+<!--                <label>Описание:</label>-->
+<!--                <textarea class="form-control" rows="3" ng-model="$ctrl.description" required></textarea>-->
+<!--                <small class="form-text text-muted">Обязательное поле. Опишите для чего и как будет использоваться-->
+<!--                    данная форма</small>-->
+<!--            </div>-->
 
         </div>
     </div>
@@ -40,7 +41,8 @@
 
                 <div class="form-group col-3">
                     <label>Тип ответа:</label>
-                    <select class="form-control" ng-model="field.type" ng-change="$ctrl.fieldTypeChanged(field)" required>
+                    <select class="form-control" ng-model="field.type" ng-change="$ctrl.fieldTypeChanged(field)"
+                            required>
                         <option value="text">Текст(строка)</option>
                         <option value="textarea">Текст(абзац)</option>
                         <option value="radio">Один из списка</option>
@@ -66,7 +68,7 @@
                 </div>
 
                 <div class="form-group col-4">
-                    <label>Примечание для проверяющего</label>
+                    <label>Подсказка для заполняющего</label>
                     <input type="text" class="form-control" ng-model="field.prompt">
                 </div>
 
@@ -74,15 +76,16 @@
 
             <div ng-if="field.type == 'radio' || field.type == 'checkbox' || field.type == 'select'">
 
-                <div ng-repeat="opt in field.options track by $index" class="mb-2">
+                <div ng-repeat="opt in field.options track by $index" class="mb-2 d-flex align-items-center">
 
-                    <input type="radio" ng-if="field.type == 'radio'" checked disabled style="display: inline-block">
+                    <input type="radio" ng-if="field.type == 'radio'" class="mr-2" checked disabled>
 
-                    <input type="checkbox" ng-if="field.type == 'checkbox'" checked disabled style="display: inline-block">
+                    <input type="checkbox" ng-if="field.type == 'checkbox'" checked disabled
+                           style="display: inline-block">
 
                     <input type="text"
                            class="form-control"
-                           style="display: inline-block; width: 400px"
+                           style=""
                            ng-model="opt.val"
                            required>
 
@@ -126,7 +129,7 @@
                             <option value="specific">Определенные</option>
                         </select>
                     </div>
-                    <div class="col-4" ng-if="field.fileAllows == 'specific'">
+                    <div class="col-3" ng-if="field.fileAllows == 'specific'">
                         <label>Типы файлов:</label>
                         <select class="form-control"
                                 ng-model="field.fileTypes"
@@ -134,6 +137,36 @@
                                 multiple
                                 required>
                         </select>
+                    </div>
+                    <div class="col-3">
+                        <label>Пример файла для заполняющего</label>
+                        <div ng-show="field.exampleFiles.length > 0" class="mb-2">
+                            <table class="table table-bordered table-striped table-sm">
+                                <thead class="thead-light">
+                                <tr>
+                                    <th>Название</th>
+                                    <th>Действие</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="file in field.exampleFiles track by $index">
+                                    <td>{{file.name}}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger btn-sm"
+                                                ng-click="$ctrl.removeFile(field,$index)">
+                                            Удалить
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button type="button" class="form-control-file" ngf-select=""
+                                ngf-keep="true"
+                                ng-model="field.exampleFiles"
+                                ngf-multiple="true">
+                            <span>выбрать файл</span>
+                        </button>
                     </div>
                 </div>
             </div>

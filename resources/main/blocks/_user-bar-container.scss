@@ -1,0 +1,17 @@
+.user-bar-container {
+  position: relative;
+
+  &__dropdown {
+    display: none;
+    position: absolute;
+    top: 43px !important;
+    right: 0 !important;
+    left: unset !important;
+    margin: 0 !important;
+
+    &.show {
+      display: block;
+    }
+  }
+
+}

@@ -18,6 +18,7 @@ function controller($http) {
 
 	$ctrl.title = null;
     $ctrl.category = null;
+    $ctrl.loading = false;
 
 	$ctrl.$onInit = function () {
 	    $ctrl.categories = $ctrl.resolve.categories;
@@ -25,7 +26,6 @@ function controller($http) {
 
 	$ctrl.save = () => {
 	    $ctrl.loading = true;
-
 	    $http
             .post(`/control-panel/programs`, {
                 title: $ctrl.title,

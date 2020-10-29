@@ -79,16 +79,16 @@
                     <div class="row mb-2">
                         <div class="col-sm-6">
                             <h1 class="m-0 text-dark">
-                                @if(isset($PAGE_TITLE)) {{$PAGE_TITLE}} @endif
+                                @if(isset($PAGE_TITLE)) {{\Str::limit($PAGE_TITLE, 70)}} @endif
                             </h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 @foreach($breadcrumb as $item)
                                     @if ($item[0])
-                                        <li class="breadcrumb-item"><a href="{{$item[0]}}">{{$item[1]}}</a></li>
+                                        <li class="breadcrumb-item"><a href="{{$item[0]}}">{{\Str::limit($item[1], 70)}}</a></li>
                                     @else
-                                        <li class="breadcrumb-item active">{{$item[1]}}</li>
+                                        <li class="breadcrumb-item active">{{\Str::limit($item[1], 70)}}</li>
                                     @endif
                                 @endforeach
                             </ol>

@@ -27,6 +27,7 @@ function controller($sce, $uibModal) {
         $uibModal
             .open({
                 component: 'applicationModal',
+                backdrop : 'static',
                 resolve: {
                     entityType: () => {
                         return 'program';

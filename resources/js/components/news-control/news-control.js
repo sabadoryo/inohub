@@ -16,8 +16,9 @@ function controller($http, $uibModal) {
 
     $ctrl.page = 1;
     $ctrl.title = null;
-    $ctrl.status = 'draft';
+    $ctrl.status = null;
     $ctrl.total = 0;
+    $ctrl.loading = false;
 
 	$ctrl.$onInit = function () {
 	    $ctrl.getList();
@@ -46,11 +47,13 @@ function controller($http, $uibModal) {
 
     $ctrl.reset = () => {
         $ctrl.page = 1;
-        $ctrl.name = null;
+        $ctrl.title = null;
+        $ctrl.status = null;
         $ctrl.getList();
     };
 
     $ctrl.getList = () => {
+        $ctrl.loading = true;
         $http
             .get('/control-panel/news/get-list', {
                 params: {
@@ -61,10 +64,12 @@ function controller($http, $uibModal) {
             })
             .then(
                 response => {
+                    $ctrl.loading = false;
                     $ctrl.news = response.data.data;
                     $ctrl.total = response.data.total;
                 },
                 error => {
+                    $ctrl.loading = false;
                     // todo handle error
                 }
             )

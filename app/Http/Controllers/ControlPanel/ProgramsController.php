@@ -18,7 +18,7 @@ class ProgramsController extends Controller
             ['/control-panel', 'Главная'],
             [null, 'Программы']
         ];
-
+        
         $categories = ProgramCategory::all();
 
         return view('control-panel.component', [
@@ -36,11 +36,6 @@ class ProgramsController extends Controller
     {
         $query = Program::query();
 
-        if ($request->status == 'draft') {
-            $query->where('status', $request->status);
-        } elseif ($request->status == 'published') {
-            $query->where('status', $request->status);
-        }
 
         if ($request->title) {
             $query->where(
@@ -52,6 +47,10 @@ class ProgramsController extends Controller
 
         if ($request->status) {
             $query->where('status', $request->status);
+        }
+
+        if ($request->category_id) {
+            $query->where('program_category_id', $request->category_id);
         }
 
         $result = $query->with('category')
@@ -88,7 +87,7 @@ class ProgramsController extends Controller
         $program = Program::find($id);
 
         $categories = ProgramCategory::all();
-
+    
         $breadcrumb = [
             ['/control-panel', 'Главная'],
             ['/control-panel/programs', 'Программы'],
@@ -106,7 +105,7 @@ class ProgramsController extends Controller
             'breadcrumb' => $breadcrumb,
         ]);
     }
-
+    
     public function pageForm($id)
     {
         $program = Program::find($id);
@@ -134,19 +133,18 @@ class ProgramsController extends Controller
     public function forms($id)
     {
         $program = Program::with(['forms'])->find($id);
-
+    
         $breadcrumb = [
             ['/control-panel', 'Главная'],
             ['/control-panel/programs', 'Программы'],
             [null, $program->title],
         ];
-
+        
         $forms = Form::all();
-
+    
         return view('control-panel.component', [
             'component' => 'program-forms',
             'bindings' => [
-                'forms' => $forms,
                 'program' => $program,
             ],
             'PAGE_TITLE' => $program->title,
@@ -154,7 +152,7 @@ class ProgramsController extends Controller
             'breadcrumb' => $breadcrumb,
         ]);
     }
-
+    
     public function updateMain(Request $request, $id)
     {
         $request->validate([
@@ -164,9 +162,9 @@ class ProgramsController extends Controller
             'title.min' => 'Название программы должно содержать больше :min символов',
             'title.max' => 'Название программы должен содержать меньше :max символов',
         ]);
-
+        
         $program = Program::find($id);
-
+        
         $program->update([
             'title' => $request->title,
             'program_category_id' => $request->category_id,
@@ -175,31 +173,31 @@ class ProgramsController extends Controller
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
         ]);
-
+        
         return [];
     }
-
+    
     public function updateFormsList($id)
     {
         $forms = Form::all();
-
+        
         return [
             'forms' => $forms,
         ];
     }
-
+    
     public function updateForms(Request $request, $id)
     {
         $program = Program::find($id);
-
+        
         $data = [];
-
+        
         foreach ($request->forms as $key => $form) {
             $data[$form['id']] = [
                 'order_number' => $key,
             ];
         }
-
+        
         $program->forms()->sync($data);
 
         return [];
@@ -222,8 +220,7 @@ class ProgramsController extends Controller
 
         return [];
     }
-
-
+    
     public function publish($id, Request $request)
     {
         $program = Program::find($id);

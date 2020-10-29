@@ -9,4 +9,33 @@
     &__tabs {
 
     }
+
+    &__row {
+        display: flex;
+        justify-content: space-between;
+
+        & > * {
+            flex-shrink: 0;
+        }
+    }
+
+    &__right {
+        width: 304px;
+    }
+
+    &__left {
+        margin-left: 80px;
+    }
+
+    &__news {
+        margin-bottom: 40px;
+    }
+
+    &__right-block {
+        margin-bottom: 40px;
+    }
+
+    &__button-back {
+        margin-bottom: 20px;
+    }
 }

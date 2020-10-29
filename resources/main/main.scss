@@ -1,6 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
-
 @import "nullstyle.scss";
+
+@import "~swiper/swiper";
+@import "~perfect-scrollbar/css/perfect-scrollbar.css";
+
 
 //* {
 //  background: #000 !important;
@@ -73,6 +75,18 @@
 @import "blocks/personal-data";
 @import "blocks/application-section";
 @import "blocks/application-block";
+@import "blocks/user-bar-container";
+@import "blocks/notifications-section";
+@import "blocks/section-filter";
+@import "blocks/application-list";
+@import "blocks/chat-section";
+@import "blocks/message-block";
+@import "blocks/about-simp";
+@import "blocks/smart-store";
+@import "blocks/smart-box";
+@import "blocks/news-box";
+@import "blocks/additional-info";
+@import "blocks/news-more";
 
 html, body {
     font-size: 62.5%;
@@ -83,4 +97,33 @@ html, body {
 img {
     max-width: 100%;
     height: auto;
+}
+
+.modal--sm {
+    width: 386px !important;
+}
+
+.auth-modal-window {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1050;
+    display: none;
+    -webkit-overflow-scrolling: touch;
+    outline: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1040;
+    background-color: #000;
+    opacity: .4;
 }

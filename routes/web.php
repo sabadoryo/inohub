@@ -2,13 +2,18 @@
 
 Route::post('login', 'Auth\LoginController@login');
 Route::post('register', 'Auth\RegisterController@register');
+Route::post('check-mail', 'Auth\RegisterController@checkMail');
 Route::post('logout', 'Auth\LoginController@logout');
 
 Route::get('/', 'MainPageController@index');
+Route::get('get-news-list', 'MainPageController@getNewsList');
+Route::get('get-feeds-list', 'MainPageController@getFeedsList');
+Route::get('news/{id}', 'MainPageController@newsPage');
 
 Route::group(['prefix' => 'cabinet', 'middleware' => ['auth']], function () {
     Route::get('', 'CabinetController@profile');
     Route::get('applications', 'CabinetController@applications');
+    Route::get('download-file/{path}', 'CabinetController@downloadFile')->where('path',  '(.*)');
 
     Route::get('project', 'CabinetController@project');
     Route::post('update-roles', 'CabinetController@updateRoles');
@@ -40,6 +45,23 @@ Route::get('test', function () {
     return view('test2', compact('passport'));
 });
 
+Route::group(['prefix' => 'tech-garden'], function () {
+    Route::get('about', 'TechGardenController@about');
+    Route::get('programs', 'TechGardenController@programs');
+    Route::get('smart-store', 'TechGardenController@smartStore');
+    Route::get('corporate-innovations', 'TechGardenController@corporateInnovations');
+    Route::get('hub-space', 'TechGardenController@hubSpace');
+    Route::get('r-and-d', 'TechGardenController@randd');
+    Route::get('resources', 'TechGardenController@resources');
+    Route::get('programs/{id}', 'TechGardenController@program');
+    Route::get('programs/{id}/get-forms', 'TechGardenController@getProgramForms');
+});
+
+Route::group(['prefix' => 'tech-garden/smart-store'], function () {
+    Route::get('get-tasks-list', 'TechGardenSmartStoreController@getTasksList');
+    Route::get('get-solutions-list', 'TechGardenSmartStoreController@getSolutionsList');
+});
+
 Route::get('get-forms', 'FormsController@getList');
 
 Route::post('applications', 'ApplicationsController@store');
@@ -51,15 +73,19 @@ Route::group([
     'middleware' => 'auth'
 ], function () {
 
-    Route::view('test', 'test', ['activePage' => 'test', 'breadcrumb' => []]);
-
     Route::get('/', 'ControlPanelController@index');
 
-    Route::get('organizations', 'OrganizationsController@index');
-    Route::get('organizations/create', 'OrganizationsController@create');
-    Route::post('organizations', 'OrganizationsController@store');
-    Route::get('organizations/{id}/edit', 'OrganizationsController@edit');
-    Route::put('organizations/{id}', 'OrganizationsController@update');
+    Route::get('programs', 'ProgramsController@index');
+    Route::get('programs/get-list', 'ProgramsController@getList');
+    Route::post('programs', 'ProgramsController@store');
+    Route::get('programs/{id}/main', 'ProgramsController@mainForm');
+    Route::get('programs/{id}/page', 'ProgramsController@pageForm');
+    Route::get('programs/{id}/forms', 'ProgramsController@forms');
+    Route::post('programs/{id}/update-main', 'ProgramsController@updateMain');
+    Route::post('programs/{id}/update-forms', 'ProgramsController@updateForms');
+    Route::post('programs/{id}/update-forms-list', 'ProgramsController@updateFormsList');
+    Route::post('programs/{id}/publish', 'ProgramsController@publish');
+    Route::post('programs/{id}/update-page', 'ProgramsController@updatePage');
 
     Route::get('users', 'UsersController@index');
     Route::get('users/get-list', 'UsersController@getList');
@@ -76,17 +102,7 @@ Route::group([
     Route::post('acl/detach-permission-from-role', 'ACLController@detachPermissionFromRole');
     Route::post('acl/add-role', 'ACLController@addRole');
 
-    Route::get('programs', 'ProgramsController@index');
-    Route::get('programs/get-list', 'ProgramsController@getList');
-    Route::post('programs', 'ProgramsController@store');
-    Route::get('programs/{id}/main', 'ProgramsController@mainForm');
-    Route::get('programs/{id}/page', 'ProgramsController@pageForm');
-    Route::get('programs/{id}/forms', 'ProgramsController@forms');
-    Route::post('programs/{id}/update-main', 'ProgramsController@updateMain');
-    Route::post('programs/{id}/update-page', 'ProgramsController@updatePage');
-    Route::post('programs/{id}/update-forms', 'ProgramsController@updateForms');
-    Route::post('programs/{id}/update-forms-list', 'ProgramsController@updateFormsList');
-    Route::post('programs/{id}/publish', 'ProgramsController@publish');
+
 
     Route::get('images', 'ImagesController@index');
     Route::post('images', 'ImagesController@store');
@@ -109,6 +125,13 @@ Route::group([
     Route::post('news/{id}/update-main', 'NewsController@updateMain');
     Route::post('news/{id}/publish', 'NewsController@publish');
 
+    Route::get('vacancies', 'VacanciesController@index');
+    Route::get('vacancies/get-list', 'VacanciesController@getList');
+    Route::post('vacancies', 'VacanciesController@store');
+    Route::get('vacancies/{id}/main', 'VacanciesController@mainForm');
+    Route::post('vacancies/{id}/update-main', 'VacanciesController@updateMain');
+    Route::post('vacancies/{id}/publish', 'VacanciesController@publish');
+
     Route::get('applications', 'ApplicationsController@index');
     Route::get('applications/get-list', 'ApplicationsController@getList');
     Route::get('applications/{id}', 'ApplicationsController@show');
@@ -121,6 +144,7 @@ Route::group([
     Route::post('events', 'EventsController@store');
 
     Route::get('forms', 'FormsController@index');
+    Route::get('forms/get-list', 'FormsController@getList');
     Route::get('forms/create', 'FormsController@create');
     Route::post('forms', 'FormsController@store');
 
@@ -136,7 +160,38 @@ Route::group([
 
     Route::post('passports/{id}/save-changes', 'PassportsController@saveChanges');
 
+    Route::get('sm/solutions', 'SmartStoreSolutionCompaniesController@index');
+    Route::get('sm/solutions/get-companies-list', 'SmartStoreSolutionCompaniesController@getList');
+    Route::get('sm/solutions/create', 'SmartStoreSolutionCompaniesController@create');
+    Route::post('sm/solutions', 'SmartStoreSolutionCompaniesController@store');
+    Route::get('sm/solutions/{id}/edit', 'SmartStoreSolutionCompaniesController@edit');
+    Route::post('sm/solutions/{id}/update', 'SmartStoreSolutionCompaniesController@update');
+    Route::post('sm/solutions/{id}/remove', 'SmartStoreSolutionCompaniesController@remove');
+
+    Route::get('sm/tasks', 'SmartStoreTaskCompaniesController@index');
+    Route::get('sm/tasks/get-companies-list', 'SmartStoreTaskCompaniesController@getList');
+    Route::get('sm/tasks/create', 'SmartStoreTaskCompaniesController@create');
+    Route::post('sm/tasks', 'SmartStoreTaskCompaniesController@store');
+    Route::get('sm/tasks/{id}/edit', 'SmartStoreTaskCompaniesController@edit');
+    Route::post('sm/tasks/{id}/update', 'SmartStoreTaskCompaniesController@update');
+    Route::post('sm/tasks/{id}/remove', 'SmartStoreTaskCompaniesController@remove');
+
 });
+
+Route::group([
+    'prefix' => 'admin',
+    'namespace' => 'Admin',
+    'middleware' => 'auth'
+], function () {
+
+    Route::get('organizations', 'OrganizationsController@index');
+    Route::get('organizations/create', 'OrganizationsController@create');
+    Route::post('organizations', 'OrganizationsController@store');
+    Route::get('organizations/{id}/edit', 'OrganizationsController@edit');
+    Route::put('organizations/{id}', 'OrganizationsController@update');
+
+});
+
 
 Route::get('test-page', function () {
     return view('test-page');
@@ -160,6 +215,46 @@ Route::get('profile-page-3', function () {
 
 Route::get('modal-full', function () {
     return view('modal-full');
+});
+
+Route::get('profile-page-4', function () {
+    return view('profile-page-4');
+});
+
+Route::get('profile-page-5', function () {
+    return view('profile-page-5');
+});
+
+Route::get('profile-page-6', function () {
+    return view('profile-page-6');
+});
+
+Route::get('profile-page-7', function () {
+    return view('profile-page-7');
+});
+
+Route::get('tech-garden-about', function () {
+    return view('tech-garden-about');
+});
+
+Route::get('tech-garden-programs', function () {
+    return view('tech-garden-programs');
+});
+
+Route::get('tech-garden-store', function () {
+    return view('tech-garden-store');
+});
+
+Route::get('tech-garden-resources', function () {
+    return view('tech-garden-resources');
+});
+
+Route::get('test-modal', function () {
+    return view('test-modal');
+});
+
+Route::get('news-page', function () {
+    return view('news-page');
 });
 
 Route::get('program', function () {

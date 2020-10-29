@@ -1,0 +1,67 @@
+.message-block {
+
+    display: flex;
+    align-items: flex-end;
+
+    $e: &;
+
+    &--mine {
+        justify-content: flex-end;
+
+        #{$e}__person-img {
+            margin-right: 0;
+            margin-left: 15px;
+        }
+    }
+
+    & > * {
+        flex-shrink: 0;
+    }
+
+    &__content {
+        width: 428px;
+        padding: 20px;
+        border-radius: 7px;
+        background-color: #f6f6f6;
+    }
+
+    &__name {
+        @include text-style(1.6rem, 600, #181515);
+        line-height: 19.5px;
+        margin-bottom: 20px;
+    }
+
+    &__text {
+        @include text-style(1.6rem, 400, #181515);
+        line-height: 19.5px;
+        margin-bottom: 25px;
+
+        &--bordered {
+            border-bottom: 1px solid #E8E8E8;
+            padding-bottom: 12px;
+        }
+    }
+
+    &__row {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+    }
+
+    &__file {
+        width: 45px;
+        height: 45px;
+    }
+
+    &__date {
+        @include text-style(1.3rem, 500, #a3a1a1);
+        line-height: 16px;
+    }
+
+    &__person-img {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        margin-right: 15px;
+    }
+}

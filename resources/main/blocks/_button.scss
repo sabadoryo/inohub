@@ -41,6 +41,20 @@
     &--w100 {
         width: 100%;
     }
+
+    &--dropdown {
+        display: flex;
+        align-items: center;
+
+        span {
+            border-right: 1px solid rgba(#ffffff, .2);
+            padding-right: 7px;
+        }
+
+        svg {
+            margin-left: 7px;
+        }
+    }
 }
 
 .button-w-icon {
@@ -85,6 +99,13 @@
 
     @include text-style(1.6rem, 500, $elem-color);
 
+    &--icon-right {
+        #{$e}__icon {
+            margin-right: 0;
+            margin-left: 10px;
+        }
+    }
+
     &:focus {
         outline: none !important;
     }
@@ -97,6 +118,11 @@
     &--grey {
         font-size: 1.4rem;
         background-color: #FAFAFA;
+        color: #181515;
+    }
+
+    &--white {
+        background-color: #ffffff;
         color: #181515;
     }
 

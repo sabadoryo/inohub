@@ -32,22 +32,21 @@ class NewsController extends Controller
     public function getList(Request $request)
     {
         $query = News::query();
-    
-        if ($request->status == 'draft') {
-            $query->where('status', $request->status);
-        } elseif ($request->status == 'published') {
-            $query->where('status', $request->status);
-        }
-    
-        if ($request->name) {
+        
+        if ($request->title) {
             $query->where(
                 'title',
                 'like',
                 $request->title . '%'
             );
         }
+    
+        if ($request->status) {
+            $query->where('status', $request->status);
+        }
         
         $result = $query->orderBy('id', 'desc')
+            ->with('user')
             ->paginate(10);
     
         return $result;
@@ -57,12 +56,13 @@ class NewsController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'short_description' => 'required',
+//            'short_description' => 'required',
         ]);
         
         $news = News::create([
             'title' => $request->title,
-            'short_description' => $request->short_description,
+            'user_id' => \Auth::user()->id,
+//            'short_description' => $request->short_description,
         ]);
         
         return ['id' => $news->id];
@@ -95,7 +95,7 @@ class NewsController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'short_description' => 'required',
+//            'short_description' => 'required',
             'data' => 'array',
             'data.*.type' => [
                 'required_without:data',
@@ -111,7 +111,7 @@ class NewsController extends Controller
         
         $news->update([
             'title' => $request->title,
-            'short_description' => $request->short_description,
+//            'short_description' => $request->short_description,
         ]);
     
         if ($request->data) {

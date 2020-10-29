@@ -11,7 +11,7 @@ import ngFileUpload from "ng-file-upload";
 import angularMoment from "angular-moment";
 import notify from "@cgross/angular-notify";
 import textAngular from "textangular";
-
+import perfectScrollbar from "angular-perfect-scrollbar";
 
 angular
     .module('app', [
@@ -24,7 +24,8 @@ angular
         ngFileUpload,
         angularMoment,
         notify,
-        textAngular
+        textAngular,
+        'perfect_scrollbar',
     ])
     .config(['$provide', function ($provide) {
         $provide.decorator('taOptions', ['taRegisterTool', '$uibModal', '$delegate', function (taRegisterTool, $uibModal, taOptions) {
@@ -44,13 +45,38 @@ angular
     }])
     .run(['$templateCache', function ($templateCache) {
         $templateCache.put('b4-pagination', require('./templates/b4-pagination.html'));
-    }]);
+        $templateCache.put("custom-modal", "<div class=\"as-modal {{size ? 'as-modal--' + size : ''}}\" uib-modal-transclude></div>");
+        $templateCache.put('full-modal', "<div class=\"modal-full\" uib-modal-transclude></div>")
+    }])
+    .directive('onScrollToBottom', function ($document) {
+        //This function will fire an event when the container/document is scrolled to the bottom of the page
+        return {
+            restrict: 'A',
+            link: function (scope, element, attrs) {
+
+                var doc = angular.element($document)[0].body;
+
+                $document.bind("scroll", function () {
+
+                    //console.log('in scroll');
+                    //console.log("scrollTop + offsetHeight:" + (doc.scrollTop + doc.offsetHeight));
+                    //console.log("scrollHeight: " + doc.scrollHeight);
+
+                    if (doc.scrollTop + doc.offsetHeight >= doc.scrollHeight) {
+                        //run the event that was passed through
+                        scope.$apply(attrs.onScrollToBottom);
+                    }
+                });
+            }
+        };
+    });
 
 
 require('./auth');
 require('./plural');
 require('./controllers/mainController');
 require('./controllers/cabinetController');
+require('./applicationWindow');
 
 require('./components/organizations-control/organizations-control');
 require('./components/organization-create-form/organization-create-form');
@@ -119,3 +145,24 @@ require('./components/corp-innovations/corp-innovations');
 require('./components/members-control/members-control');
 require('./components/members-create-form/members-create-form');
 require('./components/news-to-publish-modal/news-to-publish-modal');
+require('./components/tech-garden-about/tech-garden-about');
+require('./components/tech-garden-programs/tech-garden-programs');
+require('./components/tech-garden-corp-innovations/tech-garden-corp-innovations');
+require('./components/news-list/news-list');
+
+require('./components/smart-store-solution-companies/smart-store-solution-companies');
+require('./components/smart-store-task-companies/smart-store-task-companies');
+
+require('./components/smart-store-solution-companies-create/smart-store-solution-companies-create');
+
+require('./components/smart-store-solution-companies-edit/smart-store-solution-companies-edit');
+require('./components/smart-store-task-companies-create/smart-store-task-companies-create');
+require('./components/smart-store-task-companies-edit/smart-store-task-companies-edit');
+
+
+require('./components/feeds-list/feeds-list');
+require('./components/application-form/application-form');
+require('./components/tech-garden-smart-store/tech-garden-smart-store');
+require('./components/vacancies-control/vacancies-control');
+require('./components/vacancy-create-modal/vacancy-create-modal');
+require('./components/vacancy-main-form/vacancy-main-form');

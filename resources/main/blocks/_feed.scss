@@ -1,15 +1,63 @@
 .feed {
-    width: 550px;
-    margin-left: auto;
-    margin-right: auto;
 
-    & > * {
-        &:not(:last-child) {
-            margin-bottom: 30px;
+    $e: &;
+
+    width: 550px;
+
+    &__list {
+        & > * {
+            &:not(:last-child) {
+                margin-bottom: 30px;
+            }
         }
     }
 
     &__blog {
 
+    }
+
+    &__heading {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        margin-bottom: 30px;
+    }
+
+    &__title {
+        @include text-style(1.8rem, 700, #181515);
+    }
+
+    &__drop-box {
+        position: relative;
+    }
+
+    &__btn-dropdown {
+        display: none;
+
+        position: absolute;
+        right: 0;
+        left: 0;
+        top: 48px;
+        z-index: 2;
+
+        background-color: #ffffff;
+        border-radius: 7px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+        border: none;
+        padding: 5px 0;
+    }
+
+    &.show &__btn-dropdown {
+        display: block;
+    }
+
+    &__dropdown-item {
+        display: block;
+        padding: 10px 15px;
+        @include text-style(1.6rem, 500, #181515);
+
+        &:hover {
+            background-color: #F3F3F3;
+        }
     }
 }

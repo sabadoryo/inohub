@@ -13,7 +13,9 @@ angular
 function controller($http, Upload, moment, notify, $uibModal) {
  
 	let $ctrl = this;
-	
+
+	$ctrl.loading = false;
+
 	$ctrl.$onInit = function () {
         $ctrl.name = $ctrl.event.name;
         $ctrl.description = $ctrl.event.short_description ? $ctrl.event.short_description : "";
@@ -22,32 +24,31 @@ function controller($http, Upload, moment, notify, $uibModal) {
     };
 
 	$ctrl.openToPublishModal = () => {
-        $uibModal
-            .open({
-                component: 'eventToPublishModal',
-                resolve: {
-                    event: function () {
-                        return $ctrl.event;
-                    }
-                }
-            })
-            .result
-            .then(
-                res => {
-                    window.Swal.fire({
-                        icon: 'success',
-                        title: 'Опубликовано',
-                        timer: 2000,
-                        showConfirmButton: false,
-                    });
-                },
-                err => {
-
-                }
-            );
+        Swal.fire({
+            title: 'Вы уверены?',
+            text: "Данная мероприятие сразу же появиться в ленте у пользователей",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Да',
+            cancelButtonText: 'Отмена'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $http
+                    .post(`/control-panel/events/${$ctrl.event.id}/publish`)
+                    .then(
+                        function () {
+                            Swal.fire('Успешно опубликована', '', 'success');
+                            $ctrl.event.status = 'published';
+                        }
+                    );
+            }
+        })
     };
 
 	$ctrl.save = () => {
+        $ctrl.loading = true;
         let url = '/control-panel/events/' + $ctrl.event.id + '/update-main';
         let params = {
             name: $ctrl.name,
@@ -60,6 +61,7 @@ function controller($http, Upload, moment, notify, $uibModal) {
             url: url,
             data: params,
         }).then(() => {
+            $ctrl.loading = false;
             window.Swal.fire({
                 icon: 'success',
                 title: 'Данные обновлены',
@@ -67,6 +69,7 @@ function controller($http, Upload, moment, notify, $uibModal) {
                 showConfirmButton: false,
             });
 	    }, (error) => {
+            $ctrl.loading = false;
             let checked = false;
             let message = '';
             angular.forEach(error.data.errors, function (value, key){

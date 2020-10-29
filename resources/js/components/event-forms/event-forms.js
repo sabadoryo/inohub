@@ -13,6 +13,8 @@ angular
 function controller(notify, $http, $uibModal) {
  
 	let $ctrl = this;
+
+    $ctrl.loadingSave = false;
 	
 	$ctrl.$onInit = function () {
         $ctrl.eventForms = $ctrl.event.forms;
@@ -20,29 +22,27 @@ function controller(notify, $http, $uibModal) {
     };
 
     $ctrl.openToPublishModal = () => {
-        $uibModal
-            .open({
-                component: 'eventToPublishModal',
-                resolve: {
-                    event: function () {
-                        return $ctrl.event;
-                    }
-                }
-            })
-            .result
-            .then(
-                res => {
-                    window.Swal.fire({
-                        icon: 'success',
-                        title: 'Опубликовано',
-                        timer: 2000,
-                        showConfirmButton: false,
-                    });
-                },
-                err => {
-
-                }
-            );
+        Swal.fire({
+            title: 'Вы уверены?',
+            text: "Данная мероприятие сразу же появиться в ленте у пользователей",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Да',
+            cancelButtonText: 'Отмена'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $http
+                    .post(`/control-panel/events/${$ctrl.event.id}/publish`)
+                    .then(
+                        function () {
+                            Swal.fire('Успешно опубликована', '', 'success');
+                            $ctrl.event.status = 'published';
+                        }
+                    );
+            }
+        })
     };
 
     $ctrl.addForm = () => {
@@ -105,11 +105,13 @@ function controller(notify, $http, $uibModal) {
     }
 
     $ctrl.save = () => {
+        $ctrl.loadingSave = true;
         let url = '/control-panel/events/' + $ctrl.event.id + '/update-forms';
         let params = {
             forms: $ctrl.eventForms,
         }
         $http.post(url, params).then(() => {
+            $ctrl.loadingSave = false;
             window.Swal.fire({
                 icon: 'success',
                 title: 'Данные обновлены',
@@ -117,6 +119,7 @@ function controller(notify, $http, $uibModal) {
                 showConfirmButton: false,
             });
         }, (error) => {
+            $ctrl.loadingSave = false;
             notify({
                 message: 'Ошибка!',
                 duration: 2000,

@@ -114,6 +114,11 @@
                     </div>
                 </div>
 
+                <div class="modal-full__input-box input-box input-box--span2">
+                    <label class="input-box__label">Краткое описание проекта. В чем заключается идея? </label>
+                    <textarea class="input-box__textarea" placeholder="Проект был создан для..."></textarea>
+                </div>
+
                 <div class="modal-full__input-box input-box">
                     <label class="input-box__label">Привлекали ли вы инвестиции?</label>
 
@@ -130,11 +135,6 @@
                             Нет
                         </label>
                     </div>
-                </div>
-
-                <div class="modal-full__input-box input-box">
-                    <label class="input-box__label">Краткое описание проекта. В чем заключается идея? </label>
-                    <textarea class="input-box__textarea" placeholder="Проект был создан для..."></textarea>
                 </div>
 
             </div>

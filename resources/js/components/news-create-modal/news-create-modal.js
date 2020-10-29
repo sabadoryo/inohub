@@ -17,28 +17,28 @@ function controller($http) {
 	let $ctrl = this;
 
 	$ctrl.title = null;
-	$ctrl.description = null;
+	// $ctrl.description = null;
 	$ctrl.loading = false;
+
 	$ctrl.$onInit = function () {
     };
 
 	$ctrl.save = () => {
 	    $ctrl.loading = true;
-	    let url = '/control-panel/news';
-	    let params = {
-	        title: $ctrl.title,
-            short_description: $ctrl.description,
-        };
-
-	    $http.post(url, params).then(
-            res => {
-                $ctrl.loading = false;
-                window.location = `/control-panel/news/${res.data.id}/main`;
-            },
-            err => {
-                $ctrl.loading = false;
-                // todo Alert error
-            }
-        );
+	    $http
+            .post('/control-panel/news', {
+                title: $ctrl.title,
+                // short_description: $ctrl.description,
+            })
+            .then(
+                res => {
+                    $ctrl.loading = false;
+                    window.location = `/control-panel/news/${res.data.id}/main`;
+                },
+                err => {
+                    $ctrl.loading = false;
+                    // todo Alert error
+                }
+            );
     };
 }
