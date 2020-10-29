@@ -100,8 +100,6 @@ Route::group([
     Route::post('acl/detach-permission-from-role', 'ACLController@detachPermissionFromRole');
     Route::post('acl/add-role', 'ACLController@addRole');
 
-
-
     Route::get('images', 'ImagesController@index');
     Route::post('images', 'ImagesController@store');
 
@@ -129,6 +127,10 @@ Route::group([
     Route::get('vacancies/{id}/main', 'VacanciesController@mainForm');
     Route::post('vacancies/{id}/update-main', 'VacanciesController@updateMain');
     Route::post('vacancies/{id}/publish', 'VacanciesController@publish');
+    
+    Route::get('posts', 'PostsController@index');
+    Route::get('posts/get-list', 'PostsController@getList');
+    Route::post('posts/{id}/update-status', 'PostsController@updateStatus');
 
     Route::get('applications', 'ApplicationsController@index');
     Route::get('applications/get-list', 'ApplicationsController@getList');
