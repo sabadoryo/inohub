@@ -73,4 +73,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Application::class);
     }
+
+    public function tenants()
+    {
+        return $this->hasMany(HubSpaceTenant::class);
+    }
 }

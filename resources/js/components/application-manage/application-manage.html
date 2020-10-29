@@ -192,7 +192,7 @@
 </a>
 
 <a href=""
-   ng-show="$ctrl.application.entity_model == 'App\\CorpTask' && $ctrl.application.entity.slug == 'corp-task-solutions'"
+   ng-show="$ctrl.application.entity_model == 'App\\CorpTask' && $ctrl.application.entity.id == $ctrl.application.entity_id"
    ng-href="/control-panel/corp-task-solutions/create?application_id={{$ctrl.application.id}}"
    class="btn btn-success">
     Принять и добавить решение
@@ -200,6 +200,10 @@
 
 <br>
 
-<div>
+<div class="d-flex">
     <button type="button" class="btn btn-primary mr-4" ng-click="">Закрыть заявку</button>
+    <a ng-show="$ctrl.application.entity_model == 'App\\User' && $ctrl.application.entity.id == $ctrl.application.entity_id"
+       ng-href="/control-panel/hub-space-tenants/create?application_id={{$ctrl.application.id}}">
+        Добавить арендатора по данной заявке
+    </a>
 </div>

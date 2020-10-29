@@ -29,6 +29,9 @@ class FormsController extends Controller
         } elseif ($request->type === 'corp-task-solution') {
             $module = Module::findBySlug('corp-task-solution');
             $forms = $module->forms()->orderBy('order_number')->with('fields')->get();
+        } elseif ($request->type === 'hub-space-tenants') {
+            $module = Module::findBySlug('hub-space-tenants');
+            $forms = $module->forms()->orderBy('order_number')->with('fields')->get();
         }
 
         foreach ($forms as $form) {

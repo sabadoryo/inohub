@@ -208,6 +208,12 @@ Route::group([
     Route::post('corp-task-solutions/{id}/update', 'CorporateInnovationTaskSolutionsController@update');
     Route::post('corp-task-solutions/{id}/remove', 'CorporateInnovationTaskSolutionsController@remove');
 
+    Route::get('hub-space-tenants', 'HubSpaceTenantsController@index');
+    Route::get('hub-space-tenants/get-list', 'HubSpaceTenantsController@getList');
+    Route::get('hub-space-tenants/create', 'HubSpaceTenantsController@create');
+    Route::post('hub-space-tenants', 'HubSpaceTenantsController@store');
+    Route::get('hub-space-tenants/get-users-list', 'HubSpaceTenantsController@getUsersList');
+
 });
 
 Route::group([

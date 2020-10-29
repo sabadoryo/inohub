@@ -6,7 +6,9 @@ use App\Application;
 use App\CorpTask;
 use App\Module;
 use App\Program;
+use App\User;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\AssignOp\Mod;
 
 class ApplicationsController extends Controller
 {
@@ -46,6 +48,9 @@ class ApplicationsController extends Controller
             $entityId = $module->id;
         } elseif ($request->entity_type === 'corp-task-solution') {
             $entityModel = CorpTask::class;
+            $entityId = $request->entity_id;
+        } elseif ($request->entity_type === 'hub-space-tenants') {
+            $entityModel = User::class;
             $entityId = $request->entity_id;
         }
 

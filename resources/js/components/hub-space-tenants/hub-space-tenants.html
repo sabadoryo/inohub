@@ -1,0 +1,32 @@
+<div class="card">
+    <div class="card-header">
+        <a class="btn btn-primary" href="/control-panel/hub-space-tenants/create">Добавить арендатора</a>
+    </div>
+
+    <div class="card-body">
+        <table class="table table-bordered table-striped table-sm">
+            <thead class="thead-light">
+            <tr>
+                <th>ID</th>
+                <th>Название компании</th>
+                <th>ФИО арендатора</th>
+                <th>Тел.номер арендатора</th>
+                <th>Количество мест</th>
+                <th>Дата начала</th>
+                <th>Дата окончания</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="tenant in $ctrl.tenants track by $index">
+                    <td>{{tenant.id}}</td>
+                    <td>{{tenant.company_name}}</td>
+                    <td>{{tenant.user.full_name}}</td>
+                    <td>{{tenant.phone}}</td>
+                    <td>{{tenant.number_of_seats}}</td>
+                    <td>{{tenant.start_datetime | amDateFormat : 'DD-MM-YYYY HH:mm'}}</td>
+                    <td>{{tenant.end_datetime | amDateFormat : 'DD-MM-YYYY HH:mm'}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
