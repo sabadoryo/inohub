@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Application;
+use App\CorpTask;
 use App\Module;
 use App\Program;
 use Illuminate\Http\Request;
@@ -28,23 +29,24 @@ class ApplicationsController extends Controller
             $entityModel = Module::class;
             $module = Module::findBySlug('astanahub_membership');
             $entityId = $module->id;
-        }
-
-        if ($request->entity_type == 'program') {
+        } elseif ($request->entity_type == 'program') {
             $entityModel = Program::class;
             $entityId = $request->entity_id;
-        }
-
-        if ($request->entity_type === 'smart-store-input-solution') {
+        } elseif ($request->entity_type === 'smart-store-input-solution') {
             $entityModel = Module::class;
             $module = Module::findBySlug('smart-store-input-solution');
             $entityId = $module->id;
-        }
-
-        if ($request->entity_type === 'smart-store-input-task') {
+        } elseif ($request->entity_type === 'smart-store-input-task') {
             $entityModel = Module::class;
             $module = Module::findBySlug('smart-store-input-task');
             $entityId = $module->id;
+        } elseif ($request->entity_type === 'corp-task') {
+            $entityModel = Module::class;
+            $module = Module::findBySlug('corp-task');
+            $entityId = $module->id;
+        } elseif ($request->entity_type === 'corp-task-solution') {
+            $entityModel = CorpTask::class;
+            $entityId = $request->entity_id;
         }
 
         $app = Application::create([

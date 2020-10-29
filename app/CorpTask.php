@@ -12,5 +12,14 @@ class CorpTask extends Model
         'status',
     ];
 
-    
+    protected $dates = [
+        'deadline'
+    ];
+
+    public function solutions()
+    {
+        return $this->hasMany(CorpTaskSolution::class);
+    }
+
+
 }

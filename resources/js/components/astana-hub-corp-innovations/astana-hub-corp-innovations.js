@@ -4,17 +4,31 @@ angular
     .module('app')
     .component('astanaHubCorpInnovations', {
         template: require('./astana-hub-corp-innovations.html'),
-        controller: [controller],
+        controller: ['applicationWindow', controller],
         bindings: {
             //
         }
     });
-    
-function controller() {
- 
+
+function controller(applicationWindow) {
+
 	let $ctrl = this;
-	
+
 	$ctrl.$onInit = function () {
         //
+    };
+
+	$ctrl.openApplicationModalForTask = function () {
+	    applicationWindow
+            .open({
+                resolve: {
+                    entityType: function () {
+                        return 'corp-task';
+                    },
+                    entityId: function () {
+                        return null;
+                    }
+                }
+            })
     };
 }

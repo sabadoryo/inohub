@@ -141,12 +141,18 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="/control-panel/sm/solutions" class="nav-link {{$activePage === 'sm-solutions' ? 'active' : ''}}">
-                                ИТ-решения
+                                <i class="far fa-circle"></i>
+                                <p>
+                                    ИТ-решения
+                                </p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="/control-panel/sm/tasks" class="nav-link {{$activePage === 'sm-tasks' ? 'active' : ''}}">
-                                Задачи
+                                <i class="far fa-circle"></i>
+                                <p>
+                                    Задачи
+                                </p>
                             </a>
                         </li>
                     </ul>
