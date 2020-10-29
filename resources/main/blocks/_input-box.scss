@@ -4,7 +4,7 @@
 
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    //justify-content: space-between;
 
     &--span2 {
         grid-row: span 2;
@@ -60,16 +60,16 @@
         right: 20px;
     }
 
-    &__radio-group {
-        display: flex;
+    &__radio-item {
+        display: block;
         margin-bottom: 7px;
     }
 
-    &__radio-box {
-        &:not(:last-child) {
-            margin-right: 24px;
-        }
-    }
+    //&__radio-box {
+    //    &:not(:last-child) {
+    //        margin-right: 24px;
+    //    }
+    //}
 
     &__pass-eye {
         position: absolute;

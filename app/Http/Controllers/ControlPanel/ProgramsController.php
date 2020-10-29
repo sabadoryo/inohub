@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\ControlPanel;
 
 use App\Form;
+use App\Passport;
 use App\Program;
 use App\ProgramCategory;
 use Carbon\Carbon;
@@ -35,6 +36,7 @@ class ProgramsController extends Controller
     {
         $query = Program::query();
 
+
         if ($request->title) {
             $query->where(
                 'title',
@@ -46,7 +48,7 @@ class ProgramsController extends Controller
         if ($request->status) {
             $query->where('status', $request->status);
         }
-        
+
         if ($request->category_id) {
             $query->where('program_category_id', $request->category_id);
         }
@@ -69,6 +71,12 @@ class ProgramsController extends Controller
             'user_id' => \Auth::user()->id,
             'title' => $request->title,
             'program_category_id' => $request->category_id
+        ]);
+
+        $passport = Passport::create([
+            'content' => null,
+            'type' => 'program',
+            'program_id' => $program->id
         ]);
 
         return ['id' => $program->id];
@@ -101,24 +109,27 @@ class ProgramsController extends Controller
     public function pageForm($id)
     {
         $program = Program::find($id);
-    
+        $passportQuery = Passport::query();
+        $passport = $passportQuery->where('program_id', $program->id)->first();
+
         $breadcrumb = [
             ['/control-panel', 'Главная'],
             ['/control-panel/programs', 'Программы'],
             [null, $program->title],
         ];
-    
+
         return view('control-panel.component', [
             'component' => 'program-page-form',
             'bindings' => [
                 'program' => $program,
+                'passport' => $passport
             ],
             'PAGE_TITLE' => $program->title,
             'activePage' => 'programs',
             'breadcrumb' => $breadcrumb,
         ]);
     }
-    
+
     public function forms($id)
     {
         $program = Program::with(['forms'])->find($id);
@@ -129,6 +140,8 @@ class ProgramsController extends Controller
             [null, $program->title],
         ];
         
+        $forms = Form::all();
+    
         return view('control-panel.component', [
             'component' => 'program-forms',
             'bindings' => [
@@ -186,14 +199,32 @@ class ProgramsController extends Controller
         }
         
         $program->forms()->sync($data);
-        
+
+        return [];
+    }
+
+    public function updatePage($id, Request $request)
+    {
+        $program = Program::findOrFail($id);
+
+        $request->validate([
+            'content' => 'required'
+        ]);
+
+        $passportQuery = Passport::query();
+        $passport = $passportQuery->where('program_id', $program->id)->first();
+
+        $passport->update([
+            'content' => $request['content']
+        ]);
+
         return [];
     }
     
     public function publish($id, Request $request)
     {
         $program = Program::find($id);
-    
+
         $program->update([
             'status' => 'published',
             'published_at' => Carbon::now(),

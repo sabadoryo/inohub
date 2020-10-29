@@ -19,17 +19,14 @@
             <a href="/tech-garden/programs" class="tabs__link {{$activePage == 'programs' ? 'tabs__link--active' : ''}}">
                 Программы
             </a>
-            <a href="/tech-garden/corporate-innovations" class="tabs__link {{$activePage == 'corp-innovations' ? 'tabs__link--active' : ''}}">
-                Корпоративные инновации
+            <a href="/tech-garden/smart-store" class="tabs__link {{$activePage == 'smart-store' ? 'tabs__link--active' : ''}}">
+                Smart Store
             </a>
-            <a href="/tech-garden/hub-space" class="tabs__link {{$activePage == 'hub-space' ? 'tabs__link--active' : ''}}">
-                Hub Space
+            <a href="/tech-garden/laboratories" class="tabs__link {{$activePage == 'hub-space' ? 'tabs__link--active' : ''}}">
+                Техонлогические лаборатории
             </a>
-            <a href="/tech-garden/r-and-d" class="tabs__link {{$activePage == 'randd' ? 'tabs__link--active' : ''}}">
-                R&D
-            </a>
-            <a href="/tech-garden/resources" class="tabs__link {{$activePage == 'resources' ? 'tabs__link--active' : ''}}">
-                Ресурсы
+            <a href="/tech-garden/library" class="tabs__link {{$activePage == 'randd' ? 'tabs__link--active' : ''}}">
+                База знании
             </a>
         </div>
 

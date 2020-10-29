@@ -21,6 +21,8 @@ require('overlayscrollbars/js/jquery.overlayScrollbars');
 
 require('admin-lte/build/js/AdminLTE');
 
+window.PerfectScrollbar = require('perfect-scrollbar').default;
+
 window.Swiper = require('swiper/swiper-bundle.js');
 
 $( document ).ready(function() {

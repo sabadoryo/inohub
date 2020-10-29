@@ -7,6 +7,7 @@ Route::post('logout', 'Auth\LoginController@logout');
 
 Route::get('/', 'MainPageController@index');
 Route::get('get-news-list', 'MainPageController@getNewsList');
+Route::get('get-feeds-list', 'MainPageController@getFeedsList');
 Route::get('news/{id}', 'MainPageController@newsPage');
 
 Route::group(['middleware' => ['auth']], function () {
@@ -45,12 +46,18 @@ Route::group(['prefix' => 'astana-hub'], function () {
 Route::group(['prefix' => 'tech-garden'], function () {
     Route::get('about', 'TechGardenController@about');
     Route::get('programs', 'TechGardenController@programs');
+    Route::get('smart-store', 'TechGardenController@smartStore');
     Route::get('corporate-innovations', 'TechGardenController@corporateInnovations');
     Route::get('hub-space', 'TechGardenController@hubSpace');
     Route::get('r-and-d', 'TechGardenController@randd');
     Route::get('resources', 'TechGardenController@resources');
     Route::get('programs/{id}', 'TechGardenController@program');
     Route::get('programs/{id}/get-forms', 'TechGardenController@getProgramForms');
+});
+
+Route::group(['prefix' => 'tech-garden/smart-store'], function () {
+    Route::get('get-tasks-list', 'TechGardenSmartStoreController@getTasksList');
+    Route::get('get-solutions-list', 'TechGardenSmartStoreController@getSolutionsList');
 });
 
 Route::get('get-forms', 'FormsController@getList');
@@ -76,7 +83,7 @@ Route::group([
     Route::post('programs/{id}/update-forms', 'ProgramsController@updateForms');
     Route::post('programs/{id}/update-forms-list', 'ProgramsController@updateFormsList');
     Route::post('programs/{id}/publish', 'ProgramsController@publish');
-
+    Route::post('programs/{id}/update-page', 'ProgramsController@updatePage');
 
     Route::get('users', 'UsersController@index');
     Route::get('users/get-list', 'UsersController@getList');
@@ -92,6 +99,11 @@ Route::group([
     Route::post('acl/attach-permission-to-role', 'ACLController@attachPermissionToRole');
     Route::post('acl/detach-permission-from-role', 'ACLController@detachPermissionFromRole');
     Route::post('acl/add-role', 'ACLController@addRole');
+
+
+
+    Route::get('images', 'ImagesController@index');
+    Route::post('images', 'ImagesController@store');
 
     Route::get('events', 'EventsController@index');
     Route::get('events/get-list', 'EventsController@getList');
@@ -110,7 +122,7 @@ Route::group([
     Route::get('news/{id}/main', 'NewsController@mainForm');
     Route::post('news/{id}/update-main', 'NewsController@updateMain');
     Route::post('news/{id}/publish', 'NewsController@publish');
-    
+
     Route::get('vacancies', 'VacanciesController@index');
     Route::get('vacancies/get-list', 'VacanciesController@getList');
     Route::post('vacancies', 'VacanciesController@store');
@@ -143,6 +155,8 @@ Route::group([
     Route::get('members/create', 'MembersController@create');
     Route::post('members', 'MembersController@store');
     Route::get('members/get-list', 'MembersController@getList');
+
+    Route::post('passports/{id}/save-changes', 'PassportsController@saveChanges');
 
     Route::get('sm/solutions', 'SmartStoreSolutionCompaniesController@index');
     Route::get('sm/solutions/get-companies-list', 'SmartStoreSolutionCompaniesController@getList');

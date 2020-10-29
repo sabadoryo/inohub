@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\ControlPanel;
 
 use App\Event;
+use App\Feed;
 use App\Form;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use PHPUnit\Runner\BeforeFirstTestHook;
 
 class EventsController extends Controller
 {
@@ -205,5 +207,11 @@ class EventsController extends Controller
             'status' => 'published',
             'published_at' => Carbon::now(),
         ]);
+
+        Feed::create([
+            'entity_model' => Event::class,
+            'entity_id' => $id
+        ]);
+
     }
 }
