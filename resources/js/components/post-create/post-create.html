@@ -1,0 +1,38 @@
+<div class="card">
+  <div class="card-header">
+    Создание поста
+  </div>
+  <form ng-submit="$ctrl.save()">
+    <div class="card-body">
+      <div class="form-group">
+        <label>Заголовок:</label>
+        <input class="form-control" ng-model="$ctrl.title">
+      </div>
+      <div class="form-group">
+        <label>Контент:</label>
+        <text-angular ta-resize-force-aspect-ratio="true" ng-model="$ctrl.content"></text-angular>
+      </div>
+      <div class="form-group">
+        <label>Изображение:</label>
+        <div class="mb-2">
+          <img ng-show="$ctrl.image" ngf-thumbnail="$ctrl.image" width="350"/>
+        </div>
+        <div>
+          <a class="btn btn-light"
+             ngf-select=""
+             ng-model="$ctrl.image"
+             accept="image/*">
+
+            <span ng-show="!$ctrl.image">Выбрать изображение</span>
+            <span ng-show="$ctrl.image">Изменить изображение</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-primary" type="submit" ng-disabled="$ctrl.loading">
+        Сохранить
+      </button>
+    </div>
+  </form>
+</div>

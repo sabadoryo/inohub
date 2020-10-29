@@ -173,6 +173,17 @@ function controller(Auth, $rootScope, Upload, $http, $scope) {
             .then(
                 res => {
                     $ctrl.curForm = 'finished';
+
+                    let appId = res.data.appId;
+
+                    Swal.fire(
+                        'Отлично! Заявка успешно отправлена',
+                        `Номер заявки №${appId}. Изменения по данной заявке можете смотреть в личном кабинете`,
+                        'success'
+                    ).then(res => {
+                        $ctrl.close();
+                    });
+
                 },
                 err => {
 
