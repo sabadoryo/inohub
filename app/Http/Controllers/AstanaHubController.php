@@ -77,16 +77,11 @@ class AstanaHubController extends Controller
         $program = Program::findOrFail($id);
         $passportQuery = Passport::query();
         $passport = $passportQuery->where('program_id', $program->id)->first();
-        $component = 'astana-hub-program';
 
-        $bindings = [
-            'program' => $program,
-            'passport' => $passport
-        ];
-
-        return view('test2', [
+        return view('gjs-layout', [
             'passport' => $passport,
-            'program' => $program
+            'entityType' => 'program',
+            'entityId' => $id
         ]);
     }
 

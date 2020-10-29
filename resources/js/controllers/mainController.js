@@ -10,13 +10,10 @@ function controller($scope, $uibModal, Auth, $rootScope, $http, applicationWindo
 
     $scope.test = function () {
         console.log('Hello world');
-    }
+    };
 
     $scope.openApplicationModal = () => {
-        console.log('clcococo')
         if (!Auth.user()) {
-            console.log('clcococo 1')
-
             Auth
                 .openAuthModal({to: () => 'applicationWindow'})
                 .result
@@ -26,37 +23,19 @@ function controller($scope, $uibModal, Auth, $rootScope, $http, applicationWindo
                     }
                 );
         } else {
-            console.log('clcococo 2')
             openAppWindow();
         }
 
         function openAppWindow() {
             applicationWindow.open({
                 resolve: {
-                    entityType: 'astanahub_membership',
-                    entityId: null,
+                    entityType: $scope.entityType,
+                    entityId: $scope.entityId,
                 }
             });
         }
-
-        // $uibModal
-        //     .open({
-        //         component: 'applicationModal',
-        //         resolve: {
-        //             entityType: () => 'astanahub_membership',
-        //             entityId: () => null,
-        //         }
-        //     })
-        //     .result
-        //     .then(
-        //         res => {
-        //
-        //         },
-        //         err => {
-        //
-        //         }
-        //     );
     };
+
     $rootScope.$on('UserAuthenticated', (event, data) => {
         $scope.user = data.user;
     });
