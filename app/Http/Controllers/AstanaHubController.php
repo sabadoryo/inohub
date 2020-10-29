@@ -84,10 +84,9 @@ class AstanaHubController extends Controller
             'passport' => $passport
         ];
 
-        return view('main.astana-hub', [
-            'component' => $component,
-            'bindings' => $bindings,
-            'activePage' => 'programs'
+        return view('test2', [
+            'passport' => $passport,
+            'program' => $program
         ]);
     }
 

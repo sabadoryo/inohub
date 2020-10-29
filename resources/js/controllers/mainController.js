@@ -2,9 +2,9 @@ import angular from "angular";
 
 angular
     .module('app')
-    .controller('MainController', ['$scope', '$uibModal', 'Auth', '$rootScope', '$http', controller]);
+    .controller('MainController', ['$scope', '$uibModal', 'Auth', '$rootScope', '$http', 'applicationWindow', controller]);
 
-function controller($scope, $uibModal, Auth, $rootScope, $http) {
+function controller($scope, $uibModal, Auth, $rootScope, $http, applicationWindow) {
 
     $scope.user = Auth.user();
 
@@ -12,6 +12,51 @@ function controller($scope, $uibModal, Auth, $rootScope, $http) {
         console.log('Hello world');
     }
 
+    $scope.openApplicationModal = () => {
+        console.log('clcococo')
+        if (!Auth.user()) {
+            console.log('clcococo 1')
+
+            Auth
+                .openAuthModal({to: () => 'applicationWindow'})
+                .result
+                .then(
+                    res => {
+                        openAppWindow();
+                    }
+                );
+        } else {
+            console.log('clcococo 2')
+            openAppWindow();
+        }
+
+        function openAppWindow() {
+            applicationWindow.open({
+                resolve: {
+                    entityType: 'astanahub_membership',
+                    entityId: null,
+                }
+            });
+        }
+
+        // $uibModal
+        //     .open({
+        //         component: 'applicationModal',
+        //         resolve: {
+        //             entityType: () => 'astanahub_membership',
+        //             entityId: () => null,
+        //         }
+        //     })
+        //     .result
+        //     .then(
+        //         res => {
+        //
+        //         },
+        //         err => {
+        //
+        //         }
+        //     );
+    };
     $rootScope.$on('UserAuthenticated', (event, data) => {
         $scope.user = data.user;
     });

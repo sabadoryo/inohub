@@ -2,8 +2,8 @@ import angular from "angular";
 
 angular
     .module('app')
-    .component('applicationStatus', {
-        template: require('./application-status.html'),
+    .component('cabinetApplicationStatus', {
+        template: require('./cabnet-application-status.html'),
         controller: ['$http', 'Auth', 'moment', '$uibModal', 'Upload', controller],
         bindings: {
             app: '<'

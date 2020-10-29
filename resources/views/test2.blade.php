@@ -19,7 +19,44 @@
 
         <a href="/" class="header__logo">Tech <span class="header__logo-accent">Hub</span></a>
 
+        <div class="header__search-box search-box">
 
+            <a href="#" class="search-box__icon">
+                <svg width="18" height="18">
+                    <use xlink:href="/img/icons.svg#search"></use>
+                </svg>
+            </a>
+
+            <input type="text" class="search-box__input" placeholder="Поиск">
+
+            <div class="search-box__dropdown search-dropdown">
+
+                <a href="#" class="search-dropdown__item">
+                    <img src="/img/icons/astana-hub-icon-xs.png" alt="" class="search-dropdown__icon">
+
+                    <div class="search-dropdown__info">
+                        <div class="search-dropdown__title">Speaker Night</div>
+
+                        <div class="search-dropdown__subtitle">
+                            “Как презентовать стартап потенциальному инвестору”
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="search-dropdown__item">
+                    <img src="/img/icons/astana-hub-icon-xs.png" alt="" class="search-dropdown__icon">
+
+                    <div class="search-dropdown__info">
+                        <div class="search-dropdown__title">Speaker Night</div>
+
+                        <div class="search-dropdown__subtitle">
+                            “Ключевые правила ЭФФЕКТИВНЫХ ПРОДАЖ 2020”
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        </div>
         {{--        <div class="header__lang-switcher" onclick="console.log(document.getElementsByClassName('lang-dropdown'))">--}}
         <div class="header__lang-switcher" onclick="document.getElementsByClassName('lang-dropdown')[0].classList.toggle('lang-dropdown--show')">
             <div class="header__language">Ru</div>
