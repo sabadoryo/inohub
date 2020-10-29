@@ -41,7 +41,7 @@ function controller($http, notify) {
     }
 
     $ctrl.removeCompany = function (id, name) {
-        if (confirm(`Вы уверены, что хотите удалить компанию ${name}`)) {
+        if (confirm(`Вы уверены, что хотите удалить задачу ${name}`)) {
             $ctrl.loading = true;
 
             $http
@@ -49,7 +49,7 @@ function controller($http, notify) {
                 .then(
                     function (response) {
                         notify({
-                            message: `Компания ${name} успешно удалена`,
+                            message: `Задача ${name} успешно удалена`,
                             duration: 2000,
                             position: 'top',
                             classes: 'alert-success'

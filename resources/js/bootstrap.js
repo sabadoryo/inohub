@@ -6,6 +6,7 @@ window.$ = window.jQuery = require('jquery');
 
 window.grapesjs = require('grapesjs');
 
+require('chart.js');
 require('bootstrap');
 require('overlayscrollbars/js/jquery.overlayScrollbars');
 // import Echo from 'laravel-echo';s

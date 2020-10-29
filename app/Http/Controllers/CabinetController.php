@@ -45,12 +45,10 @@ class CabinetController extends Controller
             'forms.form',
             'forms.fields',
             'forms.fields.formField',
-            'actions' => function ($q) {
-                $q->orderBy('created_at', 'desc');
-            },
-            'actions.user'
 
         ])->findOrFail($id);
+
+        $app->actions = $app->actions()->with('user')->orderBy('created_at', 'asc')->get()->groupBy('type');
 
         foreach ($app->forms as $form) {
             foreach ($form->fields as $field) {
@@ -58,6 +56,15 @@ class CabinetController extends Controller
 
                 if ($field->formField->type === 'file') {
                     $values = [];
+                    if ($field->formField->example_files_path) {
+                        $exampleFiles = [];
+                        foreach ($field->formField->example_files_path as $ind => $path) {
+                            array_push($exampleFiles,
+                                ['name' => $field->formField->example_files_name[$ind], 'path' => $path]);
+                        }
+                        $field->formField->example_files = $exampleFiles;
+                    }
+
                     foreach ($field->value as $ind => $value) {
                         array_push($values, ['path' => $value, 'name' => $field['file_name'][$ind]]);
                     }
@@ -169,7 +176,7 @@ class CabinetController extends Controller
 
         $app->actions()->create([
             'user_id' => \Auth::user()->id,
-            'name' => 'application_user_message',
+            'name' => $request->messageFrom === 'user' ? 'application_user_message' : 'application_admin_message',
             'message' => $request->message,
             'type' => 'message',
             'additional_data' => json_encode($files),

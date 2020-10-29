@@ -13,21 +13,21 @@ class FormsController extends Controller
         if ($request->type == 'astanahub_membership') {
             $module = Module::findBySlug('astanahub_membership');
             $forms = $module->forms()->orderBy('order_number')->with('fields')->get();
-        }
-
-        if ($request->type == 'program') {
+        } elseif ($request->type == 'program') {
             $programId = $request->program_id;
             $program = Program::findOrFail($programId);
             $forms = $program->forms()->orderBy('order_number')->with('fields')->get();
-        }
-
-        if ($request->type === 'smart-store-input-solution') {
+        } elseif ($request->type === 'smart-store-input-solution') {
             $module = Module::findBySlug('smart-store-input-solution');
             $forms = $module->forms()->orderBy('order_number')->with('fields')->get();
-        }
-
-        if ($request->type === 'smart-store-input-task') {
+        } elseif ($request->type === 'smart-store-input-task') {
             $module = Module::findBySlug('smart-store-input-task');
+            $forms = $module->forms()->orderBy('order_number')->with('fields')->get();
+        } elseif ($request->type === 'corp-task') {
+            $module = Module::findBySlug('corp-task');
+            $forms = $module->forms()->orderBy('order_number')->with('fields')->get();
+        } elseif ($request->type === 'corp-task-solution') {
+            $module = Module::findBySlug('corp-task-solution');
             $forms = $module->forms()->orderBy('order_number')->with('fields')->get();
         }
 
