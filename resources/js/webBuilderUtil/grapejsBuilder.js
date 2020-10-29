@@ -637,9 +637,9 @@ const buildConstructor = (elemId, options) => {
         }
     });
 
-    // editor.CssComposer.setRule('.submit-button', {
-    //
-    // });
+    editor.CssComposer.setRule('#wrapper', {
+        'padding-bottom': '30px'
+    });
 
     // BLOCKS
 
