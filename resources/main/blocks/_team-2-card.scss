@@ -1,0 +1,26 @@
+.team-2-card {
+
+    width: 304px;
+
+    &__img {
+        width: 304px;
+        margin-bottom: 20px;
+    }
+
+    &__name {
+        @include text-style(1.8rem, 700, #181515);
+        line-height: 22px;
+        margin-bottom: 15px;
+    }
+
+    &__text {
+        @include text-style(1.6rem, 400, #181515);
+        line-height: 19.5px;
+        margin-bottom: 15px;
+    }
+
+    &__details {
+        @include text-style(1.4rem, 400, #181515);
+        line-height: 17px;
+    }
+}

@@ -272,3 +272,27 @@ Route::get('news-page', function () {
 Route::get('register-techpark', function () {
     return view('register-techpark');
 });
+
+Route::get('startup-page', function () {
+    return view('startup-page');
+});
+
+Route::get('investors-page', function () {
+    return view('investors-page');
+});
+
+Route::get('event-page', function () {
+    return view('event-page');
+});
+
+Route::get('tech-garden-store-2', function () {
+    return view('tech-garden-store-2');
+});
+
+Route::get('tech-garden-lab-1', function () {
+    return view('tech-garden-lab-1');
+});
+
+Route::get('tech-garden-lab-2', function () {
+    return view('tech-garden-lab-2');
+});

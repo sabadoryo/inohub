@@ -46,8 +46,15 @@ $( document ).ready(function() {
         },
     });
 
+    var swiper3 = new Swiper('.swiper-3-slides', {
+        slidesPerView: 3,
+        spaceBetween: 24,
 
-
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
 });
 // var swiper = new Swiper('.swiper-container', {
 //     slidesPerView: 2,

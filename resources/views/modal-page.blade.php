@@ -46,7 +46,9 @@
             Войти
         </div>
 
-        <img src="/img/avatar-placeholder.svg" alt="" class="as-modal__profile-photo">
+        <div class="as-modal__profile-img-box">
+            <img src="/img/team-member.png" alt="" class="as-modal__profile-photo">
+        </div>
 
         <form class="as-modal__form">
 
