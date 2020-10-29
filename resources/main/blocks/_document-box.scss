@@ -1,0 +1,20 @@
+.document-box {
+    width: 282px;
+    padding: 50px 20px 20px 20px;
+    background-color: #ffffff;
+    border-radius: 7px;
+
+    &__icon {
+        display: block;
+        width: 100px;
+        height: 100px;
+        border-radius: 7px;
+        margin: 0 auto 55px;
+    }
+
+    &__title {
+        @include text-style(1.8rem, 600, #181515);
+        line-height: 22px;
+        margin-bottom: 25px;
+    }
+}
