@@ -75,7 +75,7 @@ function controller(notify, $http, $uibModal) {
 
     $ctrl.save = () => {
         $ctrl.rawHtml = editor.getHtml() + `<style>${editor.getCss()}</style>`;
-        console.log(editor.getCss())
+        console.log($ctrl.rawHtml)
         $ctrl.passportHtml = `
                 <html>
                     <head>

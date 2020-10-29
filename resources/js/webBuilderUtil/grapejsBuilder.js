@@ -19,7 +19,7 @@ const buildConstructor = (elemId, options) => {
         storageManager: {
             type: 'remote',
             autosave: true,
-            stepsBeforeSave: 1,
+            stepsBeforeSave: 5,
             storeHtml: 1,
             storeCss: 1,
             storeComponents: 0,
@@ -614,7 +614,8 @@ const buildConstructor = (elemId, options) => {
                     'data-grapes-lang-en' : '',
                     'data-grapes-lang-ru' : '',
                     class: 'text-lang ui-button-red-md',
-                    'onclick': `window.open('/')`
+                    // 'onclick': `window.open('/')`,
+                    'ng-click': `test()`
                 },
                 components: `Подать заявку`,
                 traits: [

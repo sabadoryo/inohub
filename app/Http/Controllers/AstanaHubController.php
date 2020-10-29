@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Passport;
 use App\Program;
 use Illuminate\Http\Request;
 
@@ -74,11 +75,13 @@ class AstanaHubController extends Controller
     public function program($id)
     {
         $program = Program::findOrFail($id);
-
+        $passportQuery = Passport::query();
+        $passport = $passportQuery->where('program_id', $program->id)->first();
         $component = 'astana-hub-program';
 
         $bindings = [
             'program' => $program,
+            'passport' => $passport
         ];
 
         return view('main.astana-hub', [

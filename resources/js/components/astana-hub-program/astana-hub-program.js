@@ -1,20 +1,24 @@
 import angular from "angular";
 
 angular
-    .module('app')
+    .module('$sce', 'app')
     .component('astanaHubProgram', {
         template: require('./astana-hub-program.html'),
         controller: ['$uibModal', controller],
         bindings: {
             program: '<',
+            passport: '<'
         }
     });
-    
-function controller($uibModal) {
- 
+
+function controller($sce, $uibModal) {
+
 	let $ctrl = this;
-	
+
 	$ctrl.$onInit = function () {
+	    $ctrl.content = $ctrl.passport.content;
+        // $ctrl.content = $sce.trustAsHtml($ctrl.passport.content);
+	    console.log($ctrl.passport)
     };
 
 	$ctrl.openApplicationModal = function () {

@@ -8,6 +8,10 @@ function controller($scope, $uibModal, Auth, $rootScope, $http) {
 
     $scope.user = Auth.user();
 
+    $scope.test = function () {
+        console.log('Hello world');
+    }
+
     $rootScope.$on('UserAuthenticated', (event, data) => {
         $scope.user = data.user;
     });

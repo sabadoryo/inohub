@@ -24,12 +24,20 @@ Route::post('register-project', 'RegisterProjectController@store');
 Route::group(['prefix' => 'astana-hub'], function () {
     Route::get('about', 'AstanaHubController@about');
     Route::get('programs', 'AstanaHubController@programs');
+    Route::get('programs/{id}', 'AstanaHubController@getProgram');
     Route::get('corporate-innovations', 'AstanaHubController@corporateInnovations');
     Route::get('hub-space', 'AstanaHubController@hubSpace');
     Route::get('r-and-d', 'AstanaHubController@randd');
     Route::get('resources', 'AstanaHubController@resources');
     Route::get('programs/{id}', 'AstanaHubController@program');
     Route::get('programs/{id}/get-forms', 'AstanaHubController@getProgramForms');
+});
+
+Route::get('test', function () {
+    $program = \App\Program::find(9);
+    $passport = \App\Passport::where('program_id', 9)->first();
+
+    return view('test2', compact('passport'));
 });
 
 Route::get('get-forms', 'FormsController@getList');
@@ -151,5 +159,9 @@ Route::get('profile-page-3', function () {
 });
 
 Route::get('modal-full', function () {
+    return view('modal-full');
+});
+
+Route::get('program', function () {
     return view('modal-full');
 });
