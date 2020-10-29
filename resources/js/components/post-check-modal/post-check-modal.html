@@ -1,0 +1,9 @@
+<img class="card-img-top" ng-src="{{$ctrl.post.image_url}}">
+<div class="modal-body">
+  <p ng-bind-html="$ctrl.post.content"></p>
+  <footer class="blockquote-footer">{{$ctrl.post.user.full_name}} <cite title="Source Title">{{$ctrl.post.created_at | date:'dd.MM.yyyy HH:mm'}}</cite></footer>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-danger" ng-click="$ctrl.updateStatus('reject')">Отказать</button>
+  <button type="button" class="btn btn-success" ng-click="$ctrl.updateStatus('accept')">Одобрить</button>
+</div>

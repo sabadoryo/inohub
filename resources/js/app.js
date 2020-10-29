@@ -167,3 +167,5 @@ require('./components/vacancy-create-modal/vacancy-create-modal');
 require('./components/vacancy-main-form/vacancy-main-form');
 require('./components/cabinet-notifications/cabinet-notifications');
 require('./components/post-create/post-create');
+require('./components/posts-control/posts-control');
+require('./components/post-check-modal/post-check-modal');
