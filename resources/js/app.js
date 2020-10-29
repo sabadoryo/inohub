@@ -169,6 +169,7 @@ require('./components/cabinet-notifications/cabinet-notifications');
 require('./components/post-create/post-create');
 require('./components/posts-control/posts-control');
 require('./components/post-check-modal/post-check-modal');
+require('./components/projects-controller/projects-controller');
 require('./components/corp-tasks/corp-tasks');
 require('./components/corp-tasks-create/corp-tasks-create');
 require('./components/corp-tasks-edit/corp-tasks-edit');

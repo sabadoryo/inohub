@@ -3,10 +3,50 @@
 const buildConstructor = (elemId, options) => {
 
     let idCounter = 0;
+    const customComponentTypes = editor => {
+        editor.DomComponents.addType('text', {
+            model: {
+                defaults: {
+                    attributes: {
+                        'data-grapes-lang-kz' : '',
+                        'data-grapes-lang-en' : '',
+                        'data-grapes-lang-ru' : '',
+                        // class: 'text-lang'
+                    },
+                    traits: [
+                        {
+                            type: 'text',
+                            name: 'data-grapes-lang-kz',
+                            label: 'Lang KZ'
+                        },
+                        {
+                            type: 'text',
+                            name: 'data-grapes-lang-en',
+                            label: 'Lang EN'
+                        }
+                    ]
+                }
+            }
+        });
 
+        // editor.DomComponents.addType('link', {
+        //     view: {
+        //         onRender() {
+        //             const inp = document.createElement('input');
+        //             inp.type='text'
+        //             inp.value = 'href';
+        //             // This is just an example, AVOID adding events on inner elements,
+        //             // use `events` for these cases
+        //             // btn.addEventListener('click', () => {});
+        //             this.el.appendChild(inp);
+        //         }
+        //     }
+        // });
+    };
     let editor = grapesjs.init({
         // Indicate where to init the editor. You can also pass an HTMLElement
         container: '#' + elemId,
+        plugins: [ customComponentTypes ],
         // Get the content for the canvas directly from the element
         // As an alternative we could use: `components: '<h1>Hello World Component!</h1>'`,
         // fromElement: true,
@@ -19,7 +59,7 @@ const buildConstructor = (elemId, options) => {
         storageManager: {
             type: 'remote',
             autosave: true,
-            stepsBeforeSave: 1,
+            stepsBeforeSave: 5,
             storeHtml: 1,
             storeCss: 1,
             storeComponents: 0,
@@ -48,8 +88,20 @@ const buildConstructor = (elemId, options) => {
             credentials: 'include'
 
         },
+        styleManager: {
+            sectors: [
+                {
+                    name: 'Позиция',
+                    buildProps: ['width', 'height', 'min-width', 'min-height', 'margin-top', 'margin-bottom', 'margin-left', 'margin-right']
+                },
+                {
+                    name: 'Типография',
+                    buildProps: ['font-size', 'font-weight', 'text-align', 'letter-spacing', 'color', 'text-shadow', 'background-color']
+                }
+            ]
+        },
         canvas: {
-            styles: ['/css/style.css', '/css/ui-components.css']
+            styles: ['/css/style.css', '/css/ui-components.css', '/css/main.css']
         }
     });
     editor.SelectorManager.getAll().each(selector => selector.set('private', 1));
@@ -173,7 +225,6 @@ const buildConstructor = (elemId, options) => {
 
     // containers
     editor.DomComponents.addType('ui-main-component', {
-        extend: 'text',
         model: {
             defaults: {
                 tagName: 'main',
@@ -243,7 +294,7 @@ const buildConstructor = (elemId, options) => {
         model: {
             defaults: {
                 droppable: '.ui-container, .ui-container-fix, img',
-                draggable: 'main',
+                // draggable: 'main, body',
                 attributes: {
                     class: 'ui-section main-droppable'
                 },
@@ -425,26 +476,8 @@ const buildConstructor = (elemId, options) => {
                 `,
                 tagName: 'p',
                 attributes: {
-                    'data-grapes-lang-kz' : '',
-                    'data-grapes-lang-en' : '',
-                    'data-grapes-lang-ru' : '',
                     class: 'text-lang ui-heading-white'
                 },
-                // style: {'font-size': '3rem'},
-                traits: [
-                    // Strings are automatically converted to text types
-                    // 'name', // Same as: { type: 'text', name: 'name' }
-                    {
-                        type: 'text',
-                        name: 'data-grapes-lang-kz',
-                        label: 'Lang KZ'
-                    },
-                    {
-                        type: 'text',
-                        name: 'data-grapes-lang-en',
-                        label: 'Lang EN'
-                    }
-                ],
             }
         }
     });
@@ -458,26 +491,8 @@ const buildConstructor = (elemId, options) => {
                 `,
                 tagName: 'p',
                 attributes: {
-                    'data-grapes-lang-kz' : '',
-                    'data-grapes-lang-en' : '',
-                    'data-grapes-lang-ru' : '',
                     class: 'text-lang ui-heading-black'
-                },
-                // style: {'font-size': '3rem'},
-                traits: [
-                    // Strings are automatically converted to text types
-                    // 'name', // Same as: { type: 'text', name: 'name' }
-                    {
-                        type: 'text',
-                        name: 'data-grapes-lang-kz',
-                        label: 'Lang KZ'
-                    },
-                    {
-                        type: 'text',
-                        name: 'data-grapes-lang-en',
-                        label: 'Lang EN'
-                    }
-                ],
+                }
             }
         }
     });
@@ -490,23 +505,8 @@ const buildConstructor = (elemId, options) => {
                 `,
                 tagName: 'p',
                 attributes: {
-                    'data-grapes-lang-kz' : '',
-                    'data-grapes-lang-en' : '',
-                    'data-grapes-lang-ru' : '',
                     class: 'text-lang ui-paragraph-white'
-                },
-                traits: [
-                    {
-                        type: 'text',
-                        name: 'data-grapes-lang-kz',
-                        label: 'Lang KZ'
-                    },
-                    {
-                        type: 'text',
-                        name: 'data-grapes-lang-en',
-                        label: 'Lang EN'
-                    }
-                ],
+                }
             }
         }
     });
@@ -519,23 +519,8 @@ const buildConstructor = (elemId, options) => {
                 `,
                 tagName: 'p',
                 attributes: {
-                    'data-grapes-lang-kz' : '',
-                    'data-grapes-lang-en' : '',
-                    'data-grapes-lang-ru' : '',
                     class: 'text-lang ui-paragraph-black'
-                },
-                traits: [
-                    {
-                        type: 'text',
-                        name: 'data-grapes-lang-kz',
-                        label: 'Lang KZ'
-                    },
-                    {
-                        type: 'text',
-                        name: 'data-grapes-lang-en',
-                        label: 'Lang EN'
-                    }
-                ],
+                }
             }
         }
     });
@@ -605,32 +590,16 @@ const buildConstructor = (elemId, options) => {
 
     // buttons
     editor.DomComponents.addType('ui-button-red-md-component', {
-        extend: 'link',
+        extend: 'text',
         model: {
             defaults: {
                 tagName: 'button',
                 attributes: {
-                    'data-grapes-lang-kz' : '',
-                    'data-grapes-lang-en' : '',
-                    'data-grapes-lang-ru' : '',
                     class: 'text-lang ui-button-red-md',
-                    'onclick': `window.open('/')`
+                    // 'onclick': `window.open('/')`,
+                    'ng-click': `openApplicationModal()`
                 },
                 components: `Подать заявку`,
-                traits: [
-                    // Strings are automatically converted to text types
-                    // 'name', // Same as: { type: 'text', name: 'name' }
-                    {
-                        type: 'text',
-                        name: 'data-grapes-lang-kz',
-                        label: 'Lang KZ'
-                    },
-                    {
-                        type: 'text',
-                        name: 'data-grapes-lang-en',
-                        label: 'Lang EN'
-                    }
-                ],
             }
         }
     });
@@ -644,23 +613,23 @@ const buildConstructor = (elemId, options) => {
                     class: 'ui-socials'
                 },
                 components: `
-                    <a href="#" class="ui-socials__item">
+                    <a href="#" data-gjs-type="link" class="ui-socials__item">
                         <img src="/img/icons/fb-icon.png" alt="">
                     </a>
 
-                    <a href="#" class="ui-socials__item">
+                    <a href="#" data-gjs-type="link" class="ui-socials__item">
                         <img src="/img/icons/linkeddn-icon.png" alt="">
                     </a>
 
-                    <a href="#" class="ui-socials__item">
+                    <a href="#" data-gjs-type="link" class="ui-socials__item">
                         <img src="/img/icons/inst-icon.png" alt="">
                     </a>
 
-                    <a href="#" class="ui-socials__item">
+                    <a href="#" data-gjs-type="link" class="ui-socials__item">
                         <img src="/img/icons/tg-icon.png" alt="">
                     </a>
 
-                    <a href="#" class="ui-socials__item">
+                    <a href="#" data-gjs-type="link" class="ui-socials__item">
                         <img src="/img/icons/youtube-icon.png" alt="">
                     </a>
                 `
@@ -675,50 +644,50 @@ const buildConstructor = (elemId, options) => {
     // BLOCKS
 
     //TEST
-    editor.BlockManager.add('ui-main-container-block', {
-        label: 'FILLABLE: UI Main Container',
-        // category: 'Container',
-        content: `
-            <main data-gjs-droppable=".dropping" class="program-page"></main>
-        `
-    });
-    //TEST
+    // editor.BlockManager.add('ui-main-container-block', {
+    //     label: 'FILLABLE: UI Main Container',
+    //     // category: 'Container',
+    //     content: `
+    //         <main data-gjs-droppable=".dropping" class="program-page"></main>
+    //     `
+    // });
+    // Ready block
     editor.BlockManager.add('ui-welcome-section-block', {
         label: 'Welcome Section',
-        // category: 'Basic',
+        category: 'Готовые блоки',
         content: `
             <div data-gjs-droppable=".dropping" class="program-page__section program-welcome-section dropping">
                 <img data-gjs-type="image" alt="" class="program-welcome-section__img dropping">
 
                 <div data-gjs-droppable=".dropping" class="program-welcome-section__info dropping">
-                    <div data-gjs-droppable=".dropping" class="program-welcome-section__title dropping">Наименование</div>
-                    <p data-gjs-droppable=".dropping" class="program-welcome-section__subtitle dropping">Второстепенный текст, второе заглавие</p>
-                    <button data-gjs-droppable=".dropping" class="program-welcome-section__button button button--lg  dropping">Кнопка</button>
+                    <div data-gjs-droppable=".dropping" class="program-welcome-section__title dropping text-lang">Наименование</div>
+                    <p data-gjs-droppable=".dropping" class="program-welcome-section__subtitle dropping text-lang">Второстепенный текст, второе заглавие</p>
+                    <button data-gjs-droppable=".dropping" class="program-welcome-section__button button button--lg  dropping text-lang" data-gjs-type="ui-button-red-md-component"></button>
                 </div>
             </div>
         `
     });
-    //TEST
+    // Ready block
     editor.BlockManager.add('ui-cards-block', {
         label: 'Cards section',
-        // category: 'Basic',
+        category: 'Готовые блоки',
         content: `
             <div class="program-page__section program-cards dropping">
 
                 <div class="program-cards__container dropping">
-                    <h4 class="program-cards__title">Мы ищем проекты в твоем городе</h4>
+                    <h4 class="program-cards__title text-lang">Мы ищем проекты в твоем городе</h4>
 
                     <div class="program-cards__list dropping">
 
                         <div class="program-cards__item program-card dropping">
 
-                            <img src="/img/icons.svg" width="130" height="130" class="program-card__icon">
-<!--                                <use href="/img/icons.svg#lamp"></use>-->
-                            </img>
+                            <svg src="/img/icons.svg" width="130" height="130" class="program-card__icon">
+                                <use href="/img/icons.svg#lamp"></use>
+                            </svg>
 
-                            <h5 class="program-card__title dropping">С конкурентоспособной идеей</h5>
+                            <h5 class="program-card__title dropping text-lang">С конкурентоспособной идеей</h5>
 
-                            <p class="program-card__desc dropping">
+                            <p class="program-card__desc dropping text-lang">
                                 В стартап-индустрии мы называем это "MCI" - максимально конкурентоспособная идея, надобность
                                 которой
                                 уже прощупана среди целевых клиентов. Идея должна быть осуществимой и иметь потенциал на
@@ -733,9 +702,9 @@ const buildConstructor = (elemId, options) => {
                                 <use href="/img/icons.svg#group"></use>
                             </svg>
 
-                            <h5 class="program-card__title dropping">Не менее 2-х ключевых участников команды</h5>
+                            <h5 class="program-card__title dropping text-lang">Не менее 2-х ключевых участников команды</h5>
 
-                            <p class="program-card__desc dropping">
+                            <p class="program-card__desc dropping text-lang">
                                 Это говорит о том, что у вас есть сформированный костяк команды.
                             </p>
 
@@ -747,9 +716,9 @@ const buildConstructor = (elemId, options) => {
                                 <use href="/img/icons.svg#technology"></use>
                             </svg>
 
-                            <h5 class="program-card__title dropping">С ИТ-решением</h5>
+                            <h5 class="program-card__title dropping text-lang">С ИТ-решением</h5>
 
-                            <p class="program-card__desc dropping">
+                            <p class="program-card__desc dropping text-lang">
                                 интернет вещей, e-Commerce, образовательные технологии, информационная безопасность, большие
                                 данные и машинное обучение, рекламные и маркетинговые технологии, платформенное и корпоративное
                                 ПО, финансовые технологии, онлайн и mobile-игры, искусственный интеллект, дополненная и
@@ -764,9 +733,9 @@ const buildConstructor = (elemId, options) => {
                                 <use href="/img/icons.svg#star-target"></use>
                             </svg>
 
-                            <h5 class="program-card__title dropping">Полная вовлеченность основателей</h5>
+                            <h5 class="program-card__title dropping text-lang">Полная вовлеченность основателей</h5>
 
-                            <p class="program-card__desc dropping">
+                            <p class="program-card__desc dropping text-lang">
                                 На первых порах очень важно, чтобы основатель был полностью вовлечен в проект, без параллельной
                                 занятости, так как это напрямую сказывается на скорости и качестве развития стартапа.
                             </p>
@@ -780,34 +749,33 @@ const buildConstructor = (elemId, options) => {
             </div>
         `
     });
-    //TEST
+    // Ready block
     editor.BlockManager.add('ui-info-block', {
         label: 'Info Block',
-        // category: 'Basic',
-
+        category: 'Готовые блоки',
         content: `
             <div class="program-page__section program-info">
                 <div class="program-info__container">
-                    <h4 class="program-info__title">Что ты получишь на инкубации?</h4>
+                    <h4 class="program-info__title text-lang">Что ты получишь на инкубации?</h4>
 
                     <table class="program-info__table">
                         <tr>
-                            <th>Наставника</th>
-                            <td>Ты сможешь детально разобрать свой проект с бизнес-экспертами (мы называем их трекерами). На
+                            <th class="text-lang">Наставника</th>
+                            <td class="text-lang">Ты сможешь детально разобрать свой проект с бизнес-экспертами (мы называем их трекерами). На
                                 индивидуальных консультациях тебе помогут разобраться во всех процессах - от финансов до
                                 маркетинга - и выстроить рабочую модель твоего стартапа.
                             </td>
                         </tr>
                         <tr>
-                            <th>Понимание, как работает стартап</th>
-                            <td>Мы научим тебя создавать ИТ-продукт без навыков кодирования, строить гибкую бизнес-модель,
+                            <th class="text-lang">Понимание, как работает стартап</th>
+                            <td class="text-lang">Мы научим тебя создавать ИТ-продукт без навыков кодирования, строить гибкую бизнес-модель,
                                 правильно формировать роли в команде и делать продукт, который решает конкретную проблему и
                                 приносит доход.
                             </td>
                         </tr>
                         <tr>
-                            <th>Нетворкинг</th>
-                            <td>
+                            <th class="text-lang">Нетворкинг</th>
+                            <td class="text-lang">
                                 Ты автоматически станешь частью комьюнити Astana Hub. Мы познакомим тебя с нашим сообществом,
                                 расскажем о твоем проекте на наших площадках и познакомим с людьми и компаниями, которые
                                 подтолкнут твой проект к развитию.
@@ -819,37 +787,36 @@ const buildConstructor = (elemId, options) => {
             </div>
         `
     });
-    //TEST
+    // Ready block
     editor.BlockManager.add('ui-steps-block', {
         label: 'Steps',
-        // category: 'Basic',
-
+        category: 'Готовые блоки',
         content: `
             <div class="program-page__section program-steps">
 
                 <div class="program-steps__container">
 
                     <div class="program-steps__info">
-                        <p class="program-steps__text">Решай проблемы людей и меняй привычные процессы, <br>
+                        <p class="program-steps__text text-lang">Решай проблемы людей и меняй привычные процессы, <br>
                             А мы поможем разобраться во всем новом</p>
 
-                        <h4 class="program-steps__heading">Делать стартап - это интересно и современно</h4>
+                        <h4 class="program-steps__heading text-lang">Делать стартап - это интересно и современно</h4>
                     </div>
 
                     <div class="program-steps__list">
                         <div class="program-steps__item program-step">
                             <div class="program-step__number">01</div>
-                            <div class="program-step__text">Сформулируй идею</div>
+                            <div class="program-step__text text-lang">Сформулируй идею</div>
                         </div>
 
                         <div class="program-steps__item program-step">
                             <div class="program-step__number">02</div>
-                            <div class="program-step__text">Подай заявку на инкубацию</div>
+                            <div class="program-step__text text-lang">Подай заявку на инкубацию</div>
                         </div>
 
                         <div class="program-steps__item program-step">
                             <div class="program-step__number">03</div>
-                            <div class="program-step__text">Сделай работающий ИТ-проект</div>
+                            <div class="program-step__text text-lang">Сделай работающий ИТ-проект</div>
                         </div>
                     </div>
                 </div>
@@ -857,44 +824,348 @@ const buildConstructor = (elemId, options) => {
             </div>
         `
     });
-    //TEST
+    // Ready block
     editor.BlockManager.add('ui-request', {
         label: 'Request form',
-        // category: 'Section',
+        category: 'Готовые блоки',
         content: `
             <div class="program-page__section program-request">
-                <div class="program-request__title">
+                <div class="program-request__title text-lang">
                     6 недель твой путь от идеи к бизнесу!
                 </div>
 
-                <div class="program-request__subtitle">
+                <div class="program-request__subtitle text-lang">
                     Прием заявок до 23 октября 2020 <br>
                     Длительность программы: с 26 октября по 7 декабря 2020
                 </div>
 
-                <button class="program-request__button button button--lg">
-                    Подать заявку
+                <button class="program-request__button button button--lg text-lang" data-gjs-type="ui-button-red-md-component">
+
                 </button>
             </div>
         `
     });
+    // Ready block
+    editor.BlockManager.add('ui-welcome-section-2-block', {
+        label: 'Welcome Section 2',
+        category: 'Готовые блоки',
+        content: `
+            <div class="techpark-page__section techpark-welcome-section">
+                <img src="/img/techpark-bg.png" alt="" class="techpark-welcome-section__bg">
+
+                <button class="techpark-welcome-section__button-back button-back button-back--rotate button-back--transparent">
+                    <svg class="button-back__icon" width="18" height="18">
+                        <use href="/img/icons.svg#chevron-right"></use>
+                    </svg>
+                    Вернуться
+                </button>
+
+                <div class="techpark-welcome-section__title">
+                    Регистрация участников международного <br>
+                    технопарка IT-стартапов Astana Hub
+                </div>
+
+                <button class="techpark-welcome-section__btn button button--lg" data-gjs-type="ui-button-red-md-component"></button>
+            </div>
+        `
+    });
+
+    editor.BlockManager.add('ui-benefit-section-2-block', {
+        label: 'Benefit Section 2',
+        category: 'Готовые блоки',
+        content: `
+            <div class="techpark-page__section benefit-section">
+
+                <div class="benefit-section__container">
+                    <div class="benefit-section__row">
+                        <div class="benefit-section__heading">
+                            Что дает статус участника <br>
+                            Astana Hub?
+                        </div>
+
+                        <div class="benefit-section__list">
+
+                            <div class="benefit-section__item">
+                                — Возможность получить налоговые льготы: КПН – 0%, ИПН – 0%, <br>
+                                НДС – 0%, социальный налог на нерезидентов – 0%.
+                            </div>
+
+                            <div class="benefit-section__item">
+                                — Возможность получить упрощенный визовый и трудовой режим <br>
+                                для иностранных участников технопарка и компаний, где работают <br>
+                                нерезиденты.
+                            </div>
+
+                            <div class="benefit-section__item">
+                                — Даем знания и полезные контакты для привлечения инвестиций <br>
+                                на выгодных условиях
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        `
+    });
+
+    editor.BlockManager.add('ui-documents-section-block', {
+        label: 'Documents Section',
+        category: 'Готовые блоки',
+        content: `
+            <div class="techpark-page__section documents-section">
+
+                    <div class="documents-section__container">
+                        <div class="documents-section__heading heading-medium">
+                            Lorem ipsum dolor sit amet
+                        </div>
+
+                        <div class="documents-section__list">
+
+                            <div class="documents-section__document-box document-box">
+
+                                <svg class="document-box__icon" width="100" height="100">
+                                    <use href="/img/icons.svg#star-box"></use>
+                                </svg>
+
+                                <div class="document-box__title">
+                                    Перечень приоритетных видов деятельности
+                                </div>
+
+                                <button class="document-box__btn button button--grey button--icon-right button--w100">
+                                    <svg width="24" height="24">
+                                        <use href="/img/icons.svg#download"></use>
+                                    </svg>
+                                    Скачать
+                                </button>
+                            </div>
+
+                            <div class="documents-section__document-box document-box">
+
+                                <svg class="document-box__icon" width="100" height="100">
+                                    <use href="/img/icons.svg#sort"></use>
+                                </svg>
+
+                                <div class="document-box__title">
+                                    Порядок регистрации участников
+                                </div>
+
+                                <button class="document-box__btn button button--grey button--icon-right button--w100">
+                                    <svg width="24" height="24">
+                                        <use href="/img/icons.svg#download"></use>
+                                    </svg>
+                                    Скачать
+                                </button>
+                            </div>
+
+                            <div class="documents-section__document-box document-box">
+
+                                <svg class="document-box__icon" width="100" height="100">
+                                    <use href="/img/icons.svg#star-box"></use>
+                                </svg>
+
+                                <div class="document-box__title">
+                                    Положение о комиссии по отбору участников
+                                </div>
+
+                                <button class="document-box__btn button button--grey button--icon-right button--w100">
+                                    <svg width="24" height="24">
+                                        <use href="/img/icons.svg#download"></use>
+                                    </svg>
+                                    Скачать
+                                </button>
+                            </div>
+
+                            <div class="documents-section__document-box document-box">
+
+                                <svg class="document-box__icon" width="100" height="100">
+                                    <use href="/img/icons.svg#copy"></use>
+                                </svg>
+
+                                <div class="document-box__title">
+                                    Список документов для регистрации участников
+                                </div>
+
+                                <button class="document-box__btn button button--grey button--icon-right button--w100">
+                                    <svg width="24" height="24">
+                                        <use href="/img/icons.svg#download"></use>
+                                    </svg>
+                                    Скачать
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+        `
+    });
+
+    editor.BlockManager.add('ui-documents-section-2-block', {
+        label: 'Documents Section 2',
+        category: 'Готовые блоки',
+        content: `
+            <div class="techpark-page__section documents-section">
+                <div class="documents-section__container">
+
+                    <div class="documents-section__heading heading-medium">
+                        Памятка потенциального участника
+                    </div>
+
+                    <div class="documents-section__list">
+
+                        <div class="documents-section__memo memo-box">
+
+                            <img src="/img/memo-1.png" alt="" class="memo-box__img">
+
+                        </div>
+
+                        <div class="documents-section__memo memo-box">
+
+                            <img src="/img/memo-2.png" alt="" class="memo-box__img">
+
+                        </div>
+
+                        <div class="documents-section__memo memo-box">
+
+                            <img src="/img/memo-3.png" alt="" class="memo-box__img">
+
+                        </div>
+
+                        <div class="documents-section__memo memo-box">
+
+                            <img src="/img/memo-4.png" alt="" class="memo-box__img">
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        `
+    });
+
+    editor.BlockManager.add('ui-timeline-section-block', {
+        label: 'Timeline Section',
+        category: 'Готовые блоки',
+        content: `
+            <div class="techpark-page__section timeline-section">
+
+                <div class="timeline-section__container">
+
+                    <div class="timeline-section__title heading-medium">
+                        Lorem ipsum dolor sit amet
+                    </div>
+
+                    <div class="timeline-section__timeline as-timeline">
+
+                        <div class="as-timeline__block">
+                            <div class="as-timeline__block-number">
+                                01
+                            </div>
+
+                            <div class="as-timeline__block-title">
+                                Регистрация будет проходить онлайн на сайте технопарка.
+                            </div>
+
+                            <div class="as-timeline__block-subtitle">
+                                Необходимо заполнить электронное заявление и обязательно прикрепить все запрашиваемые документы.
+                            </div>
+                        </div>
+
+                        <div class="as-timeline__block">
+                            <div class="as-timeline__block-number">
+                                02
+                            </div>
+
+                            <div class="as-timeline__block-title">
+                                Ожидать результаты первичной обработки документов
+                            </div>
+
+                            <div class="as-timeline__block-subtitle">
+                                На этом этапе технопарк будет проверять наличие всех документов и информации. Если какой-то из
+                                документов не будет соответствовать требованиям, технопарк не примет вашу анкету и вернет
+                                документы на доработку.
+                            </div>
+                        </div>
+
+                        <div class="as-timeline__block">
+                            <div class="as-timeline__block-number">
+                                03
+                            </div>
+
+                            <div class="as-timeline__block-title">
+                                Ожидать решения комиссии
+                            </div>
+
+                            <div class="as-timeline__block-subtitle">
+                                В течение 10 рабочих дней вам на почту придет письмо с решением комиссии. Вы получите письмо при
+                                любом раскладе, будь то положительное или отрицательное решение комиссии.
+                            </div>
+                        </div>
+
+                        <div class="as-timeline__block">
+                            <div class="as-timeline__block-number">
+                                04
+                            </div>
+
+                            <div class="as-timeline__block-title">
+                                Подтверждение
+                            </div>
+
+                            <div class="as-timeline__block-subtitle">
+                                Если вы прошли два этапа отбора комиссии, вы получите свидетельство участника технопарка Astana
+                                Hub. Это бумажный документ, который будет подтверждать вашу регистрацию.
+                            </div>
+                        </div>
+
+                        <div class="as-timeline__block">
+                            <div class="as-timeline__block-number">
+                                05
+                            </div>
+
+                            <div class="as-timeline__block-title">
+                                Договор
+                            </div>
+
+                            <div class="as-timeline__block-subtitle">
+                                Заключить Договор с Astana Hub, где будут прописаны условия деятельности участника технопарка.
+                            </div>
+                        </div>
+
+                        <div class="as-timeline__block">
+                            <div class="as-timeline__block-number">
+                                06
+                            </div>
+
+                            <div class="as-timeline__block-title">
+                                Результат
+                            </div>
+
+                            <div class="as-timeline__block-subtitle">
+                                После всех этапов вас включат в Перечень участников Astana Hub, после чего логотип и описание
+                                вашего проекта будут опубликованы на сайте технопарка.
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        `
+    });
+
 
     // Opening the block panel on init
     editor.Panels.getButton('views', 'open-blocks').set('active', true)
 
     // submit button with script
     //TEST
-    editor.BlockManager.add('submit-button', {
-        label: 'Submit button',
-        content: {
-            type: 'submit-button-component',
-        }
-    });
 
     //TEST
     editor.BlockManager.add('image', {
         id: 'image',
         label: 'Image',
+        category: 'Util',
         // Select the component once it's dropped
         select: true,
         // You can pass components as a JSON instead of a simple HTML string,
@@ -904,10 +1175,6 @@ const buildConstructor = (elemId, options) => {
         // reacts by opening the AssetManager
         activate: true,
     });
-    editor.BlockManager.add('test', {
-        label: 'TEST',
-        content: `<div class="test-class">SOME THINGS HERE</div>`
-    })
 
     // used blocks
     editor.BlockManager.add('ui-header-block', {

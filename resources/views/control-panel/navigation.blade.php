@@ -77,6 +77,13 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="/control-panel/projects" class="nav-link {{$activePage == 'projects' ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-cubes"></i>
+                        <p>Проекты</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="/control-panel/forms" class="nav-link {{$activePage == 'forms' ? 'active' : ''}}">
                         <i class="nav-icon fas fa-users"></i>
                         <p>Настройка форм</p>

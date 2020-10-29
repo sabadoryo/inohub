@@ -25,21 +25,28 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('create', 'PostsController@create');
         Route::post('', 'PostsController@store');
     });
+    
+    Route::get('register-project', 'RegisterProjectController@form');
+    Route::post('register-project', 'RegisterProjectController@store');
 });
-
-
-Route::get('register-project', 'RegisterProjectController@form');
-Route::post('register-project', 'RegisterProjectController@store');
 
 Route::group(['prefix' => 'astana-hub'], function () {
     Route::get('about', 'AstanaHubController@about');
     Route::get('programs', 'AstanaHubController@programs');
+    Route::get('programs/{id}', 'AstanaHubController@getProgram');
     Route::get('corporate-innovations', 'AstanaHubController@corporateInnovations');
     Route::get('hub-space', 'AstanaHubController@hubSpace');
     Route::get('r-and-d', 'AstanaHubController@randd');
     Route::get('resources', 'AstanaHubController@resources');
     Route::get('programs/{id}', 'AstanaHubController@program');
     Route::get('programs/{id}/get-forms', 'AstanaHubController@getProgramForms');
+});
+
+Route::get('test', function () {
+    $program = \App\Program::find(9);
+    $passport = \App\Passport::where('program_id', 9)->first();
+
+    return view('test2', compact('passport'));
 });
 
 Route::group(['prefix' => 'tech-garden'], function () {
@@ -130,6 +137,10 @@ Route::group([
     Route::get('posts', 'PostsController@index');
     Route::get('posts/get-list', 'PostsController@getList');
     Route::post('posts/{id}/update-status', 'PostsController@updateStatus');
+    
+    Route::get('projects', 'ProjectsController@index');
+    Route::get('projects/get-list', 'ProjectsController@getList');
+    Route::post('projects/{id}/update-status', 'ProjectsController@updateStatus');
 
     Route::get('applications', 'ApplicationsController@index');
     Route::get('applications/get-list', 'ApplicationsController@getList');
