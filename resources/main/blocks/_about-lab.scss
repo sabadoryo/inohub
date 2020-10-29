@@ -1,0 +1,33 @@
+.about-lab {
+
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 7px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &__left {
+
+    }
+
+    &__right {
+        width: 544px;
+    }
+
+    &__logo {
+        height: 31px;
+        margin-bottom: 20px;
+    }
+
+    &__name {
+        @include text-style(2rem, 700, #181515);
+        line-height: 24px;
+    }
+
+    &__text {
+        @include text-style(1.6rem, 400, #181515);
+        line-height: 19.5px;
+    }
+}

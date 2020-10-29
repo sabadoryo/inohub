@@ -91,10 +91,19 @@
     }
 
     &__profile-photo {
+        position: absolute;
+        width: 142px;
+        //height: 142px;
+        //border-radius: 50%;
+        //display: block;
+    }
+
+    &__profile-img-box {
+        position: relative;
         width: 142px;
         height: 142px;
         border-radius: 50%;
-        display: block;
+        overflow: hidden;
         margin: 0 auto 10px auto;
     }
 }

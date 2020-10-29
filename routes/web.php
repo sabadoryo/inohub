@@ -126,7 +126,7 @@ Route::group([
     Route::get('vacancies/{id}/main', 'VacanciesController@mainForm');
     Route::post('vacancies/{id}/update-main', 'VacanciesController@updateMain');
     Route::post('vacancies/{id}/publish', 'VacanciesController@publish');
-    
+
     Route::get('posts', 'PostsController@index');
     Route::get('posts/get-list', 'PostsController@getList');
     Route::post('posts/{id}/update-status', 'PostsController@updateStatus');
@@ -258,4 +258,28 @@ Route::get('news-page', function () {
 
 Route::get('register-techpark', function () {
     return view('register-techpark');
+});
+
+Route::get('startup-page', function () {
+    return view('startup-page');
+});
+
+Route::get('investors-page', function () {
+    return view('investors-page');
+});
+
+Route::get('event-page', function () {
+    return view('event-page');
+});
+
+Route::get('tech-garden-store-2', function () {
+    return view('tech-garden-store-2');
+});
+
+Route::get('tech-garden-lab-1', function () {
+    return view('tech-garden-lab-1');
+});
+
+Route::get('tech-garden-lab-2', function () {
+    return view('tech-garden-lab-2');
 });

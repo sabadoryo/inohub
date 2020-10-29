@@ -1,0 +1,53 @@
+.event-welcome-section {
+
+    padding: 63px 0 63px 40px;
+    background-color: #181515;
+    border-radius: 7px;
+    position: relative;
+    overflow: hidden;
+
+    &__img-box {
+        width: 484px;
+        height: 484px;
+        border-radius: 50%;
+        overflow: hidden;
+        position: absolute;
+        top: -35px;
+        right: -125px;
+        z-index: 1;
+    }
+
+    &__img {
+
+    }
+
+    &__tag {
+        position: absolute;
+        bottom: 40px;
+        right: 40px;
+        z-index: 2;
+    }
+
+    &__date {
+        @include text-style(1.6rem, 400, #ffffff);
+        line-height: 19.5px;
+    }
+
+    &__title {
+        @include text-style(3.6rem, 700, #ffffff);
+        line-height: 44px;
+        margin-bottom: 20px;
+        position: relative;
+        z-index: 2;
+    }
+
+    &__subtitle {
+        @include text-style(1.8rem, 400, #ffffff);
+        line-height: 22px;
+        margin-bottom: 30px;
+        position: relative;
+        z-index: 2;
+    }
+
+
+}
