@@ -17,6 +17,7 @@ class ModulesController extends Controller
         ];
 
         $organizations = Organization::with('modules')->get();
+        $modules = Module::where('is_default', false)->get();
 
         return view('admin.component', [
             'PAGE_TITLE' => 'Настройка модулей',
@@ -25,7 +26,7 @@ class ModulesController extends Controller
             'component' => 'modules-control',
             'bindings' => [
                 'organizations' => $organizations,
-                'modules' => Module::all(),
+                'modules' => $modules,
             ]
         ]);
     }

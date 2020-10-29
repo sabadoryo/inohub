@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Module extends Model
 {
-    protected $fillable = ['name', 'slug'];
+    protected $fillable = ['name', 'slug', 'is_default'];
+
+    protected $casts = ['is_default' => 'boolean'];
 
     public static function findBySlug($slug)
     {

@@ -6,7 +6,6 @@ angular
         template: require('./programs-control.html'),
         controller: ['$http', '$uibModal', controller],
         bindings: {
-            categories: '<',
         }
     });
     
@@ -17,8 +16,6 @@ function controller($http, $uibModal) {
 	$ctrl.page = 1;
     $ctrl.title = null;
     $ctrl.status = null;
-    $ctrl.category = null;
-    $ctrl.loading = false;
 
 	$ctrl.$onInit = function () {
         $ctrl.getList();
@@ -33,7 +30,6 @@ function controller($http, $uibModal) {
 	    $ctrl.page = 1;
 	    $ctrl.title = null;
 	    $ctrl.status = null;
-	    $ctrl.category = null;
 	    $ctrl.getList();
     };
 
@@ -43,7 +39,6 @@ function controller($http, $uibModal) {
             .get('/control-panel/programs/get-list', {
                 params: {
                     page: $ctrl.page,
-                    category_id: $ctrl.category ? $ctrl.category.id : null,
                     title: $ctrl.title,
                     status: $ctrl.status,
                 }

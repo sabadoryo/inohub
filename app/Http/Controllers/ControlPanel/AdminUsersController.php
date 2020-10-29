@@ -14,7 +14,7 @@ class AdminUsersController extends ControlPanelController
     {
         $breadcrumb = [
             ['/control-panel', 'Главная'],
-            [null, 'Персонал сайта']
+            [null, 'Сотрудники']
         ];
         
         $roles = $this->organization->roles;
@@ -24,7 +24,7 @@ class AdminUsersController extends ControlPanelController
         ];
         
         return view('control-panel.component', [
-            'PAGE_TITLE' => 'Персонал сайта',
+            'PAGE_TITLE' => 'Сотрудники',
             'activePage' => 'admin-users',
             'breadcrumb' => $breadcrumb,
             'component' => 'admin-users-control',

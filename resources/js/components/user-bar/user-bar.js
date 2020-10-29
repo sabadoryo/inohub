@@ -29,6 +29,7 @@ function controller(Auth, $http, $rootScope) {
                 res => {
                     $rootScope.$emit('UserLogout');
                     $ctrl.user = null;
+                    window.location = '/';
                 },
                 err => {
 

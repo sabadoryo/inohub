@@ -33,15 +33,13 @@
                        class="form-control form-control-sm w-25"
                        placeholder="Введите название прав">
             </div>
-            <ul class="list-group"
-                ng-repeat="module in $ctrl.modules track by $index"
-                ng-show="(module.permissions | filter : {label: $ctrl.search} : strict).length">
+            <ul class="list-group" ng-repeat="module in $ctrl.modules | filter : {name: $ctrl.search} : strict track by $index">
                 <li class="list-group-item list-group-item-light">
                     <b>{{module.name}}</b>
                 </li>
                 <li class="list-group-item"
                     style="padding-left: 40px"
-                    ng-repeat="permission in module.permissions | filter : {label: $ctrl.search} : strict track by $index">
+                    ng-repeat="permission in module.permissions track by $index">
 
                     {{ permission.label }}
 
@@ -54,7 +52,7 @@
                         <label class="custom-control-label"
                                for="permission_{{permission.id}}"
                                style="font-weight: normal">
-                            Включен
+                            {{permission.isSelected ? 'Включен' : 'Выключен'}}
                         </label>
                     </div>
 

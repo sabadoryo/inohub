@@ -27,6 +27,14 @@ class ACLController extends ControlPanelController
             ->with('permissions')
             ->get();
 
+        $defaultModules = Module::where('is_default', true)
+            ->with('permissions')
+            ->get();
+
+        foreach ($defaultModules as $module) {
+            $modules->push($module);
+        }
+
         return view('control-panel.component', [
             'PAGE_TITLE' => 'Access control list',
             'activePage' => 'acl',
