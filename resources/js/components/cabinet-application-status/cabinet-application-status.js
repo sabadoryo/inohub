@@ -251,3 +251,4 @@ function controller($http, Auth, moment, $uibModal, Upload, $timeout) {
         $ctrl.formsVisible = !$ctrl.formsVisible;
     }
 }
+

@@ -45,6 +45,7 @@ class CabinetController extends Controller
             'forms.form',
             'forms.fields',
             'forms.fields.formField',
+            'entity',
 
         ])->findOrFail($id);
 
@@ -185,8 +186,8 @@ class CabinetController extends Controller
         return $files;
     }
 
-    public function downloadFile($path)
+    public function downloadFile($path, $name)
     {
-        return \Storage::disk('public')->download($path);
+        return \Storage::disk('public')->download($path, $name);
     }
 }

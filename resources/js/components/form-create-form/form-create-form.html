@@ -9,12 +9,12 @@
                 <small class="form-text text-muted">Обязательное поле</small>
             </div>
 
-<!--            <div class="form-group">-->
-<!--                <label>Описание:</label>-->
-<!--                <textarea class="form-control" rows="3" ng-model="$ctrl.description" required></textarea>-->
-<!--                <small class="form-text text-muted">Обязательное поле. Опишите для чего и как будет использоваться-->
-<!--                    данная форма</small>-->
-<!--            </div>-->
+            <!--            <div class="form-group">-->
+            <!--                <label>Описание:</label>-->
+            <!--                <textarea class="form-control" rows="3" ng-model="$ctrl.description" required></textarea>-->
+            <!--                <small class="form-text text-muted">Обязательное поле. Опишите для чего и как будет использоваться-->
+            <!--                    данная форма</small>-->
+            <!--            </div>-->
 
         </div>
     </div>
@@ -138,6 +138,8 @@
                                 required>
                         </select>
                     </div>
+                </div>
+                <div class="row flex-column mt-2">
                     <div class="col-3">
                         <label>Пример файла для заполняющего</label>
                         <div ng-show="field.exampleFiles.length > 0" class="mb-2">
@@ -161,7 +163,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <button type="button" class="form-control-file" ngf-select=""
+                        <button type="button" class="btn btn-light" ngf-select=""
                                 ngf-keep="true"
                                 ng-model="field.exampleFiles"
                                 ngf-multiple="true">

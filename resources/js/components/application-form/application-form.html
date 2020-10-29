@@ -1,5 +1,7 @@
 <a href="" class="modal-full__close" ng-click="$ctrl.dismiss()">
-    <svg width="28" height="28"><use href="/img/icons.svg#close-icon"></use></svg>
+    <svg width="28" height="28">
+        <use href="/img/icons.svg#close-icon"></use>
+    </svg>
 </a>
 
 <div ng-repeat="form in $ctrl.forms track by $index" class="modal-full__step">
@@ -24,9 +26,9 @@
 
         <div class="modal-full__list">
 
-            <div ng-repeat="field in form.fields track by field.id" class="input-box">
+            <div ng-repeat="field in form.fields track by field.id" ng-class="field.type ==='textarea' ? 'input-box--span2' : ''" class="input-box">
 
-                <label class="input-box__label">{{field.label}}</label>
+                <label class="input-box__label">{{field.label}}<span ng-show="field.is_required" class="input-box__required">*</span></label>
 
                 <div ng-if="field.type === 'text'" class="input-box__container">
                     <input type="text"
@@ -161,73 +163,109 @@
                 </div>
 
                 <div ng-if="field.type == 'file'" class="modal-full__input-box">
+                    <div class="input-box__container">
+                        <div class="input-box__files-box">
+                            <a class="input-box__sample-link"
+                               ng-if="field.example_files"
+                               ng-repeat="exFile in field.example_files"
+                               href="/cabinet/download-file/{{exFile.path}}"
+                            >
+                                <svg width="20" height="20">
+                                    <use href="/img/icons.svg#download"></use>
+                                </svg>
+                                Скачать пример
+                            </a>
+                            <div class="input-box__file-box" ng-show="field.max_files_count === 1 && field.value">
+                                <a class="input-box__file" href="">{{field.value.name}}</a>
+                                <a href="" ng-click="field.value = null" class="input-box__file-delete">
+                                    <svg width="24" height="24">
+                                        <use href="/img/icons.svg#close-icon"></use>
+                                    </svg>
+                                </a>
+                            </div>
 
-                    <div style="margin-bottom: 10px">
-                        <button type="button"
+                            <div class="input-box__file-box"
+                                 ng-show="field.value.length > 0"
+                                 ng-repeat="file in field.value track by $index">
+                                <a class="input-box__file" href="">{{file.value.name}}</a>
+                                <a href="" ng-click="file.value = null" class="input-box__file-delete">
+                                    <svg width="24" height="24">
+                                        <use href="/img/icons.svg#close-icon"></use>
+                                    </svg>
+                                </a>
+                            </div>
+<!--                            <div style="margin-bottom: 10px">-->
+<!--                                <button type="button"-->
+<!--                                        ngf-select=""-->
+<!--                                        ng-init="field.max_files_count === 1 ? field.value = null : field.value = []"-->
+<!--                                        ng-model="field.value"-->
+<!--                                        ngf-change="$ctrl.validateFile($files, $file, $newFiles, $duplicateFiles, $invalidFiles, $event,field)"-->
+<!--                                        ngf-multiple="{{field.max_files_count === 1 ? 'false' : 'true'}}"-->
+<!--                                        accept="{{field.file_allows === 'specific' ? field.file_types : '*'}}"-->
+<!--                                        ngf-max-size="10MB">-->
+<!--                                    <span>выбрать файл</span>-->
+<!--                                </button>-->
+<!--                            </div>-->
+
+<!--                            <div ng-show="field.max_files_count === 1 && field.value">-->
+<!--                                <table>-->
+<!--                                    <thead>-->
+<!--                                    <tr>-->
+<!--                                        <th>Название</th>-->
+<!--                                        <th>Действие</th>-->
+<!--                                    </tr>-->
+<!--                                    </thead>-->
+<!--                                    <tbody>-->
+<!--                                    <tr>-->
+<!--                                        <td>{{field.value.name}}</td>-->
+<!--                                        <td>-->
+<!--                                            <button type="button" class="btn btn-danger btn-sm"-->
+<!--                                                    ng-click="field.value = null">-->
+<!--                                                Удалить-->
+<!--                                            </button>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    </tbody>-->
+<!--                                </table>-->
+<!--                            </div>-->
+
+<!--                            <div ng-show="field.value.length > 0">-->
+<!--                                <table>-->
+<!--                                    <thead>-->
+<!--                                    <tr>-->
+<!--                                        <th>Название</th>-->
+<!--                                        <th>Действие</th>-->
+<!--                                    </tr>-->
+<!--                                    </thead>-->
+<!--                                    <tbody>-->
+<!--                                    <tr ng-repeat="file in field.value track by $index">-->
+<!--                                        <td>{{file.name}}</td>-->
+<!--                                        <td>-->
+<!--                                            <button type="button" class="btn btn-danger btn-sm"-->
+<!--                                                    ng-click="$ctrl.removeFile(field,$index)">-->
+<!--                                                Удалить-->
+<!--                                            </button>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    </tbody>-->
+<!--                                </table>-->
+<!--                            </div>-->
+
+                        </div>
+                        <button class="input-box__btn button button--xs"
+                                type="button"
                                 ngf-select=""
                                 ng-init="field.max_files_count === 1 ? field.value = null : field.value = []"
                                 ng-model="field.value"
                                 ngf-change="$ctrl.validateFile($files, $file, $newFiles, $duplicateFiles, $invalidFiles, $event,field)"
                                 ngf-multiple="{{field.max_files_count === 1 ? 'false' : 'true'}}"
                                 accept="{{field.file_allows === 'specific' ? field.file_types : '*'}}"
-                                ngf-max-size="10MB">
-                            <span>выбрать файл</span>
-                        </button>
-                    </div>
-
-                    <div ng-show="field.max_files_count === 1 && field.value">
-                        <table>
-                            <thead>
-                            <tr>
-                                <th>Название</th>
-                                <th>Действие</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>{{field.value.name}}</td>
-                                <td>
-                                    <button type="button" class="btn btn-danger btn-sm" ng-click="field.value = null">
-                                        Удалить
-                                    </button>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div ng-show="field.value.length > 0">
-                        <table>
-                            <thead>
-                            <tr>
-                                <th>Название</th>
-                                <th>Действие</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr ng-repeat="file in field.value track by $index">
-                                <td>{{file.name}}</td>
-                                <td>
-                                    <button type="button" class="btn btn-danger btn-sm"
-                                            ng-click="$ctrl.removeFile(field,$index)">
-                                        Удалить
-                                    </button>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div ng-if="field.example_files">
-                        Примеры:
-                        <div ng-repeat="exFile in field.example_files">
-                            <a href="/cabinet/download-file/{{exFile.path}}">{{exFile.name}}</a>
-                        </div>
+                                ngf-max-size="10MB">Загрузить файл</button>
                     </div>
 
                 </div>
 
-<!--                <small class="form-text text-muted">{{field.prompt}}</small>-->
+                <!--                <small class="form-text text-muted">{{field.prompt}}</small>-->
 
             </div>
 

@@ -21,7 +21,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('applications/{id}/update-form', 'CabinetController@updateForm');
         Route::post('applications/{id}/send-message', 'CabinetController@sendMessage');
         Route::get('get-applications', 'CabinetController@getApplications');
-        Route::get('download-file/{path}', 'CabinetController@downloadFile')->where('path',  '(.*)');
+        Route::get('download-file/{path}/{name}', 'CabinetController@downloadFile')->where('path',  '(.*)');
     });
     Route::group(['prefix' => 'posts'], function () {
         Route::get('create', 'PostsController@create');
