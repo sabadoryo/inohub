@@ -361,6 +361,7 @@
                 </div>
             </div>
 
+
             <div class="tabs-inner__section partners">
 
                 <div class="partners__heading">
