@@ -13,14 +13,12 @@ Route::get('news/{id}', 'MainPageController@newsPage');
 Route::group(['prefix' => 'cabinet', 'middleware' => ['auth']], function () {
     Route::get('', 'CabinetController@profile');
     Route::get('applications', 'CabinetController@applications');
-    Route::get('download-file/{path}', 'CabinetController@downloadFile')->where('path',  '(.*)');
-
-    Route::get('project', 'CabinetController@project');
-    Route::post('update-roles', 'CabinetController@updateRoles');
     Route::get('applications/{id}', 'CabinetController@application');
+    Route::get('notifications', 'CabinetController@notifications');
     Route::post('applications/{id}/update-form', 'CabinetController@updateForm');
     Route::post('applications/{id}/send-message', 'CabinetController@sendMessage');
     Route::get('get-applications', 'CabinetController@getApplications');
+    Route::get('download-file/{path}', 'CabinetController@downloadFile')->where('path',  '(.*)');
 });
 
 Route::get('register-project', 'RegisterProjectController@form');

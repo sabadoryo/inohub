@@ -75,20 +75,22 @@
 
         </div>
 
-        <div class="header__lang-switcher">
-            <div class="header__language">Ru</div>
-            <svg class="header__lang-toggle" width="10" height="5">
-                <use xlink:href="/img/icons.svg#toggle"></use>
-            </svg>
+        <div uib-dropdown="" class="header__lang-container">
 
-            <ul class="header__lang-dropdown lang-dropdown">
+            <div class="header__lang-switcher" uib-dropdown-toggle="">
+                <div class="header__language">Ru</div>
+                <svg class="header__lang-toggle" width="10" height="5">
+                    <use xlink:href="/img/icons.svg#toggle"></use>
+                </svg>
+            </div>
+
+            <ul class="header__lang-dropdown lang-dropdown" uib-dropdown-menu="">
                 <li class="lang-dropdown__item"><a href="#" class="lang-dropdown__link">Қазақша</a></li>
                 <li class="lang-dropdown__item"><a href="#" class="lang-dropdown__link">Русский</a></li>
                 <li class="lang-dropdown__item"><a href="#" class="lang-dropdown__link">English</a></li>
             </ul>
 
         </div>
-
 
         <user-bar></user-bar>
 
