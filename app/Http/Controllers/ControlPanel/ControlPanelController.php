@@ -23,7 +23,7 @@ class ControlPanelController extends Controller
         });
     }
 
-    public function index()
+    public function controlPanel()
     {
         return view('control-panel.component', [
             'PAGE_TITLE' => 'Панель управления',

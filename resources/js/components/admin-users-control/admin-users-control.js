@@ -4,11 +4,9 @@ angular
     .module('app')
     .component('adminUsersControl', {
         template: require('./admin-users-control.html'),
-        controller: [controller],
+        controller: ['$http', '$uibModal', controller],
         bindings: {
-            organizations: '<',
             roles: '<',
-            roleId: '<',
         }
     });
     
@@ -17,7 +15,7 @@ function controller($http, $uibModal) {
     let $ctrl = this;
 
     $ctrl.page = 1;
-    $ctrl.perPage = 30;
+    $ctrl.perPage = 10;
 
     $ctrl.$onInit = function () {
         $ctrl.getList();
@@ -28,24 +26,11 @@ function controller($http, $uibModal) {
         $ctrl.getList();
     };
 
-    $ctrl.openUserRolesModal = (index) => {
-        $uibModal
-            .open({
-                component: 'userRolesModal',
-                resolve: {
-                    user: function () {
-                        return $ctrl.users[index];
-                    }
-                }
-            })
-    }
-
     $ctrl.reset = () => {
         $ctrl.page = 1;
         $ctrl.search = null;
         $ctrl.status = null;
         $ctrl.roleId = null;
-        $ctrl.organizationId = null;
         $ctrl.getList();
     };
 
@@ -53,12 +38,11 @@ function controller($http, $uibModal) {
         $http
             .get('/control-panel/users/get-list', {
                 params: {
-                    status: $ctrl.status,
                     page: $ctrl.page,
+                    status: $ctrl.status,
                     per_page: $ctrl.perPage,
                     search: $ctrl.search,
                     role_id: $ctrl.roleId,
-                    organization_id: $ctrl.organizationId,
                 }
             })
             .then(

@@ -20,7 +20,6 @@ class ACLController extends ControlPanelController
         
         $roles = Role::where('organization_id', $this->organization->id)
             ->with('permissions')
-            ->withCount('users')
             ->get();
         
         $modules = $this->organization->modules()
@@ -54,10 +53,9 @@ class ACLController extends ControlPanelController
             'label' => $request->label,
             'name' => \Str::slug($request->label, '_'),
             'organization_id' => \Auth::user()->organization_id,
-            'type' => \Auth::user()->organization_id ? 'organization' : 'admin',
+            'type' => 'organization',
         ]);
-        $role->users_count = 0;
-        $role->permissions = [];
+
         return ['role' => $role];
     }
 

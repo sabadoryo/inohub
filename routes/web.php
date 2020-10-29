@@ -77,7 +77,7 @@ Route::group([
     'middleware' => ['auth', 'controlPanelAuth']
 ], function () {
 
-    Route::get('/', 'ControlPanelController@index');
+    Route::get('/', 'ControlPanelController@controlPanel');
 
     Route::get('programs', 'ProgramsController@index');
     Route::get('programs/get-list', 'ProgramsController@getList');

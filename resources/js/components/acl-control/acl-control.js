@@ -15,6 +15,8 @@ function controller($timeout, $http, notify, $uibModal) {
  
 	let $ctrl = this;
 
+	$ctrl.search = undefined;
+
 	$ctrl.$onInit = function () {
 	    $ctrl.selectedRole = $ctrl.roles[0];
 	    refreshPermissionsStatuses();
@@ -22,9 +24,11 @@ function controller($timeout, $http, notify, $uibModal) {
 
 	function refreshPermissionsStatuses() {
         $timeout(function () {
-            $ctrl.permissions.forEach(p => {
-                let existsInd = $ctrl.selectedRole.permissions.findIndex(v => v.id === p.id);
-                p.isSelected = existsInd !== -1;
+            $ctrl.modules.forEach(m => {
+                m.permissions.forEach(p => {
+                    let existsInd = $ctrl.selectedRole.permissions.findIndex(v => v.id === p.id);
+                    p.isSelected = existsInd !== -1;
+                });
             });
         })
     }
@@ -37,14 +41,15 @@ function controller($timeout, $http, notify, $uibModal) {
 	$ctrl.openAddRoleModal = function () {
         $uibModal
             .open({
-            component: 'addRoleModal'
+                component: 'addRoleModal'
             })
             .result
             .then(function (role) {
+                role.permissions = [];
                 $ctrl.roles.push(role);
                 $ctrl.selectRole(role);
         })
-    }
+    };
 
     $ctrl.permissionChanged = function (permission) {
 	    if (permission.isSelected) {

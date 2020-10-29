@@ -24,6 +24,11 @@ class Organization extends Model
         return $this->belongsToMany(Module::class);
     }
 
+    public function roles()
+    {
+        return $this->hasMany(Role::class);
+    }
+
     public function hasModule($moduleSlug)
     {
         foreach ($this->modules as $module) {

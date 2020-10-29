@@ -1,10 +1,6 @@
-<div class="alert alert-light">
-  Количество пользователей с такой ролью: {{$ctrl.selectedRole.users_count}}
-  <a href="" ng-href="/control-panel/users?role_id={{$ctrl.selectedRole.id}}" class="alert-link">Открыть</a>
-</div>
 <div class="row">
 
-  <div class="col-6">
+    <div class="col-6">
 
     <div class="card">
       <div class="card-header d-flex align-content-center">
@@ -25,36 +21,46 @@
     </div>
 
 
-  </div>
-
-  <div class="col-6">
-    <div class="card">
-      <div class="card-header d-flex align-content-center">
-        <h5 class="text-muted mb-0 mr-auto">Права</h5>
-        <input required
-               type="text"
-               ng-model="search.name"
-               class="form-control form-control-sm w-25"
-               placeholder="Введите название прав">
-      </div>
-      <ul class="list-group">
-        <li class="list-group-item" ng-repeat="permission in $ctrl.permissions | filter:search:strict track by $index">
-          {{ permission.name }}
-          <div class="custom-control custom-switch float-right">
-            <input type="checkbox"
-                   ng-model="permission.isSelected"
-                   ng-change="$ctrl.permissionChanged(permission)"
-                   class="custom-control-input"
-                   id="permission_{{permission.id}}">
-            <label class="custom-control-label"
-                   for="permission_{{permission.id}}"
-                   style="font-weight: normal">
-              Включен
-            </label>
-          </div>
-        </li>
-      </ul>
     </div>
-  </div>
+
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header d-flex align-content-center">
+                <h5 class="text-muted mb-0 mr-auto">Модули и действия</h5>
+                <input required
+                       type="text"
+                       ng-model="$ctrl.search"
+                       class="form-control form-control-sm w-25"
+                       placeholder="Введите название прав">
+            </div>
+            <ul class="list-group"
+                ng-repeat="module in $ctrl.modules track by $index"
+                ng-show="(module.permissions | filter : {label: $ctrl.search} : strict).length">
+                <li class="list-group-item list-group-item-light">
+                    <b>{{module.name}}</b>
+                </li>
+                <li class="list-group-item"
+                    style="padding-left: 40px"
+                    ng-repeat="permission in module.permissions | filter : {label: $ctrl.search} : strict track by $index">
+
+                    {{ permission.label }}
+
+                    <div class="custom-control custom-switch float-right">
+                        <input type="checkbox"
+                               ng-model="permission.isSelected"
+                               ng-change="$ctrl.permissionChanged(permission)"
+                               class="custom-control-input"
+                               id="permission_{{permission.id}}">
+                        <label class="custom-control-label"
+                               for="permission_{{permission.id}}"
+                               style="font-weight: normal">
+                            Включен
+                        </label>
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+    </div>
 
 </div>
