@@ -171,3 +171,4 @@ require('./components/posts-control/posts-control');
 require('./components/post-check-modal/post-check-modal');
 require('./components/projects-controller/projects-controller');
 require('./components/modules-control/modules-control');
+require('./components/user-edit-modal/user-edit-modal');

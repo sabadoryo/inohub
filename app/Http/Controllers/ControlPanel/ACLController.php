@@ -26,7 +26,7 @@ class ACLController extends ControlPanelController
         $modules = $this->organization->modules()
             ->with('permissions')
             ->get();
-
+        
         return view('control-panel.component', [
             'PAGE_TITLE' => 'Access control list',
             'activePage' => 'acl',

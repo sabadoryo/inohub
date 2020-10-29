@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class AdminUsersController extends ControlPanelController
 {
-    public function index(Request $request)
+    public function index()
     {
         $breadcrumb = [
             ['/control-panel', 'Главная'],
@@ -57,5 +57,16 @@ class AdminUsersController extends ControlPanelController
         $result = $query->with(['roles'])->paginate(10);
         
         return $result;
+    }
+    
+    public function updateRoles(Request $request, $id)
+    {
+        $user = User::find($id);
+        $user->update([
+            'is_active' => $request->is_active,
+        ]);
+        $user->syncRoles($request->roles_id);
+        
+        return ['roles' => $user->roles, 'is_active' => $user->is_active];
     }
 }
