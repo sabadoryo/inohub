@@ -30,20 +30,24 @@
 
     &__logo {
         @include text-style(2.2rem, 600, #ffffff);
+        margin-right: auto;
     }
 
     &__logo-accent {
         color: $elem-color;
     }
 
+    &__lang-container {
+        position: relative;
+        margin-right: 47px;
+    }
+
+
     &__lang-switcher {
         display: flex;
         align-items: center;
         cursor: pointer;
-        position: relative;
-
         @include text-style(1.6rem, 500, #ffffff);
-        margin-right: 47px;
     }
 
     &__language {
@@ -63,14 +67,27 @@
 
     &__search-box {
         margin-right: auto;
-        margin-left: auto;
+        //margin-left: auto;
+
     }
 
     &__lang-dropdown {
         position: absolute;
-        top: 43px !important;
+        top: 25px !important;
         right: 0 !important;
         left: unset !important;
         margin: 0 !important;
+    }
+
+    &__text-box {
+        margin-right: auto;
+    }
+
+    &__text {
+        @include text-style(1.4rem, 500, #c4c4c4);
+
+        &--white {
+            color: #ffffff;
+        }
     }
 }

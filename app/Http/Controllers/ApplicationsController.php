@@ -93,7 +93,7 @@ class ApplicationsController extends Controller
             'type' => 'action',
         ]);
 
-        return [];
+        return ['appId' => $app->id];
     }
 
     public function sendMessage(Request $request, $id)

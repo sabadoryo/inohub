@@ -1,12 +1,13 @@
 .as-navbar {
     width: 200px;
+    height: 100vh;
     position: fixed;
     top: 120px;
     z-index: 10;
     background-color: #fafafa;
 
     white-space: nowrap;
-    overflow: hidden;
+    overflow: auto;
 
     &__item {
         padding: 15px 16px;
@@ -34,8 +35,10 @@
         flex-shrink: 0;
     }
 
-    &__organization-section {
-        margin-top: 40px;
+    &__section {
+        &:not(:last-child) {
+            margin-bottom: 40px;
+        }
     }
 
     &__organization {
@@ -64,5 +67,15 @@
     &__title {
         @include text-style(1.6rem, 400, #181515);
         margin-bottom: 20px;
+    }
+
+    &__link:link,
+    &__link:visited {
+        display: block;
+        @include text-style(1.6rem, 500, #181515);
+        line-height: 19.5px;
+        &:not(:last-child) {
+            margin-bottom: 20px;
+        }
     }
 }

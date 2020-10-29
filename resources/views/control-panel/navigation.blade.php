@@ -70,6 +70,13 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="/control-panel/posts" class="nav-link {{$activePage == 'posts' ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-paper-plane"></i>
+                        <p>Посты</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="/control-panel/forms" class="nav-link {{$activePage == 'forms' ? 'active' : ''}}">
                         <i class="nav-icon fas fa-users"></i>
                         <p>Настройка форм</p>
