@@ -34,12 +34,20 @@ Route::post('register-project', 'RegisterProjectController@store');
 Route::group(['prefix' => 'astana-hub'], function () {
     Route::get('about', 'AstanaHubController@about');
     Route::get('programs', 'AstanaHubController@programs');
+    Route::get('programs/{id}', 'AstanaHubController@getProgram');
     Route::get('corporate-innovations', 'AstanaHubController@corporateInnovations');
     Route::get('hub-space', 'AstanaHubController@hubSpace');
     Route::get('r-and-d', 'AstanaHubController@randd');
     Route::get('resources', 'AstanaHubController@resources');
     Route::get('programs/{id}', 'AstanaHubController@program');
     Route::get('programs/{id}/get-forms', 'AstanaHubController@getProgramForms');
+});
+
+Route::get('test', function () {
+    $program = \App\Program::find(9);
+    $passport = \App\Passport::where('program_id', 9)->first();
+
+    return view('test2', compact('passport'));
 });
 
 Route::group(['prefix' => 'tech-garden'], function () {
@@ -126,7 +134,7 @@ Route::group([
     Route::get('vacancies/{id}/main', 'VacanciesController@mainForm');
     Route::post('vacancies/{id}/update-main', 'VacanciesController@updateMain');
     Route::post('vacancies/{id}/publish', 'VacanciesController@publish');
-    
+
     Route::get('posts', 'PostsController@index');
     Route::get('posts/get-list', 'PostsController@getList');
     Route::post('posts/{id}/update-status', 'PostsController@updateStatus');
