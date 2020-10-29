@@ -101,7 +101,7 @@ const buildConstructor = (elemId, options) => {
             ]
         },
         canvas: {
-            styles: ['/css/style.css', '/css/ui-components.css']
+            styles: ['/css/style.css', '/css/ui-components.css', '/css/main.css']
         }
     });
     editor.SelectorManager.getAll().each(selector => selector.set('private', 1));
@@ -590,33 +590,16 @@ const buildConstructor = (elemId, options) => {
 
     // buttons
     editor.DomComponents.addType('ui-button-red-md-component', {
-        // extend: 'link',
+        extend: 'text',
         model: {
             defaults: {
                 tagName: 'button',
                 attributes: {
-                    'data-grapes-lang-kz' : '',
-                    'data-grapes-lang-en' : '',
-                    'data-grapes-lang-ru' : '',
                     class: 'text-lang ui-button-red-md',
                     // 'onclick': `window.open('/')`,
                     'ng-click': `openApplicationModal()`
                 },
                 components: `Подать заявку`,
-                traits: [
-                    // Strings are automatically converted to text types
-                    // 'name', // Same as: { type: 'text', name: 'name' }
-                    {
-                        type: 'text',
-                        name: 'data-grapes-lang-kz',
-                        label: 'Lang KZ'
-                    },
-                    {
-                        type: 'text',
-                        name: 'data-grapes-lang-en',
-                        label: 'Lang EN'
-                    }
-                ],
             }
         }
     });
@@ -668,7 +651,7 @@ const buildConstructor = (elemId, options) => {
     //         <main data-gjs-droppable=".dropping" class="program-page"></main>
     //     `
     // });
-    //TEST
+    // Ready block
     editor.BlockManager.add('ui-welcome-section-block', {
         label: 'Welcome Section',
         category: 'Готовые блоки',
@@ -684,7 +667,7 @@ const buildConstructor = (elemId, options) => {
             </div>
         `
     });
-    //TEST
+    // Ready block
     editor.BlockManager.add('ui-cards-block', {
         label: 'Cards section',
         category: 'Готовые блоки',
@@ -766,7 +749,7 @@ const buildConstructor = (elemId, options) => {
             </div>
         `
     });
-    //TEST
+    // Ready block
     editor.BlockManager.add('ui-info-block', {
         label: 'Info Block',
         category: 'Готовые блоки',
@@ -804,7 +787,7 @@ const buildConstructor = (elemId, options) => {
             </div>
         `
     });
-    //TEST
+    // Ready block
     editor.BlockManager.add('ui-steps-block', {
         label: 'Steps',
         category: 'Готовые блоки',
@@ -841,7 +824,7 @@ const buildConstructor = (elemId, options) => {
             </div>
         `
     });
-    //TEST
+    // Ready block
     editor.BlockManager.add('ui-request', {
         label: 'Request form',
         category: 'Готовые блоки',
@@ -862,6 +845,315 @@ const buildConstructor = (elemId, options) => {
             </div>
         `
     });
+    // Ready block
+    editor.BlockManager.add('ui-welcome-section-2-block', {
+        label: 'Welcome Section 2',
+        category: 'Готовые блоки',
+        content: `
+            <div class="techpark-page__section techpark-welcome-section">
+                <img src="/img/techpark-bg.png" alt="" class="techpark-welcome-section__bg">
+
+                <button class="techpark-welcome-section__button-back button-back button-back--rotate button-back--transparent">
+                    <svg class="button-back__icon" width="18" height="18">
+                        <use href="/img/icons.svg#chevron-right"></use>
+                    </svg>
+                    Вернуться
+                </button>
+
+                <div class="techpark-welcome-section__title">
+                    Регистрация участников международного <br>
+                    технопарка IT-стартапов Astana Hub
+                </div>
+
+                <button class="techpark-welcome-section__btn button button--lg" data-gjs-type="ui-button-red-md-component"></button>
+            </div>
+        `
+    });
+
+    editor.BlockManager.add('ui-benefit-section-2-block', {
+        label: 'Benefit Section 2',
+        category: 'Готовые блоки',
+        content: `
+            <div class="techpark-page__section benefit-section">
+
+                <div class="benefit-section__container">
+                    <div class="benefit-section__row">
+                        <div class="benefit-section__heading">
+                            Что дает статус участника <br>
+                            Astana Hub?
+                        </div>
+
+                        <div class="benefit-section__list">
+
+                            <div class="benefit-section__item">
+                                — Возможность получить налоговые льготы: КПН – 0%, ИПН – 0%, <br>
+                                НДС – 0%, социальный налог на нерезидентов – 0%.
+                            </div>
+
+                            <div class="benefit-section__item">
+                                — Возможность получить упрощенный визовый и трудовой режим <br>
+                                для иностранных участников технопарка и компаний, где работают <br>
+                                нерезиденты.
+                            </div>
+
+                            <div class="benefit-section__item">
+                                — Даем знания и полезные контакты для привлечения инвестиций <br>
+                                на выгодных условиях
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        `
+    });
+
+    editor.BlockManager.add('ui-documents-section-block', {
+        label: 'Documents Section',
+        category: 'Готовые блоки',
+        content: `
+            <div class="techpark-page__section documents-section">
+
+                    <div class="documents-section__container">
+                        <div class="documents-section__heading heading-medium">
+                            Lorem ipsum dolor sit amet
+                        </div>
+
+                        <div class="documents-section__list">
+
+                            <div class="documents-section__document-box document-box">
+
+                                <svg class="document-box__icon" width="100" height="100">
+                                    <use href="/img/icons.svg#star-box"></use>
+                                </svg>
+
+                                <div class="document-box__title">
+                                    Перечень приоритетных видов деятельности
+                                </div>
+
+                                <button class="document-box__btn button button--grey button--icon-right button--w100">
+                                    <svg width="24" height="24">
+                                        <use href="/img/icons.svg#download"></use>
+                                    </svg>
+                                    Скачать
+                                </button>
+                            </div>
+
+                            <div class="documents-section__document-box document-box">
+
+                                <svg class="document-box__icon" width="100" height="100">
+                                    <use href="/img/icons.svg#sort"></use>
+                                </svg>
+
+                                <div class="document-box__title">
+                                    Порядок регистрации участников
+                                </div>
+
+                                <button class="document-box__btn button button--grey button--icon-right button--w100">
+                                    <svg width="24" height="24">
+                                        <use href="/img/icons.svg#download"></use>
+                                    </svg>
+                                    Скачать
+                                </button>
+                            </div>
+
+                            <div class="documents-section__document-box document-box">
+
+                                <svg class="document-box__icon" width="100" height="100">
+                                    <use href="/img/icons.svg#star-box"></use>
+                                </svg>
+
+                                <div class="document-box__title">
+                                    Положение о комиссии по отбору участников
+                                </div>
+
+                                <button class="document-box__btn button button--grey button--icon-right button--w100">
+                                    <svg width="24" height="24">
+                                        <use href="/img/icons.svg#download"></use>
+                                    </svg>
+                                    Скачать
+                                </button>
+                            </div>
+
+                            <div class="documents-section__document-box document-box">
+
+                                <svg class="document-box__icon" width="100" height="100">
+                                    <use href="/img/icons.svg#copy"></use>
+                                </svg>
+
+                                <div class="document-box__title">
+                                    Список документов для регистрации участников
+                                </div>
+
+                                <button class="document-box__btn button button--grey button--icon-right button--w100">
+                                    <svg width="24" height="24">
+                                        <use href="/img/icons.svg#download"></use>
+                                    </svg>
+                                    Скачать
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+        `
+    });
+
+    editor.BlockManager.add('ui-documents-section-2-block', {
+        label: 'Documents Section 2',
+        category: 'Готовые блоки',
+        content: `
+            <div class="techpark-page__section documents-section">
+                <div class="documents-section__container">
+
+                    <div class="documents-section__heading heading-medium">
+                        Памятка потенциального участника
+                    </div>
+
+                    <div class="documents-section__list">
+
+                        <div class="documents-section__memo memo-box">
+
+                            <img src="/img/memo-1.png" alt="" class="memo-box__img">
+
+                        </div>
+
+                        <div class="documents-section__memo memo-box">
+
+                            <img src="/img/memo-2.png" alt="" class="memo-box__img">
+
+                        </div>
+
+                        <div class="documents-section__memo memo-box">
+
+                            <img src="/img/memo-3.png" alt="" class="memo-box__img">
+
+                        </div>
+
+                        <div class="documents-section__memo memo-box">
+
+                            <img src="/img/memo-4.png" alt="" class="memo-box__img">
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        `
+    });
+
+    editor.BlockManager.add('ui-timeline-section-block', {
+        label: 'Timeline Section',
+        category: 'Готовые блоки',
+        content: `
+            <div class="techpark-page__section timeline-section">
+
+                <div class="timeline-section__container">
+
+                    <div class="timeline-section__title heading-medium">
+                        Lorem ipsum dolor sit amet
+                    </div>
+
+                    <div class="timeline-section__timeline as-timeline">
+
+                        <div class="as-timeline__block">
+                            <div class="as-timeline__block-number">
+                                01
+                            </div>
+
+                            <div class="as-timeline__block-title">
+                                Регистрация будет проходить онлайн на сайте технопарка.
+                            </div>
+
+                            <div class="as-timeline__block-subtitle">
+                                Необходимо заполнить электронное заявление и обязательно прикрепить все запрашиваемые документы.
+                            </div>
+                        </div>
+
+                        <div class="as-timeline__block">
+                            <div class="as-timeline__block-number">
+                                02
+                            </div>
+
+                            <div class="as-timeline__block-title">
+                                Ожидать результаты первичной обработки документов
+                            </div>
+
+                            <div class="as-timeline__block-subtitle">
+                                На этом этапе технопарк будет проверять наличие всех документов и информации. Если какой-то из
+                                документов не будет соответствовать требованиям, технопарк не примет вашу анкету и вернет
+                                документы на доработку.
+                            </div>
+                        </div>
+
+                        <div class="as-timeline__block">
+                            <div class="as-timeline__block-number">
+                                03
+                            </div>
+
+                            <div class="as-timeline__block-title">
+                                Ожидать решения комиссии
+                            </div>
+
+                            <div class="as-timeline__block-subtitle">
+                                В течение 10 рабочих дней вам на почту придет письмо с решением комиссии. Вы получите письмо при
+                                любом раскладе, будь то положительное или отрицательное решение комиссии.
+                            </div>
+                        </div>
+
+                        <div class="as-timeline__block">
+                            <div class="as-timeline__block-number">
+                                04
+                            </div>
+
+                            <div class="as-timeline__block-title">
+                                Подтверждение
+                            </div>
+
+                            <div class="as-timeline__block-subtitle">
+                                Если вы прошли два этапа отбора комиссии, вы получите свидетельство участника технопарка Astana
+                                Hub. Это бумажный документ, который будет подтверждать вашу регистрацию.
+                            </div>
+                        </div>
+
+                        <div class="as-timeline__block">
+                            <div class="as-timeline__block-number">
+                                05
+                            </div>
+
+                            <div class="as-timeline__block-title">
+                                Договор
+                            </div>
+
+                            <div class="as-timeline__block-subtitle">
+                                Заключить Договор с Astana Hub, где будут прописаны условия деятельности участника технопарка.
+                            </div>
+                        </div>
+
+                        <div class="as-timeline__block">
+                            <div class="as-timeline__block-number">
+                                06
+                            </div>
+
+                            <div class="as-timeline__block-title">
+                                Результат
+                            </div>
+
+                            <div class="as-timeline__block-subtitle">
+                                После всех этапов вас включат в Перечень участников Astana Hub, после чего логотип и описание
+                                вашего проекта будут опубликованы на сайте технопарка.
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        `
+    });
+
 
     // Opening the block panel on init
     editor.Panels.getButton('views', 'open-blocks').set('active', true)

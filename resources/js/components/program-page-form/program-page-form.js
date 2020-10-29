@@ -81,6 +81,7 @@ function controller(notify, $http, $uibModal) {
                     <head>
                         <link rel="stylesheet" href="/css/style.css">
                         <link rel="stylesheet" href="/css/ui-components.css">
+                        <link rel="stylesheet" href="/css/main.css">
                     </head>
                     <body>
                         ${$ctrl.rawHtml}

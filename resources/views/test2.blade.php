@@ -57,14 +57,17 @@
             </div>
 
         </div>
-        {{--        <div class="header__lang-switcher" onclick="console.log(document.getElementsByClassName('lang-dropdown'))">--}}
-        <div class="header__lang-switcher" onclick="document.getElementsByClassName('lang-dropdown')[0].classList.toggle('lang-dropdown--show')">
-            <div class="header__language">Ru</div>
-            <svg class="header__lang-toggle" width="10" height="5">
-                <use xlink:href="/img/icons.svg#toggle"></use>
-            </svg>
 
-            <ui class="header__lang-dropdown lang-dropdown">
+        <div uib-dropdown="" class="header__lang-container">
+
+            <div class="header__lang-switcher" uib-dropdown-toggle="">
+                <div class="header__language">Ru</div>
+                <svg class="header__lang-toggle" width="10" height="5">
+                    <use xlink:href="/img/icons.svg#toggle"></use>
+                </svg>
+            </div>
+
+            <ul class="header__lang-dropdown lang-dropdown" uib-dropdown-menu="">
                 <li class="lang-dropdown__item" onclick="document.querySelectorAll('.text-lang').forEach(elem => {
 
                         if (!elem.getAttribute('data-grapes-lang-ru'))
@@ -86,16 +89,15 @@
 
                         elem.innerHTML = elem.getAttribute('data-grapes-lang-en');
                     })"><a href="#" class="lang-dropdown__link">English</a></li>
-            </ui>
-        </div>
+            </ul>
 
+        </div>
 
         <user-bar></user-bar>
 
     </div>
 
 </header>
-
 {!! $passport->content !!}
 
 <script src="{{mix('js/manifest.js')}}"></script>
