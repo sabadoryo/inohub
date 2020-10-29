@@ -6,9 +6,10 @@
 </div>
 <form ng-submit="$ctrl.submit()">
     <div class="modal-body">
-        <ul class="list-group mb-2">
+
+        <ul class="list-group mb-3">
             <li class="list-group-item"
-                style="padding-left: 40px" ng-repeat="role in $ctrl.roles track by $index">
+                ng-repeat="role in $ctrl.roles track by $index">
 
                 {{ role.label }}
 
@@ -27,18 +28,22 @@
             </li>
         </ul>
 
-        Статус пользователя:
-        <div class="custom-control custom-switch float-right">
-            <input type="checkbox"
-                   ng-model="$ctrl.isActive"
-                   class="custom-control-input"
-                   id="user">
-            <label class="custom-control-label"
-                   for="user"
-                   style="font-weight: normal">
-                {{$ctrl.isActive ? 'Активен' : 'Неактивен'}}
-            </label>
+        <div>
+            Статус пользователя:
+
+            <div class="custom-control custom-switch float-right">
+                <input type="checkbox"
+                       ng-model="$ctrl.isActive"
+                       class="custom-control-input"
+                       id="user">
+                <label class="custom-control-label"
+                       for="user"
+                       style="font-weight: normal">
+                    {{$ctrl.isActive ? 'Активен' : 'Неактивен'}}
+                </label>
+            </div>
         </div>
+
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" ng-click="$ctrl.dismiss()">Отмена</button>
