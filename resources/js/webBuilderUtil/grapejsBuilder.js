@@ -48,6 +48,18 @@ const buildConstructor = (elemId, options) => {
             credentials: 'include'
 
         },
+        styleManager: {
+            sectors: [
+                {
+                    name: 'Позиция',
+                    buildProps: ['width', 'height', 'min-width', 'min-height', 'margin-top', 'margin-bottom', 'margin-left', 'margin-right']
+                },
+                {
+                    name: 'Типография',
+                    buildProps: ['font-size', 'font-weight', 'text-align', 'letter-spacing', 'color', 'text-shadow', 'background-color']
+                }
+            ]
+        },
         canvas: {
             styles: ['/css/style.css', '/css/ui-components.css']
         }
