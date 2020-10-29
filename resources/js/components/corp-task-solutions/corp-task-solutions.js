@@ -2,8 +2,8 @@ import angular from "angular";
 
 angular
     .module('app')
-    .component('smartStoreTaskCompanies', {
-        template: require('./smart-store-task-companies.html'),
+    .component('corpTaskSolutions', {
+        template: require('./corp-task-solutions.html'),
         controller: ['$http', 'notify', controller],
         bindings: {
             message: '@'
@@ -12,7 +12,7 @@ angular
 
 function controller($http, notify) {
 
-	let $ctrl = this;
+    let $ctrl = this;
 
     $ctrl.$onInit = function () {
         if ($ctrl.message) {
@@ -23,40 +23,44 @@ function controller($http, notify) {
                 classes: 'alert-success'
             });
         }
-        getCompaniesList();
+        getSolutionsList();
     };
 
-    function getCompaniesList()
-    {
+    function getSolutionsList() {
         $http
-            .get(`/control-panel/sm/tasks/get-companies-list`)
+            .get('/control-panel/corp-task-solutions/get-list')
             .then(
                 function (response) {
-                    $ctrl.companies = response.data.companies;
+                    $ctrl.solutions = response.data.solutions;
                 },
                 function (error) {
-                    // Notifier.ern(error);
+                    // notify({
+                    //     message: error.data.message,
+                    //     duration: 2000,
+                    //     position: 'top-right',
+                    //     classes: 'alert-danger'
+                    // });
                 }
             )
     }
 
-    $ctrl.removeCompany = function (id, name) {
-        if (confirm(`Вы уверены, что хотите удалить задачу ${name}`)) {
+    $ctrl.removeSolution = function (id, name) {
+        if (confirm(`Вы уверены, что хотите удалить решение для ${name}?`)) {
             $ctrl.loading = true;
 
             $http
-                .post(`/control-panel/sm/tasks/${id}/remove`)
+                .post(`/control-panel/corp-task-solutions/${id}/remove`)
                 .then(
                     function (response) {
                         notify({
-                            message: `Задача ${name} успешно удалена`,
+                            message: `Решение ${name} успешно удалено`,
                             duration: 2000,
                             position: 'top',
                             classes: 'alert-success'
                         });
                         $ctrl.loading = false;
 
-                        getCompaniesList();
+                        getSolutionsList();
                     },
                     function (error) {
                         notify({

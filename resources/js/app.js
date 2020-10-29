@@ -13,6 +13,8 @@ import notify from "@cgross/angular-notify";
 import textAngular from "textangular";
 import perfectScrollbar from "angular-perfect-scrollbar";
 
+require('angular-chart.js');
+
 angular
     .module('app', [
         angularAnimate,
@@ -26,6 +28,7 @@ angular
         notify,
         textAngular,
         'perfect_scrollbar',
+        'chart.js'
     ])
     .config(['$provide', function ($provide) {
         $provide.decorator('taOptions', ['taRegisterTool', '$uibModal', '$delegate', function (taRegisterTool, $uibModal, taOptions) {
@@ -173,3 +176,10 @@ require('./components/post-create/post-create');
 require('./components/posts-control/posts-control');
 require('./components/post-check-modal/post-check-modal');
 require('./components/projects-controller/projects-controller');
+
+require('./components/corp-tasks/corp-tasks');
+require('./components/corp-tasks-create/corp-tasks-create');
+require('./components/corp-tasks-edit/corp-tasks-edit');
+require('./components/corp-task-solutions/corp-task-solutions');
+require('./components/corp-task-solutions-create/corp-task-solutions-create');
+require('./components/corp-task-solutions-edit/corp-task-solutions-edit');

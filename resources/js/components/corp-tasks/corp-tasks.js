@@ -2,8 +2,8 @@ import angular from "angular";
 
 angular
     .module('app')
-    .component('smartStoreTaskCompanies', {
-        template: require('./smart-store-task-companies.html'),
+    .component('corpTasks', {
+        template: require('./corp-tasks.html'),
         controller: ['$http', 'notify', controller],
         bindings: {
             message: '@'
@@ -23,29 +23,33 @@ function controller($http, notify) {
                 classes: 'alert-success'
             });
         }
-        getCompaniesList();
+        getTasksList();
     };
 
-    function getCompaniesList()
-    {
-        $http
-            .get(`/control-panel/sm/tasks/get-companies-list`)
+	function getTasksList() {
+	    $http
+            .get('/control-panel/corp-tasks/get-list')
             .then(
                 function (response) {
-                    $ctrl.companies = response.data.companies;
+                    $ctrl.tasks = response.data.tasks;
                 },
                 function (error) {
-                    // Notifier.ern(error);
+                    // notify({
+                    //     message: error.data.message,
+                    //     duration: 2000,
+                    //     position: 'top-right',
+                    //     classes: 'alert-danger'
+                    // });
                 }
             )
     }
 
-    $ctrl.removeCompany = function (id, name) {
-        if (confirm(`Вы уверены, что хотите удалить задачу ${name}`)) {
+    $ctrl.removeTask = function (id, name) {
+        if (confirm(`Вы уверены, что хотите удалить задачу ${name}?`)) {
             $ctrl.loading = true;
 
             $http
-                .post(`/control-panel/sm/tasks/${id}/remove`)
+                .post(`/control-panel/corp-tasks/${id}/remove`)
                 .then(
                     function (response) {
                         notify({
@@ -56,7 +60,7 @@ function controller($http, notify) {
                         });
                         $ctrl.loading = false;
 
-                        getCompaniesList();
+                        getTasksList();
                     },
                     function (error) {
                         notify({

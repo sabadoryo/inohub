@@ -42,29 +42,35 @@ function controller(Auth, $rootScope, Upload, $http) {
                     type: 'astanahub_membership'
                 }
             });
-        }
-
-        if ($ctrl.entityType == 'program') {
+        } else if ($ctrl.entityType == 'program') {
             req = $http.get('/get-forms', {
                 params: {
                     type: 'program',
                     program_id: $ctrl.entityId,
                 }
             });
-        }
-
-        if ($ctrl.entityType === 'smart-store-input-solution') {
+        } else if ($ctrl.entityType === 'smart-store-input-solution') {
             req = $http.get('/get-forms', {
                 params: {
                     type: 'smart-store-input-solution',
                 }
             });
-        }
-
-        if ($ctrl.entityType === 'smart-store-input-task') {
+        } else if ($ctrl.entityType === 'smart-store-input-task') {
             req = $http.get('/get-forms', {
                 params: {
                     type: 'smart-store-input-task',
+                }
+            });
+        } else if ($ctrl.entityType === 'corp-task') {
+            req = $http.get('/get-forms', {
+                params: {
+                    type: 'corp-task',
+                }
+            });
+        } else if ($ctrl.entityType === 'corp-task-solution') {
+            req = $http.get('/get-forms', {
+                params: {
+                    type: 'corp-task-solution',
                 }
             });
         }
@@ -86,7 +92,7 @@ function controller(Auth, $rootScope, Upload, $http) {
     };
 
     $ctrl.openLoginModal = () => {
-        Auth.openLoginModal();
+        Auth.openAuthModal();
     };
 
     $ctrl.selectOtherOptionSelected = function (field) {
