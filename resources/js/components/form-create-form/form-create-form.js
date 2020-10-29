@@ -4,13 +4,13 @@ angular
     .module('app')
     .component('formCreateForm', {
         template: require('./form-create-form.html'),
-        controller: ['$http', 'Upload', controller],
+        controller: ['$http', 'Upload', 'notify', controller],
         bindings: {
             //
         }
     });
 
-function controller($http, Upload) {
+function controller($http, Upload, notify) {
 
     let $ctrl = this;
 
@@ -98,9 +98,21 @@ function controller($http, Upload) {
             .then(
                 res => {
                     $ctrl.loading = false;
+                    notify({
+                        message: 'Форма успешно создана',
+                        duration: 2000,
+                        position: 'top-right',
+                        classes: 'alert-success'
+                    });
                 },
                 err => {
                     $ctrl.loading = false;
+                    notify({
+                        message: err.data.message,
+                        duration: 2000,
+                        position: 'top-right',
+                        classes: 'alert-danger'
+                    });
                 }
             );
     };

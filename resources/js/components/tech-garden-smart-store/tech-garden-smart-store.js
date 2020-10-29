@@ -4,13 +4,13 @@ angular
     .module('app')
     .component('techGardenSmartStore', {
         template: require('./tech-garden-smart-store.html'),
-        controller: ['$http', 'notify', '$uibModal', controller],
+        controller: ['$http', 'notify', '$uibModal', 'applicationWindow', 'Auth', controller],
         bindings: {
             //
         }
     });
 
-function controller($http, notify, $uibModal) {
+function controller($http, notify, $uibModal, applicationWindow, Auth) {
 
 	let $ctrl = this;
 
@@ -46,40 +46,50 @@ function controller($http, notify, $uibModal) {
     }
 
     $ctrl.openApplicationModalForSolution = function () {
-	    $uibModal
-            .open({
-                component: 'applicationModal',
-                resolve: {
-                    entityType: function () {
-                        return 'smart-store-input-solution';
-                    },
-                    entityId: function () {
-                        return null;
+        if (!Auth.user()) {
+            Auth
+                .openAuthModal({to: () => 'applicationWindow'})
+                .result
+                .then(
+                    res => {
+                        openAppWindow();
                     }
-                }
-            })
-            .result
-            .then(function () {
+                );
+        } else {
+            openAppWindow();
+        }
 
+        function openAppWindow() {
+            applicationWindow.open({
+                resolve: {
+                    entityType: 'smart-store-input-solution',
+                    entityId: null,
+                }
             });
+        }
     };
 
     $ctrl.openApplicationModalForTask = function () {
-        $uibModal
-            .open({
-                component: 'applicationModal',
-                resolve: {
-                    entityType: function () {
-                        return 'smart-store-input-task';
-                    },
-                    entityId: function () {
-                        return null;
+        if (!Auth.user()) {
+            Auth
+                .openAuthModal({to: () => 'applicationWindow'})
+                .result
+                .then(
+                    res => {
+                        openAppWindow();
                     }
-                }
-            })
-            .result
-            .then(function () {
+                );
+        } else {
+            openAppWindow();
+        }
 
+        function openAppWindow() {
+            applicationWindow.open({
+                resolve: {
+                    entityType: 'smart-store-input-task',
+                    entityId: null,
+                }
             });
+        }
     };
 }
