@@ -248,3 +248,7 @@ Route::get('test-modal', function () {
 Route::get('news-page', function () {
     return view('news-page');
 });
+
+Route::get('register-techpark', function () {
+    return view('register-techpark');
+});

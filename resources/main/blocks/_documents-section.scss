@@ -1,0 +1,19 @@
+.documents-section {
+
+    &__container {
+        @extend %container;
+    }
+
+    &__heading {
+        text-align: center;
+        margin-bottom: 60px;
+    }
+
+    &__list {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 24px;
+    }
+
+
+}

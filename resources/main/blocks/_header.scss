@@ -30,6 +30,7 @@
 
     &__logo {
         @include text-style(2.2rem, 600, #ffffff);
+        margin-right: auto;
     }
 
     &__logo-accent {
@@ -63,7 +64,8 @@
 
     &__search-box {
         margin-right: auto;
-        margin-left: auto;
+        //margin-left: auto;
+
     }
 
     &__lang-dropdown {
@@ -72,5 +74,17 @@
         right: 0 !important;
         left: unset !important;
         margin: 0 !important;
+    }
+
+    &__text-box {
+        margin-right: auto;
+    }
+
+    &__text {
+        @include text-style(1.4rem, 500, #c4c4c4);
+
+        &--white {
+            color: #ffffff;
+        }
     }
 }
