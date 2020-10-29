@@ -12,7 +12,7 @@ function controller($q, $document, $window, $rootScope, $compile, $timeout) {
 
         let defer = $q.defer();
 
-        let el = window.angular.element('<div class="modal-full"');
+        let el = window.angular.element('<div class="modal-full">');
 
         el.append(
             `<perfect-scrollbar class="modal-full__container">

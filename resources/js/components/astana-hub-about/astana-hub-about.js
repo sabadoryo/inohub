@@ -33,27 +33,29 @@ function controller($uibModal, Auth, applicationWindow) {
     }
 
 	$ctrl.openApplicationModal = () => {
-            if (!Auth.user()) {
-                Auth
-                    .openAuthModal({to: () => 'applicationWindow'})
-                    .result
-                    .then(
-                        res => {
-                            openAppWindow();
-                        }
-                    );
-            } else {
-                openAppWindow();
-            }
 
-            function openAppWindow() {
-                applicationWindow.open({
-                    resolve: {
-                        entityType: 'astanahub_membership',
-                        entityId: null,
+        if (!Auth.user()) {
+            Auth
+                .openAuthModal({to: () => 'applicationWindow'})
+                .result
+                .then(
+                    res => {
+                        openAppWindow();
                     }
-                });
-            }
+                );
+        } else {
+            openAppWindow();
+        }
+
+        function openAppWindow() {
+            applicationWindow.open({
+                resolve: {
+                    entityType: 'astanahub_membership',
+                    entityId: null,
+                }
+            });
+        }
+
         // $uibModal
         //     .open({
         //         component: 'applicationModal',
