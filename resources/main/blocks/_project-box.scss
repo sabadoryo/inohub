@@ -1,0 +1,22 @@
+.project-box {
+    width: 468px;
+    background-color: #ffffff;
+    border-radius: 7px;
+    overflow: hidden;
+
+    &__info {
+        padding: 20px;
+        background-color: #ffffff;
+    }
+
+    &__name {
+        @include text-style(1.6rem, 600, #181515);
+        line-height: 19.5px;
+        margin-bottom: 15px;
+    }
+
+    &__text {
+        @include text-style(1.4rem, 400, #181515);
+        line-height: 17px;
+    }
+}

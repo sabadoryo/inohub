@@ -1,22 +1,18 @@
 .events {
 
-    &__heading {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        margin-bottom: 32px;
+    &__title {
+        @include text-style(2rem, 700, #181515);
+        line-height: 24px;
+        margin-bottom: 30px;
     }
 
     &__list {
-        display: flex;
-        align-items: flex-start;
-        overflow: auto;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 24px;
     }
 
     &__card {
-        &:not(:last-child) {
-            margin-right: 24px;
-        }
+
     }
 }

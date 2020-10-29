@@ -1,0 +1,19 @@
+.team-2 {
+
+    &__heading {
+        @include text-style(2rem, 700, #181515);
+        line-height: 24px;
+        margin-bottom: 30px;
+    }
+
+    &__list {
+        display: flex;
+        align-items: flex-start;
+    }
+
+    &__card {
+        &:not(:last-child) {
+            margin-right: 24px;
+        }
+    }
+}

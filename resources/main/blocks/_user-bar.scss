@@ -30,6 +30,12 @@
         }
     }
 
+    &__img {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+    }
+
     &__initials {
         @include text-style(1.5rem, 500, $elem-color);
     }

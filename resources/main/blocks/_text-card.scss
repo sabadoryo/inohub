@@ -1,0 +1,22 @@
+.text-card {
+
+    width: 468px;
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 7px;
+
+    &__title {
+        @include text-style(2rem, 700, #181515);
+        line-height: 24px;
+        margin-bottom: 20px;
+    }
+
+    &__text {
+        @include text-style(1.6rem, 400, #181515);
+        line-height: 19.5px;
+
+        &:not(:last-child) {
+            margin-bottom: 20px;
+        }
+    }
+}

@@ -76,6 +76,9 @@ require('./auth');
 require('./plural');
 require('./controllers/mainController');
 require('./applicationWindow');
+require('./filters/translate');
+
+require('./services/trans');
 
 require('./components/organizations-control/organizations-control');
 require('./components/organization-create-form/organization-create-form');

@@ -1,0 +1,14 @@
+.investors {
+    &__title {
+        @include text-style(2rem, 700, #181515);
+        line-height: 24px;
+        margin-bottom: 30px;
+    }
+
+    &__list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-column-gap: 24px;
+        grid-row-gap: 44px;
+    }
+}

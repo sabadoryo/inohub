@@ -1,0 +1,14 @@
+.companies {
+
+    &__title {
+        @include text-style(2rem, 700, #181515);
+        line-height: 24px;
+        margin-bottom: 30px;
+    }
+
+    &__list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 24px;
+    }
+}
