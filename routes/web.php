@@ -10,6 +10,8 @@ Route::get('get-news-list', 'MainPageController@getNewsList');
 Route::get('get-feeds-list', 'MainPageController@getFeedsList');
 Route::get('news/{id}', 'MainPageController@newsPage');
 
+Route::get('select-language/{lang}', 'SelectLanguageController@selectLanguage');
+
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'cabinet', 'middleware' => ['auth']], function () {
         Route::get('', 'CabinetController@profile');
