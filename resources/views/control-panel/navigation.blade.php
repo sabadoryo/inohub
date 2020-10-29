@@ -26,9 +26,21 @@
                 <li class="nav-item">
                     <a href="/control-panel" class="nav-link {{$activePage == 'control-panel' ? 'active' : ''}}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>
-                            Главная
-                        </p>
+                        <p>Главная</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/control-panel/acl" class="nav-link {{$activePage == 'acl' ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>Настройка ролей</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/control-panel/admin-users" class="nav-link {{$activePage == 'admin-users' ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-users-cog"></i>
+                        <p>Сотрудники</p>
                     </a>
                 </li>
 
@@ -36,7 +48,7 @@
                     <li class="nav-item">
                         <a href="/control-panel/members" class="nav-link {{$activePage == 'members' ? 'active' : ''}}">
                             <i class="nav-icon fas fa-copy"></i>
-                            <p>Участники</p>
+                            <p>Участники AstanaHub</p>
                         </a>
                     </li>
                 @endif
@@ -47,7 +59,6 @@
                         <p>Программы</p>
                     </a>
                 </li>
-
 
                 <li class="nav-item">
                     <a href="/control-panel/applications" class="nav-link {{$activePage == 'applications' ? 'active' : ''}}">
@@ -110,12 +121,7 @@
 
 
 
-                <li class="nav-item">
-                    <a href="/control-panel/admin-users" class="nav-link {{$activePage == 'admin-users' ? 'active' : ''}}">
-                        <i class="nav-icon fas fa-users-cog"></i>
-                        <p>Персонал сайта</p>
-                    </a>
-                </li>
+
 
                 <li class="nav-item">
                     <a href="/control-panel/roles" class="nav-link {{$activePage == 'roles' ? 'active' : ''}}">
@@ -124,12 +130,7 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a href="/control-panel/acl" class="nav-link {{$activePage == 'acl' ? 'active' : ''}}">
-                        <i class="nav-icon fas fa-users"></i>
-                        <p>ACL</p>
-                    </a>
-                </li>
+
 
                 @can('applications.show')
                     <li class="nav-item">
