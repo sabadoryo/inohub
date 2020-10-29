@@ -131,7 +131,7 @@ class NewsController extends Controller
                             'order' => $ind
                         ]);
                     } else {
-                        $path = \Storage::disk('public')->put('news', $item['image']);
+                        $path = \Storage::disk('public')->put('news_images', $item['image']);
                         $news->images()->create([
                             'path' => $path,
                             'order' => $ind
