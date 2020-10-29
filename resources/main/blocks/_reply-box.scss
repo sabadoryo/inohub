@@ -1,0 +1,26 @@
+.reply-box {
+
+    width: 304px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 7px;
+    flex-shrink: 0;
+
+    &__heading {
+        @include text-style(1.8rem, 700, #181515);
+        line-height: 22px;
+        margin-bottom: 20px;
+    }
+
+    &__textarea {
+        @include text-style(1.6rem, 400, #181515);
+        line-height: 19.5px;
+        background-color: #F7F7F7;
+        padding: 15px;
+        border-radius: 7px;
+        height: 224px;
+        width: 100%;
+        resize: none;
+        margin-bottom: 25px;
+    }
+}

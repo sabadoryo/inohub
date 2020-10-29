@@ -197,9 +197,10 @@
 
             <div class="tabs-inner__section smart-store">
 
-
-                <div class="smart-store__title">
-                    Промышленные предприятия (задачи)
+                <div class="smart-store__row">
+                    <div class="smart-store__title">
+                        Промышленные предприятия (задачи)
+                    </div>
                 </div>
 
                 <div class="swiper-container swiper-2-slides">

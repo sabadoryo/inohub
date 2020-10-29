@@ -12,13 +12,18 @@
         border-radius: 50%;
         overflow: hidden;
         position: absolute;
-        top: -35px;
-        right: -125px;
+        top: -72px;
+        right: -94px;
         z-index: 1;
     }
 
     &__img {
-
+        width: 484px;
+        height: 484px;
+        border-radius: 50%;
+        position: absolute;
+        top: 0;
+        left: -20px;
     }
 
     &__tag {

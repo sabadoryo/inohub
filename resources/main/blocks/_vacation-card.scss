@@ -1,0 +1,29 @@
+.vacation-card {
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 7px;
+
+    &__title {
+        @include text-style(1.4rem, 400, #181515);
+        line-height: 17px;
+        margin-bottom: 10px;
+    }
+
+    &__name {
+        @include text-style(1.8rem, 700, #181515);
+        line-height: 22px;
+        margin-bottom: 10px;
+    }
+
+    &__subtitle {
+        @include text-style(1.6rem, 500, #181515);
+        line-height: 19.5px;
+        margin-bottom: 25px;
+    }
+
+    &__text {
+        @include text-style(1.6rem, 400, #181515);
+        line-height: 19.5px;
+        margin-bottom: 30px;
+    }
+}

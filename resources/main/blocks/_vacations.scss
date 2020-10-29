@@ -1,0 +1,65 @@
+.vacations {
+
+    $e: &;
+
+    &__row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 30px;
+    }
+
+    &__title {
+        @include text-style(2rem, 700, #181515);
+        line-height: 24px;
+    }
+
+    &__filter-box {
+        position: relative;
+    }
+
+    &__dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        display: none;
+
+        &--show {
+            display: block;
+
+            //#{$e}__filter-btn {
+            //    border-bottom-left-radius: 0;
+            //    border-bottom-right-radius: 0;
+            //}
+        }
+    }
+
+    &__dropdown-item {
+        display: block;
+        padding: 11px 15px;
+        background-color: #ffffff;
+        @include text-style(1.6rem, 500, #181515);
+
+        &:last-child {
+            border-bottom-left-radius: 7px;
+            border-bottom-right-radius: 7px;
+        }
+
+        &:hover {
+            background-color: #F3F3F3;
+        }
+    }
+
+    &__list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 24px;
+    }
+
+    &__inner {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+}
