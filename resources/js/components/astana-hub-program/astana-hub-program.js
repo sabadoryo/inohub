@@ -4,14 +4,14 @@ angular
     .module('$sce', 'app')
     .component('astanaHubProgram', {
         template: require('./astana-hub-program.html'),
-        controller: ['$uibModal', controller],
+        controller: ['$uibModal', 'applicationWindow', controller],
         bindings: {
             program: '<',
             passport: '<'
         }
     });
 
-function controller($sce, $uibModal) {
+function controller($sce, $uibModal,applicationWindow) {
 
 	let $ctrl = this;
 
@@ -21,31 +21,17 @@ function controller($sce, $uibModal) {
 	    console.log($ctrl.passport)
     };
 
-	$ctrl.openApplicationModal = function () {
-	    console.log('test');
-
-        $uibModal
-            .open({
-                component: 'applicationModal',
-                backdrop : 'static',
+    $ctrl.openApplicationModal = function () {
+        console.log('test');
+        openAppWindow();
+        function openAppWindow() {
+            applicationWindow.open({
                 resolve: {
-                    entityType: () => {
-                        return 'program';
-                    },
-                    entityId: () => {
-                        return $ctrl.program.id;
-                    }
+                    entityType: 'program',
+                    entityId: $ctrl.program.id,
                 }
-            })
-            .result
-            .then(
-                function (result) {
-
-                },
-                function () {
-
-                }
-            );
+            });
+        }
     };
 
 }
