@@ -106,7 +106,7 @@ require('./components/application-manage/application-manage');
 require('./components/application-reply-action/application-reply-action');
 require('./components/forms-control/forms-control');
 require('./components/form-create-form/form-create-form');
-require('./components/cabinet-application-status/application-status');
+require('./components/cabinet-application-status/cabinet-application-status');
 
 require('./components/programs-control/programs-control');
 require('./components/program-create-modal/program-create-modal');
