@@ -13,6 +13,8 @@ import notify from "@cgross/angular-notify";
 import textAngular from "textangular";
 import perfectScrollbar from "angular-perfect-scrollbar";
 
+require('angular-chart.js');
+
 angular
     .module('app', [
         angularAnimate,
@@ -26,6 +28,7 @@ angular
         notify,
         textAngular,
         'perfect_scrollbar',
+        'chart.js'
     ])
     .config(['$provide', function ($provide) {
         $provide.decorator('taOptions', ['taRegisterTool', '$uibModal', '$delegate', function (taRegisterTool, $uibModal, taOptions) {

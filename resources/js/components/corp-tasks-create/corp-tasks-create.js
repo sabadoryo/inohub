@@ -6,7 +6,7 @@ angular
         template: require('./corp-tasks-create.html'),
         controller: ['Upload', 'notify', 'moment', controller],
         bindings: {
-            //
+            app: '<'
         }
     });
 
@@ -66,7 +66,7 @@ function controller(Upload, notify, moment) {
         let deadline = fields.find(v => v.label === 'Конец приема заявок');
 
         if (deadline) {
-            $ctrl.deadline = deadline.value;
+            $ctrl.deadline = moment(deadline.value, 'DD.MM.YYYY').toDate();
         }
     }
 

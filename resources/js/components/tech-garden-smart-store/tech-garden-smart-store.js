@@ -46,22 +46,27 @@ function controller($http, notify, $uibModal, applicationWindow, Auth) {
     }
 
     $ctrl.openApplicationModalForSolution = function () {
-	    $uibModal
-            .open({
-                component: 'applicationModal',
-                resolve: {
-                    entityType: function () {
-                        return 'smart-store-input-solution';
-                    },
-                    entityId: function () {
-                        return null;
+        if (!Auth.user()) {
+            Auth
+                .openAuthModal({to: () => 'applicationWindow'})
+                .result
+                .then(
+                    res => {
+                        openAppWindow();
                     }
-                }
-            })
-            .result
-            .then(function () {
+                );
+        } else {
+            openAppWindow();
+        }
 
+        function openAppWindow() {
+            applicationWindow.open({
+                resolve: {
+                    entityType: 'smart-store-input-solution',
+                    entityId: null,
+                }
             });
+        }
     };
 
     $ctrl.openApplicationModalForTask = function () {

@@ -25,7 +25,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('create', 'PostsController@create');
         Route::post('', 'PostsController@store');
     });
-    
+
     Route::get('register-project', 'RegisterProjectController@form');
     Route::post('register-project', 'RegisterProjectController@store');
 });
@@ -35,6 +35,7 @@ Route::group(['prefix' => 'astana-hub'], function () {
     Route::get('programs', 'AstanaHubController@programs');
     Route::get('programs/{id}', 'AstanaHubController@getProgram');
     Route::get('corporate-innovations', 'AstanaHubController@corporateInnovations');
+    Route::get('corporate-innovations/get-list', 'AstanaHubController@getCorpTasksList');
     Route::get('hub-space', 'AstanaHubController@hubSpace');
     Route::get('r-and-d', 'AstanaHubController@randd');
     Route::get('resources', 'AstanaHubController@resources');
@@ -78,6 +79,9 @@ Route::group([
 ], function () {
 
     Route::get('/', 'ControlPanelController@index');
+    Route::get('/get-applications-list', 'ControlPanelController@getApplicationsList');
+    Route::get('/get-chart-members-list', 'ControlPanelController@getChartMembersList');
+    Route::get('/get-users-list', 'ControlPanelController@getUsersList');
 
     Route::get('programs', 'ProgramsController@index');
     Route::get('programs/get-list', 'ProgramsController@getList');
@@ -137,7 +141,7 @@ Route::group([
     Route::get('posts', 'PostsController@index');
     Route::get('posts/get-list', 'PostsController@getList');
     Route::post('posts/{id}/update-status', 'PostsController@updateStatus');
-    
+
     Route::get('projects', 'ProjectsController@index');
     Route::get('projects/get-list', 'ProjectsController@getList');
     Route::post('projects/{id}/update-status', 'ProjectsController@updateStatus');
