@@ -23,6 +23,7 @@ Route::group(['middleware' => ['auth']], function () {
     });
     Route::group(['prefix' => 'posts'], function () {
         Route::get('create', 'PostsController@create');
+        Route::post('', 'PostsController@store');
     });
 });
 

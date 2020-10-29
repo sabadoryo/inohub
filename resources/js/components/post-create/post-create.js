@@ -4,13 +4,13 @@ angular
     .module('app')
     .component('postCreate', {
         template: require('./post-create.html'),
-        controller: [controller],
+        controller: ['Upload', controller],
         bindings: {
             //
         }
     });
 
-function controller() {
+function controller(Upload) {
 
 	let $ctrl = this;
 
@@ -21,13 +21,27 @@ function controller() {
 
 	$ctrl.save = () => {
         $ctrl.loading = true;
-        let url = '/control-panel/events/' + $ctrl.event.id + '/update-main';
+        let url = '/posts'
         let params = {
-            name: $ctrl.name,
+            title: $ctrl.title,
+            content_t: $ctrl.content ? $ctrl.content : null,
             image: $ctrl.image ? $ctrl.image : null,
-            short_description: $ctrl.description,
-            start_date: $ctrl.startDate ? moment($ctrl.startDate).format('YYYY-MM-DD') : null,
-            start_date_time: moment($ctrl.startDateTime).format('HH:mm'),
         };
+        Upload.upload({
+            url: url,
+            data: params,
+        }).then((res) => {
+            $ctrl.loading = false;
+            window.Swal.fire({
+                icon: 'success',
+                title: 'Отправлено на проверку',
+                timer: 2000,
+                showConfirmButton: false,
+            }).then(() => {
+                window.location = '/';
+            });
+        }, (error) => {
+
+        });
     }
 }
