@@ -239,3 +239,5 @@ require('./components/investor-form/investor-form');
 
 require('./components/investors-control/investors-control');
 require('./components/investors-edit/investors-edit');
+
+require('./components/banners-control/banners-control');

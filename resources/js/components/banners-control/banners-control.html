@@ -1,0 +1,26 @@
+<div class="card" style="width: 23rem;">
+    <img ng-show="$ctrl.banner"
+         class="card-img-top"
+         ngf-thumbnail="$ctrl.banner"
+         alt="techhub-banner-1"/>
+    <img ng-show="!$ctrl.banner"
+         class="card-img-top"
+         src="{{$ctrl.existingBannerUrl}}"
+         alt="techhub-banner-1"/>
+    <div class="card-body">
+        <h5 class="card-title">Баннер 1</h5>
+        <div class="card-text"></div>
+    </div>
+    <div class="card-footer bg-white">
+        <a class="btn btn-light ml-2"
+           ngf-select=""
+           ng-model="$ctrl.banner"
+           accept="image/*"
+           ngf-max-size="10MB">
+            <span ng-show="!$ctrl.image">Выбрать изображение</span>
+            <span ng-show="$ctrl.image">Изменить изображение</span>
+        </a>
+        <button class="btn btn-primary" ng-click="$ctrl.save()">Сохранить</button>
+    </div>
+</div>
+

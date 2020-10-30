@@ -54,6 +54,7 @@
         <th>Проект</th>
         <th>Сайт</th>
         <th>Статус</th>
+        <th>Дата добавления</th>
         <th></th>
     </tr>
     </thead>
@@ -69,6 +70,7 @@
             <span ng-if="startup.status === 'accepted'" class="text-success">Принято</span>
             <span ng-if="startup.status === 'rejected'" class="text-danger">Отклонено</span>
         </td>
+        <td style="vertical-align: middle">{{startup.created_at | amDateFormat : 'DD.MM HH:mm'}}</td>
         <td class="text-center">
             <button class="btn btn-primary btn-xs"
                     ng-click="$ctrl.openStartupDetailsModal(startup)"

@@ -283,6 +283,10 @@ Route::group([
     Route::post('startups/{id}/accept', 'StartupsController@accept');
     Route::post('startups/{id}/reject', 'StartupsController@reject');
 
+    Route::get('banners', 'BannersController@index');
+    Route::get('banners/get-banner', 'BannersController@getBanner');
+    Route::post('banners/save', 'BannersController@save');
+
     Route::get('notifications', 'NotificationsController@index');
 
 });
