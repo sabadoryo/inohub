@@ -10,6 +10,24 @@ Route::get('get-news-list', 'MainPageController@getNewsList');
 Route::get('get-feeds-list', 'MainPageController@getFeedsList');
 Route::get('news/{id}', 'MainPageController@newsPage');
 
+Route::get('/events', function () {
+    //todo i need controller
+    return view('event-page');
+});
+Route::get('/investors', function () {
+    //todo i need controller
+    return view('investors-page');
+});
+
+Route::get('/startup-companies', function () {
+    //todo i need controller
+    return view('startup-page');
+});
+
+Route::get('/vacancies', function () {
+    //todo i need controller
+    return view('vacation-list');
+});
 Route::get('select-language/{lang}', 'SelectLanguageController@selectLanguage');
 
 Route::group(['middleware' => ['auth']], function () {
@@ -61,6 +79,11 @@ Route::group(['prefix' => 'tech-garden'], function () {
     Route::get('resources', 'TechGardenController@resources');
     Route::get('programs/{id}', 'TechGardenController@program');
     Route::get('programs/{id}/get-forms', 'TechGardenController@getProgramForms');
+});
+
+Route::group(['prefix' => 'ao-cett'], function () {
+    Route::get('about', 'AoCettController@about');
+    Route::get('grants', 'AoCettController@grants');
 });
 
 Route::group(['prefix' => 'tech-garden/smart-store'], function () {
