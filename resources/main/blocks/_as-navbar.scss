@@ -1,13 +1,15 @@
 .as-navbar {
     width: 200px;
-    height: 100vh;
     position: fixed;
     top: 120px;
     z-index: 10;
     background-color: #fafafa;
+    padding-bottom: 150px;
+    overflow-y: hidden;
+    height: 100vh;
 
     white-space: nowrap;
-    overflow: auto;
+
 
     &__item {
         padding: 15px 16px;
@@ -19,6 +21,7 @@
 
         &:not(:last-child) {
             margin-bottom: 10px;
+
         }
 
         &:link, &:visited {

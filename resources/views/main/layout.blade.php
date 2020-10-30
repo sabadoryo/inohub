@@ -133,7 +133,7 @@
 
     <div class="main__container">
 
-        <nav class="main__as-navbar as-navbar">
+        <perfect-scrollbar class="main__as-navbar as-navbar">
 
             <div class="as-navbar__section">
                 <a href="/" class="as-navbar__item as-navbar__item--active">
@@ -204,7 +204,7 @@
                 <a href="#" class="as-navbar__link">СМИ</a>
             </div>
 
-        </nav>
+        </perfect-scrollbar>
 
         <div class="main__content content">
 
