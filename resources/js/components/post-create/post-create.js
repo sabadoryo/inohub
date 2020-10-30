@@ -14,18 +14,30 @@ function controller(Upload) {
 
 	let $ctrl = this;
 
+    $ctrl.data = [];
 	$ctrl.loading = false;
 	$ctrl.$onInit = function () {
-
     };
+
+    $ctrl.addText = () => {
+        $ctrl.data.push({
+            type: 'text',
+            content: null
+        });
+    };
+    $ctrl.selectImageModal = () => {
+        $ctrl.data.push({
+            type: 'image',
+            image: null,
+        });
+    }
 
 	$ctrl.save = () => {
         $ctrl.loading = true;
         let url = '/posts'
         let params = {
             title: $ctrl.title,
-            content_t: $ctrl.content ? $ctrl.content : null,
-            image: $ctrl.image ? $ctrl.image : null,
+            data: $ctrl.data,
         };
         Upload.upload({
             url: url,
@@ -39,6 +51,8 @@ function controller(Upload) {
                 showConfirmButton: false,
             }).then(() => {
                 window.location = '/';
+            }, () => {
+                $ctrl.loading = false;
             });
         }, (error) => {
 
