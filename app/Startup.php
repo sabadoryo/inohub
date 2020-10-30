@@ -14,6 +14,7 @@ class Startup extends Model
         'foundation_year',
         'employees_count',
         'link',
+        'bin',
         'logo_path',
     ];
 
