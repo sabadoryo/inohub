@@ -40,7 +40,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('applications/{id}/update-form', 'CabinetController@updateForm');
         Route::post('applications/{id}/send-message', 'CabinetController@sendMessage');
         Route::get('get-applications', 'CabinetController@getApplications');
-        Route::get('download-file/{path}/{name}', 'CabinetController@downloadFile')->where('path',  '(.*)');
+        Route::get('download-file/{path}/{name}', 'CabinetController@downloadFile')->where('path', '(.*)');
         Route::get('notifications', 'NotificationsController@index');
         Route::post('notifications/get-list', 'NOtificationsController@getList');
     });
@@ -198,7 +198,7 @@ Route::group([
     Route::get('corp-innovations/tasks/get-list', 'CorpInnovationsController@getTasksList');
     Route::get('corp-innovations/tasks/{id}', 'CorpInnovationsController@task');
 
-    Route::get('members','MembersController@index');
+    Route::get('members', 'MembersController@index');
     Route::get('members/create', 'MembersController@create');
     Route::post('members', 'MembersController@store');
     Route::get('members/get-list', 'MembersController@getList');
@@ -267,6 +267,10 @@ Route::group([
     Route::get('posts/get-list', 'PostsController@getList');
     Route::get('posts/{id}/check', 'PostsController@postCheck');
     Route::post('posts/{id}/update-status', 'PostsController@updateStatus');
+
+    Route::get('users', 'UsersController@index');
+    Route::get('users/get-list', 'UsersController@getList');
+    Route::post('users/{id}/change-active', 'UsersController@changeActive');
 
 });
 

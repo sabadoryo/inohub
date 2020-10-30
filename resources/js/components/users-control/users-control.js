@@ -4,17 +4,17 @@ angular
     .module('app')
     .component('usersControl', {
         template: require('./users-control.html'),
-        controller: ['$http', 'notify', controller],
+        controller: ['$http', 'notify', '$uibModal', controller],
         bindings: {}
     });
-    
-function controller($http, notify) {
+
+function controller($http, notify, $uibModal) {
 
     let $ctrl = this;
 
     $ctrl.page = 1;
     $ctrl.perPage = 30;
-    $ctrl.status = 'active';
+    $ctrl.status = '';
 
     $ctrl.$onInit = function () {
         $ctrl.getList();
@@ -25,10 +25,10 @@ function controller($http, notify) {
         $ctrl.getList();
     };
 
-    $ctrl.pageChanged = () => {
+    $ctrl.perPageChanged = () => {
         $ctrl.page = 1;
         $ctrl.getList();
-    }
+    };
 
     $ctrl.reset = () => {
         $ctrl.page = 1;
@@ -37,27 +37,9 @@ function controller($http, notify) {
         $ctrl.getList();
     };
 
-    $ctrl.changeActive = (userId) => {
-        let url = '/control-panel/users/' + userId + '/change-active';
-        $http.post(url).then(function (response){
-            notify({
-                message: 'Активность пользователя изменено',
-                duration: 2000,
-                classes: 'alert-success',
-            });
-            $ctrl.getList();
-        }, function (error){
-            notify({
-                message: 'Ошибка!',
-                duration: 2000,
-                classes: 'alert-danger',
-            });
-        });
-    }
-
     $ctrl.getList = () => {
         $http
-            .get('/control-panel/users/get-list', {
+            .get('/admin/users/get-list', {
                 params: {
                     status: $ctrl.status,
                     page: $ctrl.page,
@@ -76,4 +58,26 @@ function controller($http, notify) {
                 }
             )
     };
+
+    $ctrl.openUserDetailsModal = function (user) {
+        $uibModal
+            .open({
+                component: 'userDetailsModal',
+                resolve: {
+                    user: function () {
+                        return user;
+                    },
+                }
+            })
+            .result
+            .then((res) => {
+                console.log(res);
+                user.is_active = res;
+                notify({
+                    message: 'Успешно обновлено',
+                    duration: 2000,
+                    classes: 'alert-success'
+                });
+            })
+    }
 }

@@ -48,6 +48,14 @@
                     </a>
                 </li>
 
+                                {{--       USERS            --}}
+                <li class="nav-item">
+                    <a href="/admin/users" class="nav-link {{$activePage == 'users' ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>Пользователи</p>
+                    </a>
+                </li>
+
             </ul>
 
         </nav>

@@ -1,68 +1,72 @@
 <form class="mb-3" ng-submit="$ctrl.filter()">
-  <div class="form d-flex align-items-center">
-    <input type="text"
-           class="form-control w-50 mr-2"
-           placeholder="Введите ФИО, email или телефон"
-           ng-model="$ctrl.search">
-    <select ng-model="$ctrl.status" class="form-control w-25 mr-2">
-      <option value="all">Все</option>
-      <option value="active">Активный</option>
-      <option value="inactive">Неактивный</option>
-    </select>
-    <button type="submit" class="btn btn-primary btn-sm mr-2">Поиск</button>
-    <button type="button" class="btn btn-secondary btn-sm mr-2" ng-click="$ctrl.reset()">Сбросить</button>
-  </div>
+    <div class="form-row">
+        <div class="col-3">
+            <input type="text"
+                   class="form-control"
+                   placeholder="Введите ФИО, email или телефон"
+                   ng-model="$ctrl.search">
+        </div>
+        <div class="col-3">
+            <select ng-model="$ctrl.status" class="form-control">
+                <option value="">Статус</option>
+                <option value="active">Активный</option>
+                <option value="inactive">Неактивный</option>
+            </select>
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary" ng-disabled="$ctrl.loading">Поиск</button>
+            <button type="button" class="btn btn-secondary" ng-click="$ctrl.reset()">Сбросить</button>
+        </div>
+    </div>
 </form>
+
 <div class="mb-3">
-  <div class="d-inline mr-2">Всего: <b>{{$ctrl.total}}</b>.</div>
-  <div class="d-inline">
-    Показывать по:
-    <select class="form-control d-inline-block w-auto"
-            ng-model="$ctrl.perPage"
-            ng-change="$ctrl.pageChanged()">
-      <option ng-value="15">15</option>
-      <option ng-value="30">30</option>
-      <option ng-value="50">50</option>
-      <option ng-value="100">100</option>
-    </select>
-  </div>
+    <div class="d-inline mr-2">Всего: <b>{{$ctrl.total}}</b>.</div>
+    <div class="d-inline">
+        Показывать по:
+        <select class="form-control d-inline-block w-auto"
+                ng-model="$ctrl.perPage"
+                ng-change="$ctrl.perPageChanged()">
+            <option ng-value="15">15</option>
+            <option ng-value="30">30</option>
+            <option ng-value="50">50</option>
+            <option ng-value="100">100</option>
+        </select>
+    </div>
 </div>
 
-  <table class="table table-bordered table-striped table-sm">
+<table class="table bg-white" style="font-size: 14px">
     <thead class="thead-light">
     <tr>
-      <th>ID</th>
-      <th>ФИО</th>
-      <th>Email</th>
-      <th>Телефон</th>
-      <th>Последний вход</th>
-      <th>Статус</th>
-      <th></th>
+        <th>ID</th>
+        <th>ФИО</th>
+        <th>Email</th>
+        <th>Статус</th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
     <tr ng-repeat="user in $ctrl.users track by $index">
-      <td>{{ user.id }}</td>
-      <td>{{ user.full_name }}</td>
-      <td>{{ user.email }}</td>
-      <td>{{ user.phone }}</td>
-      <td>{{ user.last_login | date:'dd.MM.yyyy' }}</td>
-      <td>{{ user.status }}</td>
-      <td class="text-center">
-        <button ng-click="$ctrl.changeActive(user.id)" class="bt btn-xs"
-                ng-class="user.is_active ? 'btn-danger' : 'btn-success'">
-          <i class="fas fa-lock-open" ng-show="!user.is_active"></i>
-          <i class="fas fa-lock" ng-show="user.is_active"></i>
-        </button>
-      </td>
+        <td>{{ user.id }}</td>
+        <td>{{ user.full_name }}</td>
+        <td>{{ user.email }}</td>
+        <td>
+            <span ng-if="user.is_active" class="text-success">Активен</span>
+            <span ng-if="!user.is_active" class="text-danger">Забанен</span>
+        </td>
+        <td class="text-center">
+            <button class="btn btn-primary btn-xs" ng-click="$ctrl.openUserDetailsModal(user)">
+                <i class="fa fa-pen"></i>
+            </button>
+        </td>
     </tr>
     </tbody>
-  </table>
+</table>
 
-  <ul uib-pagination
-      template-url="b4-pagination"
-      total-items="$ctrl.total"
-      ng-model="$ctrl.page"
-      max-size="10"
-      items-per-page="$ctrl.perPage"
-      ng-change="$ctrl.getList()"></ul>
+<ul uib-pagination
+    template-url="b4-pagination"
+    total-items="$ctrl.total"
+    ng-model="$ctrl.page"
+    max-size="10"
+    items-per-page="$ctrl.perPage"
+    ng-change="$ctrl.getList()"></ul>

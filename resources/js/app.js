@@ -223,3 +223,4 @@ require('./components/program-members-create/program-members-create');
 require('./components/event-page/event-page');
 
 require('./components/events-list/events-list');
+require('./components/user-details-modal/user-details-modal');
