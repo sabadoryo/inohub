@@ -222,13 +222,12 @@
     </div>
     <div class="tabs-inner__section chat-section">
 
-        <div class="chat-section__messages">
+        <div class="chat-section__messages" id="chatSectionScrollDiv">
 
             <div ng-repeat="message in $ctrl.app.actions.message"
                  ng-class="message.name === 'application_user_message' ? 'message-block--mine' : ''"
-                 class="chat-section__block message-block"
-                 id="message-{{ ::$index }}" scroll-to-last="message-{{ ::$index }}">
-                <img src="/img/user-avatar.png" ng-show="message.name === 'application_admin_message'" alt="" class="message-block__person-img">
+                 class="chat-section__block message-block">
+                <img src="{{message.user.avatar_url}}" ng-show="message.name === 'application_admin_message'" alt="" class="message-block__person-img">
                 <div class="message-block__content">
 
                     <div class="message-block__name">{{message.user.full_name}}</div>
@@ -238,14 +237,13 @@
                     </div>
 
                     <div class="message-block__row">
-                        <div>
-                            <a class="message-block__file"
+                        <div style="display: flex; flex-direction: column">
+                            <a class="message-block__text"
+                               style="text-decoration: underline;"
                                ng-if="message.additional_data.length"
                                ng-repeat="file in message.additional_data track by $index"
                                href="/cabinet/download-file/{{file.path}}/{{file.name}}">
-                                <svg width="45" height="45">
-                                    <use href="/img/icons.svg#pdf-icon"></use>
-                                </svg>
+                                {{file.name}}
                             </a>
                         </div>
                         <div class="message-block__date">{{message.created_at | amDateFormat : 'ddd. DD MMMM -HH:mm'}}
@@ -254,7 +252,7 @@
 
                 </div>
 
-                <img src="/img/user-avatar.png" ng-show="message.name === 'application_user_message'" alt="" class="message-block__person-img">
+                <img src="{{message.user.avatar_url}}" ng-show="message.name === 'application_user_message'" alt="" class="message-block__person-img">
 
             </div>
 

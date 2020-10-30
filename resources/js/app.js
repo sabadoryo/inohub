@@ -72,29 +72,30 @@ angular
                 });
             }
         };
-    }).directive('scrollToLast', ['$location', '$anchorScroll', '$timeout', function ($location, $anchorScroll, $timeout) {
-
-    function linkFn(scope, element, attrs) {
-        $timeout(function () {
-            let kekw = 10;
-            angular.element(function () {
-                kekw = true;
-                console.log('lol');
-            });
-            if (kekw === 5) {
-                $location.hash(attrs.scrollToLast);
-                $anchorScroll();
-            }
-        });
-    }
-
-    return {
-        restrict: 'AE',
-        scope: {},
-        link: linkFn
-    };
-
-}]);
+    })
+    // .directive('scrollToLast', ['$location', '$anchorScroll', '$timeout', function ($location, $anchorScroll, $timeout) {
+//
+//     function linkFn(scope, element, attrs) {
+//         $timeout(function () {
+//             let kekw = 10;
+//             angular.element(function () {
+//                 kekw = true;
+//                 console.log('lol');
+//             });
+//             if (kekw === 5) {
+//                 $location.hash(attrs.scrollToLast);
+//                 $anchorScroll();
+//             }
+//         });
+//     }
+//
+//     return {
+//         restrict: 'AE',
+//         scope: {},
+//         link: linkFn
+//     };
+//
+// }]);
 
 
 require('./auth');
