@@ -41,6 +41,13 @@
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a href="/admin/posts" class="nav-link {{$activePage == 'posts' ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-paper-plane"></i>
+                        <p>Посты</p>
+                    </a>
+                </li>
+
             </ul>
 
         </nav>

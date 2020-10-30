@@ -1,38 +1,45 @@
 <div class="card">
-  <div class="card-header">
-    Создание поста
-  </div>
-  <form ng-submit="$ctrl.save()">
-    <div class="card-body">
-      <div class="form-group">
-        <label>Заголовок:</label>
-        <input class="form-control" ng-model="$ctrl.title">
-      </div>
-      <div class="form-group">
-        <label>Контент:</label>
-        <text-angular ta-resize-force-aspect-ratio="true" ng-model="$ctrl.content"></text-angular>
-      </div>
-      <div class="form-group">
-        <label>Изображение:</label>
-        <div class="mb-2">
-          <img ng-show="$ctrl.image" ngf-thumbnail="$ctrl.image" width="350"/>
-        </div>
-        <div>
-          <a class="btn btn-light"
-             ngf-select=""
-             ng-model="$ctrl.image"
-             accept="image/*">
+    <div class="card-header">
+        Создание поста
+    </div>
+    <form ng-submit="$ctrl.save()">
+        <div class="card-body">
+            <div class="form-group">
+                <label>Заголовок:</label>
+                <input class="form-control" ng-model="$ctrl.title">
+            </div>
+            <div ng-repeat="item in $ctrl.data track by $index" style="position: relative">
+                <div ng-if="item.type == 'text'" class="form-group">
+                    <label>Текст:</label>
+                    <text-angular ta-resize-force-aspect-ratio="true" ng-model="item.content"></text-angular>
+                </div>
+                <div ng-if="item.type == 'image'" class="form-group">
+                    <label> Изображение: </label>
 
-            <span ng-show="!$ctrl.image">Выбрать изображение</span>
-            <span ng-show="$ctrl.image">Изменить изображение</span>
-          </a>
+                    <img ng-show="!item.image" class="d-block" ngf-thumbnail="item.image" width="500">
+
+                    <a ng-show="!item.image"
+                       class="btn btn-default"
+                       ngf-select=""
+                       ng-model="item.image"
+                       accept="image/*">
+                        Выбрать изображение
+                        <i class="fas fa-image"></i>
+                    </a>
+                </div>
+            </div>
+            <div uib-dropdown class="d-inline-block">
+                <button type="button" class="btn btn-default btn-sm" uib-dropdown-toggle>Добавить</button>
+                <div uib-dropdown-menu>
+                    <a class="dropdown-item" href="" ng-click="$ctrl.addText()">Текст</a>
+                    <a class="dropdown-item" href="" ng-click="$ctrl.selectImageModal()">Изображение</a>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <div class="card-footer">
-      <button class="btn btn-primary" type="submit" ng-disabled="$ctrl.loading">
-        Сохранить
-      </button>
-    </div>
-  </form>
+        <div class="card-footer">
+            <button class="btn btn-primary" type="submit" ng-disabled="$ctrl.loading">
+                Сохранить
+            </button>
+        </div>
+    </form>
 </div>

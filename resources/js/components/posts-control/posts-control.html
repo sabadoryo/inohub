@@ -1,62 +1,62 @@
 <form class="mb-3" ng-submit="$ctrl.filter()">
-  <div class="form-row">
-    <div class="col-3">
-      <input type="text"
-             class="form-control"
-             placeholder="Название"
-             ng-model="$ctrl.title">
+    <div class="form-row">
+        <div class="col-3">
+            <input type="text"
+                   class="form-control"
+                   placeholder="Название"
+                   ng-model="$ctrl.title">
+        </div>
+        <div class="col-3">
+            <select ng-model="$ctrl.status" class="form-control">
+                <option value="">Выберите статус</option>
+                <option value="check">Проверка</option>
+                <option value="reject">Отказано</option>
+                <option value="accept">Принята</option>
+            </select>
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary" ng-disabled="$ctrl.loading">Поиск</button>
+            <button type="button" class="btn btn-secondary" ng-click="$ctrl.reset()">Сбросить</button>
+        </div>
     </div>
-    <div class="col-3">
-      <select ng-model="$ctrl.status" class="form-control">
-        <option value="">Выберите статус</option>
-        <option value="check">Проверка</option>
-        <option value="reject">Отказано</option>
-        <option value="accept">Принята</option>
-      </select>
-    </div>
-    <div class="col-auto">
-      <button type="submit" class="btn btn-primary" ng-disabled="$ctrl.loading">Поиск</button>
-      <button type="button" class="btn btn-secondary" ng-click="$ctrl.reset()">Сбросить</button>
-    </div>
-  </div>
 </form>
 
 <div class="mb-3 clearfix">
-  <div class="float-left">
-    Всего: <b>{{ $ctrl.total }}</b> {{ $ctrl.total | plural : ['пост', 'поста', 'постов'] }}
-  </div>
+    <div class="float-left">
+        Всего: <b>{{ $ctrl.total }}</b> {{ $ctrl.total | plural : ['пост', 'поста', 'постов'] }}
+    </div>
 </div>
 
 <table class="table table-sm bg-white">
-  <thead class="thead-light">
-  <tr>
-    <th>№</th>
-    <th>Заголовок</th>
-    <th>Статус</th>
-    <th>Пользователь</th>
-    <th>Опубликовано</th>
-    <th></th>
-  </tr>
-  </thead>
-  <tr ng-repeat="post in $ctrl.posts track by $index">
-    <td>{{ post.id }}</td>
-    <td>{{ post.title | truncate : 60 : '...' }}</td>
-    <td ng-switch="post.status">
-      <div ng-switch-when="check" class="text-primary">На проверке</div>
-      <div ng-switch-when="reject" class="text-danger">Отказано</div>
-      <div ng-switch-when="accept" class="text-success">Опубликовано</div>
-    </td>
-    <td>{{ post.user.full_name }}</td>
-    <td>{{ post.published_at | date:'dd.MM.yyyy HH:mm' }}</td>
-    <td class="text-center">
-      <button href=""
-              ng-click="$ctrl.openEdit($index)"
-              ng-disabled="post.status != 'check'"
-              class="btn btn-primary btn-xs">
-        <i class="fas fa-edit"></i>
-      </button>
-    </td>
-  </tr>
+    <thead class="thead-light">
+    <tr>
+        <th>№</th>
+        <th>Заголовок</th>
+        <th>Статус</th>
+        <th>Пользователь</th>
+        <th>Опубликовано</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tr ng-repeat="post in $ctrl.posts track by $index">
+        <td>{{ post.id }}</td>
+        <td>{{ post.title | truncate : 60 : '...' }}</td>
+        <td ng-switch="post.status">
+            <div ng-switch-when="check" class="text-primary">На проверке</div>
+            <div ng-switch-when="reject" class="text-danger">Отказано</div>
+            <div ng-switch-when="accept" class="text-success">Опубликовано</div>
+        </td>
+        <td>{{ post.user.full_name }}</td>
+        <td>{{ post.published_at | date:'dd.MM.yyyy HH:mm' }}</td>
+        <td class="text-center">
+            <a href=""
+               ng-href="/admin/posts/{{post.id}}/check"
+               ng-disabled="post.status == 'accept'"
+               class="btn btn-primary btn-xs">
+                <i class="fas fa-edit"></i>
+            </a>
+        </td>
+    </tr>
 </table>
 
 <ul uib-pagination

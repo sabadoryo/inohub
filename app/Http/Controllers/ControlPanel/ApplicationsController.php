@@ -68,14 +68,19 @@ class ApplicationsController extends ControlPanelController
             'forms.fields.formField',
         ])->findOrFail($id);
 
-        $title = 'Заявка №'.$application->id;
+        $title = 'Заявка №' . $application->id;
 
         $breadcrumb = [
             ['/control-panel', 'Главная'],
             ['/control-panel/applications', 'Заявки'],
             [null, $title]
         ];
-        $application->actions = $application->actions()->with('user')->orderBy('created_at', 'asc')->get()->groupBy('type');
+
+        $application->actions = $application->actions()
+            ->with('user')
+            ->orderBy('created_at', 'asc')
+            ->get()
+            ->groupBy('type');
 
         foreach ($application->forms as $form) {
             foreach ($form->fields as $field) {

@@ -98,12 +98,7 @@ function controller($http, Upload, notify) {
             .then(
                 res => {
                     $ctrl.loading = false;
-                    notify({
-                        message: 'Форма успешно создана',
-                        duration: 2000,
-                        position: 'top-right',
-                        classes: 'alert-success'
-                    });
+                    window.location.href = '/control-panel/forms?success_message=Форма успешно создана';
                 },
                 err => {
                     $ctrl.loading = false;
