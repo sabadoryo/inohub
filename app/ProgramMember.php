@@ -11,4 +11,19 @@ class ProgramMember extends Model
         'manager_id',
         'application_id'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function manager()
+    {
+        return $this->belongsTo(User::class, 'manager_id');
+    }
+
+    public function application()
+    {
+        return $this->belongsTo(Application::class);
+    }
 }

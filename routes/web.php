@@ -38,11 +38,13 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('', 'CabinetController@profile');
         Route::get('applications', 'CabinetController@applications');
         Route::get('applications/{id}', 'CabinetController@application');
-        Route::get('notifications', 'CabinetController@notifications');
+//        Route::get('notifications', 'CabinetController@notifications');
         Route::post('applications/{id}/update-form', 'CabinetController@updateForm');
         Route::post('applications/{id}/send-message', 'CabinetController@sendMessage');
         Route::get('get-applications', 'CabinetController@getApplications');
         Route::get('download-file/{path}/{name}', 'CabinetController@downloadFile')->where('path',  '(.*)');
+        Route::get('notifications', 'NotificationsController@index');
+        Route::post('notifications/get-list', 'NOtificationsController@getList');
     });
     Route::group(['prefix' => 'posts'], function () {
         Route::get('create', 'PostsController@create');
@@ -121,8 +123,11 @@ Route::group([
     Route::get('programs/{id}/forms', 'ProgramsController@forms');
     Route::post('programs/{id}/update-forms', 'ProgramsController@updateForms');
     Route::post('programs/{id}/publish', 'ProgramsController@publish');
-
-
+    Route::get('programs/{id}/members', 'ProgramsController@members');
+    Route::get('programs/{id}/members/get-list', 'ProgramsController@getMembersList');
+    Route::get('programs/{id}/members/get-users-list', 'ProgramsController@getUsers');
+    Route::get('programs/{id}/members/create', 'ProgramsController@createMember');
+    Route::post('programs/{id}/members', 'ProgramsController@storeMember');
 
     Route::get('users', 'UsersController@index');
     Route::get('users/get-list', 'UsersController@getList');

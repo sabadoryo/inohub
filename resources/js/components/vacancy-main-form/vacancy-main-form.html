@@ -14,14 +14,8 @@
                   <input type="text" class="form-control" placeholder="Введите название" ng-model="$ctrl.title" required>
               </div>
               <div class="form-group">
-                  <label>Компания:</label>
-                  <select class="form-control" ng-model="$ctrl.organization_id">
-                      <option ng-repeat="org in $ctrl.organizations" ng-value="org.id">{{org.name}}</option>
-                  </select>
-              </div>
-              <div class="form-group">
                   <label>Местоположение:</label>
-                  <input type="text" class="form-control" placeholder="Введите местоположение" ng-model="$ctrl.location" required>
+                  <input type="text" class="form-control" placeholder="Введите местоположение" ng-model="$ctrl.location">
               </div>
               <div class="row">
                   <div class="form-group col-6">

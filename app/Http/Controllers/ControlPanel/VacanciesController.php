@@ -72,7 +72,6 @@ class VacanciesController extends ControlPanelController
     public function mainForm($id)
     {
         $vacancy = Vacancy::with(['organization'])->findOrFail($id);
-        $organizations = Organization::all();
         $breadcrumb = [
             ['/control-panel', 'Главная'],
             ['/control-panel/vacancies', 'Вакансии'],
@@ -82,8 +81,7 @@ class VacanciesController extends ControlPanelController
         return view('control-panel.component', [
             'component' => 'vacancy-main-form',
             'bindings' => [
-                'vacancy' => $vacancy,
-                'organizations' => $organizations
+                'vacancy' => $vacancy
             ],
             'PAGE_TITLE' => $vacancy->title,
             'activePage' => 'vacancies',
@@ -108,8 +106,7 @@ class VacanciesController extends ControlPanelController
             'content' => $request->content_t,
             'to_salary' => $request->to_salary,
             'from_salary' => $request->from_salary,
-            'location' => $request->location,
-            'organization_id' => $request->organization_id
+            'location' => $request->location
         ]);
     }
 
@@ -122,4 +119,5 @@ class VacanciesController extends ControlPanelController
             'status' => 'published',
         ]);
     }
+
 }

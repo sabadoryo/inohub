@@ -1,0 +1,69 @@
+<div class="alert alert-default-warning" ng-show="$ctrl.program.status == 'draft'">
+    Данная программа еще не опубликована.
+    <button type="button" class="btn btn-primary btn-sm ml-2" ng-click="$ctrl.openToPublishModal()">Опубликовать</button>
+</div>
+
+<div class="card card-primary card-outline card-outline-tabs">
+    <div class="card-header p-0 border-bottom-0">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link" href="" ng-href="/control-panel/programs/{{$ctrl.program.id}}/main">Основная информация</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="" ng-href="/control-panel/programs/{{$ctrl.program.id}}/page">Страница</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="" ng-href="/control-panel/programs/{{$ctrl.program.id}}/forms">Анкета</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="" ng-href="/control-panel/programs/{{$ctrl.program.id}}/members">Участники</a>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-6">
+
+                <div class="mb-3 clearfix">
+
+                    <div class="float-left">
+                        Всего: <b>{{ $ctrl.total }}</b> {{ $ctrl.total | plural : ['участник', 'участника', 'участников'] }}
+                    </div>
+
+                    <a ng-href="/control-panel/programs/{{$ctrl.program.id}}/members/create"
+                       class="btn btn-primary float-right">
+                        Добавить участника
+                    </a>
+
+                </div>
+
+                <table class="table bg-white" style="font-size: 14px">
+                    <thead class="thead-light">
+                    <tr>
+                        <th>№</th>
+                        <th>ФИО</th>
+                        <th>Оператор</th>
+                        <th>Дата добавления</th>
+                    </tr>
+                    </thead>
+                    <tr ng-repeat="member in $ctrl.members track by $index">
+                        <td>{{ member.id }}</td>
+                        <td>{{ member.user.full_name }}</td>
+                        <td>{{ member.manager.full_name }}</td>
+                        <td>{{ member.created_at | amDateFormat : 'DD.MM.YYYY'}}</td>
+                    </tr>
+                </table>
+
+                <ul uib-pagination
+                    total-items="$ctrl.total"
+                    ng-model="$ctrl.page"
+                    ng-change="$ctrl.getList()"
+                    items-per-page="10"
+                    template-url="b4-pagination">
+                </ul>
+
+            </div>
+        </div>
+
+    </div>
+</div>
