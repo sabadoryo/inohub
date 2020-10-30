@@ -16,17 +16,36 @@ function controller($http) {
 
 	$ctrl.page = 1;
 	$ctrl.user = null;
-	$ctrl.manager = null;
+	$ctrl.managerId = null;
+    $ctrl.search = null;
+    $ctrl.total = 0;
 
 	$ctrl.$onInit = function () {
         $ctrl.getList();
     };
+
+	$ctrl.filter = () => {
+	    $ctrl.page = 1;
+	    $ctrl.getList();
+    }
+
+    $ctrl.reset = () => {
+	    $ctrl.managerId = null;
+	    $ctrl.status = null;
+        $ctrl.search = null;
+	    $ctrl.page = 1;
+	    $ctrl.getList();
+    }
+
 
 	$ctrl.getList = function () {
         $http
             .get('/control-panel/applications/get-list', {
                 params: {
                     page: $ctrl.page,
+                    manager_id: $ctrl.managerId,
+                    status: $ctrl.status,
+                    search: $ctrl.search,
                 }
             })
             .then(
