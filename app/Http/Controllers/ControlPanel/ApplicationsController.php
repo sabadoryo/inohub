@@ -9,19 +9,13 @@ use App\Organization;
 use App\Program;
 use Illuminate\Http\Request;
 
-class ApplicationsController extends Controller
+class ApplicationsController extends ControlPanelController
 {
     public function index()
     {
-        $organizations = Organization::all();
-
         $breadcrumb = [
             ['/control-panel', 'Главная'],
             [null, 'Заявки']
-        ];
-
-        $bindings = [
-            'organizations' => $organizations
         ];
 
         return view('control-panel.component', [
@@ -29,7 +23,7 @@ class ApplicationsController extends Controller
             'activePage' => 'applications',
             'breadcrumb' => $breadcrumb,
             'component' => 'applications-control',
-            'bindings' => $bindings
+            'bindings' => []
         ]);
     }
 

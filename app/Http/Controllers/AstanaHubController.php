@@ -51,6 +51,7 @@ class AstanaHubController extends Controller
 
         $passport = $program->passport;
 
+
         return view('gjs-layout', [
             'passport' => $passport,
             'entityType' => 'program',

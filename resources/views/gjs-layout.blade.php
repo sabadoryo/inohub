@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Techhub</title>
     <link href="{{ asset('css/ui-components.css') }}" rel="stylesheet">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
 
@@ -17,6 +17,22 @@
 
         .dropdown.show .dropdown-menu {
             display: block;
+        }
+
+        .swal2-popup {
+            width: 50em;
+        }
+
+        .swal2-title {
+            font-size: 2.6em;
+        }
+
+        .swal2-content {
+            font-size: 1.9em;
+        }
+
+        .swal2-styled.swal2-confirm {
+            font-size: 1.5em;
         }
 
     </style>
@@ -75,7 +91,8 @@
                 if (!elem.getAttribute('data-grapes-lang-ru')) {
                     elem.setAttribute('data-grapes-lang-ru', elem.innerHTML);
                 }
-                elem.innerHTML = elem.getAttribute('data-grapes-lang-{{$activeLang == 'kz' ? }}');
+                console.log('{{$activeLang}}')
+                elem.innerHTML = elem.getAttribute('data-grapes-lang-{{$activeLang}}');
             })
         });
 
