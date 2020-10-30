@@ -1,4 +1,46 @@
-<table class="table table-bordered table-striped">
+<form class="mb-3" ng-submit="$ctrl.filter()">
+
+    <div class="form-row">
+
+        <div class="col-3">
+            <input type="text"
+                   class="form-control"
+                   placeholder="Пользователь"
+                   ng-model="$ctrl.user">
+        </div>
+
+        <div class="col-3">
+            <select ng-model="$ctrl.status" class="form-control">
+                <option value="">Выберите статус</option>
+                <option value="opened">Открытые</option>
+                <option value="published">На рассмотрении</option>
+                <option value="closed">Закрытые</option>
+            </select>
+        </div>
+
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary" ng-disabled="$ctrl.loading">Поиск</button>
+            <button type="button" class="btn btn-secondary" ng-click="$ctrl.reset()">Сбросить</button>
+        </div>
+
+    </div>
+
+</form>
+
+<div class="mb-3 clearfix">
+
+    <div class="float-left">
+        Всего: <b>{{ $ctrl.total }}</b> {{ $ctrl.total | plural : ['программа', 'программы', 'программ'] }}
+    </div>
+
+    <a href="" ng-click="$ctrl.openCreateModal()" class="btn btn-primary float-right">
+        Добавить программу
+    </a>
+
+</div>
+
+
+<table class="table bg-white" style="font-size: 14px">
     <thead class="thead-light">
     <tr>
         <th>Id</th>

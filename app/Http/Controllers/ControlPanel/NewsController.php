@@ -8,7 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
-class NewsController extends Controller
+class NewsController extends ControlPanelController
 {
     public function index()
     {

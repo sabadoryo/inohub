@@ -6,7 +6,7 @@ use App\Form;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class FormsController extends Controller
+class FormsController extends ControlPanelController
 {
     public function index()
     {
