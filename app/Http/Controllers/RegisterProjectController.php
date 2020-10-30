@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\ControlPanel\ControlPanelController;
 use App\Project;
 use App\Startup;
 use Illuminate\Http\Request;
 
-class RegisterProjectController extends Controller
+class RegisterProjectController extends ControlPanelController
 {
     public function form()
     {
