@@ -118,8 +118,11 @@ Route::group([
     Route::get('programs/{id}/forms', 'ProgramsController@forms');
     Route::post('programs/{id}/update-forms', 'ProgramsController@updateForms');
     Route::post('programs/{id}/publish', 'ProgramsController@publish');
-
-
+    Route::get('programs/{id}/members', 'ProgramsController@members');
+    Route::get('programs/{id}/members/get-list', 'ProgramsController@getMembersList');
+    Route::get('programs/{id}/members/get-users-list', 'ProgramsController@getUsers');
+    Route::get('programs/{id}/members/create', 'ProgramsController@createMember');
+    Route::post('programs/{id}/members', 'ProgramsController@storeMember');
 
     Route::get('users', 'UsersController@index');
     Route::get('users/get-list', 'UsersController@getList');
@@ -252,7 +255,7 @@ Route::group([
     Route::post('organizations', 'OrganizationsController@store');
     Route::get('organizations/{id}/edit', 'OrganizationsController@edit');
     Route::put('organizations/{id}', 'OrganizationsController@update');
-    
+
     Route::get('posts', 'PostsController@index');
     Route::get('posts/get-list', 'PostsController@getList');
     Route::get('posts/{id}/check', 'PostsController@postCheck');

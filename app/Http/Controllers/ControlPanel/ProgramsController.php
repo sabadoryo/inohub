@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\ControlPanel;
 
+use App\Application;
 use App\Form;
 use App\Passport;
 use App\Program;
 use App\ProgramCategory;
+use App\ProgramMember;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -150,13 +153,13 @@ class ProgramsController extends ControlPanelController
     public function forms($id)
     {
         $program = Program::with(['forms'])->find($id);
-    
+
         $breadcrumb = [
             ['/control-panel', 'Главная'],
             ['/control-panel/programs', 'Программы'],
             [null, $program->title],
         ];
-        
+
         return view('control-panel.component', [
             'component' => 'program-forms',
             'bindings' => [
@@ -171,15 +174,15 @@ class ProgramsController extends ControlPanelController
     public function updateForms(Request $request, $id)
     {
         $program = Program::find($id);
-        
+
         $data = [];
-        
+
         foreach ($request->forms as $ind => $form) {
             $data[$form['id']] = [
                 'order_number' => $ind,
             ];
         }
-        
+
         $program->forms()->sync($data);
 
         return [];
@@ -194,4 +197,94 @@ class ProgramsController extends ControlPanelController
             'published_at' => Carbon::now(),
         ]);
     }
+
+    public function members(Request $request, $id)
+    {
+        $program = Program::with(['members'])->findOrFail($id);
+
+        $breadcrumb = [
+            ['/control-panel', 'Главная'],
+            ['/control-panel/programs', 'Программы'],
+            [null, $program->title],
+        ];
+
+        $bindings = [
+            'program' => $program
+        ];
+
+        if ($request->success_message) {
+            $bindings['message'] = $request->success_message;
+        }
+
+        return view('control-panel.component', [
+            'component' => 'program-members',
+            'bindings' => $bindings,
+            'PAGE_TITLE' => $program->title,
+            'activePage' => 'programs',
+            'breadcrumb' => $breadcrumb,
+        ]);
+    }
+
+    public function getMembersList(Request $request, $id)
+    {
+        $program = Program::findOrFail($id);
+
+        $members = $program->members()->with(['user', 'manager', 'application'])->paginate(10);
+
+        return $members;
+
+    }
+
+    public function createMember(Request $request, $id)
+    {
+        $program = Program::findOrFail($id);
+
+        $breadcrumb = [
+            ['/control-panel', 'Главная'],
+            ['/control-panel/programs', 'Программы'],
+            [null, $program->title],
+        ];
+
+        $bindings = [
+            'program' => $program
+        ];
+
+        if ($request->application_id) {
+            $app = Application::findOrFail($request->application_id);
+            $bindings['app'] = $app;
+        }
+
+        return view('control-panel.component', [
+            'component' => 'program-members-create',
+            'bindings' => $bindings,
+            'PAGE_TITLE' => $program->title,
+            'activePage' => 'programs',
+            'breadcrumb' => $breadcrumb,
+        ]);
+    }
+
+    public function storeMember(Request $request, $id)
+    {
+        $request->validate([
+            'userId' => 'required|numeric|exists:users,id',
+            'applicationId' => 'nullable|numeric|exists:applications,id',
+        ]);
+
+        $program = Program::findOrFail($id);
+
+        $program->members()->create([
+            'user_id' => $request['userId'],
+            'manager_id' => \Auth::id(),
+            'application_id' => $request['applicationId'],
+        ]);
+
+        return [];
+    }
+
+    public function getUsers(Request $request, $id) {
+        $users = User::all();
+
+        return ['users' => $users];
+    }
+
 }

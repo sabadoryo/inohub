@@ -9,21 +9,6 @@ use Illuminate\Queue\RedisQueue;
 
 class FormsController extends ControlPanelController
 {
-    protected $organization;
-
-    public function __construct()
-    {
-        $this->middleware(function ($request, $next) {
-            $this->organization = \Auth::user()
-                ->organization()
-                ->with('modules')
-                ->first();
-
-            view()->share('currentOrganization', $this->organization);
-
-            return $next($request);
-        });
-    }
 
     public function index(Request $request)
     {
