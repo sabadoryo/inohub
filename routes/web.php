@@ -180,6 +180,7 @@ Route::group([
     Route::get('applications/{id}', 'ApplicationsController@show');
     Route::post('applications/{id}/take-for-processing', 'ApplicationsController@takeForProcessing');
     Route::post('applications/{id}/accept', 'ApplicationsController@accept');
+    Route::post('applications/{id}/reject', 'ApplicationsController@reject');
 
     Route::get('events', 'EventsController@index');
     Route::get('events/get-list', 'EventsController@getList');
