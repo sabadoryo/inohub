@@ -105,7 +105,96 @@ class ModulesSeeder extends Seeder
                         'label' => 'Обработка заявок'
                     ],
                 ]
-            ]
+            ],
+            [
+                'name' => 'HubSpace',
+                'slug' => 'hub_space',
+                'is_default' => false,
+                'permissions' => [
+                    [
+                        'name' => 'check_hub_space_applications',
+                        'label' => 'Обработка заявок'
+                    ]
+                ],
+            ],
+            [
+                'name' => 'R&D центры',
+                'slug' => 'r_and_d',
+                'is_default' => false,
+                'permissions' => [
+                    [
+                        'name' => 'check_r_and_d_applications',
+                        'label' => 'Обработка заявок'
+                    ]
+                ]
+            ],
+            [
+                'name' => 'База знаний',
+                'slug' => 'resources',
+                'is_default' => false,
+                'permissions' => [
+                    [
+                        'name' => 'Добавление, изменение и удаление',
+                        'label' => 'curd',
+                    ]
+                ]
+            ],
+            [
+                'name' => 'Smart Store',
+                'slug' => 'smart_store',
+                'is_default' => false,
+                'permissions' => [
+                    [
+                        'name' => 'smart_store_curd',
+                        'label' => 'Обработка заявок',
+                    ]
+                ]
+            ],
+            [
+                'name' => 'Smart store отправка задачи',
+                'slug' => 'smart_store_send_problem',
+                'is_default' => false,
+                'permissions' => []
+            ],
+            [
+                'name' => 'Smart store отправка решении',
+                'slug' => 'smart_store_send_solution',
+                'is_default' => false,
+                'permissions' => []
+            ],
+            [
+                'name' => 'Технологические лаборатории',
+                'slug' => 'teh_laboratories',
+                'is_default' => false,
+                'permissions' => [
+                    [
+                        'name' => 'teh_laboratories_crud',
+                        'label' => 'Добавление, изменение и удаление'
+                    ]
+                ],
+            ],
+            [
+                'name' => 'Гранты',
+                'slug' => 'grants',
+                'is_default' => false,
+                'permissions' => [
+                    [
+                        'name' => 'grants_control',
+                        'label' => 'Управление',
+                    ]
+                ]
+            ],
+            [
+                'name' => 'Участники AstanaHub',
+                'slug' => 'astanahub_members',
+                'is_default' => false,
+                'permissions' => [
+                    [
+                        'name' => 'astana_hub_members_control',
+                        'label' => 'Участники AstanaHub'
+                    ]
+                ]
+            ],
         ];
 
         foreach ($modules as $module) {

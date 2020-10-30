@@ -76,7 +76,7 @@ angular
             }
         };
     })
-// .directive('scrollToLast', ['$location', '$anchorScroll', '$timeout', function ($location, $anchorScroll, $timeout) {
+    // .directive('scrollToLast', ['$location', '$anchorScroll', '$timeout', function ($location, $anchorScroll, $timeout) {
 //
 //     function linkFn(scope, element, attrs) {
 //         $timeout(function () {

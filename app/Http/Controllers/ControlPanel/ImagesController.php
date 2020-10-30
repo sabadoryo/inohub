@@ -11,7 +11,13 @@ class ImagesController extends Controller
 {
     public function index()
     {
-        return Image::all();
+        $images = Image::all();
+        $res = [];
+        foreach ($images as $img) {
+            $res[] = \Storage::disk('public')->url($img->path);
+        }
+
+        return ['data' => $res];
     }
 
     public function store(Request $request)

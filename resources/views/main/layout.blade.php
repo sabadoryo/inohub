@@ -71,7 +71,7 @@
                 </svg>
             </a>
 
-            <input type="text" class="search-box__input" placeholder="Поиск">
+            <input type="text" class="search-box__input" placeholder="{{$dictionary['Search'] ?? 'Search'}}">
 
             <div class="search-box__dropdown search-dropdown">
 
@@ -107,7 +107,7 @@
         <div uib-dropdown="" class="header__lang-container">
 
             <div class="header__lang-switcher" uib-dropdown-toggle="">
-                <div class="header__language">Ru</div>
+                <div class="header__language">{{ $dictionary['En'] ?? "En" }}</div>
                 <svg class="header__lang-toggle" width="10" height="5">
                     <use xlink:href="/img/icons.svg#toggle"></use>
                 </svg>
@@ -140,42 +140,46 @@
                     <svg class="as-navbar__icon" width="20" height="17">
                         <use xlink:href="/img/icons.svg#house"></use>
                     </svg>
-                    Лента
+                    {{$dictionary['Feed'] ?? 'Feed'}}
                 </a>
 
                 <a href="/events" class="as-navbar__item">
                     <svg class="as-navbar__icon" width="20" height="17">
                         <use xlink:href="/img/icons.svg#calendar"></use>
                     </svg>
-                    Мероприятия
+                    {{$dictionary['Events'] ?? 'Events'}}
+
                 </a>
 
                 <a href="/startup-companies" class="as-navbar__item">
                     <svg class="as-navbar__icon" width="20" height="17">
                         <use xlink:href="/img/icons.svg#rocket"></use>
                     </svg>
-                    Компании
+                    {{$dictionary['Companies'] ?? 'Companies'}}
+
                 </a>
 
                 <a href="/investors" class="as-navbar__item">
                     <svg class="as-navbar__icon" width="20" height="17">
                         <use xlink:href="/img/icons.svg#handshake"></use>
                     </svg>
-                    Инвесторы
+                    {{$dictionary['Investors'] ?? 'Investors'}}
+
                 </a>
 
                 <a href="/vacancies" class="as-navbar__item">
                     <svg class="as-navbar__icon" width="20" height="17">
                         <use xlink:href="/img/icons.svg#jobs"></use>
                     </svg>
-                    Вакансии
+                    {{$dictionary['Vacancies'] ?? 'Vacancies'}}
                 </a>
 
                 <a href="#" class="as-navbar__item">
                     <svg class="as-navbar__icon" width="20" height="17">
                         <use xlink:href="/img/icons.svg#purchases"></use>
                     </svg>
-                    Закупки
+                    {{$dictionary['Purchases'] ?? 'Purchases'}}
+
                 </a>
             </div>
 
@@ -200,7 +204,7 @@
 
             <div class="as-navbar__section">
                 <a href="#" class="as-navbar__link">FAQ</a>
-                <a href="#" class="as-navbar__link">Обратная связь</a>
+                <a href="#" class="as-navbar__link">{{$dictionary['Feedback'] ?? 'Feedback'}}</a>
                 <a href="#" class="as-navbar__link">СМИ</a>
             </div>
 

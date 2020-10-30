@@ -18,6 +18,9 @@ function controller($http) {
 	$ctrl.page = 1;
     $ctrl.display = true;
 
+    $ctrl.$onInit = () => {
+    };
+
 	$ctrl.loadMore = () => {
 	    $ctrl.page++;
 

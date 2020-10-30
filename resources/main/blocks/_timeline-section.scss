@@ -2,6 +2,8 @@
 
     $e: &;
 
+    background-color: #ffffff;
+
     &--sm {
         #{$e}__timeline {
             margin: 0 110px;

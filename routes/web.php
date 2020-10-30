@@ -251,6 +251,8 @@ Route::group([
     'middleware' => 'auth'
 ], function () {
 
+    Route::get('/', 'AdminController@index');
+
     Route::get('modules', 'ModulesController@index');
     Route::post('modules/attach-module-to-org', 'ModulesController@attachModuleToOrg');
     Route::post('modules/detach-module-from-org', 'ModulesController@detachModuleFromOrg');
