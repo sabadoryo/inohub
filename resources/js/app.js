@@ -227,3 +227,4 @@ require('./components/events-list/events-list');
 require('./components/startups-page/startups-page');
 require('./components/startups/startups');
 require('./components/startup-form/startup-form');
+require('./components/organizations-edit/organizations-edit');

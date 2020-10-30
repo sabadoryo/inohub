@@ -1,31 +1,25 @@
-<div class="card">
-    <div class="card-body">
+<table class="table bg-white">
+    <thead class="thead-light">
+    <tr>
+        <th class="text-center">ID</th>
+        <th class="text-center">Название</th>
+        <th class="text-center">Администраторы</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tr ng-repeat="org in $ctrl.organizations">
+        <td class="text-center" style="vertical-align: middle">{{org.id}}</td>
+        <td class="text-center" style="vertical-align: middle">{{org.name}}</td>
+        <td class="text-center" style="vertical-align: middle">
+            <div ng-repeat="admin in org.admins">
+                {{admin.full_name}}
+            </div>
+        </td>
+        <td class="text-center" style="vertical-align: middle">
+            <button class="btn btn-primary btn-xs" ng-click="$ctrl.editOrganization(org)">
+                <i class="fa fa-edit"></i>
+            </button>
+        </td>
+    </tr>
+</table>
 
-        <table class="table table-bordered table-striped table-sm">
-            <thead class="thead-light">
-            <tr>
-                <th>ID</th>
-                <th>Название</th>
-                <th>Адрес</th>
-                <th>Телефон</th>
-                <th>Email</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tr ng-repeat="org in $ctrl.organizations">
-                <td>{{org.id}}</td>
-                <td>{{org.name}}</td>
-                <td>{{org.address}}</td>
-                <td>{{org.phones}}</td>
-                <td>{{org.email}}</td>
-                <td class="text-center">
-                    <a href="" ng-href="/control-panel/organizations/{{org.id}}/edit" class="btn btn-primary btn-xs">
-                        <i class="fa fa-edit"></i>
-                    </a>
-                </td>
-            </tr>
-        </table>
-
-
-    </div>
-</div>

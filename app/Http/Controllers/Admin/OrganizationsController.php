@@ -4,7 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Organization;
+use App\User;
+use Faker\ORM\Spot\EntityPopulator;
 use Illuminate\Http\Request;
+use Illuminate\Queue\RedisQueue;
+use Illuminate\Support\Collection;
 
 class OrganizationsController extends Controller
 {
@@ -14,8 +18,12 @@ class OrganizationsController extends Controller
     {
         $organizations = Organization::all();
 
+        foreach ($organizations as $organization) {
+            $organization->admins = $organization->users->where('is_admin', 1);
+        }
+
         $breadcrumb = [
-            ['/control-panel', 'Главная'],
+            ['/admin', 'Главная'],
             [null, 'Организации']
         ];
 
@@ -37,7 +45,7 @@ class OrganizationsController extends Controller
         $organizations = Organization::all();
 
         $breadcrumb = [
-            ['/control-panel', 'Главная'],
+            ['/admin', 'Главная'],
             [null, 'Организации']
         ];
 
@@ -45,7 +53,7 @@ class OrganizationsController extends Controller
             'organizations' => $organizations
         ];
 
-        return view('control-panel.component', [
+        return view('admin.component', [
             'PAGE_TITLE' => 'Организации',
             'activePage' => 'organizations',
             'breadcrumb' => $breadcrumb,
@@ -75,8 +83,8 @@ class OrganizationsController extends Controller
         $organization = Organization::findOrFail($id);
 
         $breadcrumb = [
-            ['/control-panel', 'Главная'],
-            ['/control-panel/organizations', 'Организации'],
+            ['/admin', 'Главная'],
+            ['/admin/organizations', 'Организации'],
             [null, $organization->name]
         ];
 
@@ -84,7 +92,7 @@ class OrganizationsController extends Controller
             'organization' => $organization
         ];
 
-        return view('control-panel.component', [
+        return view('admin.component', [
             'PAGE_TITLE' => 'Редактирование данных организации',
             'activePage' => 'organizations',
             'breadcrumb' => $breadcrumb,
@@ -104,5 +112,46 @@ class OrganizationsController extends Controller
         $organization->save();
 
         return [];
+    }
+
+    public function getUsersByFragment(Request $request)
+    {
+        $query = User::query();
+
+        $users = $query->search($request->fragment)->limit(10)->get();
+
+        return ['users' => $users];
+    }
+
+    public function setAdmins(Request $request, $id)
+    {
+        $request->validate([
+            'adminIds' => 'required|array',
+            'adminIds.*' => 'nullable|numeric'
+        ]);
+
+        $organization = Organization::findOrFail($id);
+
+        $admins = $organization->users->where('is_admin', 1);
+
+        foreach ($admins as $admin) {
+            $admin->organization_id = null;
+            $admin->type = 'default';
+            $admin->save();
+        }
+
+        if (count($request->adminIds)) {
+            $users = User::whereIn('id', $request->adminIds)->get();
+            foreach ($users as $user) {
+                $user->organization_id = $organization->id;
+                $user->type = 'organization';
+                $user->save();
+            }
+
+            return ['admins' => $users];
+        } else {
+            return ['admins' => []];
+        }
+
     }
 }
