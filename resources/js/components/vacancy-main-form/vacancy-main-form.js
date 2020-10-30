@@ -24,7 +24,6 @@ function controller($http) {
 	    $ctrl.fromSalary = $ctrl.vacancy.from_salary;
         $ctrl.toSalary = $ctrl.vacancy.to_salary;
         $ctrl.location = $ctrl.vacancy.location;
-        $ctrl.organization_id = $ctrl.vacancy.organization.id;
     };
 
     $ctrl.openToPublishModal = () => {
@@ -59,8 +58,7 @@ function controller($http) {
             content_t: $ctrl.content,
             to_salary: $ctrl.toSalary,
             from_salary: $ctrl.fromSalary,
-            location: $ctrl.location,
-            organization_id: $ctrl.organization_id
+            location: $ctrl.location
         };
 
         $http.post(url, params).then((res) => {
