@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Notifications\PostAccepted;
+use App\Notifications\PostRejected;
 use App\Post;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -78,7 +80,13 @@ class PostsController extends Controller
             'status' => 'required',
         ]);
         
-        $post = Post::find($id);
+        $post = Post::with('user')->find($id);
+        
+        if ($request->status == 'accept') {
+            \Notification::send($post->user, new PostAccepted($post));
+        } else {
+            \Notification::send($post->user, new PostRejected($post));
+        }
         
         $post->update([
             'status' => $request->status,

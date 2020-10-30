@@ -11,6 +11,12 @@
         margin-right: 25px;
     }
 
+    &__text-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
     &__text {
         @include text-style(1.8rem, 600, #ffffff);
         line-height: 22px;

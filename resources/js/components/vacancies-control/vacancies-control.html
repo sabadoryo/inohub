@@ -9,7 +9,7 @@
     <div class="col-3">
       <select ng-model="$ctrl.status" class="form-control">
         <option value="">Выберите статус</option>
-        <option value="draft">Черновик</option>
+        <option value="draft">Не опубликован</option>
         <option value="published">Опубликован</option>
       </select>
     </div>
@@ -44,7 +44,7 @@
     <td>{{vacancy.title}}</td>
     <td>{{vacancy.organization.name}}</td>
     <td ng-switch="vacancy.status">
-      <div ng-switch-when="draft" class="text-danger">Черновик</div>
+      <div ng-switch-when="draft" class="text-danger">Не опубликован</div>
       <div ng-switch-when="published" class="text-success">Опубликован</div>
     </td>
     <td class="text-center">
