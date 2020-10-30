@@ -23,7 +23,12 @@ class Organization extends Model
     {
         return $this->belongsToMany(Module::class);
     }
-    
+
+    public function programs()
+    {
+        return $this->hasMany(Program::class);
+    }
+
     public function users()
     {
         return $this->hasMany(User::class);

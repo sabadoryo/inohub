@@ -18,33 +18,41 @@ function controller(notify, $http, $uibModal) {
 
 	$ctrl.$onInit = function () {
 		$ctrl.programForms = $ctrl.program.forms;
-		$ctrl.updateFormsList();
+		$ctrl.getForms();
+	};
+
+	$ctrl.getForms = () => {
+		$http
+			.get('/control-panel/forms/get-all')
+			.then((res) => {
+				$ctrl.forms = res.data;
+			});
 	};
 
 	$ctrl.openToPublishModal = () => {
-		$uibModal
-			.open({
-				component: 'programToPublishModal',
-				resolve: {
-					program: function () {
-						return $ctrl.program;
-					}
+		Swal.fire({
+			icon: 'warning',
+			title: 'Вы дейстивтельно хотиту опубликовать программу?',
+			showConfirmButton: true,
+			showCancelButton: true,
+			confirmButtonText: 'Да',
+			cancelButtonText: 'Отмена'
+		}).then(
+			res => {
+				if (res.isConfirmed) {
+					$http
+						.post('/control-panel/programs/' + $ctrl.program.id + '/publish')
+						.then(() => {
+							$ctrl.program.status = 'published';
+							Swal.fire(
+								'Отлично!',
+								'Программа успешно опубликована',
+								'success'
+							);
+						});
 				}
-			})
-			.result
-			.then(
-				res => {
-					window.Swal.fire({
-						icon: 'success',
-						title: 'Опубликовано',
-						timer: 2000,
-						showConfirmButton: false,
-					});
-				},
-				err => {
-
-				}
-			);
+			}
+		)
 	};
 
 	$ctrl.addForm = () => {
@@ -68,7 +76,7 @@ function controller(notify, $http, $uibModal) {
 		}
 	    $ctrl.programForms.push($ctrl.form);
 	    $ctrl.form = null;
-    }
+    };
 
     $ctrl.deleteForm = (index) => {
 		notify({
@@ -77,7 +85,7 @@ function controller(notify, $http, $uibModal) {
 			classes: 'alert-success',
 		});
 		$ctrl.programForms.splice(index, 1);
-	}
+	};
 
 	$ctrl.formDown = (index) => {
 		if ($ctrl.programForms[index + 1]) {
@@ -85,7 +93,7 @@ function controller(notify, $http, $uibModal) {
 			$ctrl.programForms[index] = $ctrl.programForms[index + 1];
 			$ctrl.programForms[index + 1] = x;
 		}
-	}
+	};
 
 	$ctrl.formUp = (index) => {
 		if ($ctrl.programForms[index - 1]) {
@@ -93,18 +101,12 @@ function controller(notify, $http, $uibModal) {
 			$ctrl.programForms[index] = $ctrl.programForms[index - 1];
 			$ctrl.programForms[index - 1] = x;
 		}
-	}
+	};
 
 	$ctrl.openFormCreate = () => {
 		window.open('/control-panel/forms/create');
-	}
+	};
 
-	$ctrl.updateFormsList = () => {
-		let url = '/control-panel/programs/'+ $ctrl.program.id +'/update-forms-list'
-		$http.post(url).then((res) => {
-			$ctrl.forms = res.data['forms'];
-		});
-	}
 
 	$ctrl.save = () => {
 		$ctrl.loadingSave = true;
@@ -128,5 +130,5 @@ function controller(notify, $http, $uibModal) {
 				classes: 'alert-danger',
 			});
 		});
-	}
+	};
 }

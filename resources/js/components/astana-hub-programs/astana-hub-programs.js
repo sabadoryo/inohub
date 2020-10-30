@@ -12,10 +12,7 @@ angular
 
 function controller() {
 
-	let $ctrl = this;
-    $ctrl.programList = [];
-	$ctrl.$onInit = function () {
-        $ctrl.programList = $ctrl.programs
-        console.log($ctrl.programList)
-    };
+    this.$onInit = () => {
+        console.log(this.programs);
+    }
 }

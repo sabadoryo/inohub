@@ -51,29 +51,13 @@ function controller($http, $uibModal) {
                 },
                 error => {
                     $ctrl.loading = false;
-                    // todo handle error
                 }
             )
     };
 
 	$ctrl.openCreateModal = () => {
-	    $uibModal
-            .open({
-                component: 'programCreateModal',
-                resolve: {
-                    categories: function () {
-                        return $ctrl.categories;
-                    }
-                }
-            })
-            .result
-            .then(
-                res => {
-
-                },
-                err => {
-
-                }
-            );
+	    $uibModal.open({
+            component: 'programCreateModal',
+        });
     };
 }

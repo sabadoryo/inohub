@@ -7,8 +7,7 @@ angular
         template: require('./program-page-form.html'),
         controller: ['notify', '$http', '$uibModal', controller],
         bindings: {
-            program: '<',
-            passport: '<'
+            program: '<'
         }
     });
 
@@ -18,15 +17,38 @@ function controller(notify, $http, $uibModal) {
 
 	let editor;
 
-
-
 	$ctrl.$onInit = function () {
-        $ctrl.programId = $ctrl.program.id;
+        $ctrl.passport = $ctrl.program.passport;
         editor = buildConstructor('gjsProgramPassport', {
             program: $ctrl.program,
             passport: $ctrl.passport
         });
-        console.log(editor);
+    };
+
+    $ctrl.openToPublishModal = () => {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Вы дейстивтельно хотиту опубликовать программу?',
+            showConfirmButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Да',
+            cancelButtonText: 'Отмена'
+        }).then(
+            res => {
+                if (res.isConfirmed) {
+                    $http
+                        .post('/control-panel/programs/' + $ctrl.program.id + '/publish')
+                        .then(() => {
+                            $ctrl.program.status = 'published';
+                            Swal.fire(
+                                'Отлично!',
+                                'Программа успешно опубликована',
+                                'success'
+                            );
+                        });
+                }
+            }
+        )
     };
 
 	// $ctrl.test = () => {
@@ -47,60 +69,35 @@ function controller(notify, $http, $uibModal) {
     //
     // };
 
-    $ctrl.openToPublishModal = () => {
-        $uibModal
-            .open({
-                component: 'programToPublishModal',
-                resolve: {
-                    program: function () {
-                        return $ctrl.program;
-                    }
-                }
-            })
-            .result
-            .then(
-                res => {
-                    window.Swal.fire({
-                        icon: 'success',
-                        title: 'Опубликовано',
-                        timer: 2000,
-                        showConfirmButton: false,
-                    });
-                },
-                err => {
-
-                }
-            );
-    };
-
     $ctrl.save = () => {
-        $ctrl.rawHtml = editor.getHtml() + `<style>${editor.getCss()}</style>`;
-        console.log($ctrl.rawHtml)
-        $ctrl.passportHtml = `
-                <html>
-                    <head>
-                        <link rel="stylesheet" href="/css/style.css">
-                        <link rel="stylesheet" href="/css/ui-components.css">
-                        <link rel="stylesheet" href="/css/main.css">
-                    </head>
-                    <body>
-                        ${$ctrl.rawHtml}
-                    </body>
-                </html>
-            `;
-        let iframe = document.getElementById('passportResult');
-        iframe.contentWindow.document.open('text/htmlreplace');
-        iframe.contentWindow.document.write($ctrl.passportHtml);
-        iframe.contentWindow.document.close();
+
+        let rawHtml = editor.getHtml() + `<style>${editor.getCss()}</style>`;
+
+        // $ctrl.passportHtml = `
+        //         <html>
+        //             <head>
+        //                 <link rel="stylesheet" href="/css/style.css">
+        //                 <link rel="stylesheet" href="/css/ui-components.css">
+        //                 <link rel="stylesheet" href="/css/main.css">
+        //             </head>
+        //             <body>
+        //                 ${$ctrl.rawHtml}
+        //             </body>
+        //         </html>
+        //     `;
+        // let iframe = document.getElementById('passportResult');
+        // iframe.contentWindow.document.open('text/htmlreplace');
+        // iframe.contentWindow.document.write($ctrl.passportHtml);
+        // iframe.contentWindow.document.close();
 
         $http
-            .post(`/control-panel/programs/${$ctrl.programId}/update-page`, {
-                content: $ctrl.rawHtml
+            .post(`/control-panel/programs/${$ctrl.program.id}/update-page`, {
+                content: rawHtml
             })
             .then(res => {
                 window.Swal.fire({
                     icon: 'success',
-                    title: 'Данные обновлены',
+                    title: 'Страница успешно обновлена',
                     timer: 2000,
                     showConfirmButton: false,
                 });

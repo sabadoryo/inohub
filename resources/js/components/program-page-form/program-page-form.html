@@ -1,10 +1,11 @@
-<div class="alert alert-light" ng-show="$ctrl.program.status == 'draft'">
-  Данная программа находится в режиме черновика. Хотите <a href="" ng-click="$ctrl.openToPublishModal()" class="alert-link">опубликовать</a>?
+<div class="alert alert-default-warning" ng-show="$ctrl.program.status == 'draft'">
+    Данная программа еще не опубликована.
+    <button type="button" class="btn btn-primary btn-sm ml-2" ng-click="$ctrl.openToPublishModal()">Опубликовать</button>
 </div>
 
-<div class="card">
-  <div class="card-header">
-    <ul class="nav nav-tabs card-header-tabs">
+<div class="card card-primary card-outline card-outline-tabs">
+  <div class="card-header p-0 border-bottom-0">
+    <ul class="nav nav-tabs">
       <li class="nav-item">
         <a class="nav-link" href="" ng-href="/control-panel/programs/{{$ctrl.program.id}}/main">Основная информация</a>
       </li>
@@ -17,15 +18,12 @@
     </ul>
   </div>
   <div class="card-body">
-    <div id="gjsProgramPassport">
-    </div>
 
-<!--    <iframe allowfullscreen="allowfullscreen" id="passportResult" style="width: 100%; height: 100vh; ">-->
-<!--    </iframe>-->
+    <div id="gjsProgramPassport" class="mb-2"></div>
+
+    <button class="btn btn-primary" type="button" ng-click="$ctrl.save()">
+      Сохранить
+    </button>
+
   </div>
-    <div class="card-footer d-flex">
-        <button class="btn btn-primary mr-auto" type="button" ng-click="$ctrl.save()">
-            Сохранить
-        </button>
-    </div>
 </div>

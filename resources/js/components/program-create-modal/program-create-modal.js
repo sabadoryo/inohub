@@ -17,19 +17,14 @@ function controller($http) {
 	let $ctrl = this;
 
 	$ctrl.title = null;
-    $ctrl.category = null;
-    $ctrl.loading = false;
-
-	$ctrl.$onInit = function () {
-	    $ctrl.categories = $ctrl.resolve.categories;
-    };
+    $ctrl.shortDescription = null;
 
 	$ctrl.save = () => {
 	    $ctrl.loading = true;
 	    $http
             .post(`/control-panel/programs`, {
                 title: $ctrl.title,
-                category_id: $ctrl.category ? $ctrl.category.id : null
+                short_description: $ctrl.shortDescription,
             })
             .then(
                 res => {
@@ -38,7 +33,6 @@ function controller($http) {
                 },
                 err => {
                     $ctrl.loading = false;
-                    // todo Alert error
                 }
             );
     };

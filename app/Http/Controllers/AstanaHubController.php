@@ -3,12 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\CorpTask;
+use App\Organization;
 use App\Passport;
 use App\Program;
 use Illuminate\Http\Request;
 
 class AstanaHubController extends Controller
 {
+    private $organization;
+
+    public function __construct()
+    {
+        $this->organization = Organization::find(1);
+    }
+
     public function about()
     {
         $component = 'astana-hub-about';
@@ -24,7 +32,7 @@ class AstanaHubController extends Controller
 
     public function programs()
     {
-        $programs = Program::all();
+        $programs = $this->organization->programs()->orderBy('title')->get();
 
         $bindings = [
             'programs' => $programs
@@ -34,6 +42,19 @@ class AstanaHubController extends Controller
             'component' => 'astana-hub-programs',
             'bindings' => $bindings,
             'activePage' => 'programs',
+        ]);
+    }
+
+    public function program($id)
+    {
+        $program = Program::findOrFail($id);
+
+        $passport = $program->passport;
+
+        return view('gjs-layout', [
+            'passport' => $passport,
+            'entityType' => 'program',
+            'entityId' => $id
         ]);
     }
 
@@ -84,18 +105,6 @@ class AstanaHubController extends Controller
         ]);
     }
 
-    public function program($id)
-    {
-        $program = Program::findOrFail($id);
-        $passportQuery = Passport::query();
-        $passport = $passportQuery->where('program_id', $program->id)->first();
-
-        return view('gjs-layout', [
-            'passport' => $passport,
-            'entityType' => 'program',
-            'entityId' => $id
-        ]);
-    }
 
     public function getProgramForms($id)
     {
