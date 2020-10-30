@@ -9,21 +9,21 @@ angular
             event: '<',
         }
     });
-    
+
 function controller($http, Upload, moment, notify, $uibModal) {
- 
-	let $ctrl = this;
 
-	$ctrl.loading = false;
+    let $ctrl = this;
+    $ctrl.myCroppedImage = null;
+    $ctrl.loading = false;
 
-	$ctrl.$onInit = function () {
+    $ctrl.$onInit = function () {
         $ctrl.name = $ctrl.event.name;
         $ctrl.description = $ctrl.event.short_description ? $ctrl.event.short_description : "";
         $ctrl.startDate = moment($ctrl.event.start_date).toDate();
         $ctrl.startDateTime = moment($ctrl.event.start_date).toDate();
     };
 
-	$ctrl.openToPublishModal = () => {
+    $ctrl.openToPublishModal = () => {
         Swal.fire({
             title: 'Вы уверены?',
             text: "Данная мероприятие сразу же появиться в ленте у пользователей",
@@ -46,13 +46,17 @@ function controller($http, Upload, moment, notify, $uibModal) {
             }
         })
     };
+    $ctrl.getImageFromBase64 = function () {
+        return $ctrl.myCroppedImage ? Upload.dataUrltoBlob($ctrl.myCroppedImage) : null;
+    };
 
-	$ctrl.save = () => {
+    $ctrl.save = () => {
         $ctrl.loading = true;
+        let image = $ctrl.getImageFromBase64();
         let url = '/control-panel/events/' + $ctrl.event.id + '/update-main';
         let params = {
             name: $ctrl.name,
-            image: $ctrl.image ? $ctrl.image : null,
+            image: image ? image : null,
             short_description: $ctrl.description,
             start_date: $ctrl.startDate ? moment($ctrl.startDate).format('YYYY-MM-DD') : null,
             start_date_time: moment($ctrl.startDateTime).format('HH:mm'),
@@ -68,11 +72,11 @@ function controller($http, Upload, moment, notify, $uibModal) {
                 timer: 2000,
                 showConfirmButton: false,
             });
-	    }, (error) => {
+        }, (error) => {
             $ctrl.loading = false;
             let checked = false;
             let message = '';
-            angular.forEach(error.data.errors, function (value, key){
+            angular.forEach(error.data.errors, function (value, key) {
                 if (!checked) {
                     message += value[0];
                     checked = true;
