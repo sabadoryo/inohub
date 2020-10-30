@@ -234,3 +234,4 @@ require('./components/user-details-modal/user-details-modal');
 require('./components/startups-control/startups-control');
 
 require('./components/startup-details-modal/startup-details-modal');
+require('./components/banners-control/banners-control');

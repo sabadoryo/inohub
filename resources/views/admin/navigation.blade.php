@@ -63,6 +63,13 @@
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a href="/admin/banners" class="nav-link {{$activePage == 'banners' ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-fire"></i>
+                        <p>Баннеры</p>
+                    </a>
+                </li>
+
             </ul>
 
         </nav>
