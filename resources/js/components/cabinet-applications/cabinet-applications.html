@@ -1,6 +1,6 @@
 <div class="tabs-inner__section-filter section-filter">
 
-    <div class="section-filter__title">{{$ctrl.total}} заявок</div>
+    <div class="section-filter__title">{{$ctrl.total}} {{$ctrl.total | plural : $ctrl.total : ['заявка', 'заявки', 'заявок']}} заявок</div>
 
     <div class="section-filter__btn-group">
         <button class="section-filter__btn button-back button-back--icon-right button-back--rotate button-back--white">
@@ -29,22 +29,16 @@
            ng-href="/cabinet/applications/{{app.id}}"
            ng-repeat="app in $ctrl.applications track by $index">
 
-            <div class="application-list__type">
-                <span ng-if="app.entity_model ==='App\\Program'">Программа</span>
-                <span ng-if="app.entity_model ==='App\\Module'">Модуль</span>
-                <span ng-if="app.entity_model ==='App\\Event'">Мероприятие</span>
-            </div>
-
             <div ng-if="app.entity_model === 'App\\Program'" class="application-list__title">
-                {{app.entity.title}}
+                <span class="application-list__type">Программа:</span> {{app.entity.title}}
             </div>
 
-            <div ng-if="app.entity_model === 'App\\Module'" class="application-list__title">
+            <div ng-if="app.entity_model !== 'App\\Program'" class="application-list__title">
                 {{app.entity.name}}
             </div>
 
             <div ng-if="app.status ==='opened'" class="application-list__status application-list__status--success">
-                Подтвердили
+                Открыта
             </div>
 
             <div ng-if="app.status ==='process'" class="application-list__status">
@@ -52,7 +46,7 @@
             </div>
 
             <div ng-if="app.status ==='closed'" class="application-list__status application-list__status--danger">
-                Заявка закрыта
+                Закрыта
             </div>
 
             <div class="application-list__date">
