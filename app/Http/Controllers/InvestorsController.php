@@ -24,7 +24,7 @@ class InvestorsController extends Controller
 
         if ($request->hasFile('photo')) {
             $photoPath = $request->file('photo')
-                ->store('logotypes', 'public');
+                ->store('investors', 'public');
         }
 
         $investor = Investor::create([
@@ -41,5 +41,12 @@ class InvestorsController extends Controller
 //        \Notification::send($users, $notification);
 
         return [];
+    }
+
+    public function getList()
+    {
+        $investors = Investor::with('user')->get();
+
+        return $investors;
     }
 }

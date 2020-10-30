@@ -30,87 +30,13 @@
 
     <div class="investors__list">
 
-        <div class="investors__item person-card">
+        <div class="investors__item person-card" ng-repeat="investor in $ctrl.investors track by $index">
 
-            <img src="/img/investor-1.png" alt="" class="person-card__img">
+            <img src="" ng-src="{{investor.photo_url}}" alt="" class="person-card__img">
 
-            <div class="person-card__name">
-                Марат Толибаев
-            </div>
+            <div class="person-card__name">{{investor.user.full_name}}</div>
 
-            <div class="person-card__desc">
-                директор инвестиционной компании "Activat", бизнесмен, участник Школы инвестора Astana Hub
-            </div>
-
-        </div>
-
-        <div class="investors__item person-card">
-
-            <img src="/img/investor-2.png" alt="" class="person-card__img">
-
-            <div class="person-card__name">
-                Самат Даумов
-            </div>
-
-            <div class="person-card__desc">
-                бизнесмен, участник Школы инвестора Astana Hub
-            </div>
-
-        </div>
-
-        <div class="investors__item person-card">
-
-            <img src="/img/investor-3.png" alt="" class="person-card__img">
-
-            <div class="person-card__name">
-                Рафаэль Жансултанов
-            </div>
-
-            <div class="person-card__desc">
-                аналитик, инвестор, участник Школы инвестора Astana Hub
-            </div>
-
-        </div>
-
-        <div class="investors__item person-card">
-
-            <img src="/img/investor-1.png" alt="" class="person-card__img">
-
-            <div class="person-card__name">
-                Марат Толибаев
-            </div>
-
-            <div class="person-card__desc">
-                директор инвестиционной компании "Activat", бизнесмен, участник Школы инвестора Astana Hub
-            </div>
-
-        </div>
-
-        <div class="investors__item person-card">
-
-            <img src="/img/investor-2.png" alt="" class="person-card__img">
-
-            <div class="person-card__name">
-                Самат Даумов
-            </div>
-
-            <div class="person-card__desc">
-                бизнесмен, участник Школы инвестора Astana Hub
-            </div>
-
-        </div>
-
-        <div class="investors__item person-card">
-
-            <img src="/img/investor-3.png" alt="" class="person-card__img">
-
-            <div class="person-card__name">
-                Рафаэль Жансултанов
-            </div>
-
-            <div class="person-card__desc">
-                аналитик, инвестор, участник Школы инвестора Astana Hub
-            </div>
+            <div class="person-card__desc">{{investor.about}}</div>
 
         </div>
 

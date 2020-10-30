@@ -47,4 +47,11 @@ class StartupsController extends Controller
 
         return [];
     }
+
+    public function getList()
+    {
+        $startups = Startup::all();
+
+        return $startups;
+    }
 }

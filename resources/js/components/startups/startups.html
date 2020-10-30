@@ -31,84 +31,27 @@
 
     <div class="companies__list">
 
-        <div class="companies__item smart-box smart-box--company">
-            <a href="#" class="smart-box__website-link">
-                pc4u.kz
-            </a>
+        <div class="companies__item smart-box smart-box--company"
+             ng-repeat="startup in $ctrl.startups track by $index">
+
+            <a href="" ng-show="startup.link" class="smart-box__website-link">{{startup.link}}</a>
 
             <div class="smart-box__body">
-                <img src="/img/pc4u-logo.png" alt="" class="smart-box__logo">
+
+                <img src="" ng-src="{{startup.logotype_url}}" alt="" class="smart-box__logo">
 
                 <div class="smart-box__title">
-                    PC4U
+                    {{startup.project_name}}
                 </div>
 
                 <div class="smart-box__text">
-                    Казахстанская компания, которая разработала первый отечественный сертифицированный продукт СОРМ
+                    {{startup.description}}
                 </div>
+
             </div>
 
         </div>
 
-        <div class="companies__item smart-box smart-box--company">
-            <a href="#" class="smart-box__website-link">
-                shift-systems.kz
-            </a>
-
-            <div class="smart-box__body">
-                <img src="/img/shift-system-logo.png" alt="" class="smart-box__logo">
-
-                <div class="smart-box__title">
-                    Shift Systems
-                </div>
-
-                <div class="smart-box__text">
-                    Персональный компьютер PC4U предназначен для работы во многих сферах деятельности, начиная от
-                    домашнего использования и заканчивая применением в промышленных задачах
-                </div>
-            </div>
-
-        </div>
-
-        <div class="companies__item smart-box smart-box--company">
-            <a href="#" class="smart-box__website-link">
-                ticketon.kz
-            </a>
-
-            <div class="smart-box__body">
-                <img src="/img/ticketon-logo.png" alt="" class="smart-box__logo">
-
-                <div class="smart-box__title">
-                    Ticketon Events
-                </div>
-
-                <div class="smart-box__text">
-                    Ticketon.kz – крупнейший в Казахстане сервис онлайн-продажи билетов на культурные и спортивные
-                    мероприятия
-                </div>
-            </div>
-
-        </div>
-
-        <div class="companies__item smart-box smart-box--company">
-            <a href="#" class="smart-box__website-link">
-                avsoft.kz
-            </a>
-
-            <div class="smart-box__body">
-                <img src="/img/av-logo.png" alt="" class="smart-box__logo">
-
-                <div class="smart-box__title">
-                    AV-Software
-                </div>
-
-                <div class="smart-box__text">
-                    Комплексные решения по разработке, модернизации и обслуживанию IT-структур, слаженных систем и
-                    решений для вашего бизнеса.
-                </div>
-            </div>
-
-        </div>
     </div>
 
 </div>

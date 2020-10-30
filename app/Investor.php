@@ -13,4 +13,17 @@ class Investor extends Model
         return $this->belongsTo(User::class);
     }
 
+    protected $appends = [
+        'photo_url',
+    ];
+
+    public function getPhotoUrlAttribute()
+    {
+        if ($this->photo_path) {
+            return \Storage::disk('public')->url($this->photo_path);
+        }
+
+        return null;
+    }
+
 }

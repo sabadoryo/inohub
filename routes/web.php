@@ -15,10 +15,11 @@ Route::get('/events/{id}', 'EventsController@show');
 
 Route::get('startups', 'StartupsController@index');
 Route::post('startups', 'StartupsController@store');
+Route::get('startups/get-list', 'StartupsController@getList');
 
 Route::get('investors', 'InvestorsController@index');
 Route::post('investors', 'InvestorsController@store');
-
+Route::get('investors/get-list', 'InvestorsController@getList');
 
 //Route::get('/vacancies', function () {
 //    //todo i need controller
