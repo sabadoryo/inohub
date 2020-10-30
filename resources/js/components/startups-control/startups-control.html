@@ -51,7 +51,7 @@
         <th>Проект</th>
         <th>Ссылка</th>
         <th>Статус</th>
-
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -61,12 +61,19 @@
         <td>{{ startup.company_name }}</td>
         <td>{{ startup.project_name }}</td>
         <td>
-            <a href="{{startup.link}}">ссылка</a>
+            <a href="{{startup.link}}">перейти</a>
         </td>
         <td>
-            <span ng-if="startup.status === 'open'" class="text-success">На рассмотрении</span>
-            <span ng-if="startup.accepted" class="text-danger">Принято</span>
-            <span ng-if="startup.rejected" class="text-danger">Отклонено</span>
+            <span ng-if="startup.status === 'open'" class="">На рассмотрении</span>
+            <span ng-if="startup.status === 'accepted'" class="text-success">Принято</span>
+            <span ng-if="startup.status === 'rejected'" class="text-danger">Отклонено</span>
+        </td>
+        <td class="text-center">
+            <button class="btn btn-primary btn-xs"
+                    ng-click="$ctrl.openStartupDetailsModal(startup)"
+                    ng-if="startup.status === 'open'">
+                <i class="fa fa-external-link"></i>
+            </button>
         </td>
     </tr>
     </tbody>

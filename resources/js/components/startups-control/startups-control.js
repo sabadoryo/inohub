@@ -63,4 +63,25 @@ function controller($http, notify, $uibModal) {
                 }
             )
     };
+
+    $ctrl.openStartupDetailsModal = function (startup) {
+        $uibModal
+            .open({
+                component: 'startupDetailsModal',
+                resolve: {
+                    startup: function () {
+                        return startup;
+                    },
+                }
+            })
+            .result
+            .then((res) => {
+                startup.status = res;
+                notify({
+                    message: 'Успешно обновлено',
+                    duration: 2000,
+                    classes: 'alert-success'
+                });
+            })
+    }
 }

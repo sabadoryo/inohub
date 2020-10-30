@@ -43,9 +43,31 @@ class StartupsController extends Controller
             $query->search($request->companyNameOrBIN);
         }
 
-        $result = $query->withCount('roles')
+        $result = $query->with('user')
             ->paginate($request->per_page ?: 30);
 
         return $result;
+    }
+
+    public function accept($id)
+    {
+        $startup = Startup::findOrFail($id);
+
+        $startup->update([
+            'status' => 'accepted',
+        ]);
+
+        return [];
+    }
+
+    public function reject($id)
+    {
+        $startup = Startup::findOrFail($id);
+
+        $startup->update([
+            'status' => 'rejected',
+        ]);
+
+        return [];
     }
 }

@@ -19,7 +19,11 @@ class Startup extends Model
         'status',
     ];
 
-    public function getLogotypeUrl()
+    protected $appends = [
+      'logotype_url',
+    ];
+
+    public function getLogotypeUrlAttribute()
     {
         if ($this->logo_path) {
             return \Storage::disk('public')->url($this->logo_path);
@@ -39,9 +43,8 @@ class Startup extends Model
             $q->where(
                 'company_name',
                 'like',
-                '%' . $search .'%'
-            )->orWhere('bin', $search)
-                ->orWhere('phone', $search);
+                '%'.$search.'%'
+            )->orWhere('bin', $search);
         });
     }
 }
