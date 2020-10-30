@@ -31,4 +31,16 @@ class Startup extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function scopeSearch($q, $search)
+    {
+        $q->where(function ($q) use ($search) {
+            $q->where(
+                'company_name',
+                'like',
+                '%' . $search .'%'
+            )->orWhere('bin', $search)
+                ->orWhere('phone', $search);
+        });
+    }
 }
