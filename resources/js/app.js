@@ -228,3 +228,5 @@ require('./components/startups-page/startups-page');
 require('./components/startups/startups');
 require('./components/startup-form/startup-form');
 require('./components/user-details-modal/user-details-modal');
+
+require('./components/startups-control/startups-control');

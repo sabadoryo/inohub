@@ -15,5 +15,20 @@ class Startup extends Model
         'employees_count',
         'link',
         'logo_path',
+        'status',
     ];
+
+    protected $appends = [
+      'logo_url',
+    ];
+
+    public function getLogoUrlAttribute()
+    {
+        return $this->logo_path ? \Storage::disk('public')->url($this->logo_path) : null;
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

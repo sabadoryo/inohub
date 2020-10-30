@@ -1,0 +1,81 @@
+<form class="mb-3" ng-submit="$ctrl.filter()">
+    <div class="form-row">
+        <div class="col-3">
+            <input type="text"
+                   class="form-control"
+                   placeholder="Введите название проекта"
+                   ng-model="$ctrl.project">
+        </div>
+        <div class="col-3">
+            <input type="text"
+                   class="form-control"
+                   placeholder="Введите название компании или БИН"
+                   ng-model="$ctrl.companyNameOrBIN">
+        </div>
+        <div class="col-1">
+            <select ng-model="$ctrl.status" class="form-control">
+                <option value="">Статус</option>
+                <option value="open">На рассмотрениии</option>
+                <option value="accepted">Принято</option>
+                <option value="rejected">Отклонено</option>
+            </select>
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary" ng-disabled="$ctrl.loading">Поиск</button>
+            <button type="button" class="btn btn-secondary" ng-click="$ctrl.reset()">Сбросить</button>
+        </div>
+    </div>
+</form>
+
+<div class="mb-3">
+    <div class="d-inline mr-2">Всего: <b>{{$ctrl.total}}</b>.</div>
+    <div class="d-inline">
+        Показывать по:
+        <select class="form-control d-inline-block w-auto"
+                ng-model="$ctrl.perPage"
+                ng-change="$ctrl.perPageChanged()">
+            <option ng-value="15">15</option>
+            <option ng-value="30">30</option>
+            <option ng-value="50">50</option>
+            <option ng-value="100">100</option>
+        </select>
+    </div>
+</div>
+
+<table class="table bg-white" style="font-size: 14px">
+    <thead class="thead-light">
+    <tr>
+        <th>ID</th>
+        <th>Пользователь</th>
+        <th>Компания</th>
+        <th>Проект</th>
+        <th>Ссылка</th>
+        <th>Статус</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="startup in $ctrl.startups track by $index">
+        <td>{{ startup.id }}</td>
+        <td>{{ startup.user.full_name }}</td>
+        <td>{{ startup.company_name }}</td>
+        <td>{{ startup.project_name }}</td>
+        <td>
+            <a href="{{startup.link}}">ссылка</a>
+        </td>
+        <td>
+            <span ng-if="startup.status === 'open'" class="text-success">На рассмотрении</span>
+            <span ng-if="startup.accepted" class="text-danger">Принято</span>
+            <span ng-if="startup.rejected" class="text-danger">Отклонено</span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<ul uib-pagination
+    template-url="b4-pagination"
+    total-items="$ctrl.total"
+    ng-model="$ctrl.page"
+    max-size="10"
+    items-per-page="$ctrl.perPage"
+    ng-change="$ctrl.getList()"></ul>

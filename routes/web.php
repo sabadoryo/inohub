@@ -276,6 +276,9 @@ Route::group([
     Route::get('users/get-list', 'UsersController@getList');
     Route::post('users/{id}/change-active', 'UsersController@changeActive');
 
+    Route::get('startups', 'StartupsController@index');
+    Route::get('startups/get-list', 'StartupsController@index');
+
 });
 
 
