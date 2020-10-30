@@ -11,9 +11,9 @@ angular
             dismiss: '&'
         }
     });
-    
+
 function controller($http) {
- 
+
 	let $ctrl = this;
 
 	$ctrl.message = null;
@@ -24,17 +24,48 @@ function controller($http) {
     };
 
 	$ctrl.submit = () => {
-	    if ($ctrl.action == 'accept') {
+	    if ($ctrl.action === 'accept') {
             $http
                 .post(`/control-panel/applications/${$ctrl.app.id}/accept`, {
                     message: $ctrl.message,
                 })
                 .then(
                     res => {
-
+                        $ctrl.close({
+                            $value: {
+                                status: 'success',
+                            }
+                        });
                     },
                     err => {
-
+                        $ctrl.close({
+                            $value: {
+                                status: 'fail',
+                                message: err.data.message
+                            }
+                        });
+                    }
+                );
+        } else if ($ctrl.action === 'reject') {
+            $http
+                .post(`/control-panel/applications/${$ctrl.app.id}/reject`, {
+                    message: $ctrl.message,
+                })
+                .then(
+                    res => {
+                        $ctrl.close({
+                            $value: {
+                                status: 'success',
+                            }
+                        });
+                    },
+                    err => {
+                        $ctrl.close({
+                            $value: {
+                                status: 'fail',
+                                message: err.data.message
+                            }
+                        });
                     }
                 );
         }

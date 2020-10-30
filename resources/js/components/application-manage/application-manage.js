@@ -16,9 +16,18 @@ function controller($timeout, $http, Auth, $uibModal, Upload, moment, $location,
 
     $ctrl.message = '';
     $ctrl.attachedFiles = [];
+    $ctrl.canEdit = false;
 
     $ctrl.$onInit = function () {
-        // $ctrl.test = $ctrl.application;
+
+        if ($ctrl.application.manager_id === Auth.user().id) {
+            $ctrl.canEdit = true;
+        }
+
+        if ($ctrl.application.status !== 'open' && $ctrl.application.status !== 'process') {
+            $ctrl.canEdit = false;
+        }
+
         $timeout(function () {
             $ctrl.application.actions.action.forEach(act => {
                 if (act.name === 'application_updated') {
@@ -67,6 +76,7 @@ function controller($timeout, $http, Auth, $uibModal, Upload, moment, $location,
             .then(
                 res => {
                     $ctrl.application.manager = Auth.user();
+                    $ctrl.canEdit = true;
                     Swal.fire('Отлично', 'Данныя заявка числиться за вами', 'success');
                 },
                 err => {
@@ -131,13 +141,43 @@ function controller($timeout, $http, Auth, $uibModal, Upload, moment, $location,
                 }
             })
             .result
-            .then(
-                res => {
-                    alert('Success');
-                },
-                err => {
+            .then(data => {
+                    if (data.status === 'success') {
+                        if (action === 'reject') {
+                            Swal.fire('Отлично', 'Заявка успешно отклонена', 'success');
+                        } else {
+                            Swal
+                                .fire('Отлично', 'Заявка успешно принята', 'success')
+                                .then(
+                                    function () {
+                                        let url = '/';
 
-                }
+                                        if ($ctrl.application.entity_model == 'App\\Module') {
+                                            if ($ctrl.application.entity.slug === 'astanahub_membership') {
+                                                url = `/control-panel/members/create?application_id=${$ctrl.application.id}`;
+                                            } else if ($ctrl.application.entity.slug === 'smart-store-input-solution') {
+                                                url = `/control-panel/sm/solutions/create?application_id=${$ctrl.application.id}`;
+                                            } else if ($ctrl.application.entity.slug === 'smart-store-input-task') {
+                                                url = `/control-panel/sm/tasks/create?application_id=${$ctrl.application.id}`;
+                                            } else if ($ctrl.application.entity.slug === 'corp-task') {
+                                                url = `/control-panel/corp-tasks/create?application_id=${$ctrl.application.id}`;
+                                            }
+                                        } else if ($ctrl.application.entity_model == 'App\\CorpTask') {
+                                            url = `/control-panel/corp-task-solutions/create?application_id=${$ctrl.application.id}`;
+                                        } else if ($ctrl.application.entity_model == 'App\\User') {
+                                            url = `/control-panel/hub-space-tenants/create?application_id=${$ctrl.application.id}`;
+                                        } else if ($ctrl.application.entity_model == 'App\\Program') {
+                                            url = `/control-panel/programs/${$ctrl.application.entity_id}/members/create?application_id=${$ctrl.application.id}`;
+                                        }
+
+                                        window.location.href = url;
+                                    }
+                                )
+                        }
+                    } else if (data.status === 'fail') {
+                        Swal.fire('Ошибка', data.message, 'error');
+                    }
+                },
             )
     }
 

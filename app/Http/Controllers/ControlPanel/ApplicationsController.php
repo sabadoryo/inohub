@@ -22,7 +22,7 @@ class ApplicationsController extends ControlPanelController
         ];
 
         $managers = $this->organization->users;
-        
+
         return view('control-panel.component', [
             'PAGE_TITLE' => 'Заявки',
             'activePage' => 'applications',
@@ -37,17 +37,17 @@ class ApplicationsController extends ControlPanelController
     public function getList(Request $request)
     {
         $query = Application::query();
-        
+
         if ($request->search) {
             $query->whereHas('user', function ($q) use ($request) {
                $q->search($request->search);
             });
         }
-        
+
         if ($request->status) {
             $query->where('status', $request->status);
         }
-        
+
         if ($request->manager_id) {
             $query->where('manager_id', $request->manager_id);
         }
@@ -142,16 +142,6 @@ class ApplicationsController extends ControlPanelController
             ]);
         }
 
-        if ($entity instanceof Module) {
-            if ($entity->slug == 'astanahub_membership') {
-
-            } elseif ($entity->slug === 'smart-store-input-solution') {
-
-            } elseif ($entity->slug === 'smart-store-input-task') {
-
-            }
-        }
-
         $app->status = 'accepted';
         $app->save();
 
@@ -160,16 +150,17 @@ class ApplicationsController extends ControlPanelController
 
     public function reject(Request $request, $id)
     {
-        $app = Application::with('user')->find($id);
+        $app = Application::with('user')->findOrFail($id);
         \Notification::send($app->user, new ApplicationRejected($app, $this->organization->name));
-        
-        if ($request->action == 'reject') {
-            $app->status = 'rejected';
-            $app->actions()->create([
-                'user_id' => \Auth::user()->id,
-                'name' => 'to-remake',
-            ]);
-        }
 
+        $app->status = 'rejected';
+        $app->actions()->create([
+            'user_id' => \Auth::user()->id,
+            'name' => 'to-remake',
+        ]);
+
+        $app->save();
+
+        return [];
     }
 }
