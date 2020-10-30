@@ -33,10 +33,10 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="/admin/modules" class="nav-link {{$activePage == 'modules' ? 'active' : ''}}">
-                        <i class="nav-icon fas fa-copy"></i>
+                    <a href="/admin/organizations" class="nav-link {{$activePage == 'organizations' ? 'active' : ''}}">
+                        <i class="nav-icon fab fa-hubspot"></i>
                         <p>
-                            Модули
+                            Организации
                         </p>
                     </a>
                 </li>

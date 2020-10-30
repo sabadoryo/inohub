@@ -41,15 +41,15 @@
         }
 
         .swal2-title {
-            font-size: 2.5em;
+            font-size: 2.8em;
         }
 
         .swal-content {
-            font-size: 1.8em;
+            font-size: 2em;
         }
 
         .swal2-styled.swal2-confirm {
-            font-size: 1.4em;
+            font-size: 1.6em;
         }
 
     </style>
@@ -151,7 +151,7 @@
 
                     </a>
 
-                    <a href="/startups" class="as-navbar__item {{$activePage == 'startups' ? 'as-navbar__item--active' : ''}}">
+                    <a href="/startups" class="as-navbar__item {{isset($activePage) && $activePage == 'startups' ? 'as-navbar__item--active' : ''}}">
                         <svg class="as-navbar__icon" width="20" height="17">
                             <use xlink:href="/img/icons.svg#rocket"></use>
                         </svg>

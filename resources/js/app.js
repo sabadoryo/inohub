@@ -227,6 +227,8 @@ require('./components/events-list/events-list');
 require('./components/startups-page/startups-page');
 require('./components/startups/startups');
 require('./components/startup-form/startup-form');
+require('./components/organizations-edit/organizations-edit');
+
 require('./components/user-details-modal/user-details-modal');
 
 require('./components/startups-control/startups-control');

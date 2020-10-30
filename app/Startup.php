@@ -18,13 +18,13 @@ class Startup extends Model
         'status',
     ];
 
-    protected $appends = [
-      'logo_url',
-    ];
-
-    public function getLogoUrlAttribute()
+    public function getLogotypeUrl()
     {
-        return $this->logo_path ? \Storage::disk('public')->url($this->logo_path) : null;
+        if ($this->logo_path) {
+            return \Storage::disk('public')->url($this->logo_path);
+        }
+
+        return null;
     }
 
     public function user()

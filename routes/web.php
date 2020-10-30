@@ -14,7 +14,7 @@ Route::get('/events', 'EventsController@index');
 Route::get('/events/{id}', 'EventsController@show');
 
 Route::get('startups', 'StartupsController@index');
-
+Route::post('startups', 'StartupsController@store');
 
 Route::get('/investors', function () {
     //todo i need controller
@@ -262,6 +262,8 @@ Route::group([
     Route::post('modules/detach-module-from-org', 'ModulesController@detachModuleFromOrg');
 
     Route::get('organizations', 'OrganizationsController@index');
+    Route::get('organizations/get-users-by-fragment', 'OrganizationsController@getUsersByFragment');
+    Route::post('organizations/{id}/admins', 'OrganizationsController@setAdmins');
     Route::get('organizations/create', 'OrganizationsController@create');
     Route::post('organizations', 'OrganizationsController@store');
     Route::get('organizations/{id}/edit', 'OrganizationsController@edit');
