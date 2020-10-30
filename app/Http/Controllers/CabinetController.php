@@ -180,7 +180,7 @@ class CabinetController extends Controller
             'additional_data' => json_encode($changes),
         ]);
 
-        return ['changes' => json_encode($changes), 'action_id' => $action->id];
+        return ['changes' => $changes, 'action_id' => $action->id];
     }
 
     public function sendMessage(Request $request, $id)
