@@ -13,6 +13,7 @@
 
     &__name {
         @include text-style(1.8rem, 700, #181515);
+
         line-height: 22px;
         margin-bottom: 10px;
     }
