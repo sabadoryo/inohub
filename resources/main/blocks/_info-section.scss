@@ -1,0 +1,48 @@
+.info-section {
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 7px;
+
+    &__heading {
+        @include text-style(1.8rem, 700, #181515);
+        line-height: 22px;
+        margin-bottom: 30px;
+    }
+
+    &__list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-column-gap: 15px;
+        grid-row-gap: 40px;
+    }
+
+    &__block {
+
+    }
+
+    &__title {
+        @include text-style(1.6rem, 600, #181515);
+        line-height: 24px;
+        margin-bottom: 20px;
+    }
+
+    &__items {
+
+    }
+
+    &__link {
+        display: block;
+        text-decoration: underline;
+
+        &:not(:last-child) {
+            margin-bottom: 10px;
+        }
+    }
+
+    &__link:link,
+    &__link:visited {
+        @include text-style(1.6rem, 400, #181515);
+        line-height: 19.5px;
+    }
+
+}
