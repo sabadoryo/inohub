@@ -23,17 +23,32 @@
 
     <div class="feed__list">
 
-        <div class="feed__event-announcement event-announcement">
-            <svg class="event-announcement__icon" width="60" height="60">
-                <use href="/img/icons.svg#announcement"></use>
-            </svg>
+<!--        <div class="feed__event-announcement event-announcement">-->
+<!--            <svg class="event-announcement__icon" width="60" height="60">-->
+<!--                <use href="/img/icons.svg#announcement"></use>-->
+<!--            </svg>-->
 
-            <div class="event-announcement__text">
-                Astana hub объявил о новой программе
-            </div>
-        </div>
+<!--            <div class="event-announcement__text">-->
+<!--                Astana hub объявил о новой программе-->
+<!--            </div>-->
+<!--        </div>-->
 
         <div ng-repeat="feed in $ctrl.feeds track by $index">
+
+            <div ng-if="feed.entity_model == 'App\\Program'" class="feed__event-announcement event-announcement">
+                <svg class="event-announcement__icon" width="60" height="60">
+                    <use href="/img/icons.svg#announcement"></use>
+                </svg>
+
+                <div class="event-announcement__text-container">
+                    <div class="event-announcement__text">
+                        Astana hub объявил о новой программе:
+                    </div>
+                    <div class="event-announcement__text">
+                        {{feed.entity.title}}
+                    </div>
+                </div>
+            </div>
 
             <div ng-if="feed.entity_model == 'App\\Post'" class="feed__blog blog-box">
 
@@ -126,7 +141,7 @@
 
             <div ng-if="feed.entity_model == 'App\\Event'" class="feed__event event-box">
 
-                <img src="/img/event-speaker-poster.png" alt="" class="event-box__img">
+                <img alt="" class="event-box__img" ng-src="{{feed.entity.photo_url}}">
 
                 <img src="/img/astana-hub-tag.png" alt="" class="event-box__tag">
 
@@ -134,9 +149,9 @@
 
                     <div class="event-box__date">{{feed.entity.start_date | amDateFormat : 'D MMM HH:mm'}}</div>
 
-                    <div class="event-box__title">Speaker Night</div>
+                    <div class="event-box__title">{{feed.entity.name}}</div>
 
-                    <div class="event-box__subtitle">{{feed.entity.name}}</div>
+                    <div class="event-box__subtitle">{{feed.entity.short_description}}</div>
 
                     <button class="event-box__button button button--lg"
                             ng-click="$ctrl.signUpForEvent(feed.entity)">

@@ -10,10 +10,8 @@ Route::get('get-news-list', 'MainPageController@getNewsList');
 Route::get('get-feeds-list', 'MainPageController@getFeedsList');
 Route::get('news/{id}', 'MainPageController@newsPage');
 
-Route::get('/events', function () {
-    //todo i need controller
-    return view('event-page');
-});
+Route::get('/events', 'EventsController@index');
+Route::get('/events/{id}', 'EventsController@show');
 Route::get('/investors', function () {
     //todo i need controller
     return view('investors-page');
