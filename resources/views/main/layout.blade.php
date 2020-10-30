@@ -41,15 +41,15 @@
         }
 
         .swal2-title {
-            font-size: 2.5em;
+            font-size: 2.8em;
         }
 
         .swal-content {
-            font-size: 1.8em;
+            font-size: 2em;
         }
 
         .swal2-styled.swal2-confirm {
-            font-size: 1.4em;
+            font-size: 1.6em;
         }
 
     </style>

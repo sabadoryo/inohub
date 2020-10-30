@@ -17,8 +17,12 @@ class StartupsController extends Controller
 
     public function store(Request $request)
     {
-        $logotypePath = $request->file('logotype')
-            ->store('public/logotypes');
+        $logotypePath = null;
+
+        if ($request->hasFile('logotype')) {
+            $logotypePath = $request->file('logotype')
+                ->store('public/logotypes');
+        }
 
         Startup::create([
             'user_id' => \Auth::user()->id,

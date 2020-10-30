@@ -16,4 +16,13 @@ class Startup extends Model
         'link',
         'logo_path',
     ];
+
+    public function getLogotypeUrl()
+    {
+        if ($this->logo_path) {
+            return \Storage::disk('public')->url($this->logo_path);
+        }
+
+        return null;
+    }
 }
