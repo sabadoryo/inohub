@@ -194,7 +194,6 @@ require('./components/vacancy-main-form/vacancy-main-form');
 require('./components/cabinet-notifications/cabinet-notifications');
 require('./components/post-create/post-create');
 require('./components/posts-control/posts-control');
-require('./components/post-check-modal/post-check-modal');
 require('./components/projects-controller/projects-controller');
 
 require('./components/corp-tasks/corp-tasks');
@@ -208,3 +207,4 @@ require('./components/hub-space-tenants/hub-space-tenants');
 require('./components/hub-space-tenants-create/hub-space-tenants-create');
 require('./components/modules-control/modules-control');
 require('./components/user-edit-modal/user-edit-modal');
+require('./components/post-check-form/post-check-form');

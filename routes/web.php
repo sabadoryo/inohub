@@ -141,10 +141,6 @@ Route::group([
     Route::post('vacancies/{id}/update-main', 'VacanciesController@updateMain');
     Route::post('vacancies/{id}/publish', 'VacanciesController@publish');
 
-    Route::get('posts', 'PostsController@index');
-    Route::get('posts/get-list', 'PostsController@getList');
-    Route::post('posts/{id}/update-status', 'PostsController@updateStatus');
-
     Route::get('projects', 'ProjectsController@index');
     Route::get('projects/get-list', 'ProjectsController@getList');
     Route::post('projects/{id}/update-status', 'ProjectsController@updateStatus');
@@ -233,6 +229,11 @@ Route::group([
     Route::post('organizations', 'OrganizationsController@store');
     Route::get('organizations/{id}/edit', 'OrganizationsController@edit');
     Route::put('organizations/{id}', 'OrganizationsController@update');
+    
+    Route::get('posts', 'PostsController@index');
+    Route::get('posts/get-list', 'PostsController@getList');
+    Route::get('posts/{id}/check', 'PostsController@postCheck');
+    Route::post('posts/{id}/update-status', 'PostsController@updateStatus');
 
 });
 

@@ -92,13 +92,6 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="/control-panel/posts" class="nav-link {{$activePage == 'posts' ? 'active' : ''}}">
-                        <i class="nav-icon fas fa-paper-plane"></i>
-                        <p>Посты</p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
                     <a href="/control-panel/projects" class="nav-link {{$activePage == 'projects' ? 'active' : ''}}">
                         <i class="nav-icon fas fa-cubes"></i>
                         <p>Проекты</p>

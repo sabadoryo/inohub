@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\ControlPanel;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Post;
@@ -12,14 +12,14 @@ class PostsController extends Controller
     public function index()
     {
         $breadcrumb = [
-            ['/control-panel', 'Главная'],
+            ['/admin', 'Главная'],
             [null, 'Посты']
         ];
         
         $bindings = [
         ];
         
-        return view('control-panel.component', [
+        return view('admin.component', [
             'PAGE_TITLE' => 'Посты',
             'activePage' => 'posts',
             'breadcrumb' => $breadcrumb,
@@ -49,6 +49,27 @@ class PostsController extends Controller
             ->paginate(10);
         
         return $result;
+    }
+    
+    public function postCheck($id)
+    {
+        $post = Post::with('user')->find($id)->append('data');
+    
+        $breadcrumb = [
+            ['/admin', 'Главная'],
+            ['/admin/posts', 'Посты'],
+            [null, $post->title],
+        ];
+    
+        return view('admin.component', [
+            'component' => 'post-check-form',
+            'bindings' => [
+                'post' => $post,
+            ],
+            'PAGE_TITLE' => $post->title,
+            'activePage' => 'posts',
+            'breadcrumb' => $breadcrumb,
+        ]);
     }
     
     public function updateStatus(Request $request, $id)
