@@ -27,76 +27,17 @@
 
     <div class="vacations__list">
 
-        <div class="vacations__card vacation-card">
+        <div class="vacations__card vacation-card" ng-repeat="vacancy in $ctrl.vacancies">
 
-            <div class="vacation-card__title">DDA Logistics</div>
+            <div class="vacation-card__title">{{vacancy.organization.name}}</div>
 
-            <div class="vacation-card__name">Frontend-Разработчик</div>
-
-            <div class="vacation-card__subtitle">
-                Астана
-            </div>
-
-            <div class="vacation-card__text">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                et dolore
-            </div>
-
-            <button class="vacation-card__btn button button--w100">Откликнуться
-            </button>
-        </div>
-
-        <div class="vacations__card vacation-card">
-
-            <div class="vacation-card__title">Tech Garden</div>
-
-            <div class="vacation-card__name">PHP Разработчик</div>
+            <div class="vacation-card__name">{{vacancy.title}}</div>
 
             <div class="vacation-card__subtitle">
-                300.000 - 500.000 ₸ ∙ Алматы
+                {{vacancy.location}}
             </div>
 
-            <div class="vacation-card__text">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                et dolore
-            </div>
-
-            <button class="vacation-card__btn button button--w100">Откликнуться
-            </button>
-        </div>
-
-        <div class="vacations__card vacation-card">
-
-            <div class="vacation-card__title">DDA Logistics</div>
-
-            <div class="vacation-card__name">Frontend-Разработчик</div>
-
-            <div class="vacation-card__subtitle">
-                Астана
-            </div>
-
-            <div class="vacation-card__text">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                et dolore
-            </div>
-
-            <button class="vacation-card__btn button button--w100">Откликнуться
-            </button>
-        </div>
-
-        <div class="vacations__card vacation-card">
-
-            <div class="vacation-card__title">DDA Logistics</div>
-
-            <div class="vacation-card__name">Frontend-Разработчик</div>
-
-            <div class="vacation-card__subtitle">
-                Астана
-            </div>
-
-            <div class="vacation-card__text">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                et dolore
+            <div class="vacation-card__text" ng-bind-html="vacancy.content">
             </div>
 
             <button class="vacation-card__btn button button--w100">Откликнуться

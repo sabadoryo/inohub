@@ -9,7 +9,7 @@ class VacanciesController extends Controller
 {
     public function index()
     {
-        $vacancies = Vacancy::all();
+        $vacancies = Vacancy::with(['organization'])->get();
 
         $bindings = [
             'vacancies' => $vacancies
