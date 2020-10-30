@@ -99,6 +99,7 @@ class CabinetController extends Controller
 
     public function updateForm(Request $request, $id)
     {
+//        dd($request->all());
         $app = Application::find($id);
 
         $appForm = $app->forms()->where('id', $request->application_form_id)->first();
@@ -114,6 +115,8 @@ class CabinetController extends Controller
                     if ($inputField['type'] === 'file') {
                         $newFile_pathes = [];
                         $newFile_names = [];
+                        $oldFile_pathes = [];
+                        $oldFile_names = [];
                         if ($inputField['value'] != 'null') {
                             foreach ($inputField['value'] as $value) {
                                 if (!is_array($value)) {
@@ -121,22 +124,41 @@ class CabinetController extends Controller
                                     array_push($newFile_pathes, $path);
                                     array_push($newFile_names, $value->getClientOriginalName());
                                 } else {
-                                    array_push($newFile_pathes, $value['path']);
-                                    array_push($newFile_names, $value['name']);
+                                    array_push($oldFile_pathes, $value['path']);
+                                    array_push($oldFile_names, $value['name']);
                                 }
                             }
                         }
-                        $changes[] = [
-                            'label' => $field->formField->label,
-                            'old_value' => $field->value,
-                            'old_value_names' => $field->file_name,
-                            'new_value' => $newFile_pathes,
-                            'new_value_names' => $newFile_names,
-                            'type' => $field->formField->type,
-                        ];
-                        $field->value = json_encode($newFile_pathes);
-                        $field->file_name = json_encode($newFile_names);
-                        $field->save();
+                        if (count($newFile_pathes)) {
+                            if (count($oldFile_pathes)) {
+                                $changes[] = [
+                                    'label' => $field->formField->label,
+                                    'old_value' => $field->value,
+                                    'old_value_names' => $field->file_name,
+                                    'new_value' => array_merge($newFile_pathes, $oldFile_pathes),
+                                    'new_value_names' => array_merge($newFile_names, $oldFile_names),
+                                    'type' => $field->formField->type,
+                                ];
+                            } else {
+                                $changes[] = [
+                                    'label' => $field->formField->label,
+                                    'old_value' => $field->value,
+                                    'old_value_names' => $field->file_name,
+                                    'new_value' => $newFile_pathes,
+                                    'new_value_names' => $newFile_names,
+                                    'type' => $field->formField->type,
+                                ];
+                            }
+                            if (count($oldFile_pathes)) {
+                                $field->value = json_encode(array_merge($newFile_pathes, $oldFile_pathes));
+                                $field->file_name = json_encode(array_merge($newFile_names, $oldFile_names));
+                                $field->save();
+                            } else {
+                                $field->value = json_encode($newFile_pathes);
+                                $field->file_name = json_encode($newFile_names);
+                                $field->save();
+                            }
+                        }
                     } else {
                         $changes[] = [
                             'label' => $field->formField->label,

@@ -6,7 +6,7 @@
             <input type="text"
                    class="form-control"
                    placeholder="Пользователь"
-                   ng-model="$ctrl.user">
+                   ng-model="$ctrl.search">
         </div>
 
         <div class="col-3">
@@ -15,6 +15,14 @@
                 <option value="opened">Открытые</option>
                 <option value="published">На рассмотрении</option>
                 <option value="closed">Закрытые</option>
+            </select>
+        </div>
+
+        <div class="col-3">
+            <select class="form-control"
+                    ng-model="$ctrl.managerId"
+                    ng-options="manager.id as manager.full_name for manager in $ctrl.managers">
+                <option value="">Выберите оператора</option>
             </select>
         </div>
 
@@ -33,19 +41,13 @@
         Всего: <b>{{ $ctrl.total }}</b> {{ $ctrl.total | plural : ['программа', 'программы', 'программ'] }}
     </div>
 
-    <a href="" ng-click="$ctrl.openCreateModal()" class="btn btn-primary float-right">
-        Добавить программу
-    </a>
-
 </div>
-
 
 <table class="table bg-white" style="font-size: 14px">
     <thead class="thead-light">
     <tr>
         <th>Id</th>
         <th>Пользователь</th>
-        <th>Тип</th>
         <th>Название</th>
         <th>Дата отправки</th>
         <th>Статус</th>
@@ -57,19 +59,33 @@
     <tr ng-repeat="app in $ctrl.applications track by $index">
         <td>{{app.id}}</td>
         <td>{{app.user.full_name}}</td>
-        <td>{{app.entity_model}}</td>
-        <td>{{app.entity.title}}</td>
+        <td>
+            {{app.entity_model}} {{app.entity.title}}
+<!--            truncate title-->
+        </td>
         <td>{{app.created_at | amDateFormat : 'DD.MM.YYYY HH:mm'}}</td>
         <td ng-switch="app.status">
-            <div class="badge badge-info" ng-switch-when="process">Новая</div>
+            <div class="badge badge-danger" ng-switch-when="opened" style="font-size: 12px">Новая</div>
+            <div class="badge badge-info" ng-switch-when="process" style="font-size: 12px">На рассмотрении</div>
+            <div class="badge badge-success" ng-switch-when="closed" style="font-size: 12px">Закрытая</div>
         </td>
-        <td>
-            <div ng-if="!app.manager">не назначен</div>
-            <div ng-if="app.manager">{{app.manager.name}}</div>
-        </td>
+        <td>{{app.manager.full_name}}</td>
         <td class="text-center">
-            <a href="" ng-href="/control-panel/applications/{{app.id}}">открыть</a>
+            <a href=""
+               class="btn btn-primary btn-xs"
+               ng-href="/control-panel/applications/{{app.id}}">
+                <i class="fa fa-external-link"></i>
+            </a>
         </td>
     </tr>
     </tbody>
 </table>
+
+
+<ul uib-pagination
+    total-items="$ctrl.total"
+    ng-model="$ctrl.page"
+    ng-change="$ctrl.getList()"
+    items-per-page="20"
+    template-url="b4-pagination">
+</ul>

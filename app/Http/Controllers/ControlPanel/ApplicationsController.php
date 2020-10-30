@@ -18,20 +18,40 @@ class ApplicationsController extends ControlPanelController
             [null, 'Заявки']
         ];
 
+        $managers = $this->organization->users;
+        
         return view('control-panel.component', [
             'PAGE_TITLE' => 'Заявки',
             'activePage' => 'applications',
             'breadcrumb' => $breadcrumb,
             'component' => 'applications-control',
-            'bindings' => []
+            'bindings' => [
+                'managers' => $managers
+            ]
         ]);
     }
 
     public function getList(Request $request)
     {
         $query = Application::query();
+        
+        if ($request->search) {
+            $query->whereHas('user', function ($q) use ($request) {
+               $q->search($request->search);
+            });
+        }
+        
+        if ($request->status) {
+            $query->where('status', $request->status);
+        }
+        
+        if ($request->manager_id) {
+            $query->where('manager_id', $request->manager_id);
+        }
 
-        $result = $query->with('user', 'entity', 'manager')->paginate();
+        $result = $query->with('user', 'entity', 'manager')
+            ->orderBy('id', 'desc')
+            ->paginate(20);
 
         return $result;
     }
