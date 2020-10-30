@@ -1,6 +1,6 @@
 
 // parameter: elemId is an id of html element that will hold the grapejs instance
-const buildConstructor = (elemId, options) => {
+const buildConstructor = (elemId, options, imagePaths = []) => {
 
     let idCounter = 0;
     const customComponentTypes = editor => {
@@ -88,7 +88,8 @@ const buildConstructor = (elemId, options) => {
         },
         assetManager: {
             assets: [
-                '/img/program-poster.png'
+                '/img/program-poster.png',
+                ...imagePaths
             ],
             upload: '/control-panel/images/',
             uploadName: 'files',
@@ -671,7 +672,7 @@ const buildConstructor = (elemId, options) => {
         label: 'Welcome Section',
         category: 'Готовые блоки',
         content: `
-            <div data-gjs-droppable=".dropping" class="program-page__section program-welcome-section dropping">
+            <div data-gjs-droppable=".dropping" class="program-welcome-section dropping">
                 <img data-gjs-type="image" alt="" class="program-welcome-section__img dropping">
 
                 <div data-gjs-droppable=".dropping" class="program-welcome-section__info dropping">
@@ -687,7 +688,7 @@ const buildConstructor = (elemId, options) => {
         label: 'Cards section',
         category: 'Готовые блоки',
         content: `
-            <div class="program-page__section program-cards dropping">
+            <div class="program-cards dropping">
 
                 <div class="program-cards__container dropping">
                     <h4 class="program-cards__title text-lang">Мы ищем проекты в твоем городе</h4>
@@ -769,7 +770,7 @@ const buildConstructor = (elemId, options) => {
         label: 'Info Block',
         category: 'Готовые блоки',
         content: `
-            <div class="program-page__section program-info">
+            <div class="program-info">
                 <div class="program-info__container">
                     <h4 class="program-info__title text-lang">Что ты получишь на инкубации?</h4>
 
@@ -807,7 +808,7 @@ const buildConstructor = (elemId, options) => {
         label: 'Steps',
         category: 'Готовые блоки',
         content: `
-            <div class="program-page__section program-steps">
+            <div class="program-steps">
 
                 <div class="program-steps__container">
 
@@ -844,7 +845,7 @@ const buildConstructor = (elemId, options) => {
         label: 'Request form',
         category: 'Готовые блоки',
         content: `
-            <div class="program-page__section program-request">
+            <div class="program-request">
                 <div class="program-request__title text-lang">
                     6 недель твой путь от идеи к бизнесу!
                 </div>
@@ -865,7 +866,7 @@ const buildConstructor = (elemId, options) => {
         label: 'Welcome Section 2',
         category: 'Готовые блоки',
         content: `
-            <div class="techpark-page__section techpark-welcome-section">
+            <div class=" techpark-welcome-section">
                 <img src="/img/techpark-bg.png" alt="" class="techpark-welcome-section__bg">
 
                 <button class="techpark-welcome-section__button-back button-back button-back--rotate button-back--transparent">
@@ -889,7 +890,7 @@ const buildConstructor = (elemId, options) => {
         label: 'Benefit Section 2',
         category: 'Готовые блоки',
         content: `
-            <div class="techpark-page__section benefit-section">
+            <div class=" benefit-section">
 
                 <div class="benefit-section__container">
                     <div class="benefit-section__row">
@@ -928,7 +929,7 @@ const buildConstructor = (elemId, options) => {
         label: 'Documents Section',
         category: 'Готовые блоки',
         content: `
-            <div class="techpark-page__section documents-section">
+            <div class=" documents-section">
 
                     <div class="documents-section__container">
                         <div class="documents-section__heading heading-medium">
@@ -1019,7 +1020,7 @@ const buildConstructor = (elemId, options) => {
         label: 'Documents Section 2',
         category: 'Готовые блоки',
         content: `
-            <div class="techpark-page__section documents-section">
+            <div class=" documents-section">
                 <div class="documents-section__container">
 
                     <div class="documents-section__heading heading-medium">
@@ -1063,7 +1064,7 @@ const buildConstructor = (elemId, options) => {
         label: 'Timeline Section',
         category: 'Готовые блоки',
         content: `
-            <div class="techpark-page__section timeline-section">
+            <div class=" timeline-section">
 
                 <div class="timeline-section__container">
 
