@@ -32,14 +32,16 @@ const buildConstructor = (elemId, options) => {
         editor.TraitManager.addType('textarea', {
             createInput({ trait }) {
                 const el = document.createElement('textarea');
-                trait.attributes.value = 'sex'
-                console.log('trait', trait)
                 return el;
             },
             onUpdate({ component, elInput, trait }) {
-                elInput.value = component.getAttributes()[trait.attributes.name];
-                console.log('elInput.value', elInput.value)
-            }
+                elInput.value = component.getAttributes()[trait.attributes.name].replace(/<br>/g, '\r');
+            },
+            onEvent({ elInput, component, event, trait }) {
+                let attr = {};
+                attr[`${trait.attributes.name}`] = elInput.value.replace(/(?:\r\n|\r|\n)/g, '<br>');
+                component.addAttributes(attr)
+            },
         })
 
         // editor.DomComponents.addType('link', {
