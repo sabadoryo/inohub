@@ -151,7 +151,7 @@
 
                     </a>
 
-                    <a href="/startups" class="as-navbar__item {{$activePage == 'startups' ? 'as-navbar__item--active' : ''}}">
+                    <a href="/startups" class="as-navbar__item {{isset($activePage) && $activePage == 'startups' ? 'as-navbar__item--active' : ''}}">
                         <svg class="as-navbar__icon" width="20" height="17">
                             <use xlink:href="/img/icons.svg#rocket"></use>
                         </svg>

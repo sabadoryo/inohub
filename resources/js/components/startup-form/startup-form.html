@@ -4,7 +4,7 @@
     </svg>
 </a>
 
-<div class="startup-form">
+<form class="startup-form" ng-submit="$ctrl.submit()">
 
     <div class="startup-form__title">Анкета стартапа</div>
 
@@ -52,7 +52,7 @@
             <div class="input-box" style="margin-bottom: 15px">
                 <label class="input-box__label">Логотип:</label>
 
-                <div style="font-size: 13px; margin-bottom: 5px" ng-show="$ctlr.logotype">{{$ctrl.logotype.name}}</div>
+                <div style="font-size: 13px; margin-bottom: 5px" ng-show="$ctrl.logotype">{{$ctrl.logotype.name}}</div>
 
                 <div>
                     <button class="button button--xs"
@@ -128,7 +128,7 @@
 
     </div>
 
-</div>
+</form>
 
 
 
