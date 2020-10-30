@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Application;
+use App\Notifications\MessageSendend;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 
@@ -189,7 +190,7 @@ class CabinetController extends Controller
     public function sendMessage(Request $request, $id)
     {
 
-        $app = Application::find($id);
+        $app = Application::with(['user', 'manager'])->find($id);
 
         $files = [];
         if ($request->attachedFiles) {
@@ -198,6 +199,12 @@ class CabinetController extends Controller
                 array_push($files, ['name' => $file->getClientOriginalName(), 'path' => $path]);
             }
 
+        }
+        
+        if ($request->messageFrom == 'user' && isset($app->manager)) {
+            \Notification::send($app->manager, new MessageSendend(\Auth::user(), $id));
+        } elseif ($request->messageFrom == 'admin') {
+            \Notification::send($app->user, new MessageSendend(\Auth::user(), $id));
         }
 
         $app->actions()->create([
