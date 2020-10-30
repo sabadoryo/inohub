@@ -204,5 +204,7 @@ require('./components/corp-task-solutions/corp-task-solutions');
 require('./components/corp-task-solutions-create/corp-task-solutions-create');
 require('./components/corp-task-solutions-edit/corp-task-solutions-edit');
 
+require('./components/hub-space-tenants/hub-space-tenants');
+require('./components/hub-space-tenants-create/hub-space-tenants-create');
 require('./components/modules-control/modules-control');
 require('./components/user-edit-modal/user-edit-modal');

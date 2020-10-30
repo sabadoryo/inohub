@@ -6,24 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Program extends Model
 {
-    //
     protected $fillable = [
+        'organization_id',
         'user_id',
-        'program_category_id',
         'title',
+        'short_description',
         'content',
         'limit_date',
-        'start_date',
-        'end_date',
         'status',
-        'color',
         'published_at',
     ];
 
     protected $dates = [
         'limit_date',
-        'start_date',
-        'end_date',
         'published_at'
     ];
 
@@ -32,18 +27,16 @@ class Program extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function category()
+    public function passport()
     {
-        return $this->belongsTo(
-            ProgramCategory::class,
-            'program_category_id'
-        );
+        return $this->morphOne(Passport::class, 'entity');
     }
 
     public function forms()
     {
         return $this->belongsToMany(Form::class)
-            ->withPivot('order_number')->orderBy('order_number');
+            ->withPivot('order_number')
+            ->orderBy('order_number');
     }
 
     public function members()

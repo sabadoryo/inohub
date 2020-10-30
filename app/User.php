@@ -84,4 +84,9 @@ class User extends Authenticatable
                 ->orWhere('phone', $search);
         });
     }
+
+    public function tenants()
+    {
+        return $this->hasMany(HubSpaceTenant::class);
+    }
 }

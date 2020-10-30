@@ -72,6 +72,12 @@ function controller(Auth, $rootScope, Upload, $http, $scope) {
                     type: 'corp-task-solution',
                 }
             });
+        } else if ($ctrl.entityType === 'hub-space-tenants') {
+            req = $http.get('/get-forms', {
+                params: {
+                    type: 'hub-space-tenants',
+                }
+            });
         }
 
         if (req) {

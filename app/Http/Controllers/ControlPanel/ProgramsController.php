@@ -18,7 +18,7 @@ class ProgramsController extends ControlPanelController
             ['/control-panel', 'Главная'],
             [null, 'Программы']
         ];
-        
+
         return view('control-panel.component', [
             'component' => 'programs-control',
             'bindings' => [],
@@ -30,8 +30,7 @@ class ProgramsController extends ControlPanelController
 
     public function getList(Request $request)
     {
-        $query = Program::query();
-
+        $query = $this->organization->programs();
 
         if ($request->title) {
             $query->where(
@@ -56,20 +55,18 @@ class ProgramsController extends ControlPanelController
     {
         $request->validate([
             'title' => 'required|string|min:3|max:255',
-            'category_id' => 'nullable|exists:program_categories,id',
+            'short_description' => 'required'
         ]);
 
         $program = Program::create([
+            'organization_id' => $this->organization->id,
             'user_id' => \Auth::user()->id,
             'title' => $request->title,
-            'program_category_id' => $request->category_id
+            'short_description' => $request->short_description,
+            'status' => 'draft'
         ]);
 
-        $passport = Passport::create([
-            'content' => null,
-            'type' => 'program',
-            'program_id' => $program->id
-        ]);
+        $program->passport()->create([]);
 
         return ['id' => $program->id];
     }
@@ -78,50 +75,76 @@ class ProgramsController extends ControlPanelController
     {
         $program = Program::find($id);
 
-        $categories = ProgramCategory::all();
-    
         $breadcrumb = [
             ['/control-panel', 'Главная'],
             ['/control-panel/programs', 'Программы'],
-            [null, $program->title],
+            [null, \Str::limit($program->title, 50)],
         ];
 
         return view('control-panel.component', [
             'component' => 'program-main-form',
             'bindings' => [
-                'categories' => $categories,
                 'program' => $program,
             ],
-            'PAGE_TITLE' => $program->title,
+            'PAGE_TITLE' => \Str::limit($program->title, 50),
             'activePage' => 'programs',
             'breadcrumb' => $breadcrumb,
         ]);
     }
-    
-    public function pageForm($id)
+
+    public function updateMain(Request $request, $id)
     {
+        $request->validate([
+            'title' => 'required|min:3|max:255'
+        ], [
+            'title.required' => 'Введите название программы',
+            'title.min' => 'Название программы должно содержать больше :min символов',
+            'title.max' => 'Название программы должен содержать меньше :max символов',
+        ]);
+
         $program = Program::find($id);
 
-        $passportQuery = Passport::query();
+        $program->update([
+            'title' => $request->title,
+            'short_description' => $request->short_description,
+            'limit_date' => $request->limit_date,
+        ]);
 
-        $passport = $passportQuery->where('program_id', $program->id)->first();
+        return [];
+    }
+
+    public function pageForm($id)
+    {
+        $program = Program::with('passport')->find($id);
 
         $breadcrumb = [
             ['/control-panel', 'Главная'],
             ['/control-panel/programs', 'Программы'],
-            [null, $program->title],
+            [null, \Str::limit($program->title, 50)],
         ];
 
         return view('control-panel.component', [
             'component' => 'program-page-form',
-            'bindings' => [
-                'program' => $program,
-                'passport' => $passport
-            ],
-            'PAGE_TITLE' => $program->title,
+            'bindings' => ['program' => $program],
+            'PAGE_TITLE' => \Str::limit($program->title, 50),
             'activePage' => 'programs',
             'breadcrumb' => $breadcrumb,
         ]);
+    }
+
+    public function updatePage(Request $request, $id)
+    {
+        $request->validate([
+            'content' => 'required'
+        ]);
+
+        $program = Program::findOrFail($id);
+
+        $program->passport->update([
+            'content' => $request->input('content')
+        ]);
+
+        return [];
     }
 
     public function forms($id)
@@ -134,8 +157,6 @@ class ProgramsController extends ControlPanelController
             [null, $program->title],
         ];
         
-        $forms = Form::all();
-    
         return view('control-panel.component', [
             'component' => 'program-forms',
             'bindings' => [
@@ -146,49 +167,16 @@ class ProgramsController extends ControlPanelController
             'breadcrumb' => $breadcrumb,
         ]);
     }
-    
-    public function updateMain(Request $request, $id)
-    {
-        $request->validate([
-            'title' => 'required|min:3|max:255'
-        ], [
-            'title.required' => 'Введите название программы',
-            'title.min' => 'Название программы должно содержать больше :min символов',
-            'title.max' => 'Название программы должен содержать меньше :max символов',
-        ]);
-        
-        $program = Program::find($id);
-        
-        $program->update([
-            'title' => $request->title,
-            'program_category_id' => $request->category_id,
-            'color' => $request->color,
-            'limit_date' => $request->limit_date,
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date,
-        ]);
-        
-        return [];
-    }
-    
-    public function updateFormsList($id)
-    {
-        $forms = Form::all();
-        
-        return [
-            'forms' => $forms,
-        ];
-    }
-    
+
     public function updateForms(Request $request, $id)
     {
         $program = Program::find($id);
         
         $data = [];
         
-        foreach ($request->forms as $key => $form) {
+        foreach ($request->forms as $ind => $form) {
             $data[$form['id']] = [
-                'order_number' => $key,
+                'order_number' => $ind,
             ];
         }
         
@@ -197,25 +185,7 @@ class ProgramsController extends ControlPanelController
         return [];
     }
 
-    public function updatePage($id, Request $request)
-    {
-        $program = Program::findOrFail($id);
-
-        $request->validate([
-            'content' => 'required'
-        ]);
-
-        $passportQuery = Passport::query();
-        $passport = $passportQuery->where('program_id', $program->id)->first();
-
-        $passport->update([
-            'content' => $request['content']
-        ]);
-
-        return [];
-    }
-    
-    public function publish($id, Request $request)
+    public function publish($id)
     {
         $program = Program::find($id);
 

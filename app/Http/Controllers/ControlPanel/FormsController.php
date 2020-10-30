@@ -117,5 +117,9 @@ class FormsController extends Controller
         return $result;
     }
 
+    public function getAll()
+    {
+        return Form::orderBy('title')->get();
+    }
 
 }

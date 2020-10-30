@@ -35,13 +35,12 @@ Route::group(['middleware' => ['auth']], function () {
 Route::group(['prefix' => 'astana-hub'], function () {
     Route::get('about', 'AstanaHubController@about');
     Route::get('programs', 'AstanaHubController@programs');
-    Route::get('programs/{id}', 'AstanaHubController@getProgram');
+    Route::get('programs/{id}', 'AstanaHubController@program');
     Route::get('corporate-innovations', 'AstanaHubController@corporateInnovations');
     Route::get('corporate-innovations/get-list', 'AstanaHubController@getCorpTasksList');
     Route::get('hub-space', 'AstanaHubController@hubSpace');
     Route::get('r-and-d', 'AstanaHubController@randd');
     Route::get('resources', 'AstanaHubController@resources');
-    Route::get('programs/{id}', 'AstanaHubController@program');
     Route::get('programs/{id}/get-forms', 'AstanaHubController@getProgramForms');
 });
 
@@ -90,13 +89,14 @@ Route::group([
     Route::get('programs/get-list', 'ProgramsController@getList');
     Route::post('programs', 'ProgramsController@store');
     Route::get('programs/{id}/main', 'ProgramsController@mainForm');
-    Route::get('programs/{id}/page', 'ProgramsController@pageForm');
-    Route::get('programs/{id}/forms', 'ProgramsController@forms');
     Route::post('programs/{id}/update-main', 'ProgramsController@updateMain');
-    Route::post('programs/{id}/update-forms', 'ProgramsController@updateForms');
-    Route::post('programs/{id}/update-forms-list', 'ProgramsController@updateFormsList');
-    Route::post('programs/{id}/publish', 'ProgramsController@publish');
+    Route::get('programs/{id}/page', 'ProgramsController@pageForm');
     Route::post('programs/{id}/update-page', 'ProgramsController@updatePage');
+    Route::get('programs/{id}/forms', 'ProgramsController@forms');
+    Route::post('programs/{id}/update-forms', 'ProgramsController@updateForms');
+    Route::post('programs/{id}/publish', 'ProgramsController@publish');
+
+
 
     Route::get('users', 'UsersController@index');
     Route::get('users/get-list', 'UsersController@getList');
@@ -162,6 +162,7 @@ Route::group([
 
     Route::get('forms', 'FormsController@index');
     Route::get('forms/get-list', 'FormsController@getList');
+    Route::get('forms/get-all', 'FormsController@getAll');
     Route::get('forms/create', 'FormsController@create');
     Route::post('forms', 'FormsController@store');
 
@@ -208,6 +209,12 @@ Route::group([
     Route::get('corp-task-solutions/{id}/edit', 'CorporateInnovationTaskSolutionsController@edit');
     Route::post('corp-task-solutions/{id}/update', 'CorporateInnovationTaskSolutionsController@update');
     Route::post('corp-task-solutions/{id}/remove', 'CorporateInnovationTaskSolutionsController@remove');
+
+    Route::get('hub-space-tenants', 'HubSpaceTenantsController@index');
+    Route::get('hub-space-tenants/get-list', 'HubSpaceTenantsController@getList');
+    Route::get('hub-space-tenants/create', 'HubSpaceTenantsController@create');
+    Route::post('hub-space-tenants', 'HubSpaceTenantsController@store');
+    Route::get('hub-space-tenants/get-users-list', 'HubSpaceTenantsController@getUsersList');
 
 });
 

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\ControlPanel;
 use App\Application;
 use App\Http\Controllers\Controller;
 use App\Member;
-use App\TestModel;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;

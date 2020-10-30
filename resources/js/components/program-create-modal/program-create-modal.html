@@ -15,19 +15,20 @@
         </div>
 
         <div class="form-group">
-            <label>Категория:</label>
-            <select class="form-control"
-                    ng-model="$ctrl.category"
-                    ng-options="c as c.title for c in $ctrl.categories">
-                <option value="">Не выбрано</option>
-            </select>
+            <label>Краткое описание:</label>
+            <textarea class="form-control" ng-model="$ctrl.shortDescription" rows="4"></textarea>
         </div>
 
     </div>
 
     <div class="modal-footer">
+
         <button type="button" class="btn btn-secondary" ng-click="$ctrl.dismiss()">Закрыть</button>
-        <button type="submit" class="btn btn-primary" ng-disabled="$ctrl.loading">Добавить</button>
+
+        <button type="submit" class="btn btn-primary" ng-disabled="$ctrl.loading">
+            Далее <span class="fa fa-chevron-right ml-2"></span>
+        </button>
+
     </div>
 
 </form>

@@ -179,6 +179,13 @@
                     </ul>
                 </li>
 
+                <li class="nav-item">
+                    <a href="/control-panel/hub-space-tenants" class="nav-link {{$activePage == 'hub-space-tenants' ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>Арендаторы Hub Space</p>
+                    </a>
+                </li>
+
             @can('applications.show')
                     <li class="nav-item">
                         <a href="/control-panel/applications" class="nav-link {{$activePage == 'applications' ? 'active' : ''}}">

@@ -36,7 +36,6 @@ function controller($http, moment) {
             let date = _.cloneDeep(moment().subtract(i, 'days').format('DD.MM'));
             $ctrl.labels.push(date);
         }
-        console.log($ctrl.labels);
     };
 
 	function getApplicationsList () {
