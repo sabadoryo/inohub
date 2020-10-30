@@ -103,8 +103,7 @@
                     et dolore
                 </div>
 
-                <button class="vacation-card__btn button button--w100">Откликнуться
-                </button>
+                <button class="vacation-card__btn button">Откликнуться</button>
             </div>
 
         </div>
