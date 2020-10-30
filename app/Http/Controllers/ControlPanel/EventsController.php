@@ -10,7 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use PHPUnit\Runner\BeforeFirstTestHook;
 
-class EventsController extends Controller
+class EventsController extends ControlPanelController
 {
     public function index()
     {
@@ -34,7 +34,7 @@ class EventsController extends Controller
     public function getList(Request $request)
     {
         $query = Event::query();
-        
+
         if ($request->name) {
             $query->where(
                 'name',
@@ -42,17 +42,17 @@ class EventsController extends Controller
                 $request->name . '%'
             );
         }
-    
+
         if ($request->status) {
             $query->where('status', $request->status);
         }
-    
+
         $result = $query->orderBy('id', 'desc')
             ->paginate(10);
 
         return $result;
     }
-    
+
     public function store(Request $request)
     {
         $request->validate([
@@ -60,31 +60,31 @@ class EventsController extends Controller
             'start_date' => 'required',
             'start_date_time' => 'required',
         ]);
-        
+
         $date = new Carbon($request->start_date);
         $time = new Carbon($request->start_date_time);
         $date->setTimeFrom($time);
-        
+
         $event = Event::create([
             'name' => $request->name,
             'start_date' => $date,
         ]);
-        
+
         return ['id' => $event->id];
     }
-    
+
     public function mainForm($id)
     {
         $event = Event::find($id);
-    
+
         $breadcrumb = [
             ['/control-panel', 'Главная'],
             ['/control-panel/events', 'Мероприятия'],
             [null, $event->name],
         ];
-        
+
         $event->start_date = $event->start_date->format('Y-m-d H:i');
-        
+
         return view('control-panel.component', [
             'component' => 'event-main-form',
             'bindings' => [
@@ -95,17 +95,17 @@ class EventsController extends Controller
             'breadcrumb' => $breadcrumb,
         ]);
     }
-    
+
     public function pageForm($id)
     {
         $event = Event::find($id);
-        
+
         $breadcrumb = [
             ['/control-panel', 'Главная'],
             ['/control-panel/events', 'Мероприятия'],
             [null, $event->name],
         ];
-        
+
         return view('control-panel.component', [
             'component' => 'event-page-form',
             'bindings' => [
@@ -116,17 +116,17 @@ class EventsController extends Controller
             'breadcrumb' => $breadcrumb,
         ]);
     }
-    
+
     public function forms($id)
     {
         $event = Event::with(['forms'])->find($id);
-        
+
         $breadcrumb = [
             ['/control-panel', 'Главная'],
             ['/control-panel/events', 'Мероприятия'],
             [null, $event->name],
         ];
-        
+
         return view('control-panel.component', [
             'component' => 'event-forms',
             'bindings' => [
@@ -137,7 +137,7 @@ class EventsController extends Controller
             'breadcrumb' => $breadcrumb,
         ]);
     }
-    
+
     public function updateMain(Request $request, $id)
     {
         $request->validate([
@@ -151,58 +151,58 @@ class EventsController extends Controller
             'start_date.required' => 'Выберите дату провидения мероприятия',
             'start_date_time.required' => 'Выберите время провидения мероприятия',
         ]);
-        
+
         $event = Event::find($id);
-    
+
         $date = new Carbon($request->start_date);
         $time = new Carbon($request->start_date_time);
         $date->setTimeFrom($time);
-    
+
         $path = null;
         if ($request->image !== "null") {
             $path = \Storage::disk('public')->put('events_images',$request->image);
         }
-        
+
         $event->update([
             'name' => $request->name,
             'start_date' => $date,
             'short_description' => $request->short_description,
             'image_path' => $path,
         ]);
-        
+
         return [];
     }
-    
+
     public function updateFormsList($id)
     {
         $forms = Form::all();
-        
+
         return [
             'forms' => $forms,
         ];
     }
-    
+
     public function updateForms(Request $request, $id)
     {
         $event = Event::find($id);
-        
+
         $data = [];
-        
+
         foreach ($request->forms as $key => $form) {
             $data[$form['id']] = [
                 'order_number' => $key,
             ];
         }
-    
+
         $event->forms()->sync($data);
-        
+
         return [];
     }
-    
+
     public function publish($id, Request $request)
     {
         $event = Event::find($id);
-        
+
         $event->update([
             'status' => 'published',
             'published_at' => Carbon::now(),
