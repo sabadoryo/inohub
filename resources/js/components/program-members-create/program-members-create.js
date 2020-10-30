@@ -17,12 +17,7 @@ function controller($http, notify) {
 	$ctrl.userId = null;
 
 	$ctrl.$onInit = function () {
-	    getUsersList();
-
-	    if ($ctrl.app) {
-	        $ctrl.applicationId = $ctrl.app.id;
-	        $ctrl.userId = $ctrl.app.entity_id;
-        }
+        getUsersList();
     };
 
 	function getUsersList () {
@@ -31,6 +26,16 @@ function controller($http, notify) {
             .then(
                 function (response) {
                     $ctrl.users = response.data.users;
+
+                    if ($ctrl.app) {
+                        $ctrl.applicationId = $ctrl.app.id;
+                        $ctrl.userId = $ctrl.app.entity_id;
+                        let user = $ctrl.users.find(v => v.id === $ctrl.userId);
+
+                        if (user) {
+                            $ctrl.users = [user];
+                        }
+                    }
                 },
                 function (error) {
 
