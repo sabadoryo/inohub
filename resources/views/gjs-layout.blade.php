@@ -75,7 +75,8 @@
                 if (!elem.getAttribute('data-grapes-lang-ru')) {
                     elem.setAttribute('data-grapes-lang-ru', elem.innerHTML);
                 }
-                elem.innerHTML = elem.getAttribute('data-grapes-lang-{{$activeLang == 'kz' ? }}');
+                console.log('{{$activeLang}}')
+                elem.innerHTML = elem.getAttribute('data-grapes-lang-{{$activeLang}}');
             })
         });
 
