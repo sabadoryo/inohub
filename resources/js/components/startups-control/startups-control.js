@@ -2,10 +2,12 @@ import angular from "angular";
 
 angular
     .module('app')
-    .component('usersControl', {
-        template: require('./users-control.html'),
+    .component('startupsControl', {
+        template: require('./startups-control.html'),
         controller: ['$http', 'notify', '$uibModal', controller],
-        bindings: {}
+        bindings: {
+            //
+        }
     });
 
 function controller($http, notify, $uibModal) {
@@ -15,6 +17,8 @@ function controller($http, notify, $uibModal) {
     $ctrl.page = 1;
     $ctrl.perPage = 30;
     $ctrl.status = '';
+    $ctrl.project = '';
+    $ctrl.companyNameOrBIN = '';
 
     $ctrl.$onInit = function () {
         $ctrl.getList();
@@ -32,47 +36,47 @@ function controller($http, notify, $uibModal) {
 
     $ctrl.reset = () => {
         $ctrl.page = 1;
-        $ctrl.search = null;
-        $ctrl.status = null;
+        $ctrl.project = '';
+        $ctrl.companyNameOrBIN = '';
+        $ctrl.status = '';
         $ctrl.getList();
     };
 
     $ctrl.getList = () => {
         $http
-            .get('/admin/users/get-list', {
+            .get('/admin/startups/get-list', {
                 params: {
-                    status: $ctrl.status,
                     page: $ctrl.page,
                     per_page: $ctrl.perPage,
-                    search: $ctrl.search,
+                    status: $ctrl.status,
+                    project: $ctrl.project,
+                    companyNameOrBIN: $ctrl.companyNameOrBIN,
                 }
             })
             .then(
                 response => {
                     $ctrl.total = response.data.total;
-                    $ctrl.users = response.data.data;
+                    $ctrl.startups = response.data.data;
                 },
                 error => {
                     alert(error);
-                    // todo handle error
                 }
             )
     };
 
-    $ctrl.openUserDetailsModal = function (user) {
+    $ctrl.openStartupDetailsModal = function (startup) {
         $uibModal
             .open({
-                component: 'userDetailsModal',
+                component: 'startupDetailsModal',
                 resolve: {
-                    user: function () {
-                        return user;
+                    startup: function () {
+                        return startup;
                     },
                 }
             })
             .result
             .then((res) => {
-                console.log(res);
-                user.is_active = res;
+                startup.status = res;
                 notify({
                     message: 'Успешно обновлено',
                     duration: 2000,

@@ -1,0 +1,30 @@
+<div class="modal-header">
+    <h5 class="modal-title">{{$ctrl.resolve.user.full_name}}</h5>
+    <button type="button" class="close" ng-click="$ctrl.dismiss()">
+        <span>&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-3">
+            Статус:
+        </div>
+        <div class="col-auto">
+            <div class="custom-control custom-switch">
+                <input type="checkbox"
+                       class="custom-control-input"
+                       ng-model="$ctrl.status"
+                       id="user-{{$ctrl.resolve.user.id}}">
+                <label class="custom-control-label"
+                       ng-class="$ctrl.status ? 'text-success' : 'text-danger'"
+                       for="user-{{$ctrl.resolve.user.id}}">
+                    {{$ctrl.status ? 'Активен' : 'Забанен'}}
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-secondary" ng-click="$ctrl.dismiss()">Закрыть</button>
+    <button class="btn btn-primary" ng-click="$ctrl.save()">Сохранить</button>
+</div>

@@ -48,6 +48,21 @@
                     </a>
                 </li>
 
+                                {{--       USERS            --}}
+                <li class="nav-item">
+                    <a href="/admin/users" class="nav-link {{$activePage == 'users' ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>Пользователи</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/admin/startups" class="nav-link {{$activePage == 'startups' ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-fire"></i>
+                        <p>Стартапы</p>
+                    </a>
+                </li>
+
             </ul>
 
         </nav>

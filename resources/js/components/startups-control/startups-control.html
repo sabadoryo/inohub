@@ -3,14 +3,21 @@
         <div class="col-3">
             <input type="text"
                    class="form-control"
-                   placeholder="Введите ФИО, email или телефон"
-                   ng-model="$ctrl.search">
+                   placeholder="Введите название проекта"
+                   ng-model="$ctrl.project">
         </div>
         <div class="col-3">
+            <input type="text"
+                   class="form-control"
+                   placeholder="Введите название компании или БИН"
+                   ng-model="$ctrl.companyNameOrBIN">
+        </div>
+        <div class="col-1">
             <select ng-model="$ctrl.status" class="form-control">
                 <option value="">Статус</option>
-                <option value="active">Активный</option>
-                <option value="inactive">Неактивный</option>
+                <option value="open">На рассмотрениии</option>
+                <option value="accepted">Принято</option>
+                <option value="rejected">Отклонено</option>
             </select>
         </div>
         <div class="col-auto">
@@ -39,24 +46,33 @@
     <thead class="thead-light">
     <tr>
         <th>ID</th>
-        <th>ФИО</th>
-        <th>Email</th>
+        <th>Пользователь</th>
+        <th>Компания</th>
+        <th>Проект</th>
+        <th>Ссылка</th>
         <th>Статус</th>
         <th></th>
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="user in $ctrl.users track by $index">
-        <td>{{ user.id }}</td>
-        <td>{{ user.full_name }}</td>
-        <td>{{ user.email }}</td>
+    <tr ng-repeat="startup in $ctrl.startups track by $index">
+        <td>{{ startup.id }}</td>
+        <td>{{ startup.user.full_name }}</td>
+        <td>{{ startup.company_name }}</td>
+        <td>{{ startup.project_name }}</td>
         <td>
-            <span ng-if="user.is_active" class="text-success">Активен</span>
-            <span ng-if="!user.is_active" class="text-danger">Забанен</span>
+            <a href="{{startup.link}}">перейти</a>
+        </td>
+        <td>
+            <span ng-if="startup.status === 'open'" class="">На рассмотрении</span>
+            <span ng-if="startup.status === 'accepted'" class="text-success">Принято</span>
+            <span ng-if="startup.status === 'rejected'" class="text-danger">Отклонено</span>
         </td>
         <td class="text-center">
-            <button class="btn btn-primary btn-xs" ng-click="$ctrl.openUserDetailsModal(user)">
-                <i class="fa fa-pen"></i>
+            <button class="btn btn-primary btn-xs"
+                    ng-click="$ctrl.openStartupDetailsModal(startup)"
+                    ng-if="startup.status === 'open'">
+                <i class="fa fa-external-link"></i>
             </button>
         </td>
     </tr>

@@ -16,14 +16,35 @@ class Startup extends Model
         'link',
         'bin',
         'logo_path',
+        'status',
     ];
 
-    public function getLogotypeUrl()
+    protected $appends = [
+      'logotype_url',
+    ];
+
+    public function getLogotypeUrlAttribute()
     {
         if ($this->logo_path) {
             return \Storage::disk('public')->url($this->logo_path);
         }
 
         return null;
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function scopeSearch($q, $search)
+    {
+        $q->where(function ($q) use ($search) {
+            $q->where(
+                'company_name',
+                'like',
+                '%'.$search.'%'
+            )->orWhere('bin', $search);
+        });
     }
 }
