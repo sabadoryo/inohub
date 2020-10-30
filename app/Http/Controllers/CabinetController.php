@@ -26,14 +26,17 @@ class CabinetController extends Controller
         ]);
     }
 
-    public function getApplications()
+    public function getApplications(Request $request)
     {
-        $applications = \Auth::user()
-            ->applications()
-            ->with('entity')
-            ->paginate(5);
 
-        return $applications;
+        $applications = \Auth::user()->applications()->with('entity');
+
+        if ($request->status) {
+            $applications->where('status', $request->status);
+        }
+
+        $result = $applications->paginate(5);
+        return $result;
     }
 
     public function application($id)

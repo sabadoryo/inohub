@@ -14,11 +14,16 @@ function controller($http, $uibModal) {
 
     let $ctrl = this;
     $ctrl.page = 1;
-    $ctrl.status = null;
+    $ctrl.status = '';
     $ctrl.total = 0;
 
     $ctrl.$onInit = function () {
         $ctrl.getList();
+    };
+
+    $ctrl.getFilteredList = function() {
+      $ctrl.page = 1;
+      $ctrl.getList();
     };
 
     $ctrl.getList = function () {
