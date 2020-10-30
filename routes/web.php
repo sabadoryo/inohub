@@ -144,6 +144,7 @@ Route::group([
     Route::post('events', 'EventsController@store');
     Route::get('events/{id}/main', 'EventsController@mainForm');
     Route::get('events/{id}/page', 'EventsController@pageForm');
+    Route::post('events/{id}/update-page', 'EventsController@updatePage');
     Route::get('events/{id}/forms', 'EventsController@forms');
     Route::post('events/{id}/update-main', 'EventsController@updateMain');
     Route::post('events/{id}/update-forms', 'EventsController@updateForms');
@@ -252,7 +253,7 @@ Route::group([
     Route::post('organizations', 'OrganizationsController@store');
     Route::get('organizations/{id}/edit', 'OrganizationsController@edit');
     Route::put('organizations/{id}', 'OrganizationsController@update');
-    
+
     Route::get('posts', 'PostsController@index');
     Route::get('posts/get-list', 'PostsController@getList');
     Route::get('posts/{id}/check', 'PostsController@postCheck');
