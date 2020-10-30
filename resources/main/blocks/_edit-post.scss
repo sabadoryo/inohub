@@ -1,0 +1,94 @@
+.edit-post {
+
+    padding: 40px 40px 120px;
+    background-color: #ffffff;
+    border-radius: 7px;
+    min-height: 100vh;
+
+    &__details {
+        display: flex;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+
+    &__user-box {
+        display: flex;
+        align-items: center;
+    }
+
+    &__user-img {
+        margin-right: 10px;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+    }
+
+    &__user-name {
+        @include text-style(1.6rem, 500, #181515);
+        margin-right: 30px;
+    }
+
+    &__date {
+        @include text-style(1.4rem, 400, #181515);
+    }
+
+    &__title-input {
+        width: 100%;
+        padding: 20px;
+        background-color: #F7F7F7;
+        border-radius: 7px;
+        @include text-style(2rem, 700, #181515);
+        margin-bottom: 30px;
+    }
+
+    &__title {
+        @include text-style(2rem, 700, #181515);
+        line-height: 24px;
+        margin-bottom: 40px;
+    }
+
+    &__text {
+    //    here should be style for simple text
+    }
+
+    &__img {
+        width: 100%;
+        border-radius: 7px;
+        margin-bottom: 30px;
+    }
+
+    &__dropdown-box {
+        position: relative;
+    }
+
+    &__dropdown {
+        background-color: #ffffff;
+        border-radius: 7px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        position: absolute;
+        top: calc(100% + 14px);
+        left: 0;
+        overflow: hidden;
+
+        display: none;
+
+        &--show {
+            display: block;
+        }
+    }
+
+    &__dropdown-item {
+        display: flex;
+        align-items: center;
+        @include text-style(1.6rem, 400, #181515);
+        padding: 10px 15px;
+
+        &:hover {
+            background-color: #F3F3F3;
+        }
+    }
+
+    &__dropdown-icon {
+        margin-right: 7px;
+    }
+}

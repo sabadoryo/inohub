@@ -208,4 +208,7 @@ require('./components/hub-space-tenants/hub-space-tenants');
 require('./components/hub-space-tenants-create/hub-space-tenants-create');
 require('./components/modules-control/modules-control');
 require('./components/user-edit-modal/user-edit-modal');
+
+require('./components/ao-cett-about/ao-cett-about');
+require('./components/ao-cett-grants/ao-cett-grants');
 require('./components/post-check-form/post-check-form');
