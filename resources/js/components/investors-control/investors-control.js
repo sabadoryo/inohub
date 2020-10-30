@@ -43,7 +43,7 @@ function controller($http, notify, $uibModal) {
 	$ctrl.editInvestor = function (investor) {
 	    $uibModal
             .open({
-                component: 'investors-edit',
+                component: 'investorsEdit',
                 resolve: {
                     investor: function () {
                         return investor;

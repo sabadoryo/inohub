@@ -2,8 +2,8 @@ import angular from "angular";
 
 angular
     .module('app')
-    .component('startups', {
-        template: require('./startups.html'),
+    .component('investors', {
+        template: require('./investors.html'),
         controller: ['startupWindow', controller],
         bindings: {
             //
@@ -12,13 +12,13 @@ angular
 
 function controller(startupWindow) {
 
-	let $ctrl = this;
+    let $ctrl = this;
 
-	$ctrl.$onInit = function () {
+    $ctrl.$onInit = function () {
         //
     };
 
-	$ctrl.openStartupForm = () => {
-        startupWindow.open('startup', {});
+    $ctrl.openInvestorForm = () => {
+        startupWindow.open('investor', {});
     };
 }

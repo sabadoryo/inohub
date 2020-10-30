@@ -12,9 +12,9 @@
         <div class="col-3">
             <select ng-model="$ctrl.status" class="form-control">
                 <option value="">Выберите статус</option>
-                <option value="open">Не подтверждён</option>
-                <option value="accepted">Подтверждён</option>
-                <option value="rejected">Отклонён</option>
+                <option value="open">Открыто</option>
+                <option value="accepted">Принято</option>
+                <option value="rejected">Отклонено</option>
             </select>
         </div>
 
@@ -34,7 +34,6 @@
         <th>ФИО</th>
         <th>О себе</th>
         <th>Сферы в которых заинтересован</th>
-        <th>Фото для карточки</th>
         <th>Статус</th>
         <th></th>
     </tr>
@@ -44,13 +43,10 @@
         <td style="vertical-align: middle">{{investor.user.full_name}}</td>
         <td style="vertical-align: middle">{{investor.about | truncate : 20 : '...'}}</td>
         <td style="vertical-align: middle">{{investor.interests | truncate : 20 : '...'}}</td>
-        <td style="vertical-align: middle">
-            <img width="50" src="/{{investor.photo_path}}">
-        </td>
         <td style="vertical-align: middle" ng-switch="investor.status">
-            <div ng-switch-when="open">Не подтверждён</div>
-            <div ng-switch-when="accepted">Подтверждён</div>
-            <div ng-switch-when="rejected">Отклонён</div>
+            <div ng-switch-when="open">Открыто</div>
+            <div ng-switch-when="accepted" class="text-success">Принято</div>
+            <div ng-switch-when="rejected" class="text-danger">Отклонено</div>
         </td>
         <td style="vertical-align: middle">
             <button ng-show="investor.status === 'open'"
@@ -61,7 +57,6 @@
         </td>
     </tr>
 </table>
-
 
 <ul uib-pagination
     total-items="$ctrl.total"

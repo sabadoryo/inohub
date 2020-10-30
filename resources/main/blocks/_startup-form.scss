@@ -16,6 +16,9 @@
   &__row {
     display: flex;
     justify-content: space-between;
+    &--centered {
+      justify-content: center;
+    }
   }
 
   &__col {

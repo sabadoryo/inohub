@@ -46,7 +46,6 @@ class InvestorsController extends Controller
     public function accept(Request $request, $id)
     {
         $investor = Investor::findOrFail($id);
-
         $investor->status = 'accepted';
         $investor->save();
 
@@ -56,7 +55,6 @@ class InvestorsController extends Controller
     public function reject(Request $request, $id)
     {
         $investor = Investor::findOrFail($id);
-
         $investor->status = 'rejected';
         $investor->save();
 

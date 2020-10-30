@@ -16,15 +16,9 @@ Route::get('/events/{id}', 'EventsController@show');
 Route::get('startups', 'StartupsController@index');
 Route::post('startups', 'StartupsController@store');
 
-Route::get('/investors', function () {
-    //todo i need controller
-    return view('investors-page');
-});
+Route::get('investors', 'InvestorsController@index');
+Route::post('investors', 'InvestorsController@store');
 
-Route::get('/startup-companies', function () {
-    //todo i need controller
-    return view('startup-page');
-});
 
 //Route::get('/vacancies', function () {
 //    //todo i need controller

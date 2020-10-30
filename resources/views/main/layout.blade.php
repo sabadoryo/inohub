@@ -162,12 +162,11 @@
                         {{__('Startups')}}
                     </a>
 
-                    <a href="/investors" class="as-navbar__item">
+                    <a href="/investors" class="as-navbar__item {{isset($activePage) && $activePage == 'investors' ? 'as-navbar__item--active' : ''}}">
                         <svg class="as-navbar__icon" width="20" height="17">
                             <use xlink:href="/img/icons.svg#handshake"></use>
                         </svg>
-                        {{$dictionary['Investors'] ?? 'Investors'}}
-
+                        {{__('Investors')}}
                     </a>
 
                     <a href="/vacancies" class="as-navbar__item">

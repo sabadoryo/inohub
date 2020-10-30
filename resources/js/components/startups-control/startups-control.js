@@ -6,7 +6,7 @@ angular
         template: require('./startups-control.html'),
         controller: ['$http', 'notify', '$uibModal', controller],
         bindings: {
-            //
+            inputId: '<',
         }
     });
 
@@ -16,11 +16,15 @@ function controller($http, notify, $uibModal) {
 
     $ctrl.page = 1;
     $ctrl.perPage = 30;
+    $ctrl.id = null;
     $ctrl.status = '';
     $ctrl.project = '';
     $ctrl.companyNameOrBIN = '';
 
     $ctrl.$onInit = function () {
+        if ($ctrl.inputId) {
+            $ctrl.id = $ctrl.inputId;
+        }
         $ctrl.getList();
     };
 
@@ -36,6 +40,7 @@ function controller($http, notify, $uibModal) {
 
     $ctrl.reset = () => {
         $ctrl.page = 1;
+        $ctrl.id = null;
         $ctrl.project = '';
         $ctrl.companyNameOrBIN = '';
         $ctrl.status = '';
@@ -48,6 +53,7 @@ function controller($http, notify, $uibModal) {
                 params: {
                     page: $ctrl.page,
                     per_page: $ctrl.perPage,
+                    id: $ctrl.id,
                     status: $ctrl.status,
                     project: $ctrl.project,
                     companyNameOrBIN: $ctrl.companyNameOrBIN,

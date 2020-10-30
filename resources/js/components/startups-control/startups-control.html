@@ -1,21 +1,24 @@
 <form class="mb-3" ng-submit="$ctrl.filter()">
     <div class="form-row">
+        <div class="col-1">
+            <input type="number" ng-model="$ctrl.id" placeholder="ID" class="form-control">
+        </div>
         <div class="col-3">
             <input type="text"
                    class="form-control"
-                   placeholder="Введите название проекта"
+                   placeholder="Название проекта"
                    ng-model="$ctrl.project">
         </div>
         <div class="col-3">
             <input type="text"
                    class="form-control"
-                   placeholder="Введите название компании или БИН"
+                   placeholder="Название компании или БИН"
                    ng-model="$ctrl.companyNameOrBIN">
         </div>
-        <div class="col-1">
+        <div class="col-2">
             <select ng-model="$ctrl.status" class="form-control">
                 <option value="">Статус</option>
-                <option value="open">На рассмотрениии</option>
+                <option value="open">Открыто</option>
                 <option value="accepted">Принято</option>
                 <option value="rejected">Отклонено</option>
             </select>
@@ -49,7 +52,7 @@
         <th>Пользователь</th>
         <th>Компания</th>
         <th>Проект</th>
-        <th>Ссылка</th>
+        <th>Сайт</th>
         <th>Статус</th>
         <th></th>
     </tr>
@@ -60,11 +63,9 @@
         <td>{{ startup.user.full_name }}</td>
         <td>{{ startup.company_name }}</td>
         <td>{{ startup.project_name }}</td>
+        <td>{{ startup.link }}</td>
         <td>
-            <a href="{{startup.link}}">перейти</a>
-        </td>
-        <td>
-            <span ng-if="startup.status === 'open'" class="">На рассмотрении</span>
+            <span ng-if="startup.status === 'open'" class="">Открыто</span>
             <span ng-if="startup.status === 'accepted'" class="text-success">Принято</span>
             <span ng-if="startup.status === 'rejected'" class="text-danger">Отклонено</span>
         </td>
