@@ -26,14 +26,17 @@ class CabinetController extends Controller
         ]);
     }
 
-    public function getApplications()
+    public function getApplications(Request $request)
     {
-        $applications = \Auth::user()
-            ->applications()
-            ->with('entity')
-            ->get();
 
-        return $applications;
+        $applications = \Auth::user()->applications()->with('entity');
+
+        if ($request->status) {
+            $applications->where('status', $request->status);
+        }
+
+        $result = $applications->paginate(5);
+        return $result;
     }
 
     public function application($id)
@@ -180,7 +183,7 @@ class CabinetController extends Controller
             'additional_data' => json_encode($changes),
         ]);
 
-        return ['changes' => json_encode($changes), 'action_id' => $action->id];
+        return ['changes' => $changes, 'action_id' => $action->id];
     }
 
     public function sendMessage(Request $request, $id)
