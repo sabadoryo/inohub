@@ -1,5 +1,6 @@
-<div class="alert alert-light" ng-show="$ctrl.event.status == 'draft'">
-  Данное мероприятие находится в режиме черновика. Хотите <a href="" ng-click="$ctrl.openToPublishModal()" class="alert-link">опубликовать</a>?
+<div class="alert alert-default-warning" ng-show="$ctrl.event.status == 'draft'">
+    Данная программа еще не опубликована.
+    <button type="button" class="btn btn-primary btn-sm ml-2" ng-click="$ctrl.openToPublishModal()">Опубликовать</button>
 </div>
 <a href="" class="btn btn-primary btn-sm mb-3">
   Посмотреть
@@ -20,5 +21,9 @@
     </ul>
   </div>
   <div class="card-body">
+      <div id="gjsEventBuilder"></div>
+      <button class="btn btn-primary" type="button" ng-click="$ctrl.save()">
+          Сохранить
+      </button>
   </div>
 </div>

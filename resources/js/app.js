@@ -13,6 +13,8 @@ import notify from "@cgross/angular-notify";
 import textAngular from "textangular";
 import perfectScrollbar from "angular-perfect-scrollbar";
 
+require('ui-cropper');
+
 require('angular-chart.js');
 
 angular
@@ -28,7 +30,8 @@ angular
         notify,
         textAngular,
         'perfect_scrollbar',
-        'chart.js'
+        'chart.js',
+        'uiCropper',
     ])
     .config(['$provide', function ($provide) {
         $provide.decorator('taOptions', ['taRegisterTool', '$uibModal', '$delegate', function (taRegisterTool, $uibModal, taOptions) {
@@ -73,7 +76,7 @@ angular
             }
         };
     })
-    // .directive('scrollToLast', ['$location', '$anchorScroll', '$timeout', function ($location, $anchorScroll, $timeout) {
+// .directive('scrollToLast', ['$location', '$anchorScroll', '$timeout', function ($location, $anchorScroll, $timeout) {
 //
 //     function linkFn(scope, element, attrs) {
 //         $timeout(function () {
@@ -213,5 +216,6 @@ require('./components/ao-cett-about/ao-cett-about');
 require('./components/ao-cett-grants/ao-cett-grants');
 require('./components/post-check-form/post-check-form');
 
+require('./components/vacancies-page/vacancies-page');
 require('./components/program-members/program-members');
 require('./components/program-members-create/program-members-create');

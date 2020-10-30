@@ -50,6 +50,7 @@ function controller($uibModal, $http) {
                   $ctrl.loading = false;
                   $ctrl.events = response.data.data;
                   $ctrl.total = response.data.total;
+                  console.log(response);
               },
               error => {
                   $ctrl.loading = false;
