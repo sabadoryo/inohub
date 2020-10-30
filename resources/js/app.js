@@ -212,3 +212,5 @@ require('./components/user-edit-modal/user-edit-modal');
 require('./components/ao-cett-about/ao-cett-about');
 require('./components/ao-cett-grants/ao-cett-grants');
 require('./components/post-check-form/post-check-form');
+
+require('./components/vacancies-page/vacancies-page');
