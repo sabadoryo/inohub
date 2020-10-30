@@ -12,8 +12,8 @@
     <link href="{{ asset('css/ui-components.css') }}" rel="stylesheet">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
-{{--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"--}}
-{{--          integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">--}}
+    {{--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"--}}
+    {{--          integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">--}}
 
     <style>
 
@@ -98,9 +98,12 @@
                 </svg>
             </div>
             <ul class="header__lang-dropdown lang-dropdown" uib-dropdown-menu="">
-                <li class="lang-dropdown__item"><a href="/select-language/kk" class="lang-dropdown__link">Қазақша</a></li>
-                <li class="lang-dropdown__item"><a href="/select-language/ru"  class="lang-dropdown__link">Русский</a></li>
-                <li class="lang-dropdown__item"><a href="/select-language/en"  class="lang-dropdown__link">English</a></li>
+                <li class="lang-dropdown__item"><a href="/select-language/kk" class="lang-dropdown__link">Қазақша</a>
+                </li>
+                <li class="lang-dropdown__item"><a href="/select-language/ru" class="lang-dropdown__link">Русский</a>
+                </li>
+                <li class="lang-dropdown__item"><a href="/select-language/en" class="lang-dropdown__link">English</a>
+                </li>
             </ul>
 
         </div>
@@ -115,7 +118,7 @@
 
     <div class="main__container">
 
-        <nav class="main__as-navbar as-navbar">
+        <perfect-scrollbar class="main__as-navbar as-navbar">
 
             <div class="as-navbar__section">
                 <a href="/" class="as-navbar__item as-navbar__item--active">
@@ -186,7 +189,7 @@
                 <a href="#" class="as-navbar__link">СМИ</a>
             </div>
 
-        </nav>
+        </perfect-scrollbar>
 
         <div class="main__content content">
 
