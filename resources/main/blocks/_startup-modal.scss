@@ -1,0 +1,72 @@
+.startup-modal {
+
+    position: fixed;
+    top: 75px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    background: white;
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__container {
+        position: relative;
+        width: 820px;
+        height: 80%;
+        padding-right: 30px;
+        margin: 0 auto;
+        overflow-y: hidden;
+    }
+
+    &__close {
+        position: absolute;
+        top: 0;
+        right: 10px;
+    }
+
+    &__step {
+        margin-bottom: 15px;
+    }
+
+    &__row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+
+    &__heading {
+        @include text-style(2.4rem, 700, #c4c4c4);
+        line-height: 29px;
+        &--active {
+            color: #181515;
+        }
+    }
+
+    &__autocomplete {
+        padding-right: 10px;
+        display: flex;
+        align-items: center;
+        @include text-style(1.6rem, 500, #181515);
+    }
+
+    &__warning-icon {
+        margin-left: 10px;
+    }
+
+    &__list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 24px;
+        margin-bottom: 45px;
+    }
+
+    &__button {
+        display: block;
+        margin-left: auto;
+    }
+}

@@ -105,6 +105,7 @@ require('./auth');
 require('./plural');
 require('./controllers/mainController');
 require('./applicationWindow');
+require('./startupWindow');
 require('./filters/translate');
 
 require('./services/trans');
@@ -223,3 +224,6 @@ require('./components/program-members-create/program-members-create');
 require('./components/event-page/event-page');
 
 require('./components/events-list/events-list');
+require('./components/startups-page/startups-page');
+require('./components/startups/startups');
+require('./components/startup-form/startup-form');
