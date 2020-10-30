@@ -384,3 +384,4 @@ Route::get('for-investor', function () {
 Route::get('edit-post', function () {
     return view('edit-post');
 });
+

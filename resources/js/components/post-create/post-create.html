@@ -1,45 +1,80 @@
-<div class="card">
-    <div class="card-header">
-        Создание поста
+<div class="content__row content__row--flex-start">
+    <a href="" ng-href="/" class="content__button-back button-back">
+        <svg class="button-back__icon" width="24" height="24">
+            <use href="/img/icons.svg#chevron-left"></use>
+        </svg>
+        Назад
+    </a>
+
+    <button class="button button--xs" ng-click="$ctrl.save()">
+        Опубликовать
+    </button>
+</div>
+<div class="content__edit edit-post">
+
+    <div class="edit-post__details">
+        <div class="edit-post__user-box">
+            <img ng-show="!$ctrl.user.avatar_url"
+                 src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt=""
+                 class="edit-post__user-img">
+            <img ng-show="$ctrl.user.avatar_url" ng-src="{{$ctrl.user.avatar_url}}" alt="" class="edit-post__user-img">
+            <div class="edit-post__user-name">
+                {{ $ctrl.user.full_name }}
+            </div>
+        </div>
     </div>
-    <form ng-submit="$ctrl.save()">
-        <div class="card-body">
-            <div class="form-group">
-                <label>Заголовок:</label>
-                <input class="form-control" ng-model="$ctrl.title">
-            </div>
-            <div ng-repeat="item in $ctrl.data track by $index" style="position: relative">
-                <div ng-if="item.type == 'text'" class="form-group">
-                    <label>Текст:</label>
-                    <text-angular ta-resize-force-aspect-ratio="true" ng-model="item.content"></text-angular>
-                </div>
-                <div ng-if="item.type == 'image'" class="form-group">
-                    <label> Изображение: </label>
 
-                    <img ng-show="!item.image" class="d-block" ngf-thumbnail="item.image" width="500">
+    <input class="edit-post__title-input" ng-model="$ctrl.title" placeholder="Заголовок">
 
-                    <a ng-show="!item.image"
-                       class="btn btn-default"
-                       ngf-select=""
-                       ng-model="item.image"
-                       accept="image/*">
-                        Выбрать изображение
-                        <i class="fas fa-image"></i>
-                    </a>
-                </div>
-            </div>
-            <div uib-dropdown class="d-inline-block">
-                <button type="button" class="btn btn-default btn-sm" uib-dropdown-toggle>Добавить</button>
-                <div uib-dropdown-menu>
-                    <a class="dropdown-item" href="" ng-click="$ctrl.addText()">Текст</a>
-                    <a class="dropdown-item" href="" ng-click="$ctrl.selectImageModal()">Изображение</a>
-                </div>
-            </div>
-        </div>
-        <div class="card-footer">
-            <button class="btn btn-primary" type="submit" ng-disabled="$ctrl.loading">
-                Сохранить
+    <div ng-repeat="item in $ctrl.data" style="margin-bottom: 10px;">
+        <text-angular ng-show="item.type == 'text'"
+                      ng-model="item.content"
+                      ta-resize-force-aspect-ratio="true"></text-angular>
+
+        <div ng-show="item.type=='image'">
+
+            <button ng-show="!item.image"
+                    ngf-select=""
+                    ng-model="item.image"
+                    accept="image/*"
+                    class="edit-post__toggle-btn button-back button-back--grey button-back--icon-right button-back--rotate45">
+                Выбрать фото
             </button>
+
+            <img ng-show="item.image"
+                 ngf-thumbnail="item.image"
+                 class="edit-post__img">
         </div>
-    </form>
+    </div>
+
+    <div class="edit-post__dropdown-box">
+
+        <div uib-dropdown class="edit-post__dropdown-box">
+            <button uib-dropdown-toggle
+                    class="edit-post__toggle-btn button-back button-back--grey button-back--icon-right button-back--rotate45">
+                Добавить
+            </button>
+            <div uib-dropdown-menu
+                 class="edit-post__dropdown edit-post__dropdown--show">
+
+                <a class="edit-post__dropdown-item"
+                   href=""
+                   ng-click="$ctrl.addText()">
+                    <svg width="24" height="24" class="edit-post__dropdown-icon">
+                        <use href="/img/icons.svg#format-text"></use>
+                    </svg>
+                    Текст
+                </a>
+
+                <a class="edit-post__dropdown-item"
+                   href=""
+                   ng-click="$ctrl.selectImageModal()">
+                    <svg width="24" height="24" class="edit-post__dropdown-icon">
+                        <use href="/img/icons.svg#format-img"></use>
+                    </svg>
+                    Изображение
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
