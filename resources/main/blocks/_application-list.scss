@@ -43,16 +43,16 @@
 
     &__type {
         @include text-style(1.6rem, 400, #181515);
-        width: 120px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        margin-right: 30px;
+        //width: 120px;
+        //white-space: nowrap;
+        //overflow: hidden;
+        //text-overflow: ellipsis;
+        //margin-right: 30px;
     }
 
     &__title {
         @include text-style(1.8rem, 600, #181515);
-        width: 440px;
+        width: 560px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;

@@ -1,0 +1,29 @@
+<div class="card">
+    <div class="card-body">
+        <div ng-show="!$ctrl.data.length" class="alert alert-light">
+            Пусто
+        </div>
+        <div ng-show="$ctrl.data.length" ng-repeat="item in $ctrl.data track by $index" style="position: relative">
+            <div ng-if="item.type == 'text'" class="form-group">
+                <label>Текст:</label>
+                <div ng-bind-html="item.content">
+                </div>
+            </div>
+            <div ng-if="item.type == 'image'" class="form-group">
+                <label> Изображение: </label>
+                <img class="d-block" ng-src="{{item.image}}" width="500">
+            </div>
+        </div>
+        <footer class="blockquote-footer">{{ $ctrl.post.user.full_name }}
+            <cite title="Source Title">{{ $ctrl.post.created_at | date:'dd.MM.yyyy HH:mm' }}</cite>
+        </footer>
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-danger" ng-click="$ctrl.submit('reject')">
+            Отказать
+        </button>
+        <button class="btn btn-success" ng-click="$ctrl.submit('accept')">
+            Одобрить
+        </button>
+    </div>
+</div>

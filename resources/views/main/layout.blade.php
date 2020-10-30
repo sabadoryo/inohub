@@ -12,9 +12,24 @@
     <link href="{{ asset('css/ui-components.css') }}" rel="stylesheet">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
-    {{--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"--}}
-    {{--          integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">--}}
-
+    @if(isset($includeBootstrap) && $includeBootstrap)
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+              integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+              crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+            .btn {font-size: 1.4rem !important;}
+            .ta-scroll-window > .ta-bind {
+                padding: 6px 25px !important;
+            }
+            p {
+                font-size: 16px !important;
+            }
+            h3 {
+                font-size: 20px !important;
+            }
+        </style>
+    @endif
     <style>
 
         [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
@@ -135,21 +150,21 @@
                     Мероприятия
                 </a>
 
-                <a href="" class="as-navbar__item">
+                <a href="/startup-companies" class="as-navbar__item">
                     <svg class="as-navbar__icon" width="20" height="17">
                         <use xlink:href="/img/icons.svg#rocket"></use>
                     </svg>
                     Компании
                 </a>
 
-                <a href="" class="as-navbar__item">
+                <a href="/investors" class="as-navbar__item">
                     <svg class="as-navbar__icon" width="20" height="17">
                         <use xlink:href="/img/icons.svg#handshake"></use>
                     </svg>
                     Инвесторы
                 </a>
 
-                <a href="" class="as-navbar__item">
+                <a href="/vacancies" class="as-navbar__item">
                     <svg class="as-navbar__icon" width="20" height="17">
                         <use xlink:href="/img/icons.svg#jobs"></use>
                     </svg>
@@ -176,7 +191,7 @@
                     Tech Garden
                 </a>
 
-                <a href="#" class="as-navbar__organization">
+                <a href="/ao-cett/about" class="as-navbar__organization">
                     <img src="/img/icons/cett-icon-sm.png" alt="" class="as-navbar__organization-icon">
                     ЦИТТ
                 </a>

@@ -10,6 +10,27 @@ Route::get('get-news-list', 'MainPageController@getNewsList');
 Route::get('get-feeds-list', 'MainPageController@getFeedsList');
 Route::get('news/{id}', 'MainPageController@newsPage');
 
+Route::get('/events', function () {
+    //todo i need controller
+    return view('event-page');
+});
+Route::get('/investors', function () {
+    //todo i need controller
+    return view('investors-page');
+});
+
+Route::get('/startup-companies', function () {
+    //todo i need controller
+    return view('startup-page');
+});
+
+//Route::get('/vacancies', function () {
+//    //todo i need controller
+//    return view('vacancies-list');
+//});
+
+Route::get('/vacancies', 'VacanciesController@index');
+
 Route::get('select-language/{lang}', 'SelectLanguageController@selectLanguage');
 
 Route::group(['middleware' => ['auth']], function () {
@@ -63,6 +84,11 @@ Route::group(['prefix' => 'tech-garden'], function () {
     Route::get('programs/{id}/get-forms', 'TechGardenController@getProgramForms');
 });
 
+Route::group(['prefix' => 'ao-cett'], function () {
+    Route::get('about', 'AoCettController@about');
+    Route::get('grants', 'AoCettController@grants');
+});
+
 Route::group(['prefix' => 'tech-garden/smart-store'], function () {
     Route::get('get-tasks-list', 'TechGardenSmartStoreController@getTasksList');
     Route::get('get-solutions-list', 'TechGardenSmartStoreController@getSolutionsList');
@@ -95,8 +121,11 @@ Route::group([
     Route::get('programs/{id}/forms', 'ProgramsController@forms');
     Route::post('programs/{id}/update-forms', 'ProgramsController@updateForms');
     Route::post('programs/{id}/publish', 'ProgramsController@publish');
-
-
+    Route::get('programs/{id}/members', 'ProgramsController@members');
+    Route::get('programs/{id}/members/get-list', 'ProgramsController@getMembersList');
+    Route::get('programs/{id}/members/get-users-list', 'ProgramsController@getUsers');
+    Route::get('programs/{id}/members/create', 'ProgramsController@createMember');
+    Route::post('programs/{id}/members', 'ProgramsController@storeMember');
 
     Route::get('users', 'UsersController@index');
     Route::get('users/get-list', 'UsersController@getList');
@@ -121,6 +150,7 @@ Route::group([
     Route::post('events', 'EventsController@store');
     Route::get('events/{id}/main', 'EventsController@mainForm');
     Route::get('events/{id}/page', 'EventsController@pageForm');
+    Route::post('events/{id}/update-page', 'EventsController@updatePage');
     Route::get('events/{id}/forms', 'EventsController@forms');
     Route::post('events/{id}/update-main', 'EventsController@updateMain');
     Route::post('events/{id}/update-forms', 'EventsController@updateForms');
@@ -140,10 +170,6 @@ Route::group([
     Route::get('vacancies/{id}/main', 'VacanciesController@mainForm');
     Route::post('vacancies/{id}/update-main', 'VacanciesController@updateMain');
     Route::post('vacancies/{id}/publish', 'VacanciesController@publish');
-
-    Route::get('posts', 'PostsController@index');
-    Route::get('posts/get-list', 'PostsController@getList');
-    Route::post('posts/{id}/update-status', 'PostsController@updateStatus');
 
     Route::get('projects', 'ProjectsController@index');
     Route::get('projects/get-list', 'ProjectsController@getList');
@@ -233,6 +259,11 @@ Route::group([
     Route::post('organizations', 'OrganizationsController@store');
     Route::get('organizations/{id}/edit', 'OrganizationsController@edit');
     Route::put('organizations/{id}', 'OrganizationsController@update');
+
+    Route::get('posts', 'PostsController@index');
+    Route::get('posts/get-list', 'PostsController@getList');
+    Route::get('posts/{id}/check', 'PostsController@postCheck');
+    Route::post('posts/{id}/update-status', 'PostsController@updateStatus');
 
 });
 
@@ -360,3 +391,4 @@ Route::get('for-investor', function () {
 Route::get('edit-post', function () {
     return view('edit-post');
 });
+

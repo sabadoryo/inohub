@@ -14,10 +14,12 @@
             <div class="application-section__title">{{$ctrl.app.entity.name}}</div>
 
             <div class="application-section__details">
-                <div ng-if="$ctrl.app.status === 'decline'" class="application-section__status application-section__status--success">Статус:
+                <div ng-if="$ctrl.app.status === 'decline'"
+                     class="application-section__status application-section__status--success">Статус:
                     <span>Подтвердили</span>
                 </div>
-                <div ng-if="$ctrl.app.status === 'success'" class="application-section__status application-section__status--error">Статус:
+                <div ng-if="$ctrl.app.status === 'success'"
+                     class="application-section__status application-section__status--error">Статус:
                     <span>Подтвердили</span>
                 </div>
                 <div ng-if="$ctrl.app.status === 'process'" class="application-section__status">Статус:
@@ -32,14 +34,17 @@
                 </div>
             </div>
 
-            <button ng-if="$ctrl.formsVisible" class="application-section__toggle-btn button-back button-back--grey" ng-click="$ctrl.toggleForms()">
+            <button ng-if="$ctrl.formsVisible" class="application-section__toggle-btn button-back button-back--grey"
+                    ng-click="$ctrl.toggleForms()">
                 <svg class="button-back__icon" width="18" height="18">
                     <use href="/img/icons.svg#toggle-2"></use>
                 </svg>
                 Скрыть
             </button>
 
-            <button ng-if="!$ctrl.formsVisible" class="application-section__toggle-btn button-back button-back--grey button-back--rotate" ng-click="$ctrl.toggleForms()">
+            <button ng-if="!$ctrl.formsVisible"
+                    class="application-section__toggle-btn button-back button-back--grey button-back--rotate"
+                    ng-click="$ctrl.toggleForms()">
                 <svg class="button-back__icon" width="18" height="18">
                     <use href="/img/icons.svg#toggle-2"></use>
                 </svg>
@@ -183,7 +188,8 @@
                                         <div class="input-box__file-box"
                                              ng-if="field.value.length > 0"
                                              ng-repeat="file in field.value">
-                                            <a class="input-box__file" href="/cabinet/download-file/{{file.path}}/{{file.name}}">{{file.name}}</a>
+                                            <a class="input-box__file"
+                                               href="/cabinet/download-file/{{file.path}}/{{file.name}}">{{file.name}}</a>
                                             <a href=""
                                                ng-show="appForm.isEditing"
                                                ng-click="$ctrl.removeFile(field,$index)"
@@ -220,75 +226,149 @@
             </div>
         </div>
     </div>
-    <div class="tabs-inner__section chat-section">
+    <div class="tabs-inner__section feedback-section">
+        <div class="feedback-section__chat chat-section">
 
-        <div class="chat-section__messages" id="chatSectionScrollDiv">
+            <div class="chat-section__messages" id="chatSectionScrollDiv">
 
-            <div ng-repeat="message in $ctrl.app.actions.message"
-                 ng-class="message.name === 'application_user_message' ? 'message-block--mine' : ''"
-                 class="chat-section__block message-block">
-                <img src="{{message.user.avatar_url}}" ng-show="message.name === 'application_admin_message'" alt="" class="message-block__person-img">
-                <div class="message-block__content">
+                <div ng-repeat="message in $ctrl.app.actions.message track by $index"
+                     ng-class="message.name === 'application_user_message' ? 'message-block--mine' : ''"
+                     class="chat-section__block message-block">
+                    <img src="{{message.user.avatar_url}}" ng-show="message.name === 'application_admin_message'" alt=""
+                         class="message-block__person-img">
+                    <div class="message-block__content">
 
-                    <div class="message-block__name">{{message.user.full_name}}</div>
+                        <div class="message-block__name">{{message.user.full_name}}</div>
 
-                    <div class="message-block__text message-block__text--bordered">
-                        {{message.message}}
+                        <div class="message-block__text message-block__text--bordered">
+                            {{message.message}}
+                        </div>
+
+                        <div class="message-block__row">
+                            <div style="display: flex; flex-direction: column">
+                                <a class="message-block__text"
+                                   style="text-decoration: underline;"
+                                   ng-if="message.additional_data.length"
+                                   ng-repeat="file in message.additional_data track by $index"
+                                   href="/cabinet/download-file/{{file.path}}/{{file.name}}">
+                                    {{file.name}}
+                                </a>
+                            </div>
+                            <div class="message-block__date">{{message.created_at | amDateFormat : 'ddd. DD MMMM
+                                -HH:mm'}}
+                            </div>
+                        </div>
+
                     </div>
 
-                    <div class="message-block__row">
-                        <div style="display: flex; flex-direction: column">
-                            <a class="message-block__text"
-                               style="text-decoration: underline;"
-                               ng-if="message.additional_data.length"
-                               ng-repeat="file in message.additional_data track by $index"
-                               href="/cabinet/download-file/{{file.path}}/{{file.name}}">
-                                {{file.name}}
-                            </a>
-                        </div>
-                        <div class="message-block__date">{{message.created_at | amDateFormat : 'ddd. DD MMMM -HH:mm'}}
-                        </div>
-                    </div>
+                    <img src="{{message.user.avatar_url}}" ng-show="message.name === 'application_user_message'" alt=""
+                         class="message-block__person-img">
 
                 </div>
 
-                <img src="{{message.user.avatar_url}}" ng-show="message.name === 'application_user_message'" alt="" class="message-block__person-img">
-
             </div>
+            <form ng-submit="$ctrl.sendMessage()" class="mb-3">
+                <div class="chat-section__message-area">
 
-        </div>
-        <form ng-submit="$ctrl.sendMessage()" class="mb-3">
-            <div class="chat-section__message-area">
-
-                <textarea ng-model="$ctrl.message" class="chat-section__message-input"></textarea>
+                    <textarea ng-model="$ctrl.message" class="chat-section__message-input"></textarea>
 
 
-                <a href=""
-                   class="chat-section__link-box"
-                   ngf-select=""
-                   ngf-keep="true"
-                   ng-model="$ctrl.attachedFiles"
-                   ngf-multiple="true">
-                    <svg class="chat-section__link-icon" width="24" height="24">
-                        <use href="/img/icons.svg#paper-clip"></use>
-                    </svg>
-                    Прикрепить файл
-                </a>
+                    <!--                <a href=""-->
+                    <!--                   class="chat-section__link-box"-->
+                    <!--                   ngf-select=""-->
+                    <!--                   ngf-keep="true"-->
+                    <!--                   ng-model="$ctrl.attachedFiles"-->
+                    <!--                   ngf-multiple="true">-->
+                    <!--                    <svg class="chat-section__link-icon" width="24" height="24">-->
+                    <!--                        <use href="/img/icons.svg#paper-clip"></use>-->
+                    <!--                    </svg>-->
+                    <!--                    Прикрепить файл-->
+                    <!--                </a>-->
 
-            </div>
-            <div class="input-box__files-box">
+                </div>
+                <div class="input-box__files-box">
 
-                <div class="input-box__file-box" ng-repeat="file in $ctrl.attachedFiles track by $index">
-                    <a class="input-box__file" href="">{{file.name}}</a>
-                    <a href="" ng-click="$ctrl.removeAttachedFile($index)" class="input-box__file-delete">
-                        <svg width="24" height="24">
-                            <use href="/img/icons.svg#close-icon"></use>
+                    <div class="input-box__file-box" ng-repeat="file in $ctrl.attachedFiles track by $index">
+                        <a class="input-box__file" href="">{{file.name}}</a>
+                        <a href="" ng-click="$ctrl.removeAttachedFile($index)" class="input-box__file-delete">
+                            <svg width="24" height="24">
+                                <use href="/img/icons.svg#close-icon"></use>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="chat-section__row">
+
+                    <button class="chat-section__append-file"
+                            ngf-select=""
+                            ngf-keep="true"
+                            ng-model="$ctrl.attachedFiles"
+                            ngf-multiple="true">
+                        <svg width="20" height="20">
+                            <use href="/img/icons.svg#paper-clip"></use>
                         </svg>
-                    </a>
+                    </button>
+
+                    <button type="submit" class="chat-section__btn button button--extra-lg">Отправить</button>
+                </div>
+
+            </form>
+        </div>
+        <div class="feedback-section__history history-section">
+
+            <div class="history-section__list">
+
+                <div class="history-section__item history-box"
+                     ng-if="action.additional_data.length > 0"
+                     ng-repeat="action in $ctrl.app.actions.action | orderBy:'-' track by $index">
+                    <div class="history-box__row">
+                        <div class="history-box__title">
+                            {{action.user.full_name}} -
+                            <span ng-if="action.name === 'application_updated'">редактировал заявку</span>
+                            <span ng-if="action.name === 'application_sent'">отправил завяку</span>
+                        </div>
+
+                        <div class="history-box__date">
+                            <span class="float-right">{{action.created_at | amDateFormat : 'DD.MM HH:mm'}}</span>
+                        </div>
+                    </div>
+
+                    <table class="history-box__table" ng-if="action.name == 'application_updated'">
+                        <tr>
+                            <th>Измененное поле</th>
+                            <th>Старое значение</th>
+                            <th>Новое значение</th>
+                        </tr>
+                        <tr ng-repeat="data in action.additional_data track by $index">
+                            <td>{{data.label}}</td>
+                           <td>
+                               <div ng-if="data.type === 'file'">
+                                   <div ng-repeat="(name,path) in data.old_data ">
+                                       <a href="/cabinet/download-file/{{path}}">{{name}}</a>
+                                   </div>
+                               </div>
+                               <div ng-if="data.type !== 'file'">
+                                   <span ng-if="data.old_value_stringified">{{data.old_value_stringified}}</span>
+                                   <span ng-if="!data.old_value_stringified">{{data.old_value}}</span>
+                               </div>
+                           </td>
+                            <td>
+                                <div ng-if="data.type === 'file'">
+                                    <div ng-repeat="(name,path) in data.new_data">
+                                        <a href="/cabinet/download-file/{{path}}">{{name}}</a>
+                                    </div>
+                                </div>
+                                <div ng-if="data.type !== 'file'">
+                                                <span
+                                                    ng-if="data.new_value_stringified">{{data.new_value_stringified}}</span>
+                                    <span ng-if="!data.new_value_stringified">{{data.new_value}}</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
-
-            <button type="submit" class="chat-section__btn button button--extra-lg">Отправить</button>
-        </form>
+        </div>
     </div>
 </div>

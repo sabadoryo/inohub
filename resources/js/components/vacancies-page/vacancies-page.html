@@ -1,0 +1,50 @@
+<div class="content__vacations vacations">
+
+    <div class="vacations__row">
+        <div class="vacations__title">
+            Вакансии
+        </div>
+
+        <div uib-dropdown="" class="vacations__filter-box">
+            <button
+                uib-dropdown-toggle=""
+                class="vacations__filter-btn button-back button-back--icon-right button-back--white">
+                По умолчанию
+                <svg class="button-back__icon" width="18" height="18">
+                    <use href="/img/icons.svg#toggle-2"></use>
+                </svg>
+            </button>
+
+            <div class="vacations__dropdown vacations__dropdown--show" uib-dropdown-menu="">
+                <a href="#" class="vacations__dropdown-item">
+                    Сначала новые
+                </a>
+                <a href="#" class="vacations__dropdown-item">
+                    Сначало старые
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="vacations__list">
+
+        <div class="vacations__card vacation-card" ng-repeat="vacancy in $ctrl.vacancies">
+
+            <div class="vacation-card__title">{{vacancy.organization.name}}</div>
+
+            <div class="vacation-card__name">{{vacancy.title}}</div>
+
+            <div class="vacation-card__subtitle">
+                {{vacancy.location}}
+            </div>
+
+            <div class="vacation-card__text" ng-bind-html="vacancy.content">
+            </div>
+
+            <button class="vacation-card__btn button button--w100">Откликнуться
+            </button>
+        </div>
+
+    </div>
+
+</div>

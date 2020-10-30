@@ -5,10 +5,12 @@ namespace App\Http\Controllers\ControlPanel;
 use App\Form;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Queue\RedisQueue;
 
 class FormsController extends ControlPanelController
 {
-    public function index()
+
+    public function index(Request $request)
     {
         $breadcrumb = [
             ['/control-panel', 'Главная'],
@@ -16,6 +18,10 @@ class FormsController extends ControlPanelController
         ];
 
         $bindings = [];
+
+        if ($request->success_message) {
+            $bindings['message'] = $request->success_message;
+        }
 
         return view('control-panel.component', [
             'PAGE_TITLE' => 'Настройка форм',
@@ -54,7 +60,7 @@ class FormsController extends ControlPanelController
             'fields.*.isRequired' => 'required',
         ]);
 
-        $form = Form::create([
+        $form = $this->organization->forms()->create([
             'title' => $request->title,
         ]);
 
@@ -109,6 +115,10 @@ class FormsController extends ControlPanelController
     public function getList(Request $request)
     {
         $query = Form::query();
+
+        if ($request->title) {
+            $query->where('title', 'like', $request->title . '%');
+        }
 
         $result = $query
             ->orderBy('id', 'desc')

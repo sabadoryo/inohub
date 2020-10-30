@@ -1,21 +1,41 @@
-<div class="alert alert-light" ng-show="$ctrl.vacancy.status == 'draft'">
-  Данная вакансия находится в режиме черновика. Хотите <a href="" ng-click="$ctrl.openToPublishModal()" class="alert-link">опубликовать</a>?
+<div class="alert alert-default-warning" ng-show="$ctrl.vacancy.status == 'draft'">
+    Данная вакансия еще не опубликована.
+    <button type="button" class="btn btn-primary btn-sm ml-2" ng-click="$ctrl.openToPublishModal()">Опубликовать</button>
 </div>
 
 <form ng-submit="$ctrl.save()">
   <div class="card">
     <div class="card-body">
 
-      <div class="form-group">
-        <label>Заголовок вакансий:</label>
-        <input type="text" class="form-control" placeholder="Введите заголовок" ng-model="$ctrl.title" required>
-      </div>
+      <div class="form-row">
+          <div class="col-6">
+              <div class="form-group">
+                  <label>Название вакансии:</label>
+                  <input type="text" class="form-control" placeholder="Введите название" ng-model="$ctrl.title" required>
+              </div>
+              <div class="form-group">
+                  <label>Местоположение:</label>
+                  <input type="text" class="form-control" placeholder="Введите местоположение" ng-model="$ctrl.location">
+              </div>
+              <div class="row">
+                  <div class="form-group col-6">
+                      <label>Зарплата от:</label>
+                      <input type="number" class="form-control" placeholder="От" ng-model="$ctrl.fromSalary">
+                  </div>
+                  <div class="form-group col-6">
+                      <label>Зарплата до: </label>
+                      <input type="number" class="form-control" placeholder="До" ng-model="$ctrl.toSalary">
+                  </div>
+              </div>
 
-      <div class="form-group">
-        <label>Описание</label>
-        <text-angular ta-resize-force-aspect-ratio="true" ng-model="$ctrl.content"></text-angular>
-      </div>
 
+              <div class="form-group">
+                  <label>Описание</label>
+                  <text-angular ta-resize-force-aspect-ratio="true" ng-model="$ctrl.content"></text-angular>
+              </div>
+
+          </div>
+      </div>
     </div>
     <div class="card-footer">
       <button class="btn btn-primary" type="submit" ng-disabled="$ctrl.loading">

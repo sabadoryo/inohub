@@ -1,5 +1,8 @@
 @import "nullstyle.scss";
 
+// TextAngular
+@import "~textangular/dist/textAngular.css";
+
 @import "~swiper/swiper";
 @import "~perfect-scrollbar/css/perfect-scrollbar.css";
 @import "~sweetalert2/src/sweetalert2";
@@ -172,6 +175,7 @@ img {
     display: inline-block;
     padding: 0;
     margin: 0;
+    background: white;
 }
 
 ul.pagination li {display: inline;}
@@ -181,8 +185,9 @@ ul.pagination li a {
     float: left;
     padding: 8px 16px;
     text-decoration: none;
+    font-size: 16px;
 }
-.pagination li a.active {
+.pagination li.active a {
     background-color: #af4937;
     color: white;
 }
