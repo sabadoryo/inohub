@@ -9,7 +9,7 @@ use App\Organization;
 use App\Program;
 use Illuminate\Http\Request;
 
-class ApplicationsController extends Controller
+class ApplicationsController extends ControlPanelController
 {
     public function index()
     {

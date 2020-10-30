@@ -73,6 +73,8 @@ function controller($http, Auth, moment, $uibModal, Upload, $timeout) {
                     }
                 });
             });
+            $ctrl.chatSection = window.angular.element(document.querySelector('#chatSectionScrollDiv'));
+            window.scrollTo(0, $ctrl.chatSection.scrollHeight);
         });
         console.log($ctrl.app);
     };
@@ -162,7 +164,10 @@ function controller($http, Auth, moment, $uibModal, Upload, $timeout) {
             })
             .then(
                 res => {
-                    $ctrl.app.actions.unshift({
+                    if (!$ctrl.app.actions.action) {
+                        $ctrl.app.actions.action = [];
+                    }
+                    $ctrl.app.actions.action.unshift({
                         id: res.data.action_id,
                         user: Auth.user(),
                         name: 'application_updated',
@@ -174,7 +179,7 @@ function controller($http, Auth, moment, $uibModal, Upload, $timeout) {
                         '',
                         'success'
                     ).then(res => {
-                        $ctrl.close();
+
                     });
                     appForm.isEditing = false;
                 },
@@ -197,6 +202,9 @@ function controller($http, Auth, moment, $uibModal, Upload, $timeout) {
             })
             .then(
                 res => {
+                    if (!$ctrl.app.actions.message) {
+                        $ctrl.app.actions.message = [];
+                    }
                     $ctrl.app.actions.message.push({
                         id: res.data.action_id,
                         user: Auth.user(),
@@ -205,7 +213,11 @@ function controller($http, Auth, moment, $uibModal, Upload, $timeout) {
                         created_at: moment(),
                         additional_data: res.data,
                     });
-
+                    $ctrl.chatSection = window.angular.element(document.getElementById('chatSectionScrollDiv'));
+                    console.log($ctrl.chatSection);
+                    console.log($ctrl.chatSection.children[$ctrl.chatSection.children.length - 1]);
+                    $ctrl.chatSection.scrollTop = $ctrl.chatSection.scrollHeight - $ctrl.chatSection.clientHeight;
+                    // window.scrollTo(0, $ctrl.chatSection);
 
                     $ctrl.message = '';
                     $ctrl.attachedFiles = [];
