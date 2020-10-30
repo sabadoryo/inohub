@@ -27,7 +27,7 @@
 
 </form>
 
-<table class="table bg-white">
+<table class="table bg-white" style="font-size: 14px">
     <thead class="thead-light">
     <tr>
         <th>ID</th>
@@ -35,6 +35,7 @@
         <th>О себе</th>
         <th>Сферы в которых заинтересован</th>
         <th>Статус</th>
+        <th>Дата добавления</th>
         <th></th>
     </tr>
     </thead>
@@ -48,6 +49,7 @@
             <div ng-switch-when="accepted" class="text-success">Принято</div>
             <div ng-switch-when="rejected" class="text-danger">Отклонено</div>
         </td>
+        <td style="vertical-align: middle">{{investor.created_at | amDateFormat : 'DD.MM HH:mm'}}</td>
         <td style="vertical-align: middle">
             <button ng-show="investor.status === 'open'"
                     class="btn btn-primary btn-xs mr-2"
