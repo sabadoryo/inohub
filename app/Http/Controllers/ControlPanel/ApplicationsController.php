@@ -5,6 +5,9 @@ namespace App\Http\Controllers\ControlPanel;
 use App\Application;
 use App\Http\Controllers\Controller;
 use App\Module;
+use App\Notifications\ApplicationAccepted;
+use App\Notifications\ApplicationProcessed;
+use App\Notifications\ApplicationRejected;
 use App\Organization;
 use App\Program;
 use Illuminate\Http\Request;
@@ -115,17 +118,19 @@ class ApplicationsController extends ControlPanelController
 
     public function takeForProcessing($id)
     {
-        $app = Application::findOrFail($id);
+        $app = Application::with('user')->findOrFail($id);
         $app->manager_id = \Auth::user()->id;
         $app->status = 'processing';
         $app->save();
+        \Notification::send($app->user, new ApplicationProcessed($app, $this->organization->name));
 
         return [];
     }
 
     public function accept(Request $request, $id)
     {
-        $app = Application::find($id);
+        $app = Application::with('user')->find($id);
+        \Notification::send($app->user, new ApplicationAccepted($app, $this->organization->name));
 
         $entity = $app->entity;
 
@@ -155,6 +160,9 @@ class ApplicationsController extends ControlPanelController
 
     public function reject(Request $request, $id)
     {
+        $app = Application::with('user')->find($id);
+        \Notification::send($app->user, new ApplicationRejected($app, $this->organization->name));
+        
         if ($request->action == 'reject') {
             $app->status = 'rejected';
             $app->actions()->create([
