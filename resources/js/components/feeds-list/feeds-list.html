@@ -5,16 +5,16 @@
         <div class="feed__drop-box" uib-dropdown>
 
             <button class="feed__btn button button--sm button--dropdown" uib-dropdown-toggle="">
-                <span>Новая запись</span>
+                <span>{{ 'New post' | translate }}</span>
                 <svg width="24" height="24">
                     <use href="/img/icons.svg#toggle-white"></use>
                 </svg>
             </button>
 
             <div class="feed__btn-dropdown" uib-dropdown-menu="">
-                <a href="#" class="feed__dropdown-item">Блог</a>
-                <a href="#" class="feed__dropdown-item">Мероприятие</a>
-                <a href="#" class="feed__dropdown-item">Еще что то</a>
+                <a href="#" class="feed__dropdown-item">{{'Blog' | translate}}</a>
+                <a href="#" class="feed__dropdown-item">{{'Event' | translate}}</a>
+                <a href="#" class="feed__dropdown-item">{{'Other' | translate}}</a>
             </div>
 
         </div>
@@ -29,7 +29,7 @@
             </svg>
 
             <div class="event-announcement__text">
-                Astana hub объявил о новой программе
+                {{'Astana hub announced a new program' | translate}}
             </div>
         </div>
 

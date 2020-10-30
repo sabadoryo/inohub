@@ -19,6 +19,7 @@ function controller(notify, $http, $uibModal) {
 
 	$ctrl.$onInit = function () {
         $ctrl.passport = $ctrl.program.passport;
+        $ctrl.imagePaths
         editor = buildConstructor('gjsProgramPassport', {
             program: $ctrl.program,
             passport: $ctrl.passport

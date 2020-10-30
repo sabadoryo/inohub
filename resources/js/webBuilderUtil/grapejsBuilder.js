@@ -1,6 +1,6 @@
 
 // parameter: elemId is an id of html element that will hold the grapejs instance
-const buildConstructor = (elemId, options) => {
+const buildConstructor = (elemId, options, imagePaths = []) => {
 
     let idCounter = 0;
     const customComponentTypes = editor => {
@@ -15,12 +15,12 @@ const buildConstructor = (elemId, options) => {
                     },
                     traits: [
                         {
-                            type: 'text',
+                            type: 'textarea',
                             name: 'data-grapes-lang-kk',
                             label: 'Lang KK'
                         },
                         {
-                            type: 'text',
+                            type: 'textarea',
                             name: 'data-grapes-lang-en',
                             label: 'Lang EN'
                         }
@@ -28,6 +28,21 @@ const buildConstructor = (elemId, options) => {
                 }
             }
         });
+
+        editor.TraitManager.addType('textarea', {
+            createInput({ trait }) {
+                const el = document.createElement('textarea');
+                return el;
+            },
+            onUpdate({ component, elInput, trait }) {
+                elInput.value = component.getAttributes()[trait.attributes.name].replace(/<br>/g, '\r');
+            },
+            onEvent({ elInput, component, event, trait }) {
+                let attr = {};
+                attr[`${trait.attributes.name}`] = elInput.value.replace(/(?:\r\n|\r|\n)/g, '<br>');
+                component.addAttributes(attr)
+            },
+        })
 
         // editor.DomComponents.addType('link', {
         //     view: {
@@ -68,12 +83,13 @@ const buildConstructor = (elemId, options) => {
                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
             },
             beforeSend(xhr, setting) {
-                console.log('sending html to server', xhr, setting)
+                // console.log('sending html to server', xhr, setting)
             }
         },
         assetManager: {
             assets: [
-                '/img/program-poster.png'
+                '/img/program-poster.png',
+                ...imagePaths
             ],
             upload: '/control-panel/images/',
             uploadName: 'files',
@@ -110,7 +126,7 @@ const buildConstructor = (elemId, options) => {
     editor.on('selector:add', selector => selector.set('private', 1));
     editor.on('component:add', model => {
         // model.addСlass(` ${model.attributes.type + '-' + model.ccid}`);
-        console.log('model', model)
+        // console.log('model', model)
     });
     editor.addComponents(`
 <!--        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">-->
@@ -656,7 +672,7 @@ const buildConstructor = (elemId, options) => {
         label: 'Welcome Section',
         category: 'Готовые блоки',
         content: `
-            <div data-gjs-droppable=".dropping" class="program-page__section program-welcome-section dropping">
+            <div data-gjs-droppable=".dropping" class="program-welcome-section dropping">
                 <img data-gjs-type="image" alt="" class="program-welcome-section__img dropping">
 
                 <div data-gjs-droppable=".dropping" class="program-welcome-section__info dropping">
@@ -672,7 +688,7 @@ const buildConstructor = (elemId, options) => {
         label: 'Cards section',
         category: 'Готовые блоки',
         content: `
-            <div class="program-page__section program-cards dropping">
+            <div class="program-cards dropping">
 
                 <div class="program-cards__container dropping">
                     <h4 class="program-cards__title text-lang">Мы ищем проекты в твоем городе</h4>
@@ -754,7 +770,7 @@ const buildConstructor = (elemId, options) => {
         label: 'Info Block',
         category: 'Готовые блоки',
         content: `
-            <div class="program-page__section program-info">
+            <div class="program-info">
                 <div class="program-info__container">
                     <h4 class="program-info__title text-lang">Что ты получишь на инкубации?</h4>
 
@@ -792,7 +808,7 @@ const buildConstructor = (elemId, options) => {
         label: 'Steps',
         category: 'Готовые блоки',
         content: `
-            <div class="program-page__section program-steps">
+            <div class="program-steps">
 
                 <div class="program-steps__container">
 
@@ -829,7 +845,7 @@ const buildConstructor = (elemId, options) => {
         label: 'Request form',
         category: 'Готовые блоки',
         content: `
-            <div class="program-page__section program-request">
+            <div class="program-request">
                 <div class="program-request__title text-lang">
                     6 недель твой путь от идеи к бизнесу!
                 </div>
@@ -850,7 +866,7 @@ const buildConstructor = (elemId, options) => {
         label: 'Welcome Section 2',
         category: 'Готовые блоки',
         content: `
-            <div class="techpark-page__section techpark-welcome-section">
+            <div class=" techpark-welcome-section">
                 <img src="/img/techpark-bg.png" alt="" class="techpark-welcome-section__bg">
 
                 <button class="techpark-welcome-section__button-back button-back button-back--rotate button-back--transparent">
@@ -874,7 +890,7 @@ const buildConstructor = (elemId, options) => {
         label: 'Benefit Section 2',
         category: 'Готовые блоки',
         content: `
-            <div class="techpark-page__section benefit-section">
+            <div class=" benefit-section">
 
                 <div class="benefit-section__container">
                     <div class="benefit-section__row">
@@ -913,7 +929,7 @@ const buildConstructor = (elemId, options) => {
         label: 'Documents Section',
         category: 'Готовые блоки',
         content: `
-            <div class="techpark-page__section documents-section">
+            <div class=" documents-section">
 
                     <div class="documents-section__container">
                         <div class="documents-section__heading heading-medium">
@@ -1004,7 +1020,7 @@ const buildConstructor = (elemId, options) => {
         label: 'Documents Section 2',
         category: 'Готовые блоки',
         content: `
-            <div class="techpark-page__section documents-section">
+            <div class=" documents-section">
                 <div class="documents-section__container">
 
                     <div class="documents-section__heading heading-medium">
@@ -1048,7 +1064,7 @@ const buildConstructor = (elemId, options) => {
         label: 'Timeline Section',
         category: 'Готовые блоки',
         content: `
-            <div class="techpark-page__section timeline-section">
+            <div class=" timeline-section">
 
                 <div class="timeline-section__container">
 
@@ -1309,7 +1325,6 @@ const buildConstructor = (elemId, options) => {
             type: 'lang-switcher-component',
             script: function () {
                 document.getElementById('lang-kk-button').addEventListener('click', e => {
-                    console.log('kazakh')
                     document.querySelectorAll('.text-lang').forEach(elem => {
 
                         if (!elem.getAttribute('data-grapes-lang-ru'))
