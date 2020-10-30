@@ -7,6 +7,7 @@ angular
         controller: ['$http', controller],
         bindings: {
             vacancy: '<',
+            organizations: '<'
         }
     });
 
@@ -15,8 +16,15 @@ function controller($http) {
 	let $ctrl = this;
 
 	$ctrl.$onInit = function () {
+	    console.log($ctrl.vacancy)
+	    console.log($ctrl.organizations)
+
 	    $ctrl.title = $ctrl.vacancy.title;
 	    $ctrl.content = $ctrl.vacancy.content;
+	    $ctrl.fromSalary = $ctrl.vacancy.from_salary;
+        $ctrl.toSalary = $ctrl.vacancy.to_salary;
+        $ctrl.location = $ctrl.vacancy.location;
+        $ctrl.organization_id = $ctrl.vacancy.organization.id;
     };
 
     $ctrl.openToPublishModal = () => {
@@ -49,6 +57,10 @@ function controller($http) {
         let params = {
             title: $ctrl.title,
             content_t: $ctrl.content,
+            to_salary: $ctrl.toSalary,
+            from_salary: $ctrl.fromSalary,
+            location: $ctrl.location,
+            organization_id: $ctrl.organization_id
         };
 
         $http.post(url, params).then((res) => {

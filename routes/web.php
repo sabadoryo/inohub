@@ -24,10 +24,13 @@ Route::get('/startup-companies', function () {
     return view('startup-page');
 });
 
-Route::get('/vacancies', function () {
-    //todo i need controller
-    return view('vacation-list');
-});
+//Route::get('/vacancies', function () {
+//    //todo i need controller
+//    return view('vacancies-list');
+//});
+
+Route::get('/vacancies', 'VacanciesController@index');
+
 Route::get('select-language/{lang}', 'SelectLanguageController@selectLanguage');
 
 Route::group(['middleware' => ['auth']], function () {
