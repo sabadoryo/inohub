@@ -1,6 +1,6 @@
 <div class="tabs-inner__section-filter section-filter">
 
-    <div class="section-filter__title">6 заявок</div>
+    <div class="section-filter__title">{{$ctrl.total}} заявок</div>
 
     <div class="section-filter__btn-group">
         <button class="section-filter__btn button-back button-back--icon-right button-back--rotate button-back--white">
@@ -30,19 +30,33 @@
            ng-repeat="app in $ctrl.applications track by $index">
 
             <div class="application-list__type">
-                Мероприятие
+                <span ng-if="app.entity_model ==='App\\Program'">Программа</span>
+                <span ng-if="app.entity_model ==='App\\Module'">Модуль</span>
+                <span ng-if="app.entity_model ==='App\\Event'">Мероприятие</span>
             </div>
 
-            <div class="application-list__title">
-                Speaker Night
+            <div ng-if="app.entity_model === 'App\\Program'" class="application-list__title">
+                {{app.entity.title}}
             </div>
 
-            <div class="application-list__status">
-                На рассмотрении
+            <div ng-if="app.entity_model === 'App\\Module'" class="application-list__title">
+                {{app.entity.name}}
+            </div>
+
+            <div ng-if="app.status ==='opened'" class="application-list__status application-list__status--success">
+                Подтвердили
+            </div>
+
+            <div ng-if="app.status ==='process'" class="application-list__status">
+                <span>На рассмотрении</span>
+            </div>
+
+            <div ng-if="app.status ==='closed'" class="application-list__status application-list__status--danger">
+                Заявка закрыта
             </div>
 
             <div class="application-list__date">
-                23 Окт.
+                {{app.created_at | amDateFormat: 'DD MMMM'}}
             </div>
 
         </a>
@@ -50,3 +64,12 @@
     </div>
 
 </div>
+
+<ul uib-pagination
+    total-items="$ctrl.total"
+    ng-model="$ctrl.page"
+    direction-links="false"
+    ng-change="$ctrl.getList()"
+    items-per-page="5"
+    template-url="b4-pagination">
+</ul>

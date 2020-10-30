@@ -31,7 +31,7 @@ class CabinetController extends Controller
         $applications = \Auth::user()
             ->applications()
             ->with('entity')
-            ->get();
+            ->paginate(5);
 
         return $applications;
     }

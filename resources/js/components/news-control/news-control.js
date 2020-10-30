@@ -9,9 +9,9 @@ angular
             //
         }
     });
-    
+
 function controller($http, $uibModal) {
- 
+
 	let $ctrl = this;
 
     $ctrl.page = 1;
