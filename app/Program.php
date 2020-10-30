@@ -27,10 +27,10 @@ class Program extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function passport()
-    {
-        return $this->morphOne(Passport::class, 'entity');
-    }
+        public function passport()
+        {
+            return $this->morphOne(Passport::class, 'entity');
+        }
 
     public function forms()
     {

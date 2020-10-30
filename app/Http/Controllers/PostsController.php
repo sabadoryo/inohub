@@ -6,16 +6,19 @@ use App\Http\Controllers\ControlPanel\ControlPanelController;
 use App\Post;
 use Illuminate\Http\Request;
 
-class PostsController extends ControlPanelController
+class PostsController extends Controller
 {
     public function create()
     {
-        return view('control-panel.component', [
+        view()->share('includeBootstrap', true);
+        
+        return view('main.component', [
             'component' => 'post-create',
             'activePage' => 'post',
             'breadcrumb' => [
             ],
             'bindings' => [
+                'user' => \Auth::user(),
             ]
         ]);
     }
