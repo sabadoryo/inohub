@@ -54,6 +54,10 @@ function controller($timeout, $http, Auth, $uibModal, Upload, moment, $location,
                     })
                 }
             });
+            $ctrl.chatSection = window.angular.element(document.getElementById('chatSectionScrollDiv'));
+            $ctrl.historySectionScrollDiv = window.angular.element(document.getElementById('historySectionScrollDiv'));
+            $ctrl.chatSection.scrollTo(0, $ctrl.chatSection[0].scrollHeight);
+            $ctrl.historySectionScrollDiv.scrollTo(0, $ctrl.historySectionScrollDiv[0].scrollHeight);
         });
     };
 
@@ -95,8 +99,10 @@ function controller($timeout, $http, Auth, $uibModal, Upload, moment, $location,
                         created_at: moment(),
                         additional_data: res.data,
                     });
-
-
+                    $timeout(function () {
+                        $ctrl.chatSection = window.angular.element(document.getElementById('chatSectionScrollDiv'));
+                        $ctrl.chatSection.scrollTo(0, $ctrl.chatSection[0].scrollHeight);
+                    });
                     $ctrl.message = '';
                     $ctrl.attachedFiles = [];
                 },

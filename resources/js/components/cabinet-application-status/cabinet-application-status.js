@@ -73,8 +73,42 @@ function controller($http, Auth, moment, $uibModal, Upload, $timeout) {
                     }
                 });
             });
-            $ctrl.chatSection = window.angular.element(document.querySelector('#chatSectionScrollDiv'));
-            window.scrollTo(0, $ctrl.chatSection.scrollHeight);
+            $ctrl.app.actions.action.forEach(act => {
+                if (act.name === 'application_updated') {
+                    act.additional_data.forEach(data => {
+                        data.new_value_stringified = null;
+                        data.old_value_stringified = null;
+
+                        if (data.type === 'file') {
+                            let fileName;
+                            let filePath;
+                            let new_data = {};
+                            let old_data = {};
+                            for (let i = 0; i < data.new_value.length; i++) {
+                                fileName = data.new_value_names[i];
+                                filePath = data.new_value[i];
+                                new_data[fileName] = filePath;
+                            }
+                            data.new_data = new_data;
+                            for (let i = 0; i < data.old_value.length; i++) {
+                                fileName = data.old_value_names[i];
+                                filePath = data.old_value[i];
+                                old_data[fileName] = filePath;
+                            }
+                            data.old_data = old_data;
+                        } else {
+                            if (Array.isArray(data.new_value)) {
+                                data.new_value_stringified = data.new_value.join(',');
+                            }
+                            if (Array.isArray(data.old_value)) {
+                                data.old_value_stringified = data.old_value.join(',');
+                            }
+                        }
+                    })
+                }
+            });
+            $ctrl.chatSection = window.angular.element(document.getElementById('chatSectionScrollDiv'));
+            $ctrl.chatSection.scrollTo(0, $ctrl.chatSection[0].scrollHeight);
         });
         console.log($ctrl.app);
     };
@@ -167,13 +201,14 @@ function controller($http, Auth, moment, $uibModal, Upload, $timeout) {
                     if (!$ctrl.app.actions.action) {
                         $ctrl.app.actions.action = [];
                     }
-                    $ctrl.app.actions.action.unshift({
+                    $ctrl.app.actions.action.push({
                         id: res.data.action_id,
                         user: Auth.user(),
                         name: 'application_updated',
                         additional_data: res.data.changes,
                         created_at: moment(),
                     });
+                    console.log(res);
                     Swal.fire(
                         'Заявка успешно обновлена',
                         '',
@@ -213,12 +248,10 @@ function controller($http, Auth, moment, $uibModal, Upload, $timeout) {
                         created_at: moment(),
                         additional_data: res.data,
                     });
-                    $ctrl.chatSection = window.angular.element(document.getElementById('chatSectionScrollDiv'));
-                    console.log($ctrl.chatSection);
-                    console.log($ctrl.chatSection.children[$ctrl.chatSection.children.length - 1]);
-                    $ctrl.chatSection.scrollTop = $ctrl.chatSection.scrollHeight - $ctrl.chatSection.clientHeight;
-                    // window.scrollTo(0, $ctrl.chatSection);
-
+                    $timeout(function () {
+                        $ctrl.chatSection = window.angular.element(document.getElementById('chatSectionScrollDiv'));
+                        $ctrl.chatSection.scrollTo(0, $ctrl.chatSection[0].scrollHeight);
+                    });
                     $ctrl.message = '';
                     $ctrl.attachedFiles = [];
                 },
