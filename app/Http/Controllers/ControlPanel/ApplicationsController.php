@@ -18,12 +18,16 @@ class ApplicationsController extends ControlPanelController
             [null, 'Заявки']
         ];
 
+        $managers = $this->organization->users;
+
         return view('control-panel.component', [
             'PAGE_TITLE' => 'Заявки',
             'activePage' => 'applications',
             'breadcrumb' => $breadcrumb,
             'component' => 'applications-control',
-            'bindings' => []
+            'bindings' => [
+                'managers' => $managers
+            ]
         ]);
     }
 
@@ -31,7 +35,9 @@ class ApplicationsController extends ControlPanelController
     {
         $query = Application::query();
 
-        $result = $query->with('user', 'entity', 'manager')->paginate();
+        $result = $query->with('user', 'entity', 'manager')
+            ->orderBy('id', 'desc')
+            ->paginate(20);
 
         return $result;
     }
