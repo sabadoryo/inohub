@@ -15,7 +15,7 @@
 {{--                <img src="https://randomuser.me/api/portraits/men/32.jpg" class="img-circle elevation-2" alt="User Image">--}}
             </div>
             <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
+                <a href="#" class="d-block">{{Auth::user()->full_name}}</a>
             </div>
         </div>
 
@@ -45,6 +45,13 @@
                     <a href="/admin/posts" class="nav-link {{$activePage == 'posts' ? 'active' : ''}}">
                         <i class="nav-icon fas fa-paper-plane"></i>
                         <p>Посты</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/admin/investors" class="nav-link {{$activePage == 'investors' ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>Инвесторы</p>
                     </a>
                 </li>
 
