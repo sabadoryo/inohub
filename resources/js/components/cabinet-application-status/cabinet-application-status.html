@@ -1,6 +1,6 @@
 <div class="tabs-content tabs-inner">
 
-    <button class="tabs-inner__button-back button-back">
+    <button class="tabs-inner__button-back button-back" ng-click="$ctrl.goToApplications()">
         <svg class="button-back__icon" width="24" height="24">
             <use href="/img/icons.svg#chevron-left"></use>
         </svg>
@@ -14,16 +14,19 @@
             <div class="application-section__title">{{$ctrl.app.entity.name}}</div>
 
             <div class="application-section__details">
-                <div ng-if="$ctrl.app.status === 'decline'"
+                <div ng-if="$ctrl.app.status === 'accepted'"
                      class="application-section__status application-section__status--success">Статус:
-                    <span>Подтвердили</span>
+                    <span>Подтверждена</span>
                 </div>
-                <div ng-if="$ctrl.app.status === 'success'"
-                     class="application-section__status application-section__status--error">Статус:
-                    <span>Подтвердили</span>
+                <div ng-if="$ctrl.app.status === 'rejected'"
+                     class="application-section__status application-section__status--danger">Статус:
+                    <span>Отклонена</span>
                 </div>
                 <div ng-if="$ctrl.app.status === 'process'" class="application-section__status">Статус:
                     <span>На рассмотрении</span>
+                </div>
+                <div ng-if="$ctrl.app.status === 'open'" class="application-section__status">Статус:
+                    <span>Открыта</span>
                 </div>
 
                 <div class="application-section__date">
@@ -82,19 +85,31 @@
                                  ng-if="field.form_field.type === 'text'">
                                 <label class="input-box__label">{{field.form_field.label}}</label>
                                 <div class="input-box__container">
-                                    <input type="text" class="input-box__input" ng-model="field.value"
+                                    <input type="text"
+                                           class="input-box__input"
+                                           ng-model="field.value"
                                            ng-disabled="!appForm.isEditing">
+                                    <svg ng-if="appForm.isEditing" class="input-box__edit" width="24" height="24">
+                                        <use href="/img/icons.svg#pencil"></use>
+                                    </svg>
                                 </div>
                             </div>
 
                             <div class="application-block__input-box input-box"
                                  ng-if="field.form_field.type === 'textarea'">
                                 <label class="input-box__label">{{field.form_field.label}} </label>
+                                <div class="input-box__container">
                                 <textarea class="input-box__textarea"
                                           ng-disabled="!appForm.isEditing"
                                           ng-model="field.value"
                                 >
                                 </textarea>
+
+                                    <svg ng-if="appForm.isEditing" class="input-box__edit input-box__edit--area"
+                                         width="24" height="24">
+                                        <use href="/img/icons.svg#pencil"></use>
+                                    </svg>
+                                </div>
                             </div>
 
                             <div class="application-block__input-box input-box"
@@ -131,7 +146,7 @@
                                         <input type="radio"
                                                ng-model="field.value"
                                                ng-value="option.val"
-                                               name="field.id"
+                                               name="{{field.id}}"
                                                ng-disabled="!appForm.isEditing"
                                                class="real-custom-radio-box__radio">
                                         <span class="real-custom-radio-box__checkmark"></span>
@@ -229,13 +244,21 @@
     <div class="tabs-inner__section feedback-section">
         <div class="feedback-section__chat chat-section">
 
-            <div class="chat-section__messages" id="chatSectionScrollDiv">
+            <perfect-scrollbar class="chat-section__messages" id="chatSectionScrollDiv">
 
                 <div ng-repeat="message in $ctrl.app.actions.message track by $index"
                      ng-class="message.name === 'application_user_message' ? 'message-block--mine' : ''"
                      class="chat-section__block message-block">
-                    <img src="{{message.user.avatar_url}}" ng-show="message.name === 'application_admin_message'" alt=""
-                         class="message-block__person-img">
+                    <div class="message-block__person-img-box"
+                         ng-show="message.name === 'application_admin_message'">
+                        <img ng-if="message.user.avatar_url" src="{{message.user.avatar_url}}"
+                             alt=""
+                             class="message-block__person-img">
+                        <div ng-show="!message.user.avatar_url"
+                             class="message-block__initials">
+                            {{ message.user.initials }}
+                        </div>
+                    </div>
                     <div class="message-block__content">
 
                         <div class="message-block__name">{{message.user.full_name}}</div>
@@ -260,17 +283,26 @@
                         </div>
 
                     </div>
+                    <div class="message-block__person-img-box"  ng-show="message.name === 'application_user_message'">
+                        <img src="{{message.user.avatar_url}}" alt=""
+                             ng-if="message.user.avatar_url"
+                             class="message-block__person-img">
+                        <div ng-show="!message.user.avatar_url"
+                             class="message-block__initials">
+                            {{ message.user.initials }}
+                        </div>
+                    </div>
 
-                    <img src="{{message.user.avatar_url}}" ng-show="message.name === 'application_user_message'" alt=""
-                         class="message-block__person-img">
 
                 </div>
 
-            </div>
+            </perfect-scrollbar>
             <form ng-submit="$ctrl.sendMessage()" class="mb-3">
                 <div class="chat-section__message-area">
 
-                    <textarea ng-model="$ctrl.message" class="chat-section__message-input"></textarea>
+                    <textarea ng-model="$ctrl.message"
+                              placeholder="Введите ваше сообщение..."
+                              class="chat-section__message-input"></textarea>
 
 
                     <!--                <a href=""-->
@@ -301,6 +333,7 @@
                 <div class="chat-section__row">
 
                     <button class="chat-section__append-file"
+                            type="button"
                             ngf-select=""
                             ngf-keep="true"
                             ng-model="$ctrl.attachedFiles"
@@ -342,17 +375,17 @@
                         </tr>
                         <tr ng-repeat="data in action.additional_data track by $index">
                             <td>{{data.label}}</td>
-                           <td>
-                               <div ng-if="data.type === 'file'">
-                                   <div ng-repeat="(name,path) in data.old_data ">
-                                       <a href="/cabinet/download-file/{{path}}">{{name}}</a>
-                                   </div>
-                               </div>
-                               <div ng-if="data.type !== 'file'">
-                                   <span ng-if="data.old_value_stringified">{{data.old_value_stringified}}</span>
-                                   <span ng-if="!data.old_value_stringified">{{data.old_value}}</span>
-                               </div>
-                           </td>
+                            <td>
+                                <div ng-if="data.type === 'file'">
+                                    <div ng-repeat="(name,path) in data.old_data ">
+                                        <a href="/cabinet/download-file/{{path}}">{{name}}</a>
+                                    </div>
+                                </div>
+                                <div ng-if="data.type !== 'file'">
+                                    <span ng-if="data.old_value_stringified">{{data.old_value_stringified}}</span>
+                                    <span ng-if="!data.old_value_stringified">{{data.old_value}}</span>
+                                </div>
+                            </td>
                             <td>
                                 <div ng-if="data.type === 'file'">
                                     <div ng-repeat="(name,path) in data.new_data">

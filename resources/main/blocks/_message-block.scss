@@ -8,7 +8,7 @@
     &--mine {
         justify-content: flex-end;
 
-        #{$e}__person-img {
+        #{$e}__person-img-box {
             margin-right: 0;
             margin-left: 15px;
         }
@@ -62,6 +62,27 @@
         width: 28px;
         height: 28px;
         border-radius: 50%;
+    }
+
+    &__initials {
+        @include text-style(1.5rem, 500, $elem-color);
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__person-img-box {
+        background-color: #ffffff;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         margin-right: 15px;
     }
 }
