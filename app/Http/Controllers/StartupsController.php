@@ -24,7 +24,7 @@ class StartupsController extends Controller
 
         if ($request->hasFile('logotype')) {
             $logotypePath = $request->file('logotype')
-                ->store('public/logotypes');
+                ->store('logotypes', 'public');
         }
 
         $startup = Startup::create([

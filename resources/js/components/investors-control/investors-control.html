@@ -1,0 +1,69 @@
+<form class="mb-3" ng-submit="$ctrl.filter()">
+
+    <div class="form-row">
+
+        <div class="col-3">
+            <input type="text"
+                   class="form-control"
+                   placeholder="Имя, фамилия, email или телефон"
+                   ng-model="$ctrl.search">
+        </div>
+
+        <div class="col-3">
+            <select ng-model="$ctrl.status" class="form-control">
+                <option value="">Выберите статус</option>
+                <option value="open">Открыто</option>
+                <option value="accepted">Принято</option>
+                <option value="rejected">Отклонено</option>
+            </select>
+        </div>
+
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary" ng-disabled="$ctrl.loading">Поиск</button>
+            <button type="button" class="btn btn-secondary" ng-click="$ctrl.reset()">Сбросить</button>
+        </div>
+
+    </div>
+
+</form>
+
+<table class="table bg-white" style="font-size: 14px">
+    <thead class="thead-light">
+    <tr>
+        <th>ID</th>
+        <th>ФИО</th>
+        <th>О себе</th>
+        <th>Сферы в которых заинтересован</th>
+        <th>Статус</th>
+        <th>Дата добавления</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tr ng-repeat="investor in $ctrl.investors">
+        <td style="vertical-align: middle">{{investor.id}}</td>
+        <td style="vertical-align: middle">{{investor.user.full_name}}</td>
+        <td style="vertical-align: middle">{{investor.about | truncate : 20 : '...'}}</td>
+        <td style="vertical-align: middle">{{investor.interests | truncate : 20 : '...'}}</td>
+        <td style="vertical-align: middle" ng-switch="investor.status">
+            <div ng-switch-when="open">Открыто</div>
+            <div ng-switch-when="accepted" class="text-success">Принято</div>
+            <div ng-switch-when="rejected" class="text-danger">Отклонено</div>
+        </td>
+        <td style="vertical-align: middle">{{investor.created_at | amDateFormat : 'DD.MM HH:mm'}}</td>
+        <td style="vertical-align: middle">
+            <button ng-show="investor.status === 'open'"
+                    class="btn btn-primary btn-xs mr-2"
+                    ng-click="$ctrl.editInvestor(investor)">
+                <i class="fa fa-edit"></i>
+            </button>
+        </td>
+    </tr>
+</table>
+
+<ul uib-pagination
+    total-items="$ctrl.total"
+    ng-model="$ctrl.page"
+    ng-change="$ctrl.getList()"
+    items-per-page="10"
+    template-url="b4-pagination">
+</ul>

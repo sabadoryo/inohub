@@ -80,7 +80,7 @@ function controller($http, notify) {
                         duration: 2000,
                         position: 'top',
                         classes: 'alert-danger'
-                    })
+                    });
                 }
             )
     };

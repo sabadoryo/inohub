@@ -16,15 +16,9 @@ Route::get('/events/{id}', 'EventsController@show');
 Route::get('startups', 'StartupsController@index');
 Route::post('startups', 'StartupsController@store');
 
-Route::get('/investors', function () {
-    //todo i need controller
-    return view('investors-page');
-});
+Route::get('investors', 'InvestorsController@index');
+Route::post('investors', 'InvestorsController@store');
 
-Route::get('/startup-companies', function () {
-    //todo i need controller
-    return view('startup-page');
-});
 
 //Route::get('/vacancies', function () {
 //    //todo i need controller
@@ -268,6 +262,11 @@ Route::group([
     Route::post('organizations', 'OrganizationsController@store');
     Route::get('organizations/{id}/edit', 'OrganizationsController@edit');
     Route::put('organizations/{id}', 'OrganizationsController@update');
+
+    Route::get('investors', 'InvestorsController@index');
+    Route::get('investors/get-list', 'InvestorsController@getList');
+    Route::post('investors/{id}/accept', 'InvestorsController@accept');
+    Route::post('investors/{id}/reject', 'InvestorsController@reject');
 
     Route::get('posts', 'PostsController@index');
     Route::get('posts/get-list', 'PostsController@getList');

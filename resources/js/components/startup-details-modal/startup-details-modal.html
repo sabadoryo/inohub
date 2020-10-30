@@ -23,8 +23,8 @@
         <tr>
             <td>Лого</td>
             <td>
-                <span ng-if="!ctrl.resolve.startup.logotype_url">Отсутствует</span>
-                <img ng-if="$ctrl.resolve.startup.logotype_url" src="{{$ctrl.resolve.startup.logotype_url}}" width="150px" height="100px">
+                <span ng-if="!$ctrl.resolve.startup.logotype_url">Отсутствует</span>
+                <img ng-if="$ctrl.resolve.startup.logotype_url" ng-src="{{$ctrl.resolve.startup.logotype_url}}" width="150px">
             </td>
         </tr>
         </tbody>
@@ -34,5 +34,5 @@
 
 <div class="modal-footer">
     <button class="btn btn-danger" ng-click="$ctrl.reject()" ng-disabled="$ctrl.loading">Отклонить</button>
-    <button class="btn btn-primary" ng-click="$ctrl.accept()" ng-disabled="$ctrl.loading">Принять</button>
+    <button class="btn btn-success" ng-click="$ctrl.accept()" ng-disabled="$ctrl.loading">Принять</button>
 </div>

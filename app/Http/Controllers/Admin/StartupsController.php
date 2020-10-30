@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class StartupsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $breadcrumb = [
             ['/admin', 'Главная'],
@@ -16,6 +16,7 @@ class StartupsController extends Controller
         ];
 
         $bindings = [
+            'input-id' => $request->id
         ];
 
         return view('admin.component', [
@@ -31,12 +32,16 @@ class StartupsController extends Controller
     {
         $query = Startup::query();
 
+        if ($request->id) {
+            $query->where('id', $request->id);
+        }
+
         if ($request->status) {
             $query->where('status', $request->status);
         }
 
         if ($request->project) {
-            $query->where('project_name', 'like', '%'.$request->project.'%');
+            $query->where('project_name', 'like', '%' . $request->project . '%');
         }
 
         if ($request->companyNameOrBIN) {

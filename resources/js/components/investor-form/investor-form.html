@@ -1,0 +1,60 @@
+<a href="" class="startup-modal__close" ng-click="$ctrl.dismiss()">
+    <svg width="28" height="28">
+        <use href="/img/icons.svg#close-icon"></use>
+    </svg>
+</a>
+
+<form class="startup-form" ng-submit="$ctrl.submit()">
+
+    <div class="startup-form__title">Анкета инвестора</div>
+
+    <div class="startup-form__row startup-form__row--centered">
+
+        <div class="startup-form__col">
+
+            <div class="input-box" style="margin-bottom: 15px">
+
+                <label class="input-box__label">
+                    О себе:
+                    <span class="input-box__required">*</span>
+                </label>
+
+                <textarea class="input-box__textarea" ng-model="$ctrl.about" required></textarea>
+
+            </div>
+
+            <div class="input-box" style="margin-bottom: 15px">
+
+                <label class="input-box__label">
+                    Какие сферы вам интересны:
+                    <span class="input-box__required">*</span>
+                </label>
+
+                <textarea class="input-box__textarea" ng-model="$ctrl.interest" required></textarea>
+
+            </div>
+
+            <div class="input-box" style="margin-bottom: 15px">
+
+                <label class="input-box__label">Фото для карточки:</label>
+
+                <div style="font-size: 13px; margin-bottom: 5px" ng-show="$ctrl.photo">{{$ctrl.photo.name}}</div>
+
+                <div>
+                    <button class="button button--xs"
+                            type="button"
+                            ngf-select=""
+                            ng-model="$ctrl.photo"
+                            ngf-max-size="10MB">Выбрать фото</button>
+                </div>
+            </div>
+
+            <button class="modal-full__button button button--extra-lg" type="submit">
+                Отправить
+            </button>
+
+        </div>
+
+    </div>
+
+</form>
