@@ -6,7 +6,7 @@ angular
         template: require('./applications-control.html'),
         controller: ['$http', controller],
         bindings: {
-            //
+            managers: '<',
         }
     });
     
@@ -15,6 +15,8 @@ function controller($http) {
 	let $ctrl = this;
 
 	$ctrl.page = 1;
+	$ctrl.user = null;
+	$ctrl.manager = null;
 
 	$ctrl.$onInit = function () {
         $ctrl.getList();
@@ -30,6 +32,7 @@ function controller($http) {
             .then(
                 res => {
                     $ctrl.applications = res.data.data;
+                    $ctrl.total = res.data.total;
                 },
                 err => {
 

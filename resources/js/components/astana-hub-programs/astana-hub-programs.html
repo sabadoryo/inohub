@@ -3,25 +3,28 @@
 
         <div class="programs__list">
 
-            <div class="programs__card program-box" ng-repeat="program in $ctrl.programs track by $index">
+            <a href=""
+               class="programs__card program-box"
+               ng-href="/astana-hub/programs/{{program.id}}"
+               ng-repeat="program in $ctrl.programs track by $index">
 
-                <a href="" ng-href="/astana-hub/programs/{{program.id}}" class="program-box__more-btn">
+                <span class="program-box__more-btn">
                     <img src="/img/icons/chevron-right-alt.svg" alt="">
-                </a>
+                </span>
 
                 <div class="program-box__title">
-                    {{program.title}}
+                    {{ program.title }}
                 </div>
 
                 <div class="program-box__date" ng-show="program.limit_date">
-                    Срок подачи до: {{program.limit_date | amDateFormat : 'D MMM'}}
+                    Срок подачи до: {{ program.limit_date | amDateFormat : 'D MMM' }}
                 </div>
 
                 <div class="program-box__text">
-                    {{program.short_description}}
+                    {{ program.short_description }}
                 </div>
 
-            </div>
+            </a>
 
         </div>
     </div>

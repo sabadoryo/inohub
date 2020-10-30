@@ -25,6 +25,18 @@
             display: block;
         }
 
+        .swal2-title {
+            font-size: 2.5em;
+        }
+
+        .swal-content {
+            font-size: 1.8em;
+        }
+
+        .swal2-styled.swal2-confirm {
+            font-size: 1.4em;
+        }
+
     </style>
 
 </head>

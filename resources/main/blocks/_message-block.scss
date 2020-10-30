@@ -19,22 +19,22 @@
     }
 
     &__content {
-        width: 428px;
+        width: 385px;
         padding: 20px;
         border-radius: 7px;
-        background-color: #f6f6f6;
+        background-color: #f7f7f7;
     }
 
     &__name {
         @include text-style(1.6rem, 600, #181515);
         line-height: 19.5px;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
     }
 
     &__text {
         @include text-style(1.6rem, 400, #181515);
         line-height: 19.5px;
-        margin-bottom: 25px;
+        margin-bottom: 10px;
 
         &--bordered {
             border-bottom: 1px solid #E8E8E8;

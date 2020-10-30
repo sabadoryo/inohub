@@ -103,7 +103,9 @@
             <div class="col-6">
                 <div class="card-header">История</div>
                 <div class="card-body" style="max-height: 500px; overflow-y: auto">
-                    <div class="card mb-2" ng-repeat="action in $ctrl.application.actions.action track by $index">
+                    <div class="card mb-2"
+                         ng-repeat="action in $ctrl.application.actions.action track by $index"
+                         ng-if="action.additional_data.length > 0">
                         <div class="card-header">
                             {{action.user.full_name}} -
                             <span ng-if="action.name === 'application_updated'">редактировал заявку</span>
