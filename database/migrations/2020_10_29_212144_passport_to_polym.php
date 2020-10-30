@@ -14,13 +14,13 @@ class PassportToPolym extends Migration
     public function up()
     {
         Schema::table('passports', function (Blueprint $table) {
-            $table->dropForeign('passports_program_id_foreign');
-            $table->dropForeign('passports_event_id_foreign');
-            $table->dropColumn('program_id');
-            $table->dropColumn('event_id');
-            $table->dropColumn('type');
-            $table->string('entity_type');
-            $table->unsignedBigInteger('entity_id');
+//            $table->dropForeign('passports_program_id_foreign');
+//            $table->dropForeign('passports_event_id_foreign');
+//            $table->dropColumn('program_id');
+//            $table->dropColumn('event_id');
+//            $table->dropColumn('type');
+//            $table->string('entity_type');
+//            $table->unsignedBigInteger('entity_id');
         });
     }
 

@@ -24,33 +24,33 @@
 </head>
 <body ng-controller="MainController" ng-cloak="" ng-init="entityType = '{{$entityType}}'; entityId = {{$entityId}}">
 
-    <header class="header">
+<header class="header">
 
-        <div class="header__container">
+    <div class="header__container">
 
-            <a href="/" class="header__logo">Tech <span class="header__logo-accent">Hub</span></a>
+        <a href="/" class="header__logo">Tech <span class="header__logo-accent">Hub</span></a>
 
-            <div uib-dropdown="" class="header__lang-container">
+        <div uib-dropdown="" class="header__lang-container">
 
-                <div class="header__lang-switcher" uib-dropdown-toggle="">
-                    <div class="header__language">Ru</div>
-                    <svg class="header__lang-toggle" width="10" height="5">
-                        <use xlink:href="/img/icons.svg#toggle"></use>
-                    </svg>
-                </div>
-                <ul class="header__lang-dropdown lang-dropdown" uib-dropdown-menu="">
-                    <li class="lang-dropdown__item"><a href="/select-language/kk" class="lang-dropdown__link">Қазақша</a></li>
-                    <li class="lang-dropdown__item"><a href="/select-language/ru"  class="lang-dropdown__link">Русский</a></li>
-                    <li class="lang-dropdown__item"><a href="/select-language/en"  class="lang-dropdown__link">English</a></li>
-                </ul>
-
+            <div class="header__lang-switcher" uib-dropdown-toggle="">
+                <div class="header__language">{{ $dictionary['En'] ?? "En" }}</div>
+                <svg class="header__lang-toggle" width="10" height="5">
+                    <use xlink:href="/img/icons.svg#toggle"></use>
+                </svg>
             </div>
-
-            <user-bar></user-bar>
+            <ul class="header__lang-dropdown lang-dropdown" uib-dropdown-menu="">
+                <li class="lang-dropdown__item"><a href="/select-language/kk" class="lang-dropdown__link">Қазақша</a></li>
+                <li class="lang-dropdown__item"><a href="/select-language/ru"  class="lang-dropdown__link">Русский</a></li>
+                <li class="lang-dropdown__item"><a href="/select-language/en"  class="lang-dropdown__link">English</a></li>
+            </ul>
 
         </div>
 
-    </header>
+        <user-bar></user-bar>
+
+    </div>
+
+</header>
 
     {!! $passport->content !!}
 
@@ -71,11 +71,12 @@
     <script>
 
         document.addEventListener("DOMContentLoaded", function () {
-            document.querySelectorAll('.text-lang').forEach(elem => {
+            console.log('{{$activeLang}}')
+
+            document.querySelectorAll('[data-grapes-lang-{{$activeLang}}]').forEach(elem => {
                 if (!elem.getAttribute('data-grapes-lang-ru')) {
                     elem.setAttribute('data-grapes-lang-ru', elem.innerHTML);
                 }
-                console.log('{{$activeLang}}')
                 elem.innerHTML = elem.getAttribute('data-grapes-lang-{{$activeLang}}');
             })
         });

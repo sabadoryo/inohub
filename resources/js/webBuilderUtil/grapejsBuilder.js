@@ -15,12 +15,12 @@ const buildConstructor = (elemId, options) => {
                     },
                     traits: [
                         {
-                            type: 'text',
+                            type: 'textarea',
                             name: 'data-grapes-lang-kk',
                             label: 'Lang KK'
                         },
                         {
-                            type: 'text',
+                            type: 'textarea',
                             name: 'data-grapes-lang-en',
                             label: 'Lang EN'
                         }
@@ -28,6 +28,19 @@ const buildConstructor = (elemId, options) => {
                 }
             }
         });
+
+        editor.TraitManager.addType('textarea', {
+            createInput({ trait }) {
+                const el = document.createElement('textarea');
+                trait.attributes.value = 'sex'
+                console.log('trait', trait)
+                return el;
+            },
+            onUpdate({ component, elInput, trait }) {
+                elInput.value = component.getAttributes()[trait.attributes.name];
+                console.log('elInput.value', elInput.value)
+            }
+        })
 
         // editor.DomComponents.addType('link', {
         //     view: {
@@ -68,7 +81,7 @@ const buildConstructor = (elemId, options) => {
                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
             },
             beforeSend(xhr, setting) {
-                console.log('sending html to server', xhr, setting)
+                // console.log('sending html to server', xhr, setting)
             }
         },
         assetManager: {
@@ -110,7 +123,7 @@ const buildConstructor = (elemId, options) => {
     editor.on('selector:add', selector => selector.set('private', 1));
     editor.on('component:add', model => {
         // model.addСlass(` ${model.attributes.type + '-' + model.ccid}`);
-        console.log('model', model)
+        // console.log('model', model)
     });
     editor.addComponents(`
 <!--        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">-->
@@ -1309,7 +1322,6 @@ const buildConstructor = (elemId, options) => {
             type: 'lang-switcher-component',
             script: function () {
                 document.getElementById('lang-kk-button').addEventListener('click', e => {
-                    console.log('kazakh')
                     document.querySelectorAll('.text-lang').forEach(elem => {
 
                         if (!elem.getAttribute('data-grapes-lang-ru'))
