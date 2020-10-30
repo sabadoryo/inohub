@@ -228,3 +228,6 @@ require('./components/startups-page/startups-page');
 require('./components/startups/startups');
 require('./components/startup-form/startup-form');
 require('./components/organizations-edit/organizations-edit');
+
+require('./components/investors-control/investors-control');
+require('./components/investors-edit/investors-edit');

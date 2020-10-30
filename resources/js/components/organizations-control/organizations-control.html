@@ -1,21 +1,21 @@
 <table class="table bg-white">
     <thead class="thead-light">
     <tr>
-        <th class="text-center">ID</th>
-        <th class="text-center">Название</th>
-        <th class="text-center">Администраторы</th>
+        <th>ID</th>
+        <th>Название</th>
+        <th>Администраторы</th>
         <th></th>
     </tr>
     </thead>
     <tr ng-repeat="org in $ctrl.organizations">
-        <td class="text-center" style="vertical-align: middle">{{org.id}}</td>
-        <td class="text-center" style="vertical-align: middle">{{org.name}}</td>
-        <td class="text-center" style="vertical-align: middle">
+        <td style="vertical-align: middle">{{org.id}}</td>
+        <td style="vertical-align: middle">{{org.name}}</td>
+        <td style="vertical-align: middle">
             <div ng-repeat="admin in org.admins">
                 {{admin.full_name}}
             </div>
         </td>
-        <td class="text-center" style="vertical-align: middle">
+        <td style="vertical-align: middle">
             <button class="btn btn-primary btn-xs" ng-click="$ctrl.editOrganization(org)">
                 <i class="fa fa-edit"></i>
             </button>

@@ -269,6 +269,11 @@ Route::group([
     Route::get('organizations/{id}/edit', 'OrganizationsController@edit');
     Route::put('organizations/{id}', 'OrganizationsController@update');
 
+    Route::get('investors', 'InvestorsController@index');
+    Route::get('investors/get-list', 'InvestorsController@getList');
+    Route::post('investors/{id}/accept', 'InvestorsController@accept');
+    Route::post('investors/{id}/reject', 'InvestorsController@reject');
+
     Route::get('posts', 'PostsController@index');
     Route::get('posts/get-list', 'PostsController@getList');
     Route::get('posts/{id}/check', 'PostsController@postCheck');
