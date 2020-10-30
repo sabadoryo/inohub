@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\ControlPanel;
 
 use App\Application;
+use App\Event;
+use App\Feed;
 use App\Form;
 use App\Passport;
 use App\Program;
@@ -195,6 +197,11 @@ class ProgramsController extends ControlPanelController
         $program->update([
             'status' => 'published',
             'published_at' => Carbon::now(),
+        ]);
+
+        Feed::create([
+            'entity_model' => Program::class,
+            'entity_id' => $id
         ]);
     }
 

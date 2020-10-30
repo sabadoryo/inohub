@@ -15,6 +15,7 @@ class VacanciesController extends Controller
             'vacancies' => $vacancies
         ];
 
+
         return view('main.component', [
             'PAGE_TITLE' => 'Вакансии',
             'activePage' => 'vacancies',
