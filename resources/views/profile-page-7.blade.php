@@ -65,79 +65,124 @@
 
             </div>
 
-            <div class="tabs-inner__section chat-section">
+            <div class="tabs-inner__section feedback-section">
 
-                <div class="chat-section__messages">
+                <div class="feedback-section__chat chat-section">
 
-                    <div class="chat-section__block message-block message-block--mine">
+                    <div class="chat-section__messages">
 
-                        <div class="message-block__content">
+                        <div class="chat-section__block message-block message-block--mine">
 
-                            <div class="message-block__name">Олжас Аскаров</div>
+                            <div class="message-block__content">
 
-                            <div class="message-block__text message-block__text--bordered">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt ut
-                                labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                                ullamco
-                                laboris nisi ut aliquip ex ea commodo consequat.
+                                <div class="message-block__name">Олжас Аскаров</div>
+
+                                <div class="message-block__text message-block__text--bordered">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                    incididunt ut
+                                    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                                    ullamco
+                                    laboris nisi ut aliquip ex ea commodo consequat.
+                                </div>
+
+                                <div class="message-block__row">
+                                    <a href="#" class="message-block__file">
+                                        <svg width="45" height="45">
+                                            <use href="/img/icons.svg#pdf-icon"></use>
+                                        </svg>
+                                    </a>
+
+                                    <div class="message-block__date">пт. 23 Октября - 12:31</div>
+                                </div>
+
                             </div>
 
-                            <div class="message-block__row">
-                                <a href="#" class="message-block__file">
-                                    <svg width="45" height="45">
-                                        <use href="/img/icons.svg#pdf-icon"></use>
-                                    </svg>
-                                </a>
+                            <img src="/img/user-avatar.png" alt="" class="message-block__person-img">
 
-                                <div class="message-block__date">пт. 23 Октября - 12:31</div>
+                        </div>
+
+                        <div class="chat-section__block message-block">
+
+                            <img src="/img/user-avatar.png" alt="" class="message-block__person-img">
+
+                            <div class="message-block__content">
+
+                                <div class="message-block__name">Асель Назымова</div>
+
+                                <div class="message-block__text">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua.
+                                </div>
+
+                                <div class="message-block__row">
+                                    <div class="message-block__date">пт. 23 Октября - 12:31</div>
+                                </div>
+
                             </div>
 
                         </div>
 
-                        <img src="/img/user-avatar.png" alt="" class="message-block__person-img">
+                    </div>
+
+                    <div class="chat-section__message-area">
+
+                        <textarea class="chat-section__message-input"></textarea>
 
                     </div>
 
-                    <div class="chat-section__block message-block">
+                    <div class="chat-section__row">
 
-                        <img src="/img/user-avatar.png" alt="" class="message-block__person-img">
+                        <button class="chat-section__append-file">
+                            <svg width="20" height="20">
+                                <use href="/img/icons.svg#paper-clip"></use>
+                            </svg>
+                        </button>
 
-                        <div class="message-block__content">
+                        <button class="chat-section__btn button button--extra-lg">Отправить</button>
+                    </div>
 
-                            <div class="message-block__name">Асель Назымова</div>
 
-                            <div class="message-block__text">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua.
+                </div>
+
+                <div class="feedback-section__history history-section">
+
+                    <div class="history-section__list">
+
+                        <div class="history-section__item history-box">
+                            <div class="history-box__row">
+                                <div class="history-box__title">
+                                    Олжас Аскаров - редактировал заявку
+                                </div>
+
+                                <div class="history-box__date">
+                                    23.10 - 12:31
+                                </div>
                             </div>
 
-                            <div class="message-block__row">
-                                <div class="message-block__date">пт. 23 Октября - 12:31</div>
-                            </div>
-
+                            <table class="history-box__table">
+                                <tr>
+                                    <th>Измененное поле</th>
+                                    <th>Старое значение</th>
+                                    <th>Новое значение</th>
+                                </tr>
+                                <tr>
+                                    <td>Телефон</td>
+                                    <td>+7 777 838 99 90</td>
+                                    <td>+7 707 217 98 09</td>
+                                </tr>
+                                <tr>
+                                    <td>E-mail</td>
+                                    <td>olzh01@gmail.com</td>
+                                    <td>olz01@gmail.com</td>
+                                </tr>
+                            </table>
                         </div>
 
                     </div>
 
                 </div>
-
-                <div class="chat-section__message-area">
-
-                    <textarea class="chat-section__message-input"></textarea>
-
-                    <a href="#" class="chat-section__link-box">
-                        <svg class="chat-section__link-icon" width="24" height="24">
-                            <use href="/img/icons.svg#paper-clip"></use>
-                        </svg>
-                        Прикрепить файл
-                    </a>
-
-                </div>
-
-                <button class="chat-section__btn button button--extra-lg">Отправить</button>
-
             </div>
+
         </div>
 
     </div>
