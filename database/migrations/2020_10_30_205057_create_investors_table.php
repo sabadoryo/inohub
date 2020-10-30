@@ -19,6 +19,7 @@ class CreateInvestorsTable extends Migration
             $table->text('about');
             $table->text('interests');
             $table->string('photo_path');
+            $table->boolean('is_approved')->default(false);
             $table->timestamps();
 
             $table->foreign('user_id')
