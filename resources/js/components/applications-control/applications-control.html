@@ -6,7 +6,7 @@
             <input type="text"
                    class="form-control"
                    placeholder="Пользователь"
-                   ng-model="$ctrl.user">
+                   ng-model="$ctrl.search">
         </div>
 
         <div class="col-3">
@@ -19,7 +19,9 @@
         </div>
 
         <div class="col-3">
-            <select name="" id="" class="form-control">
+            <select class="form-control"
+                    ng-model="$ctrl.managerId"
+                    ng-options="manager.id as manager.full_name for manager in $ctrl.managers">
                 <option value="">Выберите оператора</option>
             </select>
         </div>
