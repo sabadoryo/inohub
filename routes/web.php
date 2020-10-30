@@ -121,8 +121,11 @@ Route::group([
     Route::get('programs/{id}/forms', 'ProgramsController@forms');
     Route::post('programs/{id}/update-forms', 'ProgramsController@updateForms');
     Route::post('programs/{id}/publish', 'ProgramsController@publish');
-
-
+    Route::get('programs/{id}/members', 'ProgramsController@members');
+    Route::get('programs/{id}/members/get-list', 'ProgramsController@getMembersList');
+    Route::get('programs/{id}/members/get-users-list', 'ProgramsController@getUsers');
+    Route::get('programs/{id}/members/create', 'ProgramsController@createMember');
+    Route::post('programs/{id}/members', 'ProgramsController@storeMember');
 
     Route::get('users', 'UsersController@index');
     Route::get('users/get-list', 'UsersController@getList');
@@ -147,6 +150,7 @@ Route::group([
     Route::post('events', 'EventsController@store');
     Route::get('events/{id}/main', 'EventsController@mainForm');
     Route::get('events/{id}/page', 'EventsController@pageForm');
+    Route::post('events/{id}/update-page', 'EventsController@updatePage');
     Route::get('events/{id}/forms', 'EventsController@forms');
     Route::post('events/{id}/update-main', 'EventsController@updateMain');
     Route::post('events/{id}/update-forms', 'EventsController@updateForms');
@@ -387,3 +391,4 @@ Route::get('for-investor', function () {
 Route::get('edit-post', function () {
     return view('edit-post');
 });
+

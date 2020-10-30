@@ -6,7 +6,7 @@ angular
         template: require('./post-create.html'),
         controller: ['Upload', controller],
         bindings: {
-            //
+            user: '<',
         }
     });
 
@@ -16,6 +16,7 @@ function controller(Upload) {
 
     $ctrl.data = [];
 	$ctrl.loading = false;
+
 	$ctrl.$onInit = function () {
     };
 
@@ -25,6 +26,7 @@ function controller(Upload) {
             content: null
         });
     };
+
     $ctrl.selectImageModal = () => {
         $ctrl.data.push({
             type: 'image',

@@ -39,7 +39,7 @@ class EventsController extends ControlPanelController
             $query->where(
                 'name',
                 'like',
-                $request->name . '%'
+                $request->name.'%'
             );
         }
 
@@ -68,7 +68,11 @@ class EventsController extends ControlPanelController
         $event = Event::create([
             'name' => $request->name,
             'start_date' => $date,
+            'organization_id' => $this->organization->id,
+            'user_id' => \Auth::user()->id,
         ]);
+
+        $event->passport()->create([]);
 
         return ['id' => $event->id];
     }
@@ -98,12 +102,12 @@ class EventsController extends ControlPanelController
 
     public function pageForm($id)
     {
-        $event = Event::find($id);
+        $event = Event::with('passport')->find($id);
 
         $breadcrumb = [
             ['/control-panel', 'Главная'],
             ['/control-panel/events', 'Мероприятия'],
-            [null, $event->name],
+            [null, \Str::limit($event->name, 50)],
         ];
 
         return view('control-panel.component', [
@@ -160,7 +164,7 @@ class EventsController extends ControlPanelController
 
         $path = null;
         if ($request->image !== "null") {
-            $path = \Storage::disk('public')->put('events_images',$request->image);
+            $path = \Storage::disk('public')->put('events_images', $request->image);
         }
 
         $event->update([
@@ -213,5 +217,20 @@ class EventsController extends ControlPanelController
             'entity_id' => $id
         ]);
 
+    }
+
+    public function updatePage(Request $request, $id)
+    {
+        $request->validate([
+            'content' => 'required'
+        ]);
+
+        $event = Event::findOrFail($id);
+
+        $event->passport->update([
+            'content' => $request->input('content')
+        ]);
+
+        return [];
     }
 }

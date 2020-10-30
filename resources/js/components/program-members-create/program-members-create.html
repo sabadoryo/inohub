@@ -1,0 +1,40 @@
+<div class="alert alert-default-warning" ng-show="$ctrl.program.status == 'draft'">
+    Данная программа еще не опубликована.
+    <button type="button" class="btn btn-primary btn-sm ml-2" ng-click="$ctrl.openToPublishModal()">Опубликовать</button>
+</div>
+
+<div class="card card-primary card-outline card-outline-tabs">
+    <div class="card-header p-0 border-bottom-0">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link" href="" ng-href="/control-panel/programs/{{$ctrl.program.id}}/main">Основная информация</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="" ng-href="/control-panel/programs/{{$ctrl.program.id}}/page">Страница</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="" ng-href="/control-panel/programs/{{$ctrl.program.id}}/forms">Анкета</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="" ng-href="/control-panel/programs/{{$ctrl.program.id}}/members">Участники</a>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-6">
+
+                <div class="form-group">
+                    <label>Участник</label>
+                    <select type="text" class="form-control" ng-model="$ctrl.userId">
+                        <option ng-repeat="user in $ctrl.users" ng-value="user.id">{{user.full_name}}</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-primary" ng-click="$ctrl.submit()">Сохранить</button>
+
+            </div>
+        </div>
+
+    </div>
+</div>
