@@ -38,7 +38,7 @@ function controller($http, $uibModal) {
     $ctrl.getList = () => {
         $ctrl.loading = true;
         $http
-            .get('/control-panel/posts/get-list', {
+            .get('/admin/posts/get-list', {
                 params: {
                     page: $ctrl.page,
                     title: $ctrl.title,
@@ -57,25 +57,4 @@ function controller($http, $uibModal) {
                 }
             )
     };
-
-    $ctrl.openEdit = (index) => {
-        $uibModal
-            .open({
-                component: 'postCheckModal',
-                resolve: {
-                    post: function () {
-                        return $ctrl.posts[index];
-                    }
-                }
-            })
-            .result
-            .then(
-                res => {
-
-                },
-                err => {
-
-                }
-            );
-    }
 }

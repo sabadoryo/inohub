@@ -10,6 +10,7 @@
         padding: 10px 15px;
         display: flex;
         align-items: center;
+        @include text-style(1.6rem, 500, #181515);
 
         &--border {
             border-bottom: 1px solid #E8E8E8;
@@ -22,11 +23,6 @@
 
     &__icon {
         margin-right: 25px;
-    }
-
-    &__link:link,
-    &__link:visited {
-        @include text-style(1.6rem, 500, #181515);
     }
 
     &__link:hover {

@@ -22,7 +22,6 @@ function controller($timeout, $http, Auth, $uibModal, Upload, moment, $location,
         $timeout(function () {
             $ctrl.application.actions.action.forEach(act => {
                 if (act.name === 'application_updated') {
-                    console.log(act);
                     act.additional_data.forEach(data => {
                         data.new_value_stringified = null;
                         data.old_value_stringified = null;
@@ -56,7 +55,6 @@ function controller($timeout, $http, Auth, $uibModal, Upload, moment, $location,
                 }
             });
         });
-        console.log($ctrl.application.actions.action);
     };
 
     $ctrl.takeForProcessing = function () {
@@ -98,7 +96,6 @@ function controller($timeout, $http, Auth, $uibModal, Upload, moment, $location,
                         additional_data: res.data,
                     });
 
-                    console.log(res);
 
                     $ctrl.message = '';
                     $ctrl.attachedFiles = [];

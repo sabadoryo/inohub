@@ -25,6 +25,18 @@
             display: block;
         }
 
+        .swal2-title {
+            font-size: 2.5em;
+        }
+
+        .swal-content {
+            font-size: 1.8em;
+        }
+
+        .swal2-styled.swal2-confirm {
+            font-size: 1.4em;
+        }
+
     </style>
 
 </head>
@@ -120,21 +132,21 @@
                     Мероприятия
                 </a>
 
-                <a href="" class="as-navbar__item">
+                <a href="/startup-companies" class="as-navbar__item">
                     <svg class="as-navbar__icon" width="20" height="17">
                         <use xlink:href="/img/icons.svg#rocket"></use>
                     </svg>
                     Компании
                 </a>
 
-                <a href="" class="as-navbar__item">
+                <a href="/investors" class="as-navbar__item">
                     <svg class="as-navbar__icon" width="20" height="17">
                         <use xlink:href="/img/icons.svg#handshake"></use>
                     </svg>
                     Инвесторы
                 </a>
 
-                <a href="" class="as-navbar__item">
+                <a href="/vacancies" class="as-navbar__item">
                     <svg class="as-navbar__icon" width="20" height="17">
                         <use xlink:href="/img/icons.svg#jobs"></use>
                     </svg>
@@ -161,7 +173,7 @@
                     Tech Garden
                 </a>
 
-                <a href="#" class="as-navbar__organization">
+                <a href="/ao-cett/about" class="as-navbar__organization">
                     <img src="/img/icons/cett-icon-sm.png" alt="" class="as-navbar__organization-icon">
                     ЦИТТ
                 </a>

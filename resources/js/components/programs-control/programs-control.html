@@ -12,7 +12,7 @@
         <div class="col-3">
             <select ng-model="$ctrl.status" class="form-control">
                 <option value="">Выберите статус</option>
-                <option value="draft">Черновик</option>
+                <option value="draft">Не опубликован</option>
                 <option value="published">Опубликован</option>
             </select>
         </div>
@@ -43,21 +43,30 @@
     <tr>
         <th>№</th>
         <th>Название</th>
-        <th>Краткое описание</th>
+        <th style="max-width: 250px;">Краткое описание</th>
+        <th>Прием заявок до</th>
         <th>Статус</th>
         <th>Добавил</th>
+        <th>Опубликовано</th>
         <th></th>
     </tr>
     </thead>
     <tr ng-repeat="program in $ctrl.programs track by $index">
         <td>{{ program.id }}</td>
         <td>{{ program.title }}</td>
-        <td>{{ program.short_description | truncate : 100 : '...' }}</td>
+        <td style="max-width: 250px;">{{ program.short_description | truncate : 100 : '...' }}</td>
+        <td>{{ program.limit_date | amDateFormat : 'DD.MM.YYYY'}}</td>
         <td ng-switch="program.status">
-            <div ng-switch-when="draft" class="text-danger">Черновик</div>
+            <div ng-switch-when="draft" class="text-danger">Не опубликован</div>
             <div ng-switch-when="published" class="text-success">Опубликован</div>
         </td>
-        <td>{{program.user.full_name}}</td>
+        <td>
+            <div>{{program.user.full_name}}</div>
+            <div>{{program.created_at | amDateFormat : 'DD.MM.YYYY HH:mm'}}</div>
+        </td>
+        <td>
+            {{program.published_at | amDateFormat : 'DD.MM.YYYY HH:mm'}}
+        </td>
         <td class="text-center">
             <a href=""
                ng-href="/control-panel/programs/{{program.id}}/main"

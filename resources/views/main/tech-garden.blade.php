@@ -23,7 +23,7 @@
                 Smart Store
             </a>
             <a href="/tech-garden/laboratories" class="tabs__link {{$activePage == 'hub-space' ? 'tabs__link--active' : ''}}">
-                Техонлогические лаборатории
+                Технологические лаборатории
             </a>
             <a href="/tech-garden/library" class="tabs__link {{$activePage == 'randd' ? 'tabs__link--active' : ''}}">
                 База знании

@@ -1,23 +1,24 @@
-<div class="card">
+<div class="alert alert-default-warning" ng-show="!$ctrl.application.manager">
+    Данная заявка открыта.
+    <button class="btn btn-primary btn-sm" type="button" ng-click="$ctrl.takeForProcessing()">
+        Взять в обработку
+    </button>
+</div>
+
+<div class="card mb-3">
     <div class="card-body">
-
-        <div class="alert alert-success" ng-show="!$ctrl.application.manager">
-            Новая заявка.
-            <button class="btn btn-primary" type="button" ng-click="$ctrl.takeForProcessing()">Взять в обработку
-            </button>
-        </div>
-
         <div>Отправитель: <b>{{$ctrl.application.user.full_name}}</b></div>
         <div>Дата и время отправки: <b>{{$ctrl.application.created_at | amDateFormat : 'DD.MM.YYYY HH:mm'}}</b></div>
-        <div class="mb-3">Текущий статус: <b>{{$ctrl.application.status}}</b></div>
-
+        <div>Текущий статус: <b>{{$ctrl.application.status}}</b></div>
     </div>
 </div>
 
 <div class="card">
-    <div class="card-header">Данные</div>
+    <div class="card-header">
+        <h5 class="text-muted mb-0">Анкета</h5>
+    </div>
     <div class="card-body">
-        <table class="table table-bordered table-condensed">
+        <table class="table table-bordered table-condensed table-sm">
             <tbody ng-repeat="appForm in $ctrl.application.forms track by $index">
             <tr>
                 <th colspan="2">{{appForm.form.title}}</th>
@@ -38,43 +39,30 @@
     </div>
 </div>
 
-<div class="card">
+<div class="row mb-3">
 
-    <div class="card-header">
-        <h3 class="card-title">Действия</h3>
-    </div>
-
-    <div class="card-body">
-
-        <div class="row">
-            <div class="col-6">
-                <div class="card-header">Сообщения</div>
-                <div class="card-body" style="max-height: 500px; overflow-y: auto">
-                    <div class="card mb-2"
-                         ng-repeat="action in $ctrl.application.actions.message track by $index"
-                         id="message-{{ ::$index }}" scroll-to-last="message-{{ ::$index }}">
-                        <div class="card-header">
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-muted mb-0">Чат</h5>
+            </div>
+            <div style="max-height: 350px; overflow-y: auto" class="mb-2">
+                <ul class="list-group list-group-flush mb-2">
+                    <li ng-repeat="action in $ctrl.application.actions.message track by $index"
+                        class="list-group-item"
+                        id="message-{{ ::$index }}" scroll-to-last="message-{{ ::$index }}">
+                        <div class="mb-2">
                             {{action.user.full_name}}
-                            <span class="float-right">{{action.created_at | amDateFormat : 'DD.MM HH:mm'}}</span>
+                            <small class="float-right text-muted">{{action.created_at | amDateFormat : 'DD.MM HH:mm'}}</small>
                         </div>
-                        <div class="card-body">
-                            <div>
-                                <div class="card-text">
-                                    {{action.message}}
-                                </div>
-
-                                <div class="card-comments" ng-if="action.additional_data.length">
-                                    <hr>
-                                    Прикрепленные файлы:
-                                    <div ng-repeat="file in action.additional_data track by $index"
-                                         class="d-flex align-items-center">
-                                        <a href="/cabinet/download-file/{{file.path}}"><small class="text-muted">{{file.name}}</small></a>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="mb-2">{{action.message}}</div>
+                        <div ng-repeat="file in action.additional_data track by $index">
+                            <a href="/cabinet/download-file/{{file.path}}">{{file.name}}</a>
                         </div>
-                    </div>
-                </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body">
                 <form ng-submit="$ctrl.sendMessage()" class="mb-3">
                     <div class="form-group">
                         <label>Сообщение</label>
@@ -98,113 +86,123 @@
                         </button>
                     </div>
                 </form>
-
-            </div>
-            <div class="col-6">
-                <div class="card-header">История</div>
-                <div class="card-body" style="max-height: 500px; overflow-y: auto">
-                    <div class="card mb-2" ng-repeat="action in $ctrl.application.actions.action track by $index">
-                        <div class="card-header">
-                            {{action.user.full_name}} -
-                            <span ng-if="action.name === 'application_updated'">редактировал заявку</span>
-                            <span ng-if="action.name === 'application_sent'">отправил завяку</span>
-                            <span class="float-right">{{action.created_at | amDateFormat : 'DD.MM HH:mm'}}</span>
-                        </div>
-                        <div class="card-body" ng-if="action.name == 'application_updated'">
-                            <div>
-                                <table class="table table-bordered table-striped table-sm">
-                                    <thead class="thead-light">
-                                    <tr>
-                                        <th>Измененное поле</th>
-                                        <th>Старое значение</th>
-                                        <th>Новое значение</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr ng-repeat="data in action.additional_data track by $index">
-                                        <td>{{data.label}}</td>
-                                        <td>
-                                            <div ng-if="data.type === 'file'">
-                                                <div ng-repeat="(name,path) in data.old_data ">
-                                                    <a href="/cabinet/download-file/{{path}}">{{name}}</a>
-                                                </div>
-                                            </div>
-                                            <div ng-if="data.type !== 'file'">
-                                                <span ng-if="data.old_value_stringified">{{data.old_value_stringified}}</span>
-                                                <span ng-if="!data.old_value_stringified">{{data.old_value}}</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div ng-if="data.type === 'file'">
-                                                <div ng-repeat="(name,path) in data.new_data">
-                                                    <a href="/cabinet/download-file/{{path}}">{{name}}</a>
-                                                </div>
-                                            </div>
-                                            <div ng-if="data.type !== 'file'">
-                                                <span
-                                                    ng-if="data.new_value_stringified">{{data.new_value_stringified}}</span>
-                                                <span ng-if="!data.new_value_stringified">{{data.new_value}}</span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
+    </div>
 
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-muted mb-0">История</h5>
+            </div>
+            <ul class="list-group list-group-flush" ng-if="action.additional_data.length > 0">
+                <li class="list-group-item"
+                    ng-repeat="action in $ctrl.application.actions.action track by $index">
+
+                    <div class="mb-2">
+                        {{action.user.full_name}} -
+                        <span ng-if="action.name === 'application_updated'">редактировал заявку</span>
+                        <span ng-if="action.name === 'application_sent'">отправил завяку</span>
+                        <span class="float-right">{{action.created_at | amDateFormat : 'DD.MM HH:mm'}}</span>
+                    </div>
+
+                    <div ng-if="action.name == 'application_updated'">
+                        <table class="table table-bordered table-striped table-sm">
+                            <thead class="thead-light">
+                            <tr>
+                                <th>Измененное поле</th>
+                                <th>Старое значение</th>
+                                <th>Новое значение</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="data in action.additional_data track by $index">
+                                <td>{{data.label}}</td>
+                                <td>
+                                    <div ng-if="data.type === 'file'">
+                                        <div ng-repeat="(name,path) in data.old_data ">
+                                            <a href="/cabinet/download-file/{{path}}">{{name}}</a>
+                                        </div>
+                                    </div>
+                                    <div ng-if="data.type !== 'file'">
+                                        <span ng-if="data.old_value_stringified">{{data.old_value_stringified}}</span>
+                                        <span ng-if="!data.old_value_stringified">{{data.old_value}}</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div ng-if="data.type === 'file'">
+                                        <div ng-repeat="(name,path) in data.new_data">
+                                            <a href="/cabinet/download-file/{{path}}">{{name}}</a>
+                                        </div>
+                                    </div>
+                                    <div ng-if="data.type !== 'file'">
+                                                <span
+                                                        ng-if="data.new_value_stringified">{{data.new_value_stringified}}</span>
+                                        <span ng-if="!data.new_value_stringified">{{data.new_value}}</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </li>
+            </ul>
+
+        </div>
     </div>
 
 </div>
 
-<div class="mb-2" ng-show="$ctrl.application.entity_model == 'App\\Program'">
-    <button type="button" class="btn btn-success" ng-click="$ctrl.accept()">Принять и добавить в программу</button>
+<div>
+    <button type="button" class="btn btn-danger" ng-click="">Закрыть заявку</button>
 </div>
 
-<a href=""
-   ng-show="$ctrl.application.entity_model == 'App\\Module' && $ctrl.application.entity.slug == 'astanahub_membership'"
-   ng-href="/control-panel/members/create?application_id={{$ctrl.application.id}}"
-   class="btn btn-success">
-    Принять и зарегестрировать участника
-</a>
 
-<a href=""
-   ng-show="$ctrl.application.entity_model == 'App\\Module' && $ctrl.application.entity.slug == 'smart-store-input-solution'"
-   ng-href="/control-panel/sm/solutions/create?application_id={{$ctrl.application.id}}"
-   class="btn btn-success">
-    Принять и добавить ИТ решение
-</a>
+<!--<div class="mb-2" ng-show="$ctrl.application.entity_model == 'App\\Program'">-->
+<!--    <button type="button" class="btn btn-success" ng-click="$ctrl.accept()">Принять и добавить в программу</button>-->
+<!--</div>-->
 
-<a href=""
-   ng-show="$ctrl.application.entity_model == 'App\\Module' && $ctrl.application.entity.slug == 'smart-store-input-task'"
-   ng-href="/control-panel/sm/tasks/create?application_id={{$ctrl.application.id}}"
-   class="btn btn-success">
-    Принять и добавить задачу
-</a>
+<!--<a href=""-->
+<!--   ng-show="$ctrl.application.entity_model == 'App\\Module' && $ctrl.application.entity.slug == 'astanahub_membership'"-->
+<!--   ng-href="/control-panel/members/create?application_id={{$ctrl.application.id}}"-->
+<!--   class="btn btn-success">-->
+<!--    Принять и зарегестрировать участника-->
+<!--</a>-->
 
-<a href=""
-   ng-show="$ctrl.application.entity_model == 'App\\Module' && $ctrl.application.entity.slug == 'corp-task'"
-   ng-href="/control-panel/corp-tasks/create?application_id={{$ctrl.application.id}}"
-   class="btn btn-success">
-    Принять и добавить задачу
-</a>
+<!--<a href=""-->
+<!--   ng-show="$ctrl.application.entity_model == 'App\\Module' && $ctrl.application.entity.slug == 'smart-store-input-solution'"-->
+<!--   ng-href="/control-panel/sm/solutions/create?application_id={{$ctrl.application.id}}"-->
+<!--   class="btn btn-success">-->
+<!--    Принять и добавить ИТ решение-->
+<!--</a>-->
 
-<a href=""
-   ng-show="$ctrl.application.entity_model == 'App\\CorpTask' && $ctrl.application.entity.id == $ctrl.application.entity_id"
-   ng-href="/control-panel/corp-task-solutions/create?application_id={{$ctrl.application.id}}"
-   class="btn btn-success">
-    Принять и добавить решение
-</a>
+<!--<a href=""-->
+<!--   ng-show="$ctrl.application.entity_model == 'App\\Module' && $ctrl.application.entity.slug == 'smart-store-input-task'"-->
+<!--   ng-href="/control-panel/sm/tasks/create?application_id={{$ctrl.application.id}}"-->
+<!--   class="btn btn-success">-->
+<!--    Принять и добавить задачу-->
+<!--</a>-->
 
-<br>
+<!--<a href=""-->
+<!--   ng-show="$ctrl.application.entity_model == 'App\\Module' && $ctrl.application.entity.slug == 'corp-task'"-->
+<!--   ng-href="/control-panel/corp-tasks/create?application_id={{$ctrl.application.id}}"-->
+<!--   class="btn btn-success">-->
+<!--    Принять и добавить задачу-->
+<!--</a>-->
 
-<div class="d-flex">
-    <button type="button" class="btn btn-primary mr-4" ng-click="">Закрыть заявку</button>
-    <a ng-show="$ctrl.application.entity_model == 'App\\User' && $ctrl.application.entity.id == $ctrl.application.entity_id"
-       ng-href="/control-panel/hub-space-tenants/create?application_id={{$ctrl.application.id}}">
-        Добавить арендатора по данной заявке
-    </a>
-</div>
+<!--<a href=""-->
+<!--   ng-show="$ctrl.application.entity_model == 'App\\CorpTask' && $ctrl.application.entity.id == $ctrl.application.entity_id"-->
+<!--   ng-href="/control-panel/corp-task-solutions/create?application_id={{$ctrl.application.id}}"-->
+<!--   class="btn btn-success">-->
+<!--    Принять и добавить решение-->
+<!--</a>-->
+
+<!--<br>-->
+
+<!--<div class="d-flex">-->
+<!--    <a ng-show="$ctrl.application.entity_model == 'App\\User' && $ctrl.application.entity.id == $ctrl.application.entity_id"-->
+<!--       ng-href="/control-panel/hub-space-tenants/create?application_id={{$ctrl.application.id}}">-->
+<!--        Добавить арендатора по данной заявке-->
+<!--    </a>-->
+<!--</div>-->

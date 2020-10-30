@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\ControlPanel\ControlPanelController;
 use App\Post;
 use Illuminate\Http\Request;
 
-class PostsController extends Controller
+class PostsController extends ControlPanelController
 {
     public function create()
     {
@@ -21,18 +22,33 @@ class PostsController extends Controller
     
     public function store(Request $request)
     {
-        $request->validate(['title' => 'required|min:3|max:255']);
-    
-        $path = null;
-        if ($request->image !== "null") {
-            $path = \Storage::disk('public')->put('posts_images', $request->image);
-        }
+        $request->validate([
+            'title' => 'required',
+            'data' => 'array',
+        ]);
         
         $post = Post::create([
             'user_id' => \Auth::user()->id,
             'title' => $request->title,
-            'content' => $request->content_t,
-            'image_path' => $path,
         ]);
+        
+        if ($request->data) {
+            foreach ($request->data as $ind => $item) {
+                if ($item['type'] == 'text') {
+                    $post->texts()->create([
+                        'content' => $item['content'],
+                        'order' => $ind
+                    ]);
+                }
+                
+                if ($item['type'] == 'image') {
+                    $path = \Storage::disk('public')->put('posts_images', $item['image']);
+                    $post->images()->create([
+                        'path' => $path,
+                        'order' => $ind
+                    ]);
+                }
+            }
+        }
     }
 }

@@ -8,7 +8,7 @@ const buildConstructor = (elemId, options) => {
             model: {
                 defaults: {
                     attributes: {
-                        'data-grapes-lang-kz' : '',
+                        'data-grapes-lang-kk' : '',
                         'data-grapes-lang-en' : '',
                         'data-grapes-lang-ru' : '',
                         // class: 'text-lang'
@@ -16,8 +16,8 @@ const buildConstructor = (elemId, options) => {
                     traits: [
                         {
                             type: 'text',
-                            name: 'data-grapes-lang-kz',
-                            label: 'Lang KZ'
+                            name: 'data-grapes-lang-kk',
+                            label: 'Lang KK'
                         },
                         {
                             type: 'text',
@@ -528,7 +528,7 @@ const buildConstructor = (elemId, options) => {
         model: {
             defaults: {
                 components: `
-                    <button id="lang-kz-button">KZ</button>
+                    <button id="lang-kk-button">KK</button>
                     <button id="lang-ru-button">RU</button>
                     <button id="lang-en-button">EN</button>
                 `,
@@ -1308,14 +1308,14 @@ const buildConstructor = (elemId, options) => {
         content: {
             type: 'lang-switcher-component',
             script: function () {
-                document.getElementById('lang-kz-button').addEventListener('click', e => {
+                document.getElementById('lang-kk-button').addEventListener('click', e => {
                     console.log('kazakh')
                     document.querySelectorAll('.text-lang').forEach(elem => {
 
                         if (!elem.getAttribute('data-grapes-lang-ru'))
                             elem.setAttribute('data-grapes-lang-ru', elem.innerHTML);
 
-                        elem.innerHTML = elem.getAttribute('data-grapes-lang-kz');
+                        elem.innerHTML = elem.getAttribute('data-grapes-lang-kk');
                     })
                 });
 

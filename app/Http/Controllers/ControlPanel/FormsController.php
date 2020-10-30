@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Queue\RedisQueue;
 
-class FormsController extends Controller
+class FormsController extends ControlPanelController
 {
     protected $organization;
 
