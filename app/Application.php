@@ -10,7 +10,7 @@ class Application extends Model
         'user_id',
         'entity_model',
         'entity_id',
-        'status',
+        'status',//open,process,accepted,rejected
         'manager_id'
     ];
 
@@ -23,7 +23,7 @@ class Application extends Model
     {
         return $this->belongsTo(User::class);
     }
-    
+
     public function entity()
     {
         return $this->morphTo(
@@ -45,6 +45,6 @@ class Application extends Model
 
     public function get()
     {
-        
+
     }
 }

@@ -12,9 +12,10 @@
         <div class="col-3">
             <select ng-model="$ctrl.status" class="form-control">
                 <option value="">Выберите статус</option>
-                <option value="opened">Открытые</option>
-                <option value="published">На рассмотрении</option>
-                <option value="closed">Закрытые</option>
+                <option value="open">Открытые</option>
+                <option value="process">На рассмотрении</option>
+                <option value="accepted">Принятые</option>
+                <option value="rejected">Отклоненные</option>
             </select>
         </div>
 
@@ -65,9 +66,10 @@
         </td>
         <td>{{app.created_at | amDateFormat : 'DD.MM.YYYY HH:mm'}}</td>
         <td ng-switch="app.status">
-            <div class="badge badge-danger" ng-switch-when="opened" style="font-size: 12px">Новая</div>
+            <div class="badge badge-primary" ng-switch-when="open" style="font-size: 12px">Новая</div>
             <div class="badge badge-info" ng-switch-when="process" style="font-size: 12px">На рассмотрении</div>
-            <div class="badge badge-success" ng-switch-when="closed" style="font-size: 12px">Закрытая</div>
+            <div class="badge badge-success" ng-switch-when="accepted" style="font-size: 12px">Принятая</div>
+            <div class="badge badge-danger" ng-switch-when="rejected" style="font-size: 12px">Отклоненная</div>
         </td>
         <td>{{app.manager.full_name}}</td>
         <td class="text-center">

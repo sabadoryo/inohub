@@ -9,7 +9,13 @@
     <div class="card-body">
         <div>Отправитель: <b>{{$ctrl.application.user.full_name}}</b></div>
         <div>Дата и время отправки: <b>{{$ctrl.application.created_at | amDateFormat : 'DD.MM.YYYY HH:mm'}}</b></div>
-        <div>Текущий статус: <b>{{$ctrl.application.status}}</b></div>
+        <div ng-switch="$ctrl.application.status">Текущий статус:
+                <b ng-switch-when="open">открыта</b>
+                <b ng-switch-when="process">на рассмотрении</b>
+                <b ng-switch-when="accepted">принята</b>
+                <b ng-switch-when="rejected">отклонена</b>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -29,7 +35,7 @@
                     <span ng-if="field.form_field.type !== 'file'">{{field.value}}</span>
                     <div ng-if="field.form_field.type === 'file'">
                         <div ng-repeat="file in field.value">
-                            <a href="/cabinet/download-file/{{file.path}}">{{file.name}}</a>
+                            <a href="/cabinet/download-file/{{file.path}}/{{file.name}}">{{file.name}}</a>
                         </div>
                     </div>
                 </td>
@@ -39,7 +45,7 @@
     </div>
 </div>
 
-<div class="row mb-3">
+<div class="row mb-3" ng-show="$ctrl.canEdit">
 
     <div class="col-6">
         <div class="card">
@@ -57,7 +63,7 @@
                         </div>
                         <div class="mb-2">{{action.message}}</div>
                         <div ng-repeat="file in action.additional_data track by $index">
-                            <a href="/cabinet/download-file/{{file.path}}">{{file.name}}</a>
+                            <a href="/cabinet/download-file/{{file.path}}/{{file.name}}">{{file.name}}</a>
                         </div>
                     </li>
                 </ul>
@@ -91,11 +97,13 @@
     </div>
 
     <div class="col-6">
-        <div class="card">
+        <div class="card"
+             id="historySectionScrollDiv"
+             style="max-height: 350px; overflow-y: auto">
             <div class="card-header">
                 <h5 class="text-muted mb-0">История</h5>
             </div>
-            <ul class="list-group list-group-flush" ng-if="action.additional_data.length > 0">
+            <ul class="list-group list-group-flush">
                 <li class="list-group-item"
                     ng-repeat="action in $ctrl.application.actions.action track by $index">
 
@@ -121,7 +129,7 @@
                                 <td>
                                     <div ng-if="data.type === 'file'">
                                         <div ng-repeat="(name,path) in data.old_data ">
-                                            <a href="/cabinet/download-file/{{path}}">{{name}}</a>
+                                            <a href="/cabinet/download-file/{{path}}/{{name}}">{{name}}</a>
                                         </div>
                                     </div>
                                     <div ng-if="data.type !== 'file'">
@@ -132,7 +140,7 @@
                                 <td>
                                     <div ng-if="data.type === 'file'">
                                         <div ng-repeat="(name,path) in data.new_data">
-                                            <a href="/cabinet/download-file/{{path}}">{{name}}</a>
+                                            <a href="/cabinet/download-file/{{path}}/{{name}}">{{name}}</a>
                                         </div>
                                     </div>
                                     <div ng-if="data.type !== 'file'">
@@ -155,7 +163,15 @@
 </div>
 
 <div>
-    <button type="button" class="btn btn-danger" ng-click="">Закрыть заявку</button>
+    <button ng-show="$ctrl.canEdit"
+            type="button"
+            class="btn btn-danger"
+            ng-click="$ctrl.reject()">
+        Отклонить заявку
+    </button>
+    <button class="btn btn-success" ng-show="$ctrl.canEdit" ng-click="$ctrl.accept()">
+        Принять заявку
+    </button>
 </div>
 
 
@@ -165,35 +181,35 @@
 
 <!--<a href=""-->
 <!--   ng-show="$ctrl.application.entity_model == 'App\\Module' && $ctrl.application.entity.slug == 'astanahub_membership'"-->
-<!--   ng-href="/control-panel/members/create?application_id={{$ctrl.application.id}}"-->
+<!--   ng-href=""-->
 <!--   class="btn btn-success">-->
 <!--    Принять и зарегестрировать участника-->
 <!--</a>-->
 
 <!--<a href=""-->
-<!--   ng-show="$ctrl.application.entity_model == 'App\\Module' && $ctrl.application.entity.slug == 'smart-store-input-solution'"-->
-<!--   ng-href="/control-panel/sm/solutions/create?application_id={{$ctrl.application.id}}"-->
+<!--   ng-show="$ctrl.application.entity_model == 'App\\Module' && "-->
+<!--   ng-href=""-->
 <!--   class="btn btn-success">-->
 <!--    Принять и добавить ИТ решение-->
 <!--</a>-->
 
 <!--<a href=""-->
-<!--   ng-show="$ctrl.application.entity_model == 'App\\Module' && $ctrl.application.entity.slug == 'smart-store-input-task'"-->
-<!--   ng-href="/control-panel/sm/tasks/create?application_id={{$ctrl.application.id}}"-->
+<!--   ng-show="$ctrl.application.entity_model == 'App\\Module' && "-->
+<!--   ng-href=""-->
 <!--   class="btn btn-success">-->
 <!--    Принять и добавить задачу-->
 <!--</a>-->
 
 <!--<a href=""-->
-<!--   ng-show="$ctrl.application.entity_model == 'App\\Module' && $ctrl.application.entity.slug == 'corp-task'"-->
-<!--   ng-href="/control-panel/corp-tasks/create?application_id={{$ctrl.application.id}}"-->
+<!--   ng-show="$ctrl.application.entity_model == 'App\\Module' && "-->
+<!--   ng-href=""-->
 <!--   class="btn btn-success">-->
 <!--    Принять и добавить задачу-->
 <!--</a>-->
 
 <!--<a href=""-->
-<!--   ng-show="$ctrl.application.entity_model == 'App\\CorpTask' && $ctrl.application.entity.id == $ctrl.application.entity_id"-->
-<!--   ng-href="/control-panel/corp-task-solutions/create?application_id={{$ctrl.application.id}}"-->
+<!--   ng-show=""-->
+<!--   ng-href=""-->
 <!--   class="btn btn-success">-->
 <!--    Принять и добавить решение-->
 <!--</a>-->
@@ -201,8 +217,8 @@
 <!--<br>-->
 
 <!--<div class="d-flex">-->
-<!--    <a ng-show="$ctrl.application.entity_model == 'App\\User' && $ctrl.application.entity.id == $ctrl.application.entity_id"-->
-<!--       ng-href="/control-panel/hub-space-tenants/create?application_id={{$ctrl.application.id}}">-->
+<!--    <a ng-show=" && $ctrl.application.entity.id == $ctrl.application.entity_id"-->
+<!--       ng-href="">-->
 <!--        Добавить арендатора по данной заявке-->
 <!--    </a>-->
 <!--</div>-->

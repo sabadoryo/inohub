@@ -10,10 +10,8 @@ Route::get('get-news-list', 'MainPageController@getNewsList');
 Route::get('get-feeds-list', 'MainPageController@getFeedsList');
 Route::get('news/{id}', 'MainPageController@newsPage');
 
-Route::get('/events', function () {
-    //todo i need controller
-    return view('event-page');
-});
+Route::get('/events', 'EventsController@index');
+Route::get('/events/{id}', 'EventsController@show');
 Route::get('/investors', function () {
     //todo i need controller
     return view('investors-page');
@@ -38,11 +36,13 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('', 'CabinetController@profile');
         Route::get('applications', 'CabinetController@applications');
         Route::get('applications/{id}', 'CabinetController@application');
-        Route::get('notifications', 'CabinetController@notifications');
+//        Route::get('notifications', 'CabinetController@notifications');
         Route::post('applications/{id}/update-form', 'CabinetController@updateForm');
         Route::post('applications/{id}/send-message', 'CabinetController@sendMessage');
         Route::get('get-applications', 'CabinetController@getApplications');
         Route::get('download-file/{path}/{name}', 'CabinetController@downloadFile')->where('path',  '(.*)');
+        Route::get('notifications', 'NotificationsController@index');
+        Route::post('notifications/get-list', 'NOtificationsController@getList');
     });
     Route::group(['prefix' => 'posts'], function () {
         Route::get('create', 'PostsController@create');
@@ -180,6 +180,7 @@ Route::group([
     Route::get('applications/{id}', 'ApplicationsController@show');
     Route::post('applications/{id}/take-for-processing', 'ApplicationsController@takeForProcessing');
     Route::post('applications/{id}/accept', 'ApplicationsController@accept');
+    Route::post('applications/{id}/reject', 'ApplicationsController@reject');
 
     Route::get('events', 'EventsController@index');
     Route::get('events/get-list', 'EventsController@getList');

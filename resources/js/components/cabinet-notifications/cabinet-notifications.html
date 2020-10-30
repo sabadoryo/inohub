@@ -2,88 +2,93 @@
 
     <div class="notifications-section__list">
 
-        <a href="#" class="notifications-section__item notifications-section__item--notify">
+        <div class="notifications-section__item notifications-section__item--notify"
+             ng-repeat="notification in $ctrl.notifications">
+
             <div class="notifications-section__title">
-                Astana hub
+                {{ notification.data.title }}
             </div>
 
             <div class="notifications-section__text">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                {{ notification.data.message | truncate : 100 : '...' }}
             </div>
 
             <div class="notifications-section__date">
-                23 Окт.
+                {{ notification.created_at | amDateFormat : 'DD-MM-YY HH:mm' }}
             </div>
-        </a>
+        </div>
 
-        <a href="#" class="notifications-section__item">
-            <div class="notifications-section__title">
-                Astana hub
-            </div>
-
-            <div class="notifications-section__text">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            </div>
-
-            <div class="notifications-section__date">
-                23 Окт.
-            </div>
-        </a>
-
-        <a href="#" class="notifications-section__item">
-            <div class="notifications-section__title">
-                Astana hub
-            </div>
-
-            <div class="notifications-section__text">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            </div>
-
-            <div class="notifications-section__date">
-                23 Окт.
-            </div>
-        </a>
-
-        <a href="#" class="notifications-section__item">
-            <div class="notifications-section__title">
-                Astana hub
-            </div>
-
-            <div class="notifications-section__text">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            </div>
-
-            <div class="notifications-section__date">
-                23 Окт.
-            </div>
-        </a>
-
-        <a href="#" class="notifications-section__item">
-            <div class="notifications-section__title">
-                Astana hub
-            </div>
-
-            <div class="notifications-section__text">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            </div>
-
-            <div class="notifications-section__date">
-                23 Окт.
-            </div>
-        </a>
-
-        <a href="#" class="notifications-section__item">
-            <div class="notifications-section__title">
-                Astana hub
-            </div>
-
-            <div class="notifications-section__text">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            </div>
-
-            <div class="notifications-section__date">
-                23 Окт.
-            </div>
-        </a>
     </div>
+
 </div>
+
+
+<!--        <a href="#" class="notifications-section__item">-->
+<!--            <div class="notifications-section__title">-->
+<!--                Astana hub-->
+<!--            </div>-->
+
+<!--            <div class="notifications-section__text">-->
+<!--                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor-->
+<!--            </div>-->
+
+<!--            <div class="notifications-section__date">-->
+<!--                23 Окт.-->
+<!--            </div>-->
+<!--        </a>-->
+
+<!--        <a href="#" class="notifications-section__item">-->
+<!--            <div class="notifications-section__title">-->
+<!--                Astana hub-->
+<!--            </div>-->
+
+<!--            <div class="notifications-section__text">-->
+<!--                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor-->
+<!--            </div>-->
+
+<!--            <div class="notifications-section__date">-->
+<!--                23 Окт.-->
+<!--            </div>-->
+<!--        </a>-->
+
+<!--        <a href="#" class="notifications-section__item">-->
+<!--            <div class="notifications-section__title">-->
+<!--                Astana hub-->
+<!--            </div>-->
+
+<!--            <div class="notifications-section__text">-->
+<!--                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor-->
+<!--            </div>-->
+
+<!--            <div class="notifications-section__date">-->
+<!--                23 Окт.-->
+<!--            </div>-->
+<!--        </a>-->
+
+<!--        <a href="#" class="notifications-section__item">-->
+<!--            <div class="notifications-section__title">-->
+<!--                Astana hub-->
+<!--            </div>-->
+
+<!--            <div class="notifications-section__text">-->
+<!--                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor-->
+<!--            </div>-->
+
+<!--            <div class="notifications-section__date">-->
+<!--                23 Окт.-->
+<!--            </div>-->
+<!--        </a>-->
+
+<!--        <a href="#" class="notifications-section__item">-->
+<!--            <div class="notifications-section__title">-->
+<!--                Astana hub-->
+<!--            </div>-->
+
+<!--            <div class="notifications-section__text">-->
+<!--                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor-->
+<!--            </div>-->
+
+<!--            <div class="notifications-section__date">-->
+<!--                23 Окт.-->
+<!--            </div>-->
+<!--        </a>-->

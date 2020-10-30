@@ -219,3 +219,7 @@ require('./components/post-check-form/post-check-form');
 require('./components/vacancies-page/vacancies-page');
 require('./components/program-members/program-members');
 require('./components/program-members-create/program-members-create');
+
+require('./components/event-page/event-page');
+
+require('./components/events-list/events-list');
