@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\ControlPanelAuth;
 use App\Http\Middleware\SetACL;
+use App\Http\Middleware\SetAdminNotifications;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -69,5 +70,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'controlPanelAuth' => ControlPanelAuth::class,
+        'setAdminNotifications' => SetAdminNotifications::class,
     ];
 }

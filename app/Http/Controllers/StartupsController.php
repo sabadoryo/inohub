@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\NewStartupCreated;
 use App\Startup;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Notification;
 
 class StartupsController extends Controller
 {
@@ -24,7 +27,7 @@ class StartupsController extends Controller
                 ->store('public/logotypes');
         }
 
-        Startup::create([
+        $startup = Startup::create([
             'user_id' => \Auth::user()->id,
             'project_name' => $request->project_name,
             'description' => $request->description,
@@ -35,6 +38,12 @@ class StartupsController extends Controller
             'employees_count' => $request->employees_count,
             'foundation_year' => $request->foundation_year
         ]);
+
+        $users = User::where('type', 'admin')->get();
+
+        $notification = new NewStartupCreated(\Auth::user(), $startup);
+
+        \Notification::send($users, $notification);
 
         return [];
     }

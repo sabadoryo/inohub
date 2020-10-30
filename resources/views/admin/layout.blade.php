@@ -28,8 +28,41 @@
 
             <ul class="navbar-nav ml-auto">
 
+                <li class="nav-item dropdown mr-3">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i class="far fa-bell"></i>
+                        @if($unreadNotificationsCount)
+                            <span class="badge badge-warning navbar-badge">{{$unreadNotificationsCount}}</span>
+                        @endif
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        @if($unreadNotificationsCount)
+                            <span class="dropdown-item dropdown-header">
+                                {{$unreadNotificationsCount}}
+                                {{trans_choice('{1} непрочитанное уведомление|[2,*] непрочитанных уведомлении', $unreadNotificationsCount)}}
+                            </span>
+                        @else
+                            <span class="dropdown-item dropdown-header">
+                                Нет непрочитанных уведомлении
+                            </span>
+                        @endif
+                        <div class="dropdown-divider"></div>
+                        @foreach($topNotifications as $n)
+                                <a href="/admin/notifications?id={{$n->id}}" class="dropdown-item">
+                                    @switch($n->type)
+                                        @case('App\Notifications\NewStartupCreated')
+                                            Добавлен новый стартап
+                                            @break
+                                    @endswitch
+                                </a>
+                                <div class="dropdown-divider"></div>
+                        @endforeach
+                        <a href="/admin/notifications" class="dropdown-item dropdown-footer">Перейти к уведомлениям</a>
+                    </div>
+                </li>
+
                 <li class="nav-item">
-                    <form  method="post">
+                    <form action="/logout" method="post">
                         @csrf
                         <button class="btn btn-outline-secondary">
                             <i class="fas fa-sign-out-alt mr-1"></i>

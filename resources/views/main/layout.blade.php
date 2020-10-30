@@ -40,11 +40,15 @@
             display: block;
         }
 
-        .swal2-title {
-            font-size: 2.8em;
+        .swal2-popup {
+            width: 38em;
         }
 
-        .swal-content {
+        .swal2-title {
+            font-size: 3.2em;
+        }
+
+        .swal2-content {
             font-size: 2em;
         }
 

@@ -252,7 +252,7 @@ Route::group([
 Route::group([
     'prefix' => 'admin',
     'namespace' => 'Admin',
-    'middleware' => 'auth'
+    'middleware' => ['auth', 'setAdminNotifications']
 ], function () {
 
     Route::get('/', 'AdminController@index');
@@ -273,6 +273,8 @@ Route::group([
     Route::get('posts/get-list', 'PostsController@getList');
     Route::get('posts/{id}/check', 'PostsController@postCheck');
     Route::post('posts/{id}/update-status', 'PostsController@updateStatus');
+
+    Route::get('notifications', 'NotificationsController@index');
 
 });
 
