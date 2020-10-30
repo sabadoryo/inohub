@@ -77,7 +77,7 @@
                                    ng-model="field.value"
                                    ng-click="$ctrl.radioOtherOptionSelected(field)"
                                    class="custom-radio-box__radio"
-                                   name="field.id"
+                                   name="{{field.id}}"
                                    id="{{field.id + $index + option.val}}"
                                    value="{{option.val}}"
                                    ng-required="field.is_required">

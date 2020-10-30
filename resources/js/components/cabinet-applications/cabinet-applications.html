@@ -13,9 +13,10 @@
         <div class="section-filter__btn-group button-back--rotate">
             <select class="input-box__input" ng-model="$ctrl.status" ng-change="$ctrl.getFilteredList()">
                 <option value="">Все</option>
+                <option value="accepted">Принята</option>
+                <option value="rejected">Отклонена</option>
                 <option value="process">На рассмотрении</option>
-                <option value="opened">Открытые</option>
-                <option value="closed">Закрытые</option>
+                <option value="open">Открыта</option>
             </select>
 
             <svg class="button-back__icon" width="18" height="18">
@@ -43,20 +44,24 @@
                 {{app.entity.name}}
             </div>
 
-            <div ng-if="app.status ==='opened'" class="application-list__status application-list__status--success">
+            <div ng-if="app.status ==='open'" class="application-list__status application-list__status--success">
                 Открыта
             </div>
 
-            <div ng-if="app.status ==='process'" class="application-list__status">
+            <div ng-if="app.status ==='process'" class="application-list__status application-list__status--warning">
                 <span>На рассмотрении</span>
             </div>
 
-            <div ng-if="app.status ==='closed'" class="application-list__status application-list__status--danger">
-                Закрыта
+            <div ng-if="app.status ==='rejected'" class="application-list__status application-list__status--danger">
+                Отклонено
+            </div>
+
+            <div ng-if="app.status ==='accepted'" class="application-list__status application-list__status">
+                Принята
             </div>
 
             <div class="application-list__date">
-                {{app.created_at | amDateFormat: 'DD MMMM'}}
+                {{app.created_at | amDateFormat : 'DD.MM-HH:mm'}}
             </div>
 
         </a>

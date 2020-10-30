@@ -57,6 +57,7 @@ class ApplicationsController extends Controller
         $app = Application::create([
             'user_id' => \Auth::user()->id,
             'entity_model' => $entityModel,
+            'status' => 'open',
             'entity_id' => $entityId,
         ]);
 
