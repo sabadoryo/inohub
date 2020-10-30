@@ -76,7 +76,7 @@ angular
             }
         };
     })
-// .directive('scrollToLast', ['$location', '$anchorScroll', '$timeout', function ($location, $anchorScroll, $timeout) {
+    // .directive('scrollToLast', ['$location', '$anchorScroll', '$timeout', function ($location, $anchorScroll, $timeout) {
 //
 //     function linkFn(scope, element, attrs) {
 //         $timeout(function () {
@@ -217,3 +217,5 @@ require('./components/ao-cett-grants/ao-cett-grants');
 require('./components/post-check-form/post-check-form');
 
 require('./components/vacancies-page/vacancies-page');
+require('./components/program-members/program-members');
+require('./components/program-members-create/program-members-create');
