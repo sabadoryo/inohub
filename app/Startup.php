@@ -8,13 +8,12 @@ class Startup extends Model
 {
     protected $fillable = [
         'user_id',
-        'name',
-        'short_description',
-        'stage',
-        'another_stage',
+        'company_name',
+        'project_name',
+        'description',
+        'foundation_year',
+        'employees_count',
         'link',
-        'bin',
-        'legal_name',
-        'ceo',
+        'logo_path',
     ];
 }

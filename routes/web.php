@@ -12,6 +12,10 @@ Route::get('news/{id}', 'MainPageController@newsPage');
 
 Route::get('/events', 'EventsController@index');
 Route::get('/events/{id}', 'EventsController@show');
+
+Route::get('startups', 'StartupsController@index');
+
+
 Route::get('/investors', function () {
     //todo i need controller
     return view('investors-page');
