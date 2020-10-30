@@ -17,8 +17,12 @@ function controller($http, $uibModal, applicationWindow, Auth) {
 
 	$ctrl.page = 1;
 
-    $ctrl.loadMore = () => {
-        $ctrl.page++;
+	$ctrl.$onInit = () => {
+	    $ctrl.getList();
+    }
+
+    $ctrl.getList = () => {
+        // $ctrl.page++;
 
         $http
             .get('/get-feeds-list', {
@@ -28,9 +32,12 @@ function controller($http, $uibModal, applicationWindow, Auth) {
             })
             .then(
                 res => {
-                    res.data.forEach(feed => {
-                        $ctrl.feeds.push(feed);
-                    });
+                    $ctrl.feeds = res.data;
+                    console.log($ctrl.feeds);
+
+                    // res.data.forEach(feed => {
+                    //     $ctrl.feeds.push(feed);
+                    // });
                 }
             );
     };

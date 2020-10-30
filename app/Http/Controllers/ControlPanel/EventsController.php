@@ -216,7 +216,6 @@ class EventsController extends ControlPanelController
             'entity_model' => Event::class,
             'entity_id' => $id
         ]);
-
     }
 
     public function updatePage(Request $request, $id)
