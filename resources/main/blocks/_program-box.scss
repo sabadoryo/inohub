@@ -2,12 +2,20 @@
 
     $e: &;
 
-    width: 468px;
+    width: 465px;
+    //min-height: 130px;
     border-radius: 7px;
     background-color: #ffffff;
     padding: 20px;
     position: relative;
     overflow: hidden;
+    display: block;
+    transition: all .2s;
+
+    &:hover {
+        box-shadow: 0 1.5px 5px 0 rgba(0,0,0,0.3);
+        transform: translateY(-5px);
+    }
 
     &__title {
         @include text-style(1.8rem, 600, #181515);

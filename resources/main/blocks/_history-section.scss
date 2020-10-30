@@ -1,0 +1,13 @@
+.history-section {
+    width: 468px;
+
+    &__list {
+
+    }
+
+    &__item {
+        &:not(:last-child) {
+            margin-bottom: 24px;
+        }
+    }
+}

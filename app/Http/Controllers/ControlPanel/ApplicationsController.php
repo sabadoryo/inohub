@@ -13,23 +13,21 @@ class ApplicationsController extends ControlPanelController
 {
     public function index()
     {
-        $organizations = Organization::all();
-
         $breadcrumb = [
             ['/control-panel', 'Главная'],
             [null, 'Заявки']
         ];
 
-        $bindings = [
-            'organizations' => $organizations
-        ];
+        $managers = $this->organization->users;
 
         return view('control-panel.component', [
             'PAGE_TITLE' => 'Заявки',
             'activePage' => 'applications',
             'breadcrumb' => $breadcrumb,
             'component' => 'applications-control',
-            'bindings' => $bindings
+            'bindings' => [
+                'managers' => $managers
+            ]
         ]);
     }
 
@@ -37,7 +35,9 @@ class ApplicationsController extends ControlPanelController
     {
         $query = Application::query();
 
-        $result = $query->with('user', 'entity', 'manager')->paginate();
+        $result = $query->with('user', 'entity', 'manager')
+            ->orderBy('id', 'desc')
+            ->paginate(20);
 
         return $result;
     }

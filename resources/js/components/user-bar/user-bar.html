@@ -32,36 +32,36 @@
     </div>
 
     <ul uib-dropdown-menu="" class="user-bar-container__dropdown user-dropdown">
-        <li class="user-dropdown__item">
+        <a href="/cabinet" class="user-dropdown__item">
             <svg class="user-dropdown__icon" width="24" height="24">
                 <use href="/img/icons.svg#profile-icon"></use>
             </svg>
-            <a href="/cabinet" class="user-dropdown__link">Кабинет</a>
-        </li>
+            Кабинет
+        </a>
 
-        <li class="user-dropdown__item">
+        <a href="/cabinet/applications" class="user-dropdown__item">
             <svg class="user-dropdown__icon" width="24" height="24">
                 <use href="/img/icons.svg#file"></use>
             </svg>
-            <a href="/cabinet/applications" class="user-dropdown__link">Заявки</a>
-        </li>
+            Заявки
+        </a>
 
-        <li class="user-dropdown__item user-dropdown__item--border">
+        <a href="/cabinet/notifications" class="user-dropdown__item user-dropdown__item--border">
             <svg class="user-dropdown__icon" width="24" height="24">
                 <use href="/img/icons.svg#bell"></use>
             </svg>
-            <a href="/cabinet/notifications" class="user-dropdown__link">Уведомления</a>
+            Уведомления
             <div class="user-dropdown__badge as-badge">
                 12
             </div>
-        </li>
+        </a>
 
-        <li class="user-dropdown__item">
+        <a href="" class="user-dropdown__item" ng-click="$ctrl.logout()">
             <svg class="user-dropdown__icon" width="24" height="24">
                 <use href="/img/icons.svg#exit"></use>
             </svg>
-            <a href="" class="user-dropdown__link" ng-click="$ctrl.logout()">Выйты</a>
-        </li>
+            Выйты
+        </a>
     </ul>
 
     <div class="notify-dropdown">
