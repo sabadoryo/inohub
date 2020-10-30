@@ -367,3 +367,19 @@ Route::get('vacation-page', function () {
 Route::get('cett-grants', function () {
     return view('cett-grants');
 });
+
+Route::get('event-more', function () {
+    return view('event-more');
+});
+
+Route::get('for-startup', function () {
+    return view('for-startup');
+});
+
+Route::get('for-investor', function () {
+    return view('for-investor');
+});
+
+Route::get('edit-post', function () {
+    return view('edit-post');
+});
