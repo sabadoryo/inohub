@@ -85,4 +85,9 @@ class Organization extends Model
         return null;
     }
 
+    public function forms()
+    {
+        return $this->hasMany(Form::class);
+    }
+
 }
