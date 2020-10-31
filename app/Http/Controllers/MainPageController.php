@@ -30,7 +30,7 @@ class MainPageController extends Controller
                 $img = $feed->entity->images()->first();
                 $text = $feed->entity->texts()->first();
                 $feed->image_url = $img ? $img->url : null;
-                $feed->text = \Str::limit(strip_tags($text->content), 100, '...');
+                $feed->text = \Str::limit(strip_tags(json_decode($text->content)), 100, '...');
                 $feed->entity->user;
             }
         }
