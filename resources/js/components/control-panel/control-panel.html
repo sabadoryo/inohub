@@ -1,128 +1,128 @@
-<h3>Заявки</h3>
-<div class="d-flex mb-4">
-    <button class="btn"
-            style="border-radius: 0"
-            ng-click="$ctrl.changeAppDateRange('day')"
-            ng-class="{'btn-primary': $ctrl.appDateRange === 'day'}">
-        Сегодня
-    </button>
-    <button class="btn"
-            style="border-radius: 0"
-            ng-click="$ctrl.changeAppDateRange('month')"
-            ng-class="{'btn-primary': $ctrl.appDateRange === 'month'}">
-        За месяц
-    </button>
-    <button class="btn"
-            style="border-radius: 0"
-            ng-click="$ctrl.changeAppDateRange('year')"
-            ng-class="{'btn-primary': $ctrl.appDateRange === 'year'}">
-        За год
-    </button>
-</div>
-<div class="row">
-    <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-        <div class="small-box bg-gradient-success">
-            <div class="inner">
-                <h3>{{$ctrl.openApps.count}}</h3>
-                <p>Открытые</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-plus-circle"></i>
-            </div>
-            <a href="#" class="small-box-footer">
-                More info <i class="fas fa-arrow-circle-right"></i>
-            </a>
-        </div>
-    </div>
-    <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-        <div class="small-box bg-gradient-info">
-            <div class="inner">
-                <h3>{{$ctrl.processingApps.count}}</h3>
-                <p>В обработке</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-copy"></i>
-            </div>
-            <a href="#" class="small-box-footer">
-                More info <i class="fas fa-arrow-circle-right"></i>
-            </a>
-        </div>
-    </div>
-    <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-        <div class="small-box bg-gradient-gray">
-            <div class="inner">
-                <h3>{{$ctrl.closedApps.count}}</h3>
-                <p>Закрытые</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-check-circle"></i>
-            </div>
-            <a href="#" class="small-box-footer">
-                More info <i class="fas fa-arrow-circle-right"></i>
-            </a>
-        </div>
-    </div>
-</div>
+<!--<h3>Заявки</h3>-->
+<!--<div class="d-flex mb-4">-->
+<!--    <button class="btn"-->
+<!--            style="border-radius: 0"-->
+<!--            ng-click="$ctrl.changeAppDateRange('day')"-->
+<!--            ng-class="{'btn-primary': $ctrl.appDateRange === 'day'}">-->
+<!--        Сегодня-->
+<!--    </button>-->
+<!--    <button class="btn"-->
+<!--            style="border-radius: 0"-->
+<!--            ng-click="$ctrl.changeAppDateRange('month')"-->
+<!--            ng-class="{'btn-primary': $ctrl.appDateRange === 'month'}">-->
+<!--        За месяц-->
+<!--    </button>-->
+<!--    <button class="btn"-->
+<!--            style="border-radius: 0"-->
+<!--            ng-click="$ctrl.changeAppDateRange('year')"-->
+<!--            ng-class="{'btn-primary': $ctrl.appDateRange === 'year'}">-->
+<!--        За год-->
+<!--    </button>-->
+<!--</div>-->
+<!--<div class="row">-->
+<!--    <div class="col-lg-4 col-md-6 col-sm-6 col-12">-->
+<!--        <div class="small-box bg-gradient-success">-->
+<!--            <div class="inner">-->
+<!--                <h3>{{$ctrl.openApps.count}}</h3>-->
+<!--                <p>Открытые</p>-->
+<!--            </div>-->
+<!--            <div class="icon">-->
+<!--                <i class="fas fa-plus-circle"></i>-->
+<!--            </div>-->
+<!--            <a href="#" class="small-box-footer">-->
+<!--                More info <i class="fas fa-arrow-circle-right"></i>-->
+<!--            </a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="col-lg-4 col-md-6 col-sm-6 col-12">-->
+<!--        <div class="small-box bg-gradient-info">-->
+<!--            <div class="inner">-->
+<!--                <h3>{{$ctrl.processingApps.count}}</h3>-->
+<!--                <p>В обработке</p>-->
+<!--            </div>-->
+<!--            <div class="icon">-->
+<!--                <i class="fas fa-copy"></i>-->
+<!--            </div>-->
+<!--            <a href="#" class="small-box-footer">-->
+<!--                More info <i class="fas fa-arrow-circle-right"></i>-->
+<!--            </a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="col-lg-4 col-md-6 col-sm-6 col-12">-->
+<!--        <div class="small-box bg-gradient-gray">-->
+<!--            <div class="inner">-->
+<!--                <h3>{{$ctrl.closedApps.count}}</h3>-->
+<!--                <p>Закрытые</p>-->
+<!--            </div>-->
+<!--            <div class="icon">-->
+<!--                <i class="fas fa-check-circle"></i>-->
+<!--            </div>-->
+<!--            <a href="#" class="small-box-footer">-->
+<!--                More info <i class="fas fa-arrow-circle-right"></i>-->
+<!--            </a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
-<div class="card card-primary w-75">
-    <div class="card-header">
-        <h3 class="card-title">Участники Astana Hub</h3>
+<!--<div class="card card-primary w-75">-->
+<!--    <div class="card-header">-->
+<!--        <h3 class="card-title">Участники Astana Hub</h3>-->
 
-        <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-            </button>
-            <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
-        </div>
-    </div>
-    <div class="card-body">
-        <div class="chart">
-            <canvas id="canvas" class="chart chart-line d-block"
-                    chart-data="$ctrl.chartMembers"
-                    chart-labels="$ctrl.labels"
-                    width="800">
-            </canvas>
-        </div>
-    </div>
-</div>
+<!--        <div class="card-tools">-->
+<!--            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>-->
+<!--            </button>-->
+<!--            <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="card-body">-->
+<!--        <div class="chart">-->
+<!--            <canvas id="canvas" class="chart chart-line d-block"-->
+<!--                    chart-data="$ctrl.chartMembers"-->
+<!--                    chart-labels="$ctrl.labels"-->
+<!--                    width="800">-->
+<!--            </canvas>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
-<div>
-    <h3>Заявки по персоналу</h3>
-    <div class="d-flex mb-4">
-        <button class="btn"
-                style="border-radius: 0"
-                ng-click="$ctrl.changeUserAppsDateRange('day')"
-                ng-class="{'btn-primary': $ctrl.userAppsDateRange === 'day'}">
-            Сегодня
-        </button>
-        <button class="btn"
-                style="border-radius: 0"
-                ng-click="$ctrl.changeUserAppsDateRange('month')"
-                ng-class="{'btn-primary': $ctrl.userAppsDateRange === 'month'}">
-            За месяц
-        </button>
-        <button class="btn"
-                style="border-radius: 0"
-                ng-click="$ctrl.changeUserAppsDateRange('year')"
-                ng-class="{'btn-primary': $ctrl.userAppsDateRange === 'year'}">
-            За год
-        </button>
-    </div>
-    <table class="table table-bordered">
-        <thead class="thead-light">
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">ФИО</th>
-            <th scope="col">В процессе</th>
-            <th scope="col">Закрытые</th>
-        </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="user in $ctrl.users track by $index">
-                <th scope="row">{{$index + 1}}</th>
-                <td>{{ user.full_name | truncate : 15 : '...' }}</td>
-                <td class="text-primary">{{ user.processingApps }}</td>
-                <td class="text-danger">{{ user.closedApps }}</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+<!--<div>-->
+<!--    <h3>Заявки по персоналу</h3>-->
+<!--    <div class="d-flex mb-4">-->
+<!--        <button class="btn"-->
+<!--                style="border-radius: 0"-->
+<!--                ng-click="$ctrl.changeUserAppsDateRange('day')"-->
+<!--                ng-class="{'btn-primary': $ctrl.userAppsDateRange === 'day'}">-->
+<!--            Сегодня-->
+<!--        </button>-->
+<!--        <button class="btn"-->
+<!--                style="border-radius: 0"-->
+<!--                ng-click="$ctrl.changeUserAppsDateRange('month')"-->
+<!--                ng-class="{'btn-primary': $ctrl.userAppsDateRange === 'month'}">-->
+<!--            За месяц-->
+<!--        </button>-->
+<!--        <button class="btn"-->
+<!--                style="border-radius: 0"-->
+<!--                ng-click="$ctrl.changeUserAppsDateRange('year')"-->
+<!--                ng-class="{'btn-primary': $ctrl.userAppsDateRange === 'year'}">-->
+<!--            За год-->
+<!--        </button>-->
+<!--    </div>-->
+<!--    <table class="table table-bordered">-->
+<!--        <thead class="thead-light">-->
+<!--        <tr>-->
+<!--            <th scope="col">#</th>-->
+<!--            <th scope="col">ФИО</th>-->
+<!--            <th scope="col">В процессе</th>-->
+<!--            <th scope="col">Закрытые</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--            <tr ng-repeat="user in $ctrl.users track by $index">-->
+<!--                <th scope="row">{{$index + 1}}</th>-->
+<!--                <td>{{ user.full_name | truncate : 15 : '...' }}</td>-->
+<!--                <td class="text-primary">{{ user.processingApps }}</td>-->
+<!--                <td class="text-danger">{{ user.closedApps }}</td>-->
+<!--            </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
+<!--</div>-->
