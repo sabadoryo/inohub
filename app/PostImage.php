@@ -11,6 +11,18 @@ class PostImage extends Model
         'path',
         'order',
     ];
-    
+
+    protected $appends = [
+        'url'
+    ];
+
+    public function getUrlAttribute()
+    {
+        if ($this->path) {
+            return \Storage::disk('public')->url($this->path);
+        }
+
+        return null;
+    }
     
 }

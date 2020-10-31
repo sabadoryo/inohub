@@ -140,14 +140,14 @@
             <perfect-scrollbar class="main__as-navbar as-navbar">
 
                 <div class="as-navbar__section">
-                    <a href="/" class="as-navbar__item">
+                    <a href="/" class="as-navbar__item {{isset($activePage) && $activePage == 'main' ? 'as-navbar__item--active' : ''}}">
                         <svg class="as-navbar__icon" width="20" height="17">
                             <use xlink:href="/img/icons.svg#house"></use>
                         </svg>
                         {{$dictionary['Feed'] ?? 'Feed'}}
                     </a>
 
-                    <a href="/events" class="as-navbar__item">
+                    <a href="/events" class="as-navbar__item {{isset($activePage) && $activePage == 'events' ? 'as-navbar__item--active' : ''}}">
                         <svg class="as-navbar__icon" width="20" height="17">
                             <use xlink:href="/img/icons.svg#calendar"></use>
                         </svg>

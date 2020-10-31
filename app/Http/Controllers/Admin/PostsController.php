@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Feed;
 use App\Http\Controllers\Controller;
 use App\Notifications\PostAccepted;
 use App\Notifications\PostRejected;
@@ -91,6 +92,11 @@ class PostsController extends Controller
         $post->update([
             'status' => $request->status,
             'published_at' => $request->status == 'accept' ? Carbon::now() : null,
+        ]);
+
+        Feed::create([
+            'entity_model' => Post::class,
+            'entity_id' => $post->id
         ]);
         
         return ['published_at' => $post->published_at];

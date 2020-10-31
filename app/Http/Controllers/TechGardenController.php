@@ -20,6 +20,45 @@ class TechGardenController extends Controller
         ]);
     }
 
+    public function laboratories()
+    {
+        $component = 'tech-garden-laboratories';
+
+        $bindings = [];
+
+        return view('main.tech-garden', [
+            'component' => $component,
+            'bindings' => $bindings,
+            'activePage' => 'laboratories',
+        ]);
+    }
+
+    public function laboratory()
+    {
+        $component = 'tech-garden-laboratory';
+
+        $bindings = [];
+
+        return view('main.tech-garden', [
+            'component' => $component,
+            'bindings' => $bindings,
+            'activePage' => 'laboratories',
+        ]);
+    }
+
+    public function aboutSmartStore()
+    {
+        $component = 'tech-garden-about';
+
+        $bindings = [];
+
+        return view('main.tech-garden', [
+            'component' => $component,
+            'bindings' => $bindings,
+            'activePage' => 'about',
+        ]);
+    }
+
     public function programs()
     {
         $bindings = [];

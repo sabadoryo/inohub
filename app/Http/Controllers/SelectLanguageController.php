@@ -8,8 +8,8 @@ class SelectLanguageController extends Controller
 {
     public function selectLanguage($lang)
     {
-
-        session(['locale' => $lang]);
+        \Cache::put('locale', $lang);
+//        session(['locale' => $lang]);
 
         return redirect()->back();
     }

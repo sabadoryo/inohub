@@ -12,9 +12,7 @@
             </button>
 
             <div class="feed__btn-dropdown" uib-dropdown-menu="">
-                <a href="/posts/create" class="feed__dropdown-item">Блог</a>
-                <a href="#" class="feed__dropdown-item">Мероприятие</a>
-                <a href="#" class="feed__dropdown-item">Еще что то</a>
+                <a href="/posts/create" class="feed__dropdown-item">Пост</a>
             </div>
 
         </div>
@@ -50,7 +48,9 @@
                 </div>
             </div>
 
-            <div ng-if="feed.entity_model == 'App\\Post'" class="feed__blog blog-box">
+            <div ng-if="feed.entity_model == 'App\\Post'"
+                 class="feed__blog blog-box"
+                 ng-class="{'blog-box--non-image': !feed.image_url}">
 
                 <div class="blog-box__details">
                     <div class="blog-box__detail">
@@ -68,7 +68,7 @@
                     </div>
                 </div>
 
-                <img src="/img/blog-img.png" alt="" class="blog-box__img">
+                <img src="" ng-src="{{feed.image_url}}" alt="" class="blog-box__img">
 
                 <div class="blog-box__info">
 
@@ -76,20 +76,19 @@
                         <svg width="16" height="18" class="blog-box__date-icon">
                             <use xlink:href="/img/icons.svg#calendar-grey"></use>
                         </svg>
-                        23.10.2020
+                        {{feed.created_at | amDateFormat : 'DD.MM.YYYY'}}
                     </div>
 
                     <div class="blog-box__tag">
-                        <img src="/img/icons/astana-hub-icon-xs.png" alt="" class="blog-box__tag-icon">
-                        Astana Hub
+                        {{feed.entity.user.full_name}}
                     </div>
 
-                    <a href="#" class="blog-box__title">TrandyGo: Handmade как источник заработка</a>
+                    <a href="" class="blog-box__title">{{feed.entity.title}}</a>
 
                     <div class="blog-box__desc">
-                        Сейчас в Казахстане спрос на авторские аксессуары растет с каждым годом, а с развитием
-                        онлайн-площадок хендмейд-продукция имеет все тенденции к росту.
+                        {{feed.text}}
                     </div>
+
                 </div>
 
             </div>

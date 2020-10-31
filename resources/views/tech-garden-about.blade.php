@@ -179,40 +179,29 @@
                     <div class="swiper-wrapper">
 
                         <div class="swiper-slide team-card">
-                            <img src="/img/team-member.png" alt="" class="team-card__img">
-                            <h5 class="team-card__name">Самал Турсунова</h5>
-                            <h5 class="team-card__job">Руководитель</h5>
+                            <img src="/img/techgarden1.png" alt="" class="team-card__img">
+                            <h5 class="team-card__name">Сембин Аскар Болатович</h5>
+                            <h5 class="team-card__job">Генеральный директор</h5>
                         </div>
 
                         <div class="swiper-slide team-card">
-                            <img src="/img/team-member.png" alt="" class="team-card__img">
-                            <h5 class="team-card__name">Самал Турсунова</h5>
-                            <h5 class="team-card__job">Руководитель</h5>
+                            <img src="/img/techgarden2.png" alt="" class="team-card__img">
+                            <h5 class="team-card__name">Альмухаметов Айбек Мейрамбекович</h5>
+                            <h5 class="team-card__job">Заместитель генерального директора</h5>
                         </div>
 
                         <div class="swiper-slide team-card">
-                            <img src="/img/team-member.png" alt="" class="team-card__img">
-                            <h5 class="team-card__name">Самал Турсунова</h5>
-                            <h5 class="team-card__job">Руководитель</h5>
+                            <img src="/img/techgarden3.png" alt="" class="team-card__img">
+                            <h5 class="team-card__name">Омарбеков Толеген Базарович</h5>
+                            <h5 class="team-card__job">Руководитель аппарата</h5>
                         </div>
 
                         <div class="swiper-slide team-card">
-                            <img src="/img/team-member.png" alt="" class="team-card__img">
-                            <h5 class="team-card__name">Самал Турсунова</h5>
-                            <h5 class="team-card__job">Руководитель</h5>
+                            <img src="/img/techgarden4.png" alt="" class="team-card__img">
+                            <h5 class="team-card__name">Сырлыбаева Бэла Рашидовна</h5>
+                            <h5 class="team-card__job">Директор департамента стратегического планирования и анализа</h5>
                         </div>
 
-                        <div class="swiper-slide team-card">
-                            <img src="/img/team-member.png" alt="" class="team-card__img">
-                            <h5 class="team-card__name">Самал Турсунова</h5>
-                            <h5 class="team-card__job">Руководитель</h5>
-                        </div>
-
-                        <div class="swiper-slide team-card">
-                            <img src="/img/team-member.png" alt="" class="team-card__img">
-                            <h5 class="team-card__name">Самал Турсунова</h5>
-                            <h5 class="team-card__job">Руководитель</h5>
-                        </div>
 
                     </div>
 

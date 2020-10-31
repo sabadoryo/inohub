@@ -9,7 +9,7 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $component = '';
+        $component = 'test';
         $activePage = '';
         $breadcrumb = [];
         return view('admin.component', compact('component', 'activePage', 'breadcrumb'));

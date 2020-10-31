@@ -18,7 +18,6 @@ function controller() {
 	let $ctrl = this;
 	
 	$ctrl.$onInit = function () {
-        console.log($ctrl.news);
-        console.log($ctrl.newsCount);
+
     };
 }

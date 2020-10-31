@@ -26,7 +26,7 @@
             <a href="/cabinet/applications" class="tabs__link {{$activeTab == 'applications' ? 'tabs__link--active' : ''}}">
                 Заявки
             </a>
-            <a href="/astana-hub/notifications" class="tabs__link {{$activeTab == 'notifications' ? 'tabs__link--active' : ''}}">
+            <a href="/cabinet/notifications" class="tabs__link {{$activeTab == 'notifications' ? 'tabs__link--active' : ''}}">
                 Уведомления
                 <span class="tabs__badge as-badge">12</span>
             </a>

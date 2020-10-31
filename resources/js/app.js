@@ -241,3 +241,8 @@ require('./components/investors-control/investors-control');
 require('./components/investors-edit/investors-edit');
 
 require('./components/banners-control/banners-control');
+
+require('./components/teech-garden-laboratories/teech-garden-laboratories');
+require('./components/tech-garden-laboratories/tech-garden-laboratories');
+require('./components/tech-garden-laboratory/tech-garden-laboratory');
+require('./components/tech-garden-resources/tech-garden-resources');

@@ -22,10 +22,10 @@
             <a href="/tech-garden/smart-store" class="tabs__link {{$activePage == 'smart-store' ? 'tabs__link--active' : ''}}">
                 Smart Store
             </a>
-            <a href="/tech-garden/laboratories" class="tabs__link {{$activePage == 'hub-space' ? 'tabs__link--active' : ''}}">
+            <a href="/tech-garden/laboratories" class="tabs__link {{$activePage == 'laboratories' ? 'tabs__link--active' : ''}}">
                 Технологические лаборатории
             </a>
-            <a href="/tech-garden/library" class="tabs__link {{$activePage == 'randd' ? 'tabs__link--active' : ''}}">
+            <a href="/tech-garden/resources" class="tabs__link {{$activePage == 'resources' ? 'tabs__link--active' : ''}}">
                 База знании
             </a>
         </div>

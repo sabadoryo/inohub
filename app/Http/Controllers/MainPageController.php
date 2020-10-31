@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Feed;
 use App\News;
+use App\Post;
 use Illuminate\Http\Request;
 
 class MainPageController extends Controller
@@ -22,16 +23,26 @@ class MainPageController extends Controller
 
         $feeds = Feed::with('entity')
             ->latest('created_at')
-            ->limit(5)
             ->get();
+
+        foreach ($feeds as $feed) {
+            if ($feed->entity instanceof Post) {
+                $img = $feed->entity->images()->first();
+                $text = $feed->entity->texts()->first();
+                $feed->image_url = $img ? $img->url : null;
+                $feed->text = \Str::limit(strip_tags($text->content), 100, '...');
+                $feed->entity->user;
+            }
+        }
 
         return view('main.component', [
             'component' => 'main-page',
+            'activePage' => 'main',
             'bindings' => [
                 'news' => $news,
                 'news-count' => $newsTotal,
                 'feeds-count' => $feedsCount,
-                'feeds' => $feeds
+                'feeds' => $feeds,
             ]
         ]);
     }

@@ -34,17 +34,22 @@
 
                 <li class="nav-item">
                     <a href="/admin/organizations" class="nav-link {{$activePage == 'organizations' ? 'active' : ''}}">
-                        <i class="nav-icon fab fa-hubspot"></i>
-                        <p>
-                            Организации
-                        </p>
+                        <i class="nav-icon fas fa-building"></i>
+                        <p>Организации</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/admin/users" class="nav-link {{$activePage == 'users' ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>Пользователи</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a href="/admin/posts" class="nav-link {{$activePage == 'posts' ? 'active' : ''}}">
-                        <i class="nav-icon fas fa-paper-plane"></i>
-                        <p>Посты</p>
+                        <i class="nav-icon fas fa-newspaper"></i>
+                        <p>Блог</p>
                     </a>
                 </li>
 
@@ -52,14 +57,6 @@
                     <a href="/admin/investors" class="nav-link {{$activePage == 'investors' ? 'active' : ''}}">
                         <i class="nav-icon fas fa-users"></i>
                         <p>Инвесторы</p>
-                    </a>
-                </li>
-
-                                {{--       USERS            --}}
-                <li class="nav-item">
-                    <a href="/admin/users" class="nav-link {{$activePage == 'users' ? 'active' : ''}}">
-                        <i class="nav-icon fas fa-users"></i>
-                        <p>Пользователи</p>
                     </a>
                 </li>
 
@@ -72,7 +69,7 @@
 
                 <li class="nav-item">
                     <a href="/admin/banners" class="nav-link {{$activePage == 'banners' ? 'active' : ''}}">
-                        <i class="nav-icon fas fa-fire"></i>
+                        <i class="nav-icon fas fa-ad"></i>
                         <p>Баннеры</p>
                     </a>
                 </li>

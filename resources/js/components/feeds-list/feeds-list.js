@@ -18,28 +18,28 @@ function controller($http, $uibModal, applicationWindow, Auth) {
 	$ctrl.page = 1;
 
 	$ctrl.$onInit = () => {
-	    $ctrl.getList();
+	    // $ctrl.getList();
     }
 
     $ctrl.getList = () => {
         // $ctrl.page++;
 
-        $http
-            .get('/get-feeds-list', {
-                params: {
-                    page: $ctrl.page
-                }
-            })
-            .then(
-                res => {
-                    $ctrl.feeds = res.data;
-                    console.log($ctrl.feeds);
-
-                    // res.data.forEach(feed => {
-                    //     $ctrl.feeds.push(feed);
-                    // });
-                }
-            );
+        // $http
+        //     .get('/get-feeds-list', {
+        //         params: {
+        //             page: $ctrl.page
+        //         }
+        //     })
+        //     .then(
+        //         res => {
+        //             $ctrl.feeds = res.data;
+        //             console.log($ctrl.feeds);
+        //
+        //             // res.data.forEach(feed => {
+        //             //     $ctrl.feeds.push(feed);
+        //             // });
+        //         }
+        //     );
     };
 
     $ctrl.signUpForEvent = (event) => {

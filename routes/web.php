@@ -75,7 +75,10 @@ Route::group(['prefix' => 'tech-garden'], function () {
     Route::get('about', 'TechGardenController@about');
     Route::get('programs', 'TechGardenController@programs');
     Route::get('smart-store', 'TechGardenController@smartStore');
+    Route::get('laboratories', 'TechGardenController@laboratories');
+    Route::get('resources', 'TechGardenController@resources');
     Route::get('corporate-innovations', 'TechGardenController@corporateInnovations');
+    Route::get('laboratory', 'TechGardenController@laboratory');
     Route::get('hub-space', 'TechGardenController@hubSpace');
     Route::get('r-and-d', 'TechGardenController@randd');
     Route::get('resources', 'TechGardenController@resources');

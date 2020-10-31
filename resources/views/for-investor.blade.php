@@ -12,7 +12,7 @@
     <div class="content__info info-section">
 
         <div class="info-section__heading">
-            Для стартапов
+            Для инвесторов
         </div>
 
         <div class="info-section__list">

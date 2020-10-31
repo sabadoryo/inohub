@@ -9,8 +9,8 @@ class EventsController extends Controller
 {
     public function index()
     {
-
         $events = Event::all();
+
         $eventsWeek = Event::query()->where('start_date')->get();
         $eventsMonth = Event::query()->where('start_date')->get();
         $eventsOverMonth = Event::query()->where('start_date')->get();
@@ -25,7 +25,7 @@ class EventsController extends Controller
             'PAGE_TITLE' => 'Мероприятия',
             'activePage' => 'events',
             'component' => 'events-list',
-            'bindings' => $bindings
+            'bindings' => $bindings,
         ]);
     }
 
